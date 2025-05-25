@@ -1,0 +1,106 @@
+/**
+ * Copyright (c) 2020-2022 ForgeRock. All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ */
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+@import '~@forgerock/platform-shared/src/scss/main.scss';
+
+/* Export colors to make them available in JS */
+:export {
+  /* stylelint-disable */
+  basecolor: $primary;
+  /* stylelint-enable */
+}
+
+html,
+body {
+  background-color: $gray-100;
+  overflow-y: auto;
+}
+
+#app {
+  transition: all 0.2s ease;
+  height: 100%;
+
+  .container,
+  .container-fluid {
+    @media (min-width: 768px) {
+      padding-left: $grid-gutter-width;
+      padding-right: $grid-gutter-width;
+    }
+  }
+}
+
+::-ms-reveal {
+  display: none;
+}
+
+/* Circle and icon */
+.fr-resource-circle {
+  width: 75px;
+  height: 75px;
+  text-align: center;
+
+  .fa {
+    line-height: inherit;
+  }
+}
+
+/* Application adjustments (not related to themes
+   Center spinner */
+.v-spinner {
+  .v-bounce1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.fr-body-image {
+  @if $fr-background-image != 'none' {
+    background: $fr-background-image;
+  }
+
+  @if $fr-background-size != 'none' {
+    background-size: $fr-background-size;
+  }
+}
+
+/**
+  Fade animation for form transitions into error state
+ */
+.is-invalid {
+  transition: border 0.75s linear;
+}
+
+.fr-validation-requirements {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.75s;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Override for vue-multiselects which allow options to span multiple lines */
+.multiselect__single,
+.multiselect__option span {
+  white-space: normal !important;
+  line-height: 1.5rem !important;
+}
+
+.focus-ring-none {
+  outline: none !important
+}

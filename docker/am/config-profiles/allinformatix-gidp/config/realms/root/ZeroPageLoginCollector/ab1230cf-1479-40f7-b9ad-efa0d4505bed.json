@@ -1,0 +1,31 @@
+{
+  "data": {
+    "_id": "ab1230cf-1479-40f7-b9ad-efa0d4505bed",
+    "_outcomes": [
+      {
+        "displayName": "Has Credentials",
+        "id": "true"
+      },
+      {
+        "displayName": "No Credentials",
+        "id": "false"
+      }
+    ],
+    "_type": {
+      "_id": "ZeroPageLoginNode",
+      "collection": true,
+      "name": "Zero Page Login Collector"
+    },
+    "allowWithoutReferer": true,
+    "passwordHeader": "X-OpenAM-Password",
+    "referrerWhiteList": [],
+    "usernameHeader": "X-OpenAM-Username"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "ab1230cf-1479-40f7-b9ad-efa0d4505bed",
+    "entityType": "ZeroPageLoginCollector",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

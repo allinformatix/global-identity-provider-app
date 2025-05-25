@@ -1,0 +1,11 @@
+namespace: gidp-dev
+
+resources:
+- ../mini
+- secrets
+
+components:
+  - ../platform-config/gidp-fqdn/dev
+
+patches:
+  - path: platform-config-patch.yaml

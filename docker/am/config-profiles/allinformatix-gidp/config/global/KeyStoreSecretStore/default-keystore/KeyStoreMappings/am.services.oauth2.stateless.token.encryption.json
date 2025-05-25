@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.services.oauth2.stateless.token.encryption",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "directenctest"
+    ],
+    "secretId": "am.services.oauth2.stateless.token.encryption"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.services.oauth2.stateless.token.encryption",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "federation/multi",
+      "collection": false,
+      "name": "Multi-Federation Protocol"
+    },
+    "singleLogoutHandlerList": [
+      "key=WSFED|class=com.sun.identity.multiprotocol.WSFederationSingleLogoutHandler",
+      "key=SAML2|class=com.sun.identity.multiprotocol.SAML2SingleLogoutHandler"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "MultiFederationProtocol",
+    "entityType": "MultiFederationProtocol",
+    "pathParams": {},
+    "realm": null
+  }
+}

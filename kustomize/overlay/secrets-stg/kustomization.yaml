@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../base/secrets
+
+# kustomize can't patchesStrategicMerge CRD's out of the box - this is the easiest way
+patchesJson6902: #patch
+  - path: secrets-patch.yaml #specify the values file
+    target:
+      group: secret-agent.secrets.forgerock.io # specify the api group
+      version: v1alpha1  #specify the version
+      kind: SecretAgentConfiguration # specify the CRD
+      name: forgerock-sac # specify the object name

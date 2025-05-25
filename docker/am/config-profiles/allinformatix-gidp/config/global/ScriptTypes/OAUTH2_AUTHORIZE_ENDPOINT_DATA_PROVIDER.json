@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "OAUTH2_AUTHORIZE_ENDPOINT_DATA_PROVIDER",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "[Empty]",
+    "languages": [
+      "JAVASCRIPT",
+      "GROOVY"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "OAUTH2_AUTHORIZE_ENDPOINT_DATA_PROVIDER",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

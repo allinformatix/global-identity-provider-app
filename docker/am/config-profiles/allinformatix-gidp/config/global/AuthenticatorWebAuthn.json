@@ -1,0 +1,25 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "authenticatorWebAuthnService",
+      "collection": false,
+      "name": "WebAuthn Profile Encryption Service"
+    },
+    "defaults": {
+      "authenticatorWebAuthnDeviceSettingsEncryptionKeystore": "/home/forgerock/openam/security/keystores/keystore.jceks",
+      "authenticatorWebAuthnDeviceSettingsEncryptionKeystorePassword": null,
+      "authenticatorWebAuthnDeviceSettingsEncryptionKeystorePrivateKeyPassword": null,
+      "authenticatorWebAuthnDeviceSettingsEncryptionKeystoreType": "JCEKS",
+      "authenticatorWebAuthnDeviceSettingsEncryptionScheme": "NONE",
+      "webauthnAttrName": "webauthnDeviceProfiles"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "AuthenticatorWebAuthn",
+    "entityType": "AuthenticatorWebAuthn",
+    "pathParams": {},
+    "realm": null
+  }
+}

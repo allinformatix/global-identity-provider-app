@@ -1,0 +1,14 @@
+###############################################################################
+# Development Build Stage
+###############################################################################
+FROM platform-shared:latest
+
+WORKDIR /home/app/packages/platform-login
+
+COPY packages/platform-shared /home/app/packages/platform-shared
+
+COPY packages/platform-login .
+
+RUN cp .env.production .env
+
+CMD ["/dev-entrypoint.sh", "platform-login"]

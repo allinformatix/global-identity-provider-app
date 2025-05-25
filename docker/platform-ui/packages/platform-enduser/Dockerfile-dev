@@ -1,0 +1,14 @@
+###############################################################################
+# Development Build Stage
+###############################################################################
+FROM platform-shared:latest
+
+WORKDIR /home/app/packages/platform-enduser
+
+COPY packages/platform-shared /home/app/packages/platform-shared
+
+COPY packages/platform-enduser .
+
+RUN cp .env.production .env
+
+CMD ["/dev-entrypoint.sh", "platform-enduser"]

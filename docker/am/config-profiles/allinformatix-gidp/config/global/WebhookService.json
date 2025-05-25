@@ -1,0 +1,17 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "webhooks",
+      "collection": false,
+      "name": "Webhook Service"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "WebhookService",
+    "entityType": "WebhookService",
+    "pathParams": {},
+    "realm": null
+  }
+}

@@ -1,0 +1,1502 @@
+{
+	"info": {
+		"_postman_id": "a47a7b7b-c190-4f66-ae64-409c88c3ef12",
+		"name": "IDMConsole",
+		"description": "Collection of IDM Console\n\nVariables:\n\n- \"url\" : the environment URL\n- \"client-secret\": the password for OAuth client automated-api-tests\n- \"userName\" : username of the test user that has the internal \"internal/role/ergo-support\"\n    \n- \"userPassword\": password of the test user above\n    \n- \"userId\": the _id of the test user\n    \n\nNote: [https://confluence.itergo.com/display/IAM/IDM+custom+endpoint+for+Identity+Management+Console](https://confluence.itergo.com/display/IAM/IDM+custom+endpoint+for+Identity+Management+Console)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26909393"
+	},
+	"item": [
+		{
+			"name": "getAccessToken",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// clear cookies",
+							"const jar = pm.cookies.jar();",
+							"const url = pm.variables.get('url');",
+							"jar.clear(url, function (err) {",
+							"    if(err) {",
+							"        console.error(err);",
+							"    }",
+							"    else {",
+							"        console.log(\"cookies cleared!\");",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"access_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "default"
+						},
+						{
+							"key": "client_id",
+							"value": "automated-api-tests",
+							"type": "default"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client-secret}}",
+							"type": "default"
+						},
+						{
+							"key": "scope",
+							"value": "fr:idm:*",
+							"type": "default"
+						},
+						{
+							"key": "username",
+							"value": "{{userName}}",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "{{userPassword}}",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/am/oauth2/realms/root/realms/customer/access_token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"am",
+						"oauth2",
+						"realms",
+						"root",
+						"realms",
+						"customer",
+						"access_token"
+					]
+				},
+				"description": "Generate access token with the client credentials grant type"
+			},
+			"response": [
+				{
+					"name": "invalidClient",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "default"
+								},
+								{
+									"key": "client_id",
+									"value": "automated-tests",
+									"type": "default"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client-secret}}",
+									"type": "default"
+								},
+								{
+									"key": "scope",
+									"value": "fr:idm:*",
+									"type": "default"
+								},
+								{
+									"key": "username",
+									"value": "{{userName}}",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "{{userPassword}}",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/am/oauth2/realms/root/realms/customer/access_token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"oauth2",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"access_token"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_description\": \"Client authentication failed\",\n    \"error\": \"invalid_client\"\n}"
+				},
+				{
+					"name": "success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "default"
+								},
+								{
+									"key": "client_id",
+									"value": "automated-api-tests",
+									"type": "default"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client-secret}}",
+									"type": "default"
+								},
+								{
+									"key": "scope",
+									"value": "fr:idm:*",
+									"type": "default"
+								},
+								{
+									"key": "username",
+									"value": "{{userName}}",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "{{userPassword}}",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/am/oauth2/realms/root/realms/customer/access_token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"oauth2",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"access_token"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"h6gDSk0Vb3Iry4K_7AOrqJLvuRE\",\n    \"scope\": \"fr:idm:*\",\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 3599\n}"
+				}
+			]
+		},
+		{
+			"name": "telephoneIdent",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true,
+					"content-type": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIdent",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"openidm",
+						"endpoint",
+						"idmconsole",
+						"registration"
+					],
+					"query": [
+						{
+							"key": "_action",
+							"value": "telephoneIdent"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success/200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "telephoneIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"id\": \"da7164e0-4121-4d0e-831e-bf8442f2bda6\",\n    \"message\": \"success\"\n}"
+				},
+				{
+					"name": "noCustomerFound/404",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "telephoneIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 404,\n    \"reason\": \"Not Found\",\n    \"message\": \"no customer found\",\n    \"detail\": \"id : da7164e0-4121-4d0e-831e-bf8442f2bdap\"\n}"
+				},
+				{
+					"name": "accessDenied/403",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "telephoneIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 403,\n    \"reason\": \"Forbidden\",\n    \"message\": \"Access denied\"\n}"
+				},
+				{
+					"name": "unsupportedAction/400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIden",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "telephoneIden"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"reason\": \"Bad Request\",\n    \"message\": \"Unsupported action telephone\",\n    \"detail\": {}\n}"
+				},
+				{
+					"name": "requestContentNotSupplied/400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "telephoneIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"reason\": \"Bad Request\",\n    \"message\": \"request content is not supplied\",\n    \"detail\": {}\n}"
+				},
+				{
+					"name": "technicalError/500",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "telephoneIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 500,\n    \"message\": \"Technical error while updating the identity : da7164e0-4121-4d0e-831e-bf8442f2bdap\",\n    \"detail\": \"{}\"\n}"
+				},
+				{
+					"name": "idIsNotSupplied/400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "telephoneIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"reason\": \"Bad Request\",\n    \"message\": \"id is not supplied\",\n    \"detail\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "letterIdent",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true,
+					"content-type": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Hennig\",\n    \"dob\":\"1954-09-21\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letterIdent",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"openidm",
+						"endpoint",
+						"idmconsole",
+						"registration"
+					],
+					"query": [
+						{
+							"key": "_action",
+							"value": "letterIdent"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success/200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Hennig\",\n    \"dob\":\"1954-09-21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letterIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "letterIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"id\": \"da7164e0-4121-4d0e-831e-bf8442f2bda6\",\n    \"message\": \"success\"\n}"
+				},
+				{
+					"name": "noCustomerFound/404",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Henni\",\n    \"dob\":\"1954-09-21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letterIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "letterIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 404,\n    \"reason\": \"Not Found\",\n    \"message\": \"no customer found\",\n    \"id\": \"DA000113071\"\n}"
+				},
+				{
+					"name": "accessDenied/403",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Hennig\",\n    \"dob\":\"1954-09-21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letterIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "letterIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 403,\n    \"reason\": \"Forbidden\",\n    \"message\": \"Access denied\"\n}"
+				},
+				{
+					"name": "unsupportedAction/400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Hennig\",\n    \"dob\":\"1954-09-21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letter",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "letter"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"reason\": \"Bad Request\",\n    \"message\": \"Unsupported action letter\",\n    \"detail\": {}\n}"
+				},
+				{
+					"name": "requestContentNotSupplied/400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letterIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "letterIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"reason\": \"Bad Request\",\n    \"message\": \"request content is not supplied\",\n    \"detail\": {}\n}"
+				},
+				{
+					"name": "technicalError/500",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letterIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "letterIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 500,\n    \"message\": \"error missing required response.\",\n    \"id\": \"DA000113071\"\n}"
+				},
+				{
+					"name": "CustomerNotCompliance/400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"1021500485593\",\n    \"firstName\":\"Katrin\",\n    \"lastName\":\"Ciam\",\n    \"dob\":\"1974-08-26\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letterIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "letterIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"reason\": \"Bad Request\",\n    \"message\": \"customer not compliant\",\n    \"detail\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "personalIdent",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true,
+					"content-type": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Hennig\",\n    \"dob\":\"1954-09-21\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=personalIdent",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"openidm",
+						"endpoint",
+						"idmconsole",
+						"registration"
+					],
+					"query": [
+						{
+							"key": "_action",
+							"value": "personalIdent"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success/200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Hennig\",\n    \"dob\":\"1954-09-21\",\n    \"mobilephone\" : \"+441\",\n    \"email\" : \"test@hotmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=personalIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "personalIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"id\": \"da7164e0-4121-4d0e-831e-bf8442f2bda6\",\n    \"message\": \"success\"\n}"
+				},
+				{
+					"name": "noCustomerFound/404",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Henni\",\n    \"dob\":\"1954-09-21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=personalIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "personalIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 404,\n    \"reason\": \"Not Found\",\n    \"message\": \"no customer found\",\n    \"detail\": \"id : DA000113071\"\n}"
+				},
+				{
+					"name": "accessDenied/403",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Hennig\",\n    \"dob\":\"1954-09-21\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=personalIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "personalIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 403,\n    \"reason\": \"Forbidden\",\n    \"message\": \"Access denied\"\n}"
+				},
+				{
+					"name": "unsupportedAction/400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=xx",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "xx"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"reason\": \"Bad Request\",\n    \"message\": \"Unsupported action xx\",\n    \"detail\": {}\n}"
+				},
+				{
+					"name": "requestContentNotSupplied/400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=personalIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "personalIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"reason\": \"Bad Request\",\n    \"message\": \"request content is not supplied\",\n    \"detail\": {}\n}"
+				},
+				{
+					"name": "technicalError/500",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"Ludger\",\n    \"lastName\":\"Hennig\",\n    \"dob\":\"1954-09-21\",\n    \"mobilephone\" : \"+441\",\n    \"email\" : \"test@hotmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=personalIdent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"openidm",
+								"endpoint",
+								"idmconsole",
+								"registration"
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "personalIdent"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 500,\n    \"message\": \"error missing required response.\",\n    \"id\": \"DA000113071\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "client-secret",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userPassword",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userName",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

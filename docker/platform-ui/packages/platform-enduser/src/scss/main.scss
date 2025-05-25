@@ -1,0 +1,287 @@
+/**
+ * Copyright (c) 2020-2023 ForgeRock. All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ */
+
+/* General custom form adjustments (radio, checkbox, etc...) */
+@import 'custom-form';
+@import '~@forgerock/platform-shared/src/scss/devices.scss';
+@import '~@forgerock/platform-shared/src/scss/main.scss';
+
+/* Export colors to make them available in JS */
+:export {
+  /* stylelint-disable */
+  basecolor: $primary;
+  blue: $blue;
+  gray400: $gray-400;
+  /* stylelint-enable */
+}
+
+.material-icons.md-18,
+.material-icons-outlined.md-18 { font-size: 18px; }
+
+.material-icons.md-24,
+.material-icons-outlined.md-24 { font-size: 24px; }
+
+.material-icons.md-36,
+.material-icons-outlined.md-36 { font-size: 36px; }
+
+.material-icons.md-48,
+.material-icons-outlined.md-48 { font-size: 48px; }
+
+.material-icons.md-64,
+.material-icons-outlined.md-64 { font-size: 64px; }
+
+.material-icons,
+.material-icons-outlined {
+  font-size: 1.125rem;
+  vertical-align: middle;
+}
+
+/* Circle and icon */
+.fr-resource-circle {
+  width: 75px;
+  height: 75px;
+  text-align: center;
+
+  .fa {
+    line-height: inherit;
+  }
+}
+
+.modal-backdrop {
+  opacity: 0.5;
+}
+
+/* Application adjustments (not related to themes
+   Center spinner */
+.v-spinner {
+  .v-bounce1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.fr-body-image {
+  @if $fr-background-image != 'none' {
+    background: $fr-background-image;
+    background-size: cover;
+  }
+}
+
+/* Base application styles */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Jumbotron */
+.fr-header-jumbotron {
+  background-color: transparent;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 300;
+  }
+
+  .btn-success {
+    padding: 10px 20px 10px 20px;
+  }
+}
+
+/* Input Group Button styles */
+.input-group .input-group-append {
+  > .btn {
+    border-color: $input-border-color;
+  }
+}
+
+label {
+  color: $label-color;
+}
+
+/* Basic Form */
+.b-form-group .input-group .form-control {
+  border-bottom-right-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+/* Disabled form input */
+#app .card .form-label-group .form-label-group-input .form-control:disabled {
+  background-color: #f7f8fc !important;
+}
+
+/* General page transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition-property: opacity;
+  transition-duration: 0.25s;
+}
+
+.fade-enter-active {
+  transition-delay: 0.25s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+/* Base page headers */
+.fr-page-header {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Back bar */
+.fr-backbar {
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+/* Form Break */
+.fr-form-break {
+  display: flex;
+  width: 100%;
+  margin: 14px 0;
+
+  > :first-child,
+  > :last-child {
+    flex: 1;
+    position: relative;
+  }
+
+  > :first-child::before,
+  > :last-child::before {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: $gray-200;
+    box-shadow: 0 1px 0 fade(white, 20%);
+  }
+
+  > :first-child {
+    margin-right: 10px;
+  }
+
+  :last-child {
+    margin-left: 10px;
+  }
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+/**
+  Grid and Table styles
+ */
+.card > .table th:first-child,
+.card > .table td:first-child {
+  padding-left: 1.875rem;
+}
+
+.card > .table th:last-child,
+.card > .table td:last-child {
+  padding-right: 1.875rem;
+}
+
+/*
+  Paginator Styles
+ */
+.pagination {
+  border-radius: 0;
+
+  .page-link {
+    border-radius: $pagination-border-radius;
+    margin-left: 4px;
+  }
+
+  .disabled.page-item {
+    opacity: 0.5;
+  }
+}
+
+.form-label-group {
+  position: relative;
+}
+
+/**
+  Table styles
+ */
+
+table td.avatar {
+  > div {
+    display: flex;
+  }
+
+  @media (min-width: 992px) {
+    width: 70px;
+    padding-right: 0;
+  }
+}
+
+table th.select,
+table td.select {
+  > div {
+    display: flex;
+  }
+
+  @media (min-width: 992px) {
+    width: 20px;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 991.99px) {
+  table.b-table.b-table-stacked-lg > tbody > tr > [data-label].avatar {
+    grid-template-columns: auto;
+  }
+}
+
+/**
+  Fade animation for form transitions into error state
+ */
+.is-invalid {
+  transition: border 0.75s linear;
+}
+
+.fr-validation-requirements {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.75s;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Override for vue-multiselects which allow options to span multiple lines */
+.multiselect__single,
+.multiselect__option span {
+  white-space: normal !important;
+  line-height: 1.5rem !important;
+}
+
+/* Additional component level theme overrides must come after if you want access to bootstrap variables
+   These should also come last so they can override anything in the application */
+@import 'theme-components';

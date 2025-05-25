@@ -1,0 +1,20 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "baseurl",
+      "collection": false,
+      "name": "Base URL Source"
+    },
+    "contextPath": "/am",
+    "fixedValue": "https://&{fqdn}",
+    "source": "FIXED_VALUE"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "BaseUrlSource",
+    "entityType": "BaseUrlSource",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

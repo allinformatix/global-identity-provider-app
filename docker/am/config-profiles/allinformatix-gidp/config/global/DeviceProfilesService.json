@@ -1,0 +1,24 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "deviceProfilesService",
+      "collection": false,
+      "name": "Device Profiles Service"
+    },
+    "defaults": {
+      "deviceProfilesAttrName": "deviceProfiles",
+      "deviceProfilesSettingsEncryptionKeystore": "/home/forgerock/openam/security/keystores/keystore.jks",
+      "deviceProfilesSettingsEncryptionKeystorePassword": null,
+      "deviceProfilesSettingsEncryptionKeystoreType": "JKS",
+      "deviceProfilesSettingsEncryptionScheme": "NONE"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "DeviceProfilesService",
+    "entityType": "DeviceProfilesService",
+    "pathParams": {},
+    "realm": null
+  }
+}

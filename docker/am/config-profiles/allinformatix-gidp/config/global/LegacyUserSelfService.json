@@ -1,0 +1,29 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "security",
+      "collection": false,
+      "name": "Legacy User Self Service"
+    },
+    "defaults": {
+      "confirmationIdHmacKey": "WP5sULT2j3gZEgBWnPdTOuBULJfGAwgwJ9IP3xfyd9Y=",
+      "forgotPasswordConfirmationUrl": "http://am:80/am/XUI/confirm.html",
+      "forgotPasswordEnabled": false,
+      "forgotPasswordTokenLifetime": 900,
+      "protectedUserAttributes": [],
+      "selfRegistrationConfirmationUrl": "http://am:80/am/XUI/confirm.html",
+      "selfRegistrationEnabled": false,
+      "selfRegistrationTokenLifetime": 900,
+      "selfServiceEnabled": false,
+      "userRegisteredDestination": "default"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "LegacyUserSelfService",
+    "entityType": "LegacyUserSelfService",
+    "pathParams": {},
+    "realm": null
+  }
+}

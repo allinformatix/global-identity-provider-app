@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          envFrom:
+          - secretRef:
+              name: postgres-env-secrets
+          env:
+            - name: POSTGRES_DB
+              value: "forgerock"
+            - name: POSTGRES_USER
+              value: "fruser"
+            # - name: POSTGRES_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: postgres-env-secrets
+            #       key: POSTGRES_PASSWORD
+          envFrom:
+            - secretRef:
+                name: postgres-env-secrets

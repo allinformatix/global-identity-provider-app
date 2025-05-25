@@ -1,0 +1,27 @@
+{
+  "data": {
+    "_id": "1d475815-72cb-42eb-aafd-4026989d28a7",
+    "_type": {
+      "_id": "globalScript",
+      "collection": true,
+      "name": "globalScript"
+    },
+    "context": "SOCIAL_IDP_PROFILE_TRANSFORMATION",
+    "createdBy": "null",
+    "creationDate": "0",
+    "description": "Default global script for Social Identity Provider Profile Transformation",
+    "evaluatorVersion": "V1_0",
+    "language": "GROOVY",
+    "lastModifiedBy": "null",
+    "lastModifiedDate": "0",
+    "name": "Social Identity Provider Profile Transformation Script",
+    "script": "LyoKICogQ29weXJpZ2h0IDIwMjAgRm9yZ2VSb2NrIEFTLiBBbGwgUmlnaHRzIFJlc2VydmVkCiAqCiAqIFVzZSBvZiB0aGlzIGNvZGUgcmVxdWlyZXMgYSBjb21tZXJjaWFsIHNvZnR3YXJlIGxpY2Vuc2Ugd2l0aCBGb3JnZVJvY2sgQVMuCiAqIG9yIHdpdGggb25lIG9mIGl0cyBhZmZpbGlhdGVzLiBBbGwgdXNlIHNoYWxsIGJlIGV4Y2x1c2l2ZWx5IHN1YmplY3QKICogdG8gc3VjaCBsaWNlbnNlIGJldHdlZW4gdGhlIGxpY2Vuc2VlIGFuZCBGb3JnZVJvY2sgQVMuCiAqLwoKLyogRGVmYXVsdCBTb2NpYWwgSWRlbnRpdHkgUHJvdmlkZXIgUHJvZmlsZSBUcmFuc2Zvcm1hdGlvbiBzY3JpcHQgdG8gdXNlIGFzIGEgdGVtcGxhdGUgZm9yIG5ldyBzY3JpcHRzICov"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "1d475815-72cb-42eb-aafd-4026989d28a7",
+    "entityType": "GlobalScripts",
+    "pathParams": {},
+    "realm": null
+  }
+}

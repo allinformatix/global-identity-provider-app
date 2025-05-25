@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "IdentityAssertionService",
+      "collection": false,
+      "name": "Identity Assertion Service"
+    },
+    "cacheDuration": 120,
+    "defaults": {
+      "cacheDuration": 120,
+      "enable": true
+    },
+    "enable": true
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "IdentityAssertionService",
+    "entityType": "IdentityAssertionService",
+    "pathParams": {},
+    "realm": null
+  }
+}

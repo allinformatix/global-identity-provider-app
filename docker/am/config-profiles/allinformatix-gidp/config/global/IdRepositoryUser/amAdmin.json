@@ -1,0 +1,25 @@
+{
+  "data": {
+    "_id": "amAdmin",
+    "_type": {
+      "_id": "user",
+      "collection": true,
+      "name": "User"
+    },
+    "cn": "amAdmin",
+    "dn": "uid=amAdmin,ou=people,",
+    "givenName": "amAdmin",
+    "inetUserStatus": "Active",
+    "iplanet-am-user-auth-config": "[Empty]",
+    "roles": [],
+    "sn": "amAdmin",
+    "userPassword": null
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "amAdmin",
+    "entityType": "IdRepositoryUser",
+    "pathParams": {},
+    "realm": null
+  }
+}

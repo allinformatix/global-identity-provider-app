@@ -1,0 +1,14 @@
+# kustomize/overlay/mini/ingresses/patch-ingress-login-allinformatix-com.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-login-allinformatix-com
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+spec:
+  rules:
+    - host: login.allinformatix.com
+  tls:
+    - hosts:
+        - login.allinformatix.com
+      secretName: sslcert-login-allinformatix-com

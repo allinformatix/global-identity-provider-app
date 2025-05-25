@@ -1,0 +1,9 @@
+{
+    "enabled" : true,
+    "cacheEnabled" : true,
+    "urlContextRoot" : "/ai-exec-layer-enduser",
+    "defaultDir" : "&{idm.install.dir}/ui/enduser",
+    "responseHeaders" : {
+        "X-Frame-Options" : "DENY"
+    }
+}

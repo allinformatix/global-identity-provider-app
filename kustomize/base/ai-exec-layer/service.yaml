@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-exec-layer
+spec:
+  ports:
+  - name: ai-exec-layer
+    port: 80
+    protocol: TCP
+    targetPort: 9080
+  selector:
+    app: ai-exec-layer
+  type: ClusterIP

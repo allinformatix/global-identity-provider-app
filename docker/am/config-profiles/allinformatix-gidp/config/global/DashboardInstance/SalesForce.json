@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "SalesForce",
+    "_type": {
+      "_id": "instances",
+      "collection": true,
+      "name": "instance"
+    },
+    "className": "SAML2ApplicationClass",
+    "displayName": "SalesForce",
+    "icfIdentifier": "idm magic 12",
+    "icon": "images/logos/salesforce.png",
+    "login": "http://www.salesforce.com",
+    "name": "SalesForce"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "SalesForce",
+    "entityType": "DashboardInstance",
+    "pathParams": {},
+    "realm": null
+  }
+}

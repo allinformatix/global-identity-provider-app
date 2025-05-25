@@ -1,0 +1,382 @@
+dn: dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: domain
+objectClass: top
+dc: ai-exec-layer
+
+dn: dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: domain
+objectClass: top
+dc: openidm
+
+dn: ou=links,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: links
+
+dn: ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: internal
+
+dn: ou=users,ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: ou=roles,ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: roles
+
+dn: ou=usermeta,ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: usermeta
+
+dn: ou=notification,ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: notification
+
+dn: ou=config,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: config
+
+dn: ou=file,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: file
+
+dn: ou=Security,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: Security
+
+dn: ou=Keys,ou=Security,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: Keys
+
+dn: ou=clusteredrecontargetids,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: clusteredrecontargetids
+
+dn: ou=reconprogressstate,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: reconprogressstate
+
+dn: ou=generic,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: generic
+
+dn: ou=scheduler,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: scheduler
+
+dn: ou=triggers,ou=scheduler,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: triggers
+
+dn: ou=jobs,ou=scheduler,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: jobs
+
+dn: ou=calendars,ou=scheduler,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: calendars
+
+dn: ou=jobGroups,ou=scheduler,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: jobGroups
+
+dn: ou=triggerGroups,ou=scheduler,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: triggerGroups
+
+dn: ou=cluster,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: cluster
+
+dn: ou=states,ou=cluster,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: states
+
+dn: ou=events,ou=cluster,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: events
+
+dn: ou=relationships,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: relationships
+
+dn: ou=updates,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: updates
+
+dn: ou=import,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: import
+
+dn: ou=managed,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: managed
+
+dn: ou=user,ou=managed,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: user
+
+dn: ou=role,ou=managed,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: role
+
+dn: ou=group,ou=managed,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: group
+
+dn: ou=assignment,ou=managed,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: assignment
+
+dn: ou=organization,ou=managed,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: organization
+
+dn: ou=application,ou=managed,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: application
+
+dn: ou=ui,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: ui
+
+dn: ou=notification,ou=ui,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: notification
+
+dn: ou=jsonstorage,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: jsonstorage
+
+dn: ou=locks,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: locks
+
+dn: ou=sync,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: sync
+
+dn: ou=queue,ou=sync,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: queue
+
+dn: ou=recon,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: recon
+
+dn: ou=assoc,ou=recon,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: organizationalunit
+objectClass: top
+ou: assoc
+
+dn: cn=openidm-admin,ou=roles,ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: fr-idm-internal-role
+objectClass: top
+cn: openidm-admin
+description: Administrative access
+fr-idm-name: openidm-admin
+
+dn: cn=openidm-authorized,ou=roles,ou=internal,dc=openidm,dc=allinformatix,d
+ c=com
+objectClass: fr-idm-internal-role
+objectClass: top
+cn: openidm-authorized
+description: Basic minimum user
+fr-idm-name: openidm-authorized
+
+dn: cn=openidm-reg,ou=roles,ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: fr-idm-internal-role
+objectClass: top
+cn: openidm-reg
+description: Anonymous access
+fr-idm-name: openidm-reg
+
+dn: cn=openidm-cert,ou=roles,ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: fr-idm-internal-role
+objectClass: top
+cn: openidm-cert
+description: Authenticated via certificate
+fr-idm-name: openidm-cert
+
+dn: cn=openidm-tasks-manager,ou=roles,ou=internal,dc=openidm,dc=allinformati
+ x,dc=com
+objectClass: fr-idm-internal-role
+objectClass: top
+cn: openidm-tasks-manager
+description: Allowed to reassign workflow tasks
+fr-idm-name: openidm-tasks-manager
+
+dn: cn=platform-provisioning,ou=roles,ou=internal,dc=openidm,dc=allinformati
+ x,dc=com
+objectClass: fr-idm-internal-role
+objectClass: top
+cn: platform-provisioning
+description: Platform provisioning access
+fr-idm-name: platform-provisioning
+
+dn: uid=openidm-admin,ou=users,ou=internal,dc=openidm,dc=allinformatix,dc=co
+ m
+objectClass: fr-idm-internal-user
+objectClass: top
+objectClass: uidObject
+uid: openidm-admin
+fr-idm-password: {"$crypto":{"value":{"algorithm":"SHA-256","data":"L4jUfaHc
+ rOToN+H+J3Bjdq8rvl4QfxdfrZd2CYbHXh2FGp2d+uYChpO8j0ZkhoBM"},"type":"salted-h
+ ash"}}
+
+dn: uid=anonymous,ou=users,ou=internal,dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+objectClass: fr-idm-internal-user
+objectClass: top
+objectClass: uidObject
+uid: anonymous
+fr-idm-password: {"$crypto":{"value":{"algorithm":"SHA-256","data":"wGQbyYL4
+ DmgFdAuv03C4/PU+4Qypw0kN7I4HRRAx/wuVD4d7IQoRNw8gMeStO3Ak"},"type":"salted-h
+ ash"}}
+
+dn: uid=idm-provisioning,ou=users,ou=internal,dc=openidm,dc=allinformatix,dc
+ =com
+objectClass: fr-idm-internal-user
+objectClass: top
+objectClass: uidObject
+uid: idm-provisioning
+
+dn: uid=connector-server-client,ou=users,ou=internal,dc=openidm,dc=allinform
+ atix,dc=com
+objectClass: fr-idm-internal-user
+objectClass: top
+objectClass: uidObject
+uid: connector-server-client
+
+dn: uid=scheduler-service-group,ou=jobGroups,ou=scheduler,dc=openidm,dc=alli
+ nformatix,dc=com
+objectClass: fr-idm-generic-obj
+objectClass: top
+objectClass: uidObject
+fr-idm-json: {"name":"scheduler-service-group","paused":false}
+uid: scheduler-service-group
+
+dn: uid=scheduler-service-group.taskscan_expire,ou=jobs,ou=scheduler,dc=open
+ idm,dc=allinformatix,dc=com
+objectClass: fr-idm-generic-obj
+objectClass: top
+objectClass: uidObject
+fr-idm-json: {"group":"scheduler-service-group","name":"taskscan_expire","pa
+ used":false,"serialized":{"type":"JobDetailImpl","description":null,"durabi
+ lity":true,"group":"scheduler-service-group","jobClass":"org.forgerock.open
+ idm.quartz.StatefulSchedulerServiceJob","jobDataMap":{"scheduler.invokeServ
+ ice":"org.forgerock.openidm.taskscanner","scheduler.config-name":"scheduler
+ -taskscan_expire","scheduler.invokeContext":{"waitForCompletion":false,"num
+ berOfThreads":5,"scan":{"_queryFilter":"((/inactiveDate lt \"${Time.nowWith
+ Offset}\") AND (!(/activeDate pr) or /activeDate le \"${Time.nowWithOffset}
+ \"))","object":"managed/user","taskState":{"started":"/expireAccount/task-s
+ tarted","completed":"/expireAccount/task-completed"},"recovery":{"timeout":
+ "10m"}},"task":{"script":{"type":"text/javascript","globals":{},"source":"v
+ ar patch = [{ \"operation\" : \"replace\", \"field\" : \"/accountStatus\", 
+ \"value\" : \"inactive\" }];\n\nlogger.debug(\"Performing Expire Account Ta
+ sk on {} ({})\", input.mail, objectID);\n\nopenidm.patch(objectID, null, pa
+ tch); true;"}}},"schedule.config":{"enabled":false,"persisted":true,"recove
+ rable":false,"misfirePolicy":"fireAndProceed","schedule":null,"repeatInterv
+ al":86400000,"repeatCount":-1,"type":"simple","invokeService":"org.forgeroc
+ k.openidm.taskscanner","invokeContext":{"waitForCompletion":false,"numberOf
+ Threads":5,"scan":{"_queryFilter":"((/inactiveDate lt \"${Time.nowWithOffse
+ t}\") AND (!(/activeDate pr) or /activeDate le \"${Time.nowWithOffset}\"))"
+ ,"object":"managed/user","taskState":{"started":"/expireAccount/task-starte
+ d","completed":"/expireAccount/task-completed"},"recovery":{"timeout":"10m"
+ }},"task":{"script":{"type":"text/javascript","globals":{},"source":"var pa
+ tch = [{ \"operation\" : \"replace\", \"field\" : \"/accountStatus\", \"val
+ ue\" : \"inactive\" }];\n\nlogger.debug(\"Performing Expire Account Task on
+  {} ({})\", input.mail, objectID);\n\nopenidm.patch(objectID, null, patch);
+  true;"}}},"invokeLogLevel":"info","startTime":null,"endTime":null,"concurr
+ entExecution":false,"configAlias":"taskscan_expire"},"scheduler.invokeLogLe
+ vel":"info"},"name":"taskscan_expire","shouldRecover":false}}
+uid: scheduler-service-group.taskscan_expire
+
+dn: uid=scheduler-service-group.taskscan_activate,ou=jobs,ou=scheduler,dc=op
+ enidm,dc=allinformatix,dc=com
+objectClass: fr-idm-generic-obj
+objectClass: top
+objectClass: uidObject
+fr-idm-json: {"group":"scheduler-service-group","name":"taskscan_activate","
+ paused":false,"serialized":{"type":"JobDetailImpl","description":null,"dura
+ bility":true,"group":"scheduler-service-group","jobClass":"org.forgerock.op
+ enidm.quartz.StatefulSchedulerServiceJob","jobDataMap":{"scheduler.invokeSe
+ rvice":"org.forgerock.openidm.taskscanner","scheduler.config-name":"schedul
+ er-taskscan_activate","scheduler.invokeContext":{"waitForCompletion":false,
+ "numberOfThreads":5,"scan":{"_queryFilter":"((/activeDate le \"${Time.nowWi
+ thOffset}\") AND (!(/inactiveDate pr) or /inactiveDate ge \"${Time.nowWithO
+ ffset}\"))","object":"managed/user","taskState":{"started":"/activateAccoun
+ t/task-started","completed":"/activateAccount/task-completed"},"recovery":{
+ "timeout":"10m"}},"task":{"script":{"type":"text/javascript","globals":{},"
+ source":"var patch = [{ \"operation\" : \"replace\", \"field\" : \"/account
+ Status\", \"value\" : \"active\" }];\n\nlogger.debug(\"Performing Activate 
+ Account Task on {} ({})\", input.mail, objectID);\n\nopenidm.patch(objectID
+ , null, patch); true;"}}},"schedule.config":{"enabled":false,"persisted":tr
+ ue,"recoverable":false,"misfirePolicy":"fireAndProceed","schedule":null,"re
+ peatInterval":86400000,"repeatCount":-1,"type":"simple","invokeService":"or
+ g.forgerock.openidm.taskscanner","invokeContext":{"waitForCompletion":false
+ ,"numberOfThreads":5,"scan":{"_queryFilter":"((/activeDate le \"${Time.nowW
+ ithOffset}\") AND (!(/inactiveDate pr) or /inactiveDate ge \"${Time.nowWith
+ Offset}\"))","object":"managed/user","taskState":{"started":"/activateAccou
+ nt/task-started","completed":"/activateAccount/task-completed"},"recovery":
+ {"timeout":"10m"}},"task":{"script":{"type":"text/javascript","globals":{},
+ "source":"var patch = [{ \"operation\" : \"replace\", \"field\" : \"/accoun
+ tStatus\", \"value\" : \"active\" }];\n\nlogger.debug(\"Performing Activate
+  Account Task on {} ({})\", input.mail, objectID);\n\nopenidm.patch(objectI
+ D, null, patch); true;"}}},"invokeLogLevel":"info","startTime":null,"endTim
+ e":null,"concurrentExecution":false,"configAlias":"taskscan_activate"},"sch
+ eduler.invokeLogLevel":"info"},"name":"taskscan_activate","shouldRecover":f
+ alse}}
+uid: scheduler-service-group.taskscan_activate
+
+dn: uid=idm-7879f8fdfd-kztgl,ou=states,ou=cluster,dc=openidm,dc=allinformati
+ x,dc=com
+objectClass: fr-idm-generic-obj
+objectClass: top
+objectClass: uidObject
+fr-idm-json: {"recoveryAttempts":0,"detectedDown":"0000000000000000000","typ
+ e":"state","recoveryFinished":"0000000000000000000","instanceId":"idm-7879f
+ 8fdfd-kztgl","startup":"0000001747746367495","recoveringInstanceId":null,"s
+ tate":1,"recoveringTimestamp":"0000000000000000000","recoveryStarted":"0000
+ 000000000000000","shutdown":"0000000000000000000","timestamp":"000000174775
+ 0047449"}
+uid: idm-7879f8fdfd-kztgl
+

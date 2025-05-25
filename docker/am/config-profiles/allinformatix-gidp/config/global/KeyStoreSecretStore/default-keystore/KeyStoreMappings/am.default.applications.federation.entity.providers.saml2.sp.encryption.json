@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.default.applications.federation.entity.providers.saml2.sp.encryption",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "test"
+    ],
+    "secretId": "am.default.applications.federation.entity.providers.saml2.sp.encryption"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.default.applications.federation.entity.providers.saml2.sp.encryption",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

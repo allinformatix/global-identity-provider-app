@@ -1,0 +1,28 @@
+{
+  "data": {
+    "_id": "ig-agent",
+    "_type": {
+      "_id": "IdentityGatewayAgent",
+      "collection": true,
+      "name": "Identity Gateway Agents"
+    },
+    "agentgroup": null,
+    "igCdssoLoginUrlTemplate": null,
+    "igCdssoRedirectUrls": [
+      "http://am:80/am/cdcservlet"
+    ],
+    "igTokenIntrospection": "Realm_Subs",
+    "secretLabelIdentifier": null,
+    "status": "Active",
+    "userpassword": {
+      "$base64:decode": "&{ig.agent.secret}"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "ig-agent",
+    "entityType": "IdentityGatewayAgents",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

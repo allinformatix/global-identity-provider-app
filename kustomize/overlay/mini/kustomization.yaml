@@ -1,0 +1,29 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+resources:
+- ../../base/kustomizeConfig
+- ../../base/ds-backup-management
+- ../../base/ds/cts
+- ../../base/ds/idrepo
+- ../../base/postgres
+- ../../base/am
+- ../../base/amster
+- ../../base/idm
+- ../../base/ig
+- ../../base/end-user-ui
+- ../../base/login-ui
+- ../../base/admin-ui
+- ../../base/ingress
+- ../../base/ldif-importer
+- ../../base/pdb
+
+patches:
+- path: am.yaml
+- path: base.yaml
+- path: ds-cts.yaml
+- path: ds-idrepo.yaml
+- path: idm.yaml
+- path: amster.yaml
+- path: ig.yaml
+- path: postgres.yaml

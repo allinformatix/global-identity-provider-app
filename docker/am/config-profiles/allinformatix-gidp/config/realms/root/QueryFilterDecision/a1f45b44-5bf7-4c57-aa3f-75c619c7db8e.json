@@ -1,0 +1,29 @@
+{
+  "data": {
+    "_id": "a1f45b44-5bf7-4c57-aa3f-75c619c7db8e",
+    "_outcomes": [
+      {
+        "displayName": "True",
+        "id": "true"
+      },
+      {
+        "displayName": "False",
+        "id": "false"
+      }
+    ],
+    "_type": {
+      "_id": "QueryFilterDecisionNode",
+      "collection": true,
+      "name": "Query Filter Decision"
+    },
+    "identityAttribute": "userName",
+    "queryFilter": "!(/preferences pr) or /preferences/marketing eq false or /preferences/updates eq false"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "a1f45b44-5bf7-4c57-aa3f-75c619c7db8e",
+    "entityType": "QueryFilterDecision",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

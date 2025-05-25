@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ig
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ig
+  template:
+    metadata:
+      labels:
+        app: ig
+    spec:
+      securityContext:
+        runAsUser: 11111
+        runAsGroup: 0
+      containers:
+      - name: ig
+        env:
+        # - name: OPENIG_BASE
+        #   value: /config
+        # - name: CATALINA_OPTS
+        #   value: -server
+        - name: IG_DEBUG_AI
+          value: "true"
+        - name: RUNPOD_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: runpod-api-key
+              key: RUNPOD_API_KEY
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openai-api-key
+              key: OPENAI_API_KEY
+        - name: FQDN_API
+          valueFrom:
+            configMapKeyRef:
+              name: platform-config 
+              key: FQDN_API
+        - name: IG_ROUTER_SCAN_INTERVAL
+          value: "2 seconds"
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POSTGRES_HOST
+          value: "postgres"
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: API_PRODUCT_PRICES_AZURE_DB
+          value: "product_prices_azure"
+        - name: API_PRODUCT_PRICES_AZURE_USER
+          value: "api_user_product_prices"
+        - name: API_PRODUCT_PRICES_AZURE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-env-secrets
+              key: API_PRODUCT_PRICES_AZURE_PASSWORD
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-env-secrets
+              key: POSTGRES_PASSWORD
+        envFrom:
+        - secretRef:
+            name: ig-env-secrets
+        image: ig
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /kube/liveness
+            port: 8080
+          periodSeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /kube/readiness
+            port: 8080
+          initialDelaySeconds: 5
+        ports:
+        - containerPort: 8080   
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+          limits:
+            memory: 512Mi
+      tolerations:
+        - key: kubernetes.io/arch
+          operator: Exists
+          effect: NoSchedule

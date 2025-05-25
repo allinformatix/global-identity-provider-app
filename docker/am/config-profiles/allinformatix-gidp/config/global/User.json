@@ -1,0 +1,20 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "user",
+      "collection": false,
+      "name": "User"
+    },
+    "dynamic": {
+      "defaultUserStatus": "Active"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "User",
+    "entityType": "User",
+    "pathParams": {},
+    "realm": null
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "ConfigurationVersionService",
+      "collection": false,
+      "name": "Configuration Version Service"
+    },
+    "appliedRuleIds": [
+      "AME-23273",
+      "AME-21032",
+      "AME-21768"
+    ],
+    "configurationCommit": "6aef064c39ce4ead3916d50dfc4bdef37f73af56",
+    "configurationVersion": "8.0.0.0"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "ConfigurationVersionService",
+    "entityType": "ConfigurationVersionService",
+    "pathParams": {},
+    "realm": null
+  }
+}

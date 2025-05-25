@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "OAUTH2_ACCESS_TOKEN_MODIFICATION",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "d22f9a0c-426a-4466-b95e-d0f125b0d5fa",
+    "languages": [
+      "JAVASCRIPT",
+      "GROOVY"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "OAUTH2_ACCESS_TOKEN_MODIFICATION",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

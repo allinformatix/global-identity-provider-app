@@ -1,0 +1,351 @@
+/**
+ * Copyright 2019-2023 ForgeRock AS. All Rights Reserved
+ *
+ * Use of this code requires a commercial software license with ForgeRock AS.
+ * or with one of its affiliates. All use shall be exclusively subject
+ * to such license between the licensee and ForgeRock AS.
+ */
+
+/**
+  Badge Styles
+*/
+.fr-rounded-circle {
+  height: 34px;
+  width: 34px;
+  background-color: $gray-400;
+  color: $white;
+  border-radius: 50%;
+  text-align: center;
+
+  &.material-icons {
+    position: relative;
+    padding-top: 5px;
+  }
+}
+
+/**
+  Menu State Mixins
+*/
+@mixin fr-menu-expanded {
+  width: $fr-sidemenu-width-lg;
+  transform: translateX(0);
+
+  .ping-logo-horizontal {
+    display: block;
+  }
+
+  .ping-logo-square {
+    display: none;
+  }
+}
+
+@mixin fr-menu-collapsed {
+  width: $fr-sidemenu-width-sm;
+
+  :deep {
+    .dropdown-toggle::after {
+      opacity: 0;
+    }
+  }
+
+  .sidebar-item-text,
+  :deep(.fr-sidebar-menuitems .menu-item-text),
+  :deep(.fr-menu-item-submenuitems),
+  .ping-logo-horizontal {
+    display: none;
+  }
+
+  .ping-logo-square {
+    display: block;
+  }
+}
+
+@mixin fr-menu-collapsed-hover {
+  &:hover {
+    width: $fr-sidemenu-width-lg;
+
+    .fr-sidebar-nav {
+      :deep {
+        .dropdown-toggle::after {
+          opacity: 1;
+        }
+      }
+
+      > li > ul,
+      :deep(.fr-menu-item-submenuitems) {
+        display: block;
+      }
+
+      .ping-logo-horizontal {
+        display: block;
+      }
+
+      .ping-logo-square {
+        display: none;
+      }
+    }
+
+    :deep(.menu-item-text),
+    .sidebar-item-text {
+      display: inline;
+    }
+  }
+}
+
+@mixin fr-menu-hidden {
+  transform: translateX(-#{$fr-sidemenu-width-lg});
+  width: $fr-sidemenu-width-lg;
+}
+
+/**
+  Overlay shim
+*/
+#app {
+  .fr-sidebar-shim {
+    display: none;
+    background-color: $black;
+    opacity: 0.2;
+    z-index: $zindex-sticky;
+  }
+
+  &.fr-menu-mobile.fr-menu-expanded {
+    .fr-sidebar-shim {
+      display: block;
+    }
+  }
+}
+
+/**
+  Touch device specific styles - Desktop
+*/
+@media (any-hover: hover), all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  @include media-breakpoint-up(md) {
+    #app.fr-menu-collapsed {
+      .fr-sidebar-wrapper {
+        @include fr-menu-collapsed;
+      }
+    }
+
+    #app.fr-menu-collapsed:not(.fr-hover-disabled) {
+      .fr-sidebar-wrapper {
+        @include fr-menu-collapsed-hover;
+      }
+    }
+
+    #app.fr-menu-expanded {
+      .fr-sidebar-wrapper {
+        @include fr-menu-expanded;
+      }
+    }
+  }
+
+  @include media-breakpoint-between(sm, md) {
+    #app:not(.fr-menu-collapsed):not(.fr-menu-expanded) .fr-sidebar-wrapper {
+      @include fr-menu-collapsed;
+      @include fr-menu-collapsed-hover;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .fr-sidebar-wrapper {
+      @include fr-menu-hidden;
+    }
+
+    #app.fr-menu-mobile.fr-menu-expanded {
+      .fr-sidebar-wrapper {
+        @include fr-menu-expanded;
+      }
+    }
+  }
+}
+
+/**
+  Touch device specific styles - Mobile
+*/
+@media (any-hover: none) {
+  .fr-sidebar-wrapper {
+    @include media-breakpoint-down(md) {
+      @include fr-menu-hidden;
+    }
+
+    .fr-sidebar-bottom {
+      display: none;
+    }
+  }
+}
+
+/**
+  Default Menu Styles
+*/
+.fr-sidebar-wrapper {
+  background: $fr-sidemenu-background-color;
+  color: $fr-sidemenu-font-color;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  width: $fr-sidemenu-width-lg;
+  will-change: transform;
+  transition: transform 0.2s ease-out, width 0.2s ease-out;
+  z-index: $zindex-fixed;
+
+  .fr-menu-mobile.fr-menu-expanded & {
+    transform: translateX(0);
+
+    .ping-logo-horizontal {
+      display: block;
+    }
+
+    .ping-logo-square {
+      display: none;
+    }
+  }
+
+  .fr-menu-mobile.fr-menu-collapsed & {
+    .ping-logo-horizontal {
+      display: none;
+    }
+
+    .ping-logo-square {
+      display: none;
+    }
+  }
+
+  :not(.fr-menu-mobile) & {
+    @include media-breakpoint-up(sm) {
+      box-shadow: 1px 0 9px rgba(0, 0, 0, 0.13);
+    }
+  }
+
+  .fr-sidebar-nav {
+    .ping-logo {
+      height: 24px;
+      background-position: left;
+    }
+
+    .material-icons {
+      height: 18px;
+      width: 18px;
+    }
+
+    .sidebar-item-text {
+      display: inline;
+      padding-right: 2.25rem;
+    }
+
+    li > button {
+      color: inherit;
+      background-color: inherit;
+      border-color: $white;
+      width: 100%;
+      position: relative;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      border-radius: 4px;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+
+      &:hover {
+        background-color: $fr-sidemenu-hover;
+      }
+    }
+
+    ul,
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .fr-sidebar-brand {
+      height: 72px;
+
+      &:hover {
+        background-color: $fr-sidemenu-hover;
+      }
+
+      :deep {
+        .b-dropdown {
+          width: 100%;
+
+          > button {
+            overflow: hidden;
+          }
+
+          .dropdown-menu {
+            margin: 0 0 0 -5px;
+          }
+
+          h5 {
+            font-size: 0.875rem;
+          }
+
+          h6 {
+            color: $gray-500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+          }
+
+          span {
+            font-size: 0.8125rem;
+          }
+
+          .dropdown-item {
+            align-items: center;
+            display: flex;
+
+            h5,
+            span {
+              font-size: 0.875rem;
+            }
+
+            .material-icons-outlined,
+            .material-icons {
+              font-size: 1.125rem;
+            }
+          }
+
+          li.hidden {
+            display: none !important;
+          }
+        }
+
+        .fr-dropdown-button {
+          margin-left: 12px;
+        }
+      }
+    }
+
+    .fr-dropdown-button-content {
+      max-width: 150px;
+      padding-right: 2.25rem;
+    }
+
+    .fr-dropdown-header {
+      h6 {
+        font-size: 0.6875rem;
+      }
+    }
+
+    ul.fr-sidebar-menuitems {
+      font-size: 0.875rem;
+      overflow-x: hidden;
+      overflow-y: auto;
+      white-space: nowrap;
+    }
+  }
+
+  .fr-sidebar-bottom {
+    border-top: 1px solid $fr-sidemenu-toggler-border-color;
+
+    .btn {
+      &:focus {
+        outline: 2px auto -webkit-focus-ring-color;
+      }
+    }
+  }
+}

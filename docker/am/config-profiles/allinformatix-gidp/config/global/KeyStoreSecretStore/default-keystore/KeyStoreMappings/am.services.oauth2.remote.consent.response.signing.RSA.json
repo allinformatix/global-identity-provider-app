@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.services.oauth2.remote.consent.response.signing.RSA",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "rsajwtsigningkey"
+    ],
+    "secretId": "am.services.oauth2.remote.consent.response.signing.RSA"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.services.oauth2.remote.consent.response.signing.RSA",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

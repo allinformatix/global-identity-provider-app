@@ -1,0 +1,13 @@
+namespace: gidp-stg
+
+resources:
+- ../mini
+- secrets
+
+components:
+- ../platform-config/gidp-fqdn/stg
+
+patches:
+- path: platform-config-patch.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization

@@ -1,0 +1,17 @@
+{
+  "data": {
+    "_id": "user",
+    "_type": {
+      "_id": "SupportedIdentities",
+      "collection": true,
+      "name": "SupportedIdentities"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "user",
+    "entityType": "SupportedIds",
+    "pathParams": {},
+    "realm": null
+  }
+}

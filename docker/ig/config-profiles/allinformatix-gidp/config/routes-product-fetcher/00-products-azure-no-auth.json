@@ -1,0 +1,70 @@
+{
+  "name": "Product fetcher endpoints with no AuthN",
+  "condition": "${find(request.uri.path, '^/productFetcherNoAuth')}",
+  "heap": [
+    {
+      "name": "CommonClientHandler",
+      "type": "ClientHandler"
+    },
+    {
+      "name": "capture",
+      "type": "CaptureDecorator",
+      "config": {
+        "type": "Slf4jLogSink",
+        "captureEntity": true,
+        "captureExchange": true,
+        "logSink": {
+          "config": {
+            "base": "org.forgerock.openig"
+          }
+        }
+      }
+    }
+  ],
+  "handler": {
+    "type": "DispatchHandler",
+    "config": {
+      "bindings": [
+        {
+          "name": "Fetch products Test endpoint no AuthN",
+          "condition": "${find(request.uri.path, 'test$')}",
+          "handler": {
+            "type": "Chain",
+            "capture": "all",
+            "config": {
+              "filters": [],
+              "handler": {
+                "type": "StaticResponseHandler",
+                "config": {
+                  "status": 200
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Microsoft Azure products no AuthN",
+          "condition": "${find(request.uri.path, 'azure$')}",
+          "handler": {
+            "type": "Chain",
+            "capture": "request",
+            "config": {
+              "filters": [
+                {
+                  "name": "fetchProductsAzureToPostgres",
+                  "type": "ScriptableFilter",
+                  "config": {
+                    "type": "application/x-groovy",
+                    "file": "fetchProductsAzureToPostgres.groovy"
+                  }
+                } 
+              ],
+              "handler": "CommonClientHandler"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "monitor": true
+}

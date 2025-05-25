@@ -1,0 +1,25 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "deviceIdService",
+      "collection": false,
+      "name": "Device ID Service"
+    },
+    "defaults": {
+      "deviceIdAttrName": "devicePrintProfiles",
+      "deviceIdSettingsEncryptionKeystore": "/home/forgerock/openam/security/keystores/keystore.jks",
+      "deviceIdSettingsEncryptionKeystorePassword": null,
+      "deviceIdSettingsEncryptionKeystorePrivateKeyPassword": null,
+      "deviceIdSettingsEncryptionKeystoreType": "JKS",
+      "deviceIdSettingsEncryptionScheme": "NONE"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "DeviceIDService",
+    "entityType": "DeviceIDService",
+    "pathParams": {},
+    "realm": null
+  }
+}

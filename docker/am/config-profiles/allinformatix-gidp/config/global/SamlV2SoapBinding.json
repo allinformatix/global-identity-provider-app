@@ -1,0 +1,18 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "federation/saml2soapbinding",
+      "collection": false,
+      "name": "SAML v2.0 SOAP Binding"
+    },
+    "requestHandlers": []
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "SamlV2SoapBinding",
+    "entityType": "SamlV2SoapBinding",
+    "pathParams": {},
+    "realm": null
+  }
+}

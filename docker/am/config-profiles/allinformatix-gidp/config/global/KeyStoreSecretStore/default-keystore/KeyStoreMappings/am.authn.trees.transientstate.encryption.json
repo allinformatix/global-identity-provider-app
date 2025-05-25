@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.authn.trees.transientstate.encryption",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "directenctest"
+    ],
+    "secretId": "am.authn.trees.transientstate.encryption"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.authn.trees.transientstate.encryption",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "data": {
+    "_id": "agent",
+    "_type": {
+      "_id": "SupportedIdentities",
+      "collection": true,
+      "name": "SupportedIdentities"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "agent",
+    "entityType": "SupportedIds",
+    "pathParams": {},
+    "realm": null
+  }
+}

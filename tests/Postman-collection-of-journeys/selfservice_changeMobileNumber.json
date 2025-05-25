@@ -1,0 +1,3021 @@
+{
+	"info": {
+		"_postman_id": "2dcf9d6d-5e60-443f-94b0-9812bcdb7c78",
+		"name": "selfservice_changeMobileNumber",
+		"description": "selfservice_changeEmail Postman Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28536302"
+	},
+	"item": [
+		{
+			"name": "prerequisites",
+			"item": [
+				{
+					"name": "getAuthId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// clear cookies\r",
+									"const jar = pm.cookies.jar();\r",
+									"const url = pm.variables.get('url');\r",
+									"jar.clear(url, function (err) {\r",
+									"    if(err) {\r",
+									"        console.error(err);\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"cookies cleared!\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "2166"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:37:25 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "19"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoicTZyYjkyNWNoOTU5Mmg5ZmlvcWtldmJvc2kiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1TGNtWXhSbVJvV0Vsc05Vb3lZbDgyUkhwNE1XTm5MblkyTm5GQlJrTk1hVFp5WXpkWVl6WlNUWEZuZUdWUlozWTNhVVF6VlU0d00wazBYMjR4Y0ZobVQyOVBaMEppVTNCWWJFdG9lbXBoWTNSSlh6UlRla1l3Y2tNeVUwbDNjemxPV1hKYUxVdE1SRUZrT0drNFEyNWtRVmx4WjNsbVNtdDNSMmRyTTBWS2RVZFJUbU5hVEcxcVkyUlFlVUpJV2tGRFFVTkdaVTFFY2sxb1lWQnVSMVJXVWpOTk5GbG9kVWxmZGxwcVRXNU9jMGwzUVZka2FXaE1ObVZCTkUxZldtNXFXRzAxU2xoNE9VaGpOMGRLTFRRNVREbGZTbmRSTkhWSlFWRjFhSEZtZFVFeFpsZHNaMnBVZEZOa1VWQnpNVVZVUW5GdU5Gb3RZV3hNZDNWRGJIcHNhakY1YUdzdFpWSlNWbWgyVW1SdGJVRm9SbkYzYmt0VGQwZzFabXhGWTBWUlRFYzBZbXBwWlhWcFJrNWtkak0wVUVZM1NrSXlaVGRTWVdOalVuaHhObkI1T0dST1RqRldNSEJ5WmxJdFUwVllTM0ZZWVV4T2VHNVJlbEE0VG5aMlZqVkRSMUJLV0RsMU4wdGxTbWxKZUdjMk1XSXdRMVpzWkdSUFdVZ3RaRWRuVjJ0RE5FeGphemRWTjNwemVqSkZSeTAyZVhCTFNVMXFiMkpJWkRFMmJESlFaWFZCWDBWTmJWODVOMVpWWmtoSmJGZG9MVXhQZFVsaFR6Qnpia3h0VEdOMU0xQjNNMlkxUjJsV05ubG9ibWhsYmxwMVZucExlRXgwWjNGZlExVTBja2x5Y1RsRFIycE1Rak5zYlhCT01XaEdhM2xoVnpGV09WTlRVVkpmUVdZMmNERkVkbXRCTm1sa1QxSnZYM0E1TldSTlQxUTNkbXhtTm1OVWF5MUJkMU01VEVSV01GUjZOVWxKVjJkc2VqSktXRlpPWVRKRmJWUmFRVzQxZEZka1dqUm9hRzV1WVRBMFEzcHdUWEZCZUdkR1VFeE9jRkIyUVd3NFdWVmZja0ptVHpCVFVVZFZZMGR1Y0ZaS2RHbzNRV1ZYY3pKb1FWQk9WM3BaU1hVNFJEY3dhVEZ1ZFZVNFRXUkRhV3A1UlVseU1ubEpaemt5VGxCRFgxUnphbFkwUmxCU2N6SklVWEJQWmtFM1NVMWpNME10UkhWRWRYQTViWEpqVFY4eGMxOXJMbVIxY25sNVZXSnhWVVk1ZW5keFlrdFVlazlyVTJjLmRyalNoTzlsQ2Y2RFg5c3VyTDZDNGhKZFdqT0JvaWZidFJRaThLbUFwS3MiLCJleHAiOjE3MDk3MDg4NDUsImlhdCI6MTcwOTcwNzA0NX0._0dsCzAmm1V6tSAg_0HEvEwAw6IbZDcpCKeZicleXxA\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 1\n  }\n ]\n}"
+						}
+					]
+				},
+				{
+					"name": "passUserData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{userName}}\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"{{password}}\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{userName}}\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"{{password}}\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "4926"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:37:44 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "8310"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoib2JzNWRtMHBsOWJuNGVuaGozcWgzamY4N3IiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1Q1YwTm5Na3N3ZDBSWldYWm5hazF4WlVSS2NUZEJMbkpIZVZNNVIxaHZXblZ0U1VaUGFUVnJSWEYwVUdKdVIybFVWRnBhZUhwU1RGRnhVMGR4U0VKUmVVRjVhMGRyV2psaU5GQjRlSFZZU1VGbFZucEhjMGQwZUhGWGVVVkJhemRDY0cxWE9XRllNWGRMV1hOalowSTBVRVpoVWtOaWRGTnBNbDkxWVRsSU1tVXRWVTl5ZGtSM00ydHdWMDQ0WDJKMWNsWmhaVVYxTWxOTll6QkRWalJaU0VNeGJDMHpibXhqUWpCNmRtdDZhbFJoUldWdlQyMUZOR0ZqUVMxeWQwMDNjRXRNUVZJMGEwNTROelZzZVZOb1JubEllVVZEYm1WdU5YSnZUbXRMWkZCS2JrNXRVVlZLYWxSMGQyaFVNM1YzWWxoVWVsTndaemxPVXpnMGN6aFVORU55ZEZGSWVFRnRUVU5NZHpSUlRXOXJWV05sYjNoa1NGcFpiRlZXUTFaaWNYTkRkMjVWVFRWMmNGVjZiRmRKUTNkQ1FUUnRlSEY1YUdvMU5Vd3dVR1kwUTNoTE1XNVdVRzFNYjE5V1lUZEdVWFZHZURscWNtbzFkMWxLTTA0MVRXcGFRVXhzUTJ4M1lVdEhkbkl6YVU5ck5WUnBjWFpDZWtKTFRWbzJibHBJU0dSRlVYaHVOMXBKU25semJrazVOa2hETW1sa1lYVllaMnRmTWtaa2FGaGtkM3BoYTJNeU0xbFVhSEZOYjFCRFdVSnVia3RQUkV4d1UyZ3RTWEZPUkhCdlJGQnBaVmxsUTNSQ1kydG5SMlZKVDBST2EycE1ja1ZwUkdWUVdHaFJVRmRvWjJGdU0yUm1iRmxvZEhBd1lrbERUREpEVmtaWlZucGFjR3BEYUhWVWNHbzVUMUJtYW1oVWJXRnRjalkzTkRGb2VISjRiRGcwU0RoSVUxbEdRMWR1WHpWdFlrUjRVMVY2ZVc5TVEyVkdkekUwUlVkM09XTTFiVVZuVWxOUE9EUlNXbFpTUlV0NFZHaGhPV0ZRUWtoRExVbG5Za3BHYm1kRFdHdGFWR1ZMVFhZelFWVTVNRTFGU3pGclJWSlBUV2cwT1VwNVpGQTRlVkEwYWpCNGVrOU1aR05oTUdFME4xOHhVekZ1UWt3MFEyTnNVbDlpTjJGWU5rMHRRVXA1WmpaMU5GTjJNWGgzTkhOZmFuTjBWSEYyY1dOT2JsZHlaVk5KWjBOT0xYZHlNWEpYZG1Wd2RqVmpObGhZTjNWb1pHdFZURFkxVnpVMlNqVXRPSHBPVUZreWVFWXpUa3BPY3pnd0xUaFpUMlIxZEdaVVlrZ3diV0pOYkc0elVYcHdaRzVLVGxkeWJVWnVOa3RUWlU5S2EwcFFNVmN3UWxwZmRWbDVlVWh2YzJ0RVYwcEdVak5zTlZKdU5uWjZNV3RHUWxSMVluUllWRkUzTTNCalIwNXhUbmxVZEVGZlZubGtSVWxpYlRKaVkwVTFPRlptZVhSMWNtaEdjeTFGYlVkTmVHUkhURFpVVDA1eVNqbFhkbkpZVlhWNFgzQXlSazlrYkRORFpIUmFUM2RzUmtKR1R6Vk9RVEV4ZGkxMFRVVlFSVUZJZFRobGRWOWtkV3hhUVdscU9EVXRabW96U1hscVFVazJjamx4YTBGVlZUbFJTVFI1WTFKNVJsUkJaMnRtTUVwTk5qZHBaV2cyWkVaaGVVcE5YMlV3ZVd0RU5tbDZUV1pNYUU1elVtOXNiVmh6TWxnMVNFSjVjMjVLWkhKdWVFMXJXa3RDYW1KcGFGVmplSGd5VXpSQ2RUZzBkbkJpVWt3NVVtZFFNRE50UlV4MGNYcFpXRGhRYWtoMGRUSXdYM2hUVlUxRWRVaHNhMjFxWVVoU1dFMXhSVkpPVlhsM2RIWmtUak0zTW5WVWRUQkxlV04zU0Rkb2JFVkpNVGw0ZEVFM2FqVkhlbXRPZGtKTU0zWlNkbEZrVkUxbk9VTllhalpUZVRoeFgyOVdObkpDWmpsUFFrdzVVbmxoVHpkTVJ6UmllbVp5UjE5VFl5MWlaREZqYzE5aGJHazVSR1pXVmt0UFExSlJSbVk1U1VKaGVrSkhhRVJPVGt4NWVUZENZakZqVTFJd2NGQm5jRVZhVm14Q1kxOXdjM1IwV0VaaldYZERUV1JJTmtkbk0yeGhkbTQ0VjFWME1YSkpPRFphYmtwVFlTMUtlVmsxY25oMlgwZFBiRmREZG1Oa00xWlZZa1ZZV2tKbFVFUnpVSEZ2TURobVoyNUZMVzlNUW1KYVJVcEdORWw0WWxGR09ITmpOaTFxYjBOVWNUWkJTRWRVYTB3eVNHcHBiR3cwWjA1a01ubDRlbUl4YlcxdFJHZzRjbk4xWTFKbVJsOWFOVTVWVWswM1RFOVplRlZCYjBKTVIzaGFiVXN6YzJWbE5GQTNhVE5KYWxobVNXUnFiV1p6UjBkV2JFOXJjM2hUTTNWdlZIQjZiM1oxY1dOeWJuVlJVMkl6YzNSSU1rcFlVVFZPVDNWMldYQjBMVVIwTFVwWE1qUm9lVWx1TVZKd2QyaHBUakJ5VUVOaE5GSmFNV2hvVDBGcmJVNDFWaTFFUVRJM01tVkZZMWh5ZWtoamNXZDFhVTVNWVU1Q1kzbDRVek14WkZoVWJ6bGlkRE5pWjFkc1dHSkhlVTkzVld0Q1pUVk1OVFJpYlV0dU1qQXRaSGhVVGtseGMwNTNWVWx6VFVaTFVXaHRXRzkyZFZoU1NFUk5UR3QwUm5WNVpqVk5jM1UyUW5nMk5sUmtkbTlVVEdOTWExQnpTbFZwVVRSUFZrVktRVzlwWjFJemFGQnRhVUZwY1VKa1VHOVpUM2sxZEdoVU4yTnFlVk5VYzA1UmJFRTNObVkxV0ZZek1rTXlVekZYWmtkYVRVSnJhblZUVlMxMWJWTkJUa0pQWVZCbk1XaG1YMnBvYWtOcGFVNVZRVzEzTXpKUVkySXdZM1prWjNGQ2JYcEpkV1pOVjJkakxYQk1WbE4yYmtKV1lXeEVYMDh4Y1RkU1ZXWlVUR2RwTmtwbWJFOTBNV1EzYVRkblVEVlNhRWRGYUVWUk5sSlhia1ZrYzBkbVEybFZVMDlLYlY5WlIycDVXbFU0YmxSQlFWTlhNVFZpZEZsdVJHZHpUbE5hZWtsT2FWQlFVVVl3Y0RSSGMyOWlXSEZ4Um1sSlpDMDBWbGMwTjJGdlVHcGZlRzQwUzJWVGFIVm5OemRvU0ZSd09XWlVRMkpmUW5KbWQwbEpYMEp3TldkV0xVTkJWa1ZTUWxwWk0yaHVYMGRNUVRoaU5ETnpPVTEwY0VOZmFsbFpZMDlSUkhOUGJ6SXpMV2RZUW5Zd2JEWnBRMGRHUlhWQllUUkVaWEpWT1RreFdXNXhTVkJWYWpWQmFFSkJTemhvTmtkUVVuTmpPRWQwWVV0Wk0yRXpNUzFXUVUxVVMya3diVko0WDNSUmVWRlViVEl3YjBOU1ZXaHJUMFV0UmtaRVlWWnFZbUYxVDNGM2NUazJSMWhEWW5NMWEyeDNZMUpQVG5OWk1XVm5TRUZCTVdaU1dVUnpjREZSWkd4aFQzZzJOMHRJU0dodllsazNhVzkzYkdKVVMzUmlSbWxCZGxNNWJXVk5ZVFptVGpsaWVISXhNbFZDWjNZNFExWjVjVXRyVjFsNlpuTnhZbmxpUlMxaFJHazRaMVZSWDNKeWNIb3pTMTh3TlcxcGIxUm5PVzAxU2tGV1IwbzFVbVYzV2tsaVFqaFNXVTlJU1VWSVptNVNhWGxzZEhjekxWWmFVemgzY0V0RVRGWnhOamRzWVZSVGRtNDFRUzAzTm5wYWQzUkxOamxTWVhCVGMzZGtkVGxoTW1SbVZWbE5RVXRMWmxkT2QzUkNWVGhUUTNsZmNqbGpWV013TXpoeVZHSjRVM0F4ZFZsS1FqbElUMmx0V0ROallubGlSMHBDZGxaNE56RnlRa0pzY0U4M1FrSmhURGRIY1RoVE56aGhWV0ZPTlRCM1ZYTlBhMU4yUVdWeWEwbFFkSFppZDFKT1VsOWlORmRKV1VveE1tNTNka3BmUkhSNlRsaERNVXhRYW1sa1lrNVZZalU0WXpCMldrOW1aeTU1WTBSZlkzWjZOSGh4YVhGd05VUlVWbkJsYzB4bi52V0V6UmJEc0pJbURTeFVLaDNhZDMtSTNmUHlhX2tXelUxa05wQ1BWTWxNIiwiZXhwIjoxNzA5NzA4ODQ1LCJpYXQiOjE3MDk3MDcwNDV9.J5_MB-LRfZ2AzX330G8LXLJ_hLV-tOTMocuxGPBq3L8\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ]\n  }\n ]\n}"
+						}
+					]
+				},
+				{
+					"name": "passOtp(sms)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('tokenId', response.tokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							]
+						},
+						"description": "To get tokenId, make sure the user has accepted terms & privacy condition."
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "175"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:38:09 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "234"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"tokenId\": \"F1sHWAv9sMeL4LrmWCLcTOx2kiY.*AAJTSQACMDIAAlNLABxWNXdEU1FCaTNwZ2tHS01hRDNibW9TeFdDZWc9AAR0eXBlAANDVFMAAlMxAAIwMQ..*\",\n \"successUrl\": \"/am/console\",\n \"realm\": \"/customer\"\n}"
+						},
+						{
+							"name": "incorrectOtp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 401,\n    \"reason\": \"Unauthorized\",\n    \"message\": \"2FA method Not Found in User profile\"\n}"
+						}
+					]
+				},
+				{
+					"name": "getAuthIdForSession",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"tokenId\": \"{{tokenId}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeMobilePhone"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3162"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:17:59 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "120"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiZ2puZHJrMW82b2VqMjMxZzlkNzhhc3AzcTciLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1UmRXRkNWR2RsVDJreWQyMU1ja3hKZFU1WGF6TlJMbVozVW5OM1UyczRaMkZ0VjFkVVdHUkllak42V2sxMVoyUlNUazlvU21SaE5HUnZRWEpsYWpOa1NFWktSVk5sWm1SVk9YTjZaR2cwT0UxWFQySkJZV2MzZFU1NlZucFdXbmN4YWxJelJWRnliR3RRZGxOaWRVOXdXVTl2V21zNVgzRlhSRVV0Y0dsU05tTnVkbFJaTm5neGNXRjNiamw2UlZSbVQwRjZlRXhaTjFJNFUyeDNObXhGZUUxUlYzWm1WVWRuTTNkVU5YcE1lRWRNWTFacVVXUXlOV0psZWw5Q1FXRlZOVTl4U2w5a1ZERk1hVmRPYTJkM05FNWtjV2haWlRWNlIxb3paalJSUlc1S2VtUkZjWFIwYVhOYVoxUk1NVGxYT1dOVE1IUXpjRjkyZW1FMGRFaDBYMkZEWTFaclExODNVVWd5ZFRWblpVRndjUzF2Y0ZBeFJDMVBTVVowUnpKTFV6bFlhMmRhU0hkS1pVcEtMVGRXV2tSUGVUVnhZM1JEWkZCWmNEQXdUbWRIY2t3MFRrSlNTbWRSYVhWNlptUjZibXMyVW5NNFZteHdRbkpqZVZKblRHUk1TVmgyUjJ0WVgxTlplalpHYkRoV1REaHRkQzFLYjIxcVVuWmlXVVp6ZUVwMVRta3dWVEJVVEhsdVVFOTFNMnhPVVMxMlJERmZWM3B0TlZNM1NITlpjVWxqWTBGbk0wVk5XbVJ0TFZFeVZuTndXbVEwYlZkdWMyUkJiVk5sUXpka1JVazFjVzE0Vkd4VFYyVm9SRjlPWkhRMFRFcFBVbUpXUVRKTk5IRlBZWEZVVkVGbVpVVjJPWGd4VVdoaU5XWjBiMU42TWtzelkweEVWR0pIVW1KQ2VraFVPV0ZLTVZoMVdIWXdhekpPYkdsclYydDVOVXRZV2xsbkxYY3hXbkpPV0dSbE5XRlVSa3htWWtobmVsaGZUVFpYY25sZmNtZzNZekZYZGpGcFFsWXhRM2N3TkVZeGFHcDZWMnRSVGxwWmFWOW5SWGg0T0ZSeGVsQktUalpqTjI1d1EyUkRTMlJ2WlZoMlRsUjZaMHM1Wms1QlEwRmtjemQ0TW1aS1Iwc3hRVmhJVGxkbVEzUlJUM1pyU0VobmRIbEZlbmxSZGpCbE1tVTBRbGx3VjI5d1pFTm9SMWRVYVZOVlltWlBZamR1UTBONGVIVXpkVWc1U1VkTmIyZHpZalU1WDJKVlpHaHRSV2xpUzJ4dFNVOWlVbWRMVWtoS2N6VTNaRzVpVTBJMFR6bEhhRlF5ZFRKNFRqZzJlV0V3WlhGNWNHWnBjSGhuZEhsTGJEbHRVbXR3ZVZOWGFGcGhPRVJvYWpoNU5XVmFXVll5VTJ3d2NWUjFUamN0U1d4bVoyaFFUVWx1Y2tKR05VSjJPRGRpWWpSSk5GVkpOM1ZWUTNGWFpIRkZNMnBOVmxSaFQyeHFRMUoxU0Rka1YwVk1PREF6U0RGZll6ZDZjM1o1VGkxRU5uSkxjWEJpT1VRNFEyNTBaMDVsY2poRGJVWXhPVjk2ZW10blFrRkZUblZJWWpOR2FFWnJiMnM1YzBWc2FEVnJUWHBsUTNKWlluWm9aVTFUYzFaRldqRnZSREV3YVZoc01HOVBkeTVtU0VKNWNVaHBYMlEzTkVoTGJqWmlSM2RvYUd0Qi5wdnBQVUJHdWc3STgwZTQ0c2U2eGdHNEFGMjkxcG5ERjRkU01TWDFWTzNJIiwiZXhwIjoxNzEwNDE1NzYzLCJpYXQiOjE3MTA0MTM5NjN9.vpc699qWUoOUB6NFyCoQ2KWtMbAe7jTYW7G7zAdxzg8\",\r\n    \"callbacks\": [\r\n        {\r\n            \"type\": \"TextInputCallback\",\r\n            \"output\": [\r\n                {\r\n                    \"name\": \"prompt\",\r\n                    \"value\": \"mobilephoneNumber\"\r\n                },\r\n                {\r\n                    \"name\": \"defaultText\",\r\n                    \"value\": \"\"\r\n                }\r\n            ],\r\n            \"input\": [\r\n                {\r\n                    \"name\": \"IDToken1\",\r\n                    \"value\": \"\"\r\n                }\r\n            ],\r\n            \"_id\": 0\r\n        }\r\n    ]\r\n}"
+						},
+						{
+							"name": "Session Undefined",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"tokenId\": \"{{tokenId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 401,\n    \"reason\": \"Unauthorized\",\n    \"message\": \"Login failure\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "GermanMobileNumberChange",
+			"item": [
+				{
+					"name": "NewMobileNumber",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeMobilePhone"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "EnterNewMobileNumber",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"mobilephoneNumber\"\n                },\n                {\n                    \"name\": \"defaultText\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{mobilePhoneNumber}}\"\n                }\n            ],\n            \"_id\": 0\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3546"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:18:06 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "306"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoib2UzZzA5NTdvMWF0MHVia2pkN2Nqc3A4MGUiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk0M1JXeDZOVFZQWTFjemRVSktlblZLZDJsMVJVMUJMa05VTTFCYWJVOXJhM295WjFsSVprMHRRVkpVVjFZd1dXZzNORUZWUXpOUU16VndaVk50Y21ONFRVNXBjWFJWWTJwWWJsbEZWVWQxZERKNldqVm9aVzVHTlVaRmVXUnlVM1pPYzFKeGNURkpWVTh4VHpOSFZsRkJiVXRDZG5sTlZFeGlkSGxTUjBobFZTMVhURkZLYVRKV09YSTJjbGhOVG1OdlpXTmhRekZ4WDBoeGFGbDZVVTA0Y1UxaFkwaERVbEl3UmxKQ1gzUXlZVGxMU0RKSU9GSjVOVkZGTlZwcmQyNTBhMFpSZGpVNFRUZ3RRME5ZTFcxSlUyUjBkMmhxWTFoaFdEaDBRMDlhUkZZNWFqUklhalk0YUY5WVdEaDBkMVo1VjFjMmQySjViMWxsUlZOMFJtWnRaVmgwUlZZeWMwNUhja1YyYzFoc2VHRkJRV1ZJY1RaMGJIRm1iMVJTWkRCeWJYUjJkRFJpVVdoQldHMDBWSEkxTjJRelZsTk1SRXN3YlMweGVHZFNSR1o2WTBwc1YwZzJYMG94ZURkUlNIbDRZM05wWkVwcU5tdFJMVFZtV2tSR1lsaFlORzFyYVVoQlJ6RkJPVkpvWlhOWlVHUlRiR3BFU21aTlJYUldSbUpxVUc1NmEzRmpRbUphZUVWYVkyUjZUSFJ1YTBObE1USXRTV2huWTFReWNWWjFPVWRVUzBOVFRqVnpWbE5LV2tsemQwdGFTbWx2U2pGT1duRXphRVl3VUdwcVRsSmhZbGt6TlZKVVlsZFhabEpNY3pGaFRsOTNVVzB6VjJkbGNXeFBlbGt0VGxaQmVrRnVaRk5wZWsxblZVVndjVUZmZEhOd1JVOXhRV0pxV1dnNWRtMVlSaTFhV1ZKMVNXa3liVjlIZVdkZk4zcDVNRmRLYW1wTFdrUmZTSFUxZUVSbU1rUjVSR2xITTFFd2IySnhUVTFTWTJaQ1VWQmxYMVEzUjBaeWJUZHVkVlpEUWpBMWRGSlRVRmxQWWpoamFFNVRTV2MzYVdWQmFXaEZVMHc1Wm05TFpUTTJWM3BuTWpRdE1YSkNlSEZJWkdKdVdVaG9aMDVZVDJSVFp6UnVNakJ2Y0ZOR1QxcHFiMWhMZWxFeGFIZHliRkpvVkZGSE0wRmFVRUYxT1VSU2MybGZSa1poVjBjMlJsOU1aalJTUmpSVGJWbzNVa2RhYkRWamNrdEVUVFJOTTBoQ2J5MTFTMHRWUTFGQ2JHaGxSbE5qZFhCVk1tdEJXWGxOWW1WTmJHUmxOMjF0UjAxaGIzcFZWVFZ5TjA5SGNGOVBOMlJzWW5oM1ltZEZaek5VYUZwSVRUUk5RMmhwV1dOMFNHdzFRemhKTnpodFpXUlFXRm96ZGt4b1RsZ3hNa1pLWjJ0bU5sbFBiazg1WHpGNkxUZ3pWVzVpWlUxWE5VMWtZVGhVVEZwR09Fc3lWVmxtUlVsblJXNTROWEphVDNKR2NITm1kalJxZW1Wa1ZuaHdOSEJMZUVoeWNHSjZZMDV4Y2tKSldtSjFTa05DT1ZCSlpHeHdMWGd6V0VGeVkzTmxaQzF4TTJwVVdrOUNVV1poWlVoNGVHRjFaMnBNY2pGV1VHcEpWbXhtVEVWeVVrRXlORXRGVlZBMVlYUTVTV0l4U1RJMVEzTlBXV2xaU2poWmIyaHZUVmRWWlZJeVlWTnJhMFphY21aMWNtMUJUMDV3YlRSclFYUTJXakJxZW5ScFVHaGpkM1pMWnpSMFIwdGxjMUJ1ZWpGb1RqQkhSM0owTTFoM1ZYUllNek51UjFkRVJHcFVOa0ZYWlVRMk5HaFFZVEZDZFVocmJXbGpaVjl4YUc0eU5HMXlZbTVYYjFSRGJWWm9ObWh0TWpKaWVHdFdiMUJoVGpKa2RrSXdOSE5wYURoV2FIbE5SWEpqTm5jM09YVTBPVlI2U2t3M2FYQm9ZM055VDNFNFJ6SjJiVVZaVmxBM1NtTnVVMTg0YzNaclJucHVTakJhUlZsbFpWOHhjRVl5UjI1WVVYRkNRMWxuV2pVeFZUaEpjRmxhU0RKR1MxSXdkMEU0VW0xaGRreG5kMjVrY2s1bVMwMWlRa1JaV2xoTWFGVnZUamhUZEZnME1VSjZhbUZrVmxkQlRVOWxZWEZoWlZoblduWnJWRlpMTFhBeU1EbDBNekp3UkZSRlRFMHhaMEpKU21kV1drOVdRbFJ1ZVdGNE5HUjJVbk5OYlRkMFl6aEZkbEZHY0Y5MllVMWpla2RPYldjdE0zcEdVMnhhVHpoVVUxSkNWRk5qVGxvM05YUjZUVjl5VlU1VGNEUnFhMnQxVHprNGNuTktYM05GZFhKSmNtTTVheTU1VFVGQ1EyaDVaVFYxV0hSSFNHcHBhak5NYm1oUi40bnNoLUgxUXRSUHBheGc0WThvbElRdUE5V2V3RmI1eHUtejZVMnBkSXh3IiwiZXhwIjoxNzEwNDE1NzYzLCJpYXQiOjE3MTA0MTM5NjN9.UO1LB_3pqagBgeb5-QxhpW0rBfeOGgaGxkEIeabZM98\",\r\n    \"callbacks\": [\r\n        {\r\n            \"type\": \"ChoiceCallback\",\r\n            \"output\": [\r\n                {\r\n                    \"name\": \"prompt\",\r\n                    \"value\": \"options\"\r\n                },\r\n                {\r\n                    \"name\": \"choices\",\r\n                    \"value\": [\r\n                        \"Enter OTP\",\r\n                        \"Send again\",\r\n                        \"Change Mobilephone\"\r\n                    ]\r\n                },\r\n                {\r\n                    \"name\": \"defaultChoice\",\r\n                    \"value\": 0\r\n                }\r\n            ],\r\n            \"input\": [\r\n                {\r\n                    \"name\": \"IDToken1\",\r\n                    \"value\": 0\r\n                }\r\n            ],\r\n            \"_id\": 0\r\n        }\r\n    ]\r\n}"
+						},
+						{
+							"name": "EnterOldMobileNumberAsNew",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"mobilephoneNumber\"\n                },\n                {\n                    \"name\": \"defaultText\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{oldMobilePhoneNumber}}\"\n                }\n            ],\n            \"_id\": 0\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3546"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:18:06 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "306"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiYW1zZDEwdjQ1dm85cDZjY2dlNmQ1YjE0bTciLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1NlFucG1jeTAzVkhkQmFYRm5hbFpCTmpVd1VUWm5MbWw2VG14cGQxSlhaR015U204M1ptVTNVRVk1VEVOUmQwaEhhazF2ZDNsQ1RFeExNRnBQWkdoT2FWZHVSblJpUkZkaU9EVnlRbFp2TW1OQlkyUkNlRzExZDBoUk9DMU9SVkZaWVVGTGFuVnBXblprZFhScFgzUmhSbWRMUjB3MlZEWTVWRmhXTXpNeFpVWTBTalZRYXpOblVVVkRhWEpQYldWUk5qUXRURzl4UkRkTFNFUnVVbGh1VlRWS00wMXBMV1kzZWkxSFNWUkxlSE5XU1UxRWFHZHlabXhYWHpCVk5sbExYM1pJYUZSb1ZuTXhNMEpYVERacU5GTnhZM2xSUTJKMVJsOTVPRTlGZDNOeE1HSnFiRUUxVURobk1WOVlSMnRtV0RjM2FtNWtlVUZyTlZWaGFWQklXRkpYUlV3d2FYRnJhSGhEVUhGQmJVTjRUVmRxT0dWMlRUWklOamh0TUU1Sll6aG1TMDFEYW1GSmVHTjRMVTVMZVdScWFFVkVRMHRvVUVvMmVtUTFiR1l0VVZobVFVMDRiMkpKT0RCT05UaHJiMlpoZW1JeVNFUmhjbGt0V25SSGNHOXJPRGRRVjNBM1RWcDNjVzUwYTJ4c09GSnVXSE51VUVsaE9EUnFibUZUYkd4S1pFRlZlbTVSVlU1YVJHZDBVV0ZJVDJwRldVTk9hVXREV0hVMk1WUm5TVFZyVjNKeFkyMUVWbTR5YTNSUVMyc3lVVmg1ZGpWamFVWlJOM1pCVEVwcFRWTnFWRzAxZG5KR2IydE9hMnhDUjNoTFJXVjBNRkZYU0VSclRYbzJTbXBVWlZGQ1pteEVNV2hFWTBaQlJuVjBWRkpoYUc1UlVXWnZiMFE0UkdGVFIxbFhNVGRJTjNONlZWVlFhRFpuTTJwUE5WRXhXbkZaZVdOck5VMU1kWFZ6VlhSQmEycDJkblZJYlZSaFIyd3paRlpYTm14WGRHVmFUak10ZUZkMFJITXRURWN5VTBSWFZWOXFWSFZFT1dGdVJEaFZSRU5SZUdreWVHZzNkVEYyUm5vNWN6Wk5jVkUxU0hsT00yRkdYMUJmZGpkb2MyNHdNM2R3UVZkSVdXOWtabVJoVFRsTE5GSmxXblpuYXpOVWNVaG5jakZVZWs1VWQwdEplR0kxYzFoaFRFa3RNa1pVWkhKRlJUZE5OVXczYmtoZlRWWnFaRGwzWkRKYVJYRnZVVmxyYW5wS1ZGUnNNMU5qVjNOSVdGWlZkVEZrYmtZNVUwMXRaa2MzZFVGdldsODViVzVWZFRKSWJTMDBSazlSYW1wek9FdHNVRmxVWjBoVk5IaHplblk1TldGbk1VbHpPSHBNVUdkVFlsUTVVRUpwTUV4QlQyZEtNVFo1YzA1UlQydHlNVGxYUWtvNVNsQmFaV3RTTlhKeFdqQkVhSHB0WkhoVVozUTFXa2hvZERoWGVXcG9hRmhXUlVvMWRGTm5ORVI2TXpCRGMyTkZOMmRUTWtSdVFrcHNhSEF0TmpkRk5UUkJTMU5OYTFOQlVsUlRkWGxWUTFWclMyMTRYMFkwVDI4NGRIVlhURk4wUldaUGVXNDRhRlV5VDBSbWFFWk5iblZZYTJKTVJEZzRNM3AwUTNFd1VrWkdSVTVJTld4M1dYcHNWWEZCT1RWcGVsQTBlbXRKVTBrMU9HUkxZbk4xU0c5TVFsODJReko0TldKNVdHRTRZbXRJTFZSR2NFMDFRM1o2ZFdRMlYwMU9WR3BoTWtWYWF6UmhTRTA0TnpacU5YUTBhVk0yWVZFdU4ybHNYME5pUjBGMmNXMTROMGcyV25OaE9GVk1kdy5wSHhPb0cyTU1sYzVZYmEycVc5b0RMdHRKR2JLeGNHVXMwM1BIcXZRcFQ0IiwiZXhwIjoxNzEwNDkyNDM3LCJpYXQiOjE3MTA0OTA2Mzd9.amAhzurQzZM_IbyHLLjlh25w8XWTKErmb0zoeiKY7SA\",\r\n \"callbacks\": [\r\n  {\r\n   \"type\": \"TextOutputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"message\",\r\n     \"value\": \"enterNewMobilephone\"\r\n    },\r\n    {\r\n     \"name\": \"messageType\",\r\n     \"value\": \"2\"\r\n    }\r\n   ],\r\n   \"_id\": 0\r\n  },\r\n  {\r\n   \"type\": \"TextInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"mobilephoneNumber\"\r\n    },\r\n    {\r\n     \"name\": \"defaultText\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken2\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"_id\": 1\r\n  }\r\n ],\r\n \"status\": 200,\r\n \"ok\": true\r\n}"
+						},
+						{
+							"name": "SelectOTPChoice",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"ChoiceCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"options\"\n                },\n                {\n                    \"name\": \"choices\",\n                    \"value\": [\n                        \"Enter OTP\",\n                        \"Send again\",\n                        \"Change Mobilephone\"\n                    ]\n                },\n                {\n                    \"name\": \"defaultChoice\",\n                    \"value\": 0\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": 0\n                }\n            ],\n            \"_id\": 0\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiMTVpMGx2YzkwbGxoZDdydmZja3Fza3FoYzkiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk0NWRXMXJPV2hHY2twd2FtTXpUVmxYYUVaaE56Um5MbVZuWmxWVU1qZDFTRTkxWldKbVNUTnVSa2xSZUc1d1RGZGpiM1JZT1ZKQlpsWnlXWFZzVG05UFFWSnFZeTEyTFc5blNXODJVMWRyZG1SUk5FaHFVRmgwVTNaUFZsOXJVRWxFYjJNeWQyYzBObkJxY0d4VGNHZEVjM05YTmtWRFpETlhRbloxTkhwUFpGWXpkekExVkU5UFpISk1WelJqTFRjdFRYcGlZbEpWT1RSRE5FUjZSMmxhVDFKalprZDBOR3M0TFRGUlVtNW1UME5VWVRWWlZEZ3ROWGRHT0V0eFVUaGtjRWhKZEU0eVVFSm1kVFZwWDAxM1YwVk5kWGRvY0hveGMzSnNYMDEzWmpCb00xZDFkM3BOYWsxNWQyOTJYMDlIWkdaa2JqbDRRWEJ1YmxWbGRGRmpVbFZFVkZCNmJXRk1iMkY1YkRoQ09FSnFZV0Z3YjI5a1pUUTFUVzF1YUZaNmVtSnhia05WZVhOUmJsRnFUMFZ0Ylhad2IweGhOa00wTnpCbVZWZEVMVEpEVW5GUFR6bEZjR1JKY3pOa2IzbGhaVEJ2TW1VME4xUlpSR0ZQVWtFek56SkxiV2hpYUZkc2MyZEpURkZEWm14RlFsa3hjMmxaTVU1ZmVFTTFaRzlxVG5ONmRsaEpMVkp1ZFRGcVZETnZRbkprVjBoaVdUaDRiMmN6WldsNk1GSmhNbWQ0UzA1VmMyUktaRzFsTlZwcGEwWTBaVTh3U0VKaVJ6WXdZelpDT0dONVEzTlZhbEUyVFRKRWNtVjJOR2xEVTNwVFNVaEpjMmR1Vm5jMGRqVTFhbmRwT1VadUxVaHdRakI0Y2pFMFlrbzROMUJRYjBjeVVrWk5UbGwxZWpkS2JUSm5TVE5mVFdobldtRlVVSEpsTFUxbk0xTklWWGxhV0ZZMloxOVBja2xvU21WUFpWOTJhekZLVUZJeGRFVlNkbHBNWWxWclYwWlpjRkZpUjBObE5VOUpSMlE1YUhvNFVtcFZZems0UVhKa2IyVlNVMDQyT1ZKTWRsOXliVFoyWVRVM1owUTBOVmg1UmkwNFkwZE5WR1pqVkdwb09YWXpaV1ZvWDNaa2NIZENUbE5FVUU5TFdXVnNaMU0zY0hWMVkzazRhREJKZG5GeGJYVlpObXMzVHpoUmQwNWtNMUZQWDNaWVpXSnJjV2hmYzI5T0xYbFpOVGhwYzJScGFUZzBha2gzUW1KRlVUUTVWWEl5TWpGNlJrRnljbEYzT1dSaVRVUmpWbko0V1ZFNE5uTnZTa2RwYmpBeFgyMVpNMkpaTVdoVk5pMDFMVjlXTm5GMFdXOWxOa2M1ZDFWV1JucE1lWFJ5VUdObFVqUmhjMUphV1RGd2VraHNiRGsxZVd4Q1QzVTVaekJIY2tkc1FpMDJiWEZsYURJekxUQXhTbkJzYTJ0TGJUQnFXRjlwZURsVFpFSkxSbVJJT0U5NldXUjJZemt0YW01aFYxcE1WVUV6VVRGdE9XMHpXR0ZYZHpWMWNXaHRaVXR0YlV0c2IwUjZWVm8yVmtkcVpGTXpObmxGUTFWM1lraEVMVWhpYmtKcE5UTkZXaTFSVGpsaU1tZ3RPR0pTVVRGMU4wRndTMVZrUnpOdFkzSnZPRWw1VFhFMGVXTlZhbmRUU0RKaWNWVnZUVEpKYnpOU1gzZHJVakZNTUhCMlNVNTNNMGh2VTBsS1ZVTlZTVzQ1V1VwUlVXbFpia2hVV0VwbmQzTnROVmxITFZGZmVrUjVMVGhXUjBaS1NuRlpObm90Y21kV05HSkhWbEZKYWxCTFpIVmtORk4wZW14cVZHNTVWa1JWZERWSlgzRkVSbEpZT1dWTVZ6aFNjakZpUjNSQlRVeHRSbmxKVGw5VFlXWmhTRzF0Y1VweVZsbzRRbXBtTFVWMGNuUjVRWEZLVTJsTVVUSnlWRFl4UlRKWVVIZDVjM0owYkdscFZWVmxlR013U0UxMk1uQlBUbHA2YTJoMFJsOVFhRmRLYUZsR2FFcEtUVkZTYW5OeE5VZFdWa3h5Um1sMGVtMVFjRkJwZG5Sd01uazVZVTgwVVhSdlpFNXRiaTFvT0ZwUVdsUnZlbEY2UjJnNFoyTnFUR1ZqTlZkYWVtbEdOMngwUkU1RlJqY3lVRFJoUXpaeGRrdFhSa3hMWDNwWmVHdFZMV2t0VGxkVlZFVjFXbTVTZFdSWVV6Tk9OVUo1U3pOdk1HbDRNa3hoUlVaT2QxTTFOMGhoTkhKYWFuZG9OVGRFV21WTUxWTkxNM00wTGpkdFNERjJSaTFOTld0aWVIRjJUMlZUWjNRM2FFRS5oUGhPRXJCemdzR0RLd3kxUUo2OGNGQ1ZVQ2hMbkJKZWRVTE5jbGxQNTlZIiwiZXhwIjoxNzEwNDIwOTI3LCJpYXQiOjE3MTA0MTkxMjd9.PJyN0g6UBFJeYyb8lQg7yE7M-cMAcM_i8mKvHatLFZc\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						{
+							"name": "SendAgainChoice",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiZzR2YmdjNzYzbjZnbWYycGc1MTdqNG03bHUiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1dVNVaElTVk5LTURJNE5HUnlaalpZWDFOeGIzSkJMa0pGVmpSV1NXaHBhRmxLTjI1Q1YyWnNXQzF0T0RCRVIxcHJVbGRxVkRObGJFUXdWWEJEU1ROc1JtWXdPRkZMVlU1cGJEbHhWbFUyZUdWc1JYZFBWV1ZNVG5CSGJFeGpabXR6TjFJMU4zTkRkekZ3YjBkalduRk1kRW90ZW5Ob09HNWZMVGx3Y1d0VWNuVlBZVTk0UWpVMU5YUndhVGt3Vm1WclQwZE9VbEJMT1ZkV1JrRjZZM04xY0VzeWQwWXRjWHB2ZFZGdk1WbFFiVjk1YkVFd1RTMU9UemMxTFVFdE0zWXpNbEJPY0VjME5GSkNkVVkwVEV4M1ZsSXRia0ppVGpSRFVUWkljVXB4YVZoUmRtcENkekJDYjJaSFF6RTVWRFJTWkV4WVJGSlNNVkJ3VEdwQlNrUmlhbmRMVDFKQllUVjRkRFIzY0hoVVMwbE1TSFJXZVc1NlV5MTNZVGM0Tm5ObFpFaExSbkZpWW1sQldUZGxibU13VFhWV1owTlBlVWhmYkdGV1VHOW9UazFmVTNsMGQxaGliVzVGTlZwWVZGOTVWazkwUW5OMU9XTXpPVVZmY25nd0xXeHdNSHAwVDE5WFNUSnBNVFJKYm01dGNtSnJaVlp3VEU5UlZEVnpibUZtUm00MVNqWk5aRE53YUZKVFYzUnBaR0ZZZDNWdVJGVXlhbk00VVZWa2FqaGtSV2d0WkRCWkxYbDBabFpPUW1vMlIzbFJXbVZJV1hGUGIxVTROSGRzTWxWeFdFeDJNVmRNYjFCR1pXSnVhRTFUTldseFlWOU9RMkUyZUVaUFgwNVhSM2R3ZERSZllqUnRNR1J5Y0c5Rk0yZFhhMG96ZWtwdWQwUjFOR1o0TkZONVpVNHpNakZQUlVONVJVRlBjeTEzVVZoWGJtVjZia05QZDI1SGJqQlVabGxFWTFwc2IzcDBlSGxQVVVKa2RWZHpORWcxTVRkYWRVVm9Tbll6U25kaVJtUTNjMFp6TTFsMloxcG5MVkZqVkhCQ1RDMXFNVlF0VWpsV2JVdGxRMUZSUkU5S1gzQm1OMUkwUmpCNk1rVjZSV0pTWWxOZlRHZE5TakJCY0dabVFuTlNWbEpaU0RoTWRGRk1kbGRDVW14dlRtTTFjbXczZG0xMFVqbDZVbnBXYlhWT1dXb3hURTVWZVRORVYzSTNPRFJFZWtzeFQyUnRkbVJKUVhSU01Gb3pjeTFXUkUxTmEyVTBOakJvZFdWNlpVMXRWRWRLU1ZaeVVVeGZWSEJpYzBzMlkzaHNTR1pxU2t0cldsQlpNbnBQV0VKa2NYSjZUSHAzVkRBNFZGWTFha3RMVGpSRGJHZFlURzVVTFVWc04zUkNVMk10UXpsU1JHZzVTMmRmVUVGTlVXNWxjVWRWVm5ZelUwczNVR1pyUzBkUk9HOVNiREZmVVhrdE5WVnhjbTF6TkRCb1JqQjZkVkJrVVhJNWVYSTNaM3AyZERKbWNsOXhVMFYwUlV0eWF6SXlibVJSVFd4aFdrZHJXbFYwTjFod1ZrZGhSbmRUV1dWUGRscHhTRFJCY1V0NVYxRkhSM3BSVWprM05qVnVabFpDYzJ3dFlqQkNTVXRTU21oNGNYYzBkM0F4YjNOSVNUTlRTVTFMWDAxb1dsVklPRkZmZWt4VWFWRjVjakJ4WjJoUFNVSk9abTU2V1ZFNVRWQnJhVUpIU25aRWRGbGxZMlZ3WDNjM1RrZDRNR2wxZVZGcE5HMVlSRVUyYmxCdllUZzRSamRuTkd0RWJqVjZOMlZtZG01TGFtNXdZMTlMYVZJMmVFZExPVXg1YzFoaFRYbG1UMWMyYzBVd2QyWldhWEJTTTFwa1kzZE5kM2R1Y1haYVZEWTVhVFI1VFc5Wk1uVm1VRkZWWTNWemVXMXhVMEpWTTNCdFIzWkdlVlZaVVVoZk56Z3lNVTUyVW1wclJrZDBNa1JJYTAwMldXNWlTa3R0Wmxwc2FFaE5ZWFkzU0dGVVRtSnJXREZYYkRaaWVWaFJUbkk1YzB4elNDMXZTRXBvWWswelZXeHplV0ZrTW1NNVNtUnJkWEF3Y0ZGUk4zQXhjazlTWlUxNE5HZGlURkZTWW1sWVpuVmxOWEJMTUZKTU1saHhMV2syYWpaNWFXbDRZbGhTTkVoRFpUZG5ibkphTUVveE5IRkdTblUyYkVkZlJEWTRhazlvTVc1VVNFeFpSa2x0VERJM1JrbzNSRlpYWkVWVVQxRlVVRUozVW04d2FIZzJhbkphVDI5TFZGaHRWMjFVVkVkemVHOXhNMHRtVldseldFNXllSEJMWmtOT05sTjRNVkk1TUhZelJGRnJWblpTV0hrd1REQXlaeTQwVGpkbVprRkxXbFJoU1hOcVRYVTNabVJIUkhKUi5FR2FnMWZtUGVtVlcteXV2MEdWMDU1bmxvSkdncjQ0Nl9ULUQ4M3JjODZ3IiwiZXhwIjoxNzEwNDIxNTQ4LCJpYXQiOjE3MTA0MTk3NDh9.pwxJ8pcCax4f5VwwWB7KdIJNt2Qlg1_49CY4CB9DdmA\",\n \"callbacks\": [\n  {\n   \"type\": \"ChoiceCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"options\"\n    },\n    {\n     \"name\": \"choices\",\n     \"value\": [\n      \"Enter OTP\",\n      \"Send again\",\n      \"Change Mobilephone\"\n     ]\n    },\n    {\n     \"name\": \"defaultChoice\",\n     \"value\": 0\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": 1\n    }\n   ],\n   \"_id\": 0\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoidmRva2MwZnR1MmxwZXBkc2Iwc21iZW5naGsiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1RVJIRkVUVkV0Y1RkRmVWWm5ObVl4TWtGa1owMTNMbFY0UjNnM1dFZFdlSE5JVlU1VlpqUjZkRWMwVjNkT2FGbzNRbTFNWDNvMFREZHJWVFk1ZUVSQ2FraHhVRk5EV2s1RFRrMVNOVzF6Y3pkbGJFNTRkRGxDZFdVM1IyVjRRa296TW1aV1pXZDZiV2hNWHpSR2RWTlFSelpWYldkNlNFUm1PRGMxY2s5WGFVcFBNSEZITkRWRlFrNTZZMDExVlhaTVExOTJMVkprVms5TlJXdGxkVjgyVEdGWFFqSmFOWFl5YkROMVExSmFVMWhJU2pWT1RISmthbWhMUlhCSlJURm1SV0pCWTNsdk1FaFBNM0JpVFdaaFFXRmxjMUZ6Y0Y5SFpFUjBkR1Z5VkY5U2JrNHliVU5OVEVoWmJYZG5PRTFOVjBOTGIwWmhRVkkxYzI5Q09XMW1WREYwT0V3NFluSmZXVzlpYVhKTE9HbHZOa1JvY0dwMk4zVnFVMWhGUVhGRVpVWXpWREppVnpKUFJEazRVR2QxWWxSZldsUkRlbWRGZEVodk0wMTViak5FYjBOWVdIWnRkMUJGVm1WNVJIQlNOWEJHWDBSUFJFRXpjVjk1TlhFM01GZEpXRTFwVlZaMlV6Sk1RbXg0UW1WbE0zSXhhM3BRUVMxWFQwcFlUVEZxYlZrelpIaDNaWFJhVUhCaVUzSnRURmhGZG1oTWNuWnRWbFl5WlhwemFrMTZTRWc1UVhZelQydGhjalYzTVZsd04yUnpabTVQV1dSZlp6a3ljQzFaUWpCa1ZWVlpPR2R2VmpaVU1VVTVha051VEZobVQyUnZkSFJGZVU5cGVHcDBSV0prUXpreFoyaFhjV0ZYVUZaMWRsWTBkblZ2VEVweE1HaEtjMDloYkVSemNUaEVTR1pTTkVwdVNubEJRemxKYkZsT1VVcFphMDVmU0c4elluZHpNbDlKWDBOblFYaEtNR1pVZEhwWmVYYzFaVUpITlRoTFVFUmxXVzVIUTNFMWFtcDBUbUZCUlRSamJWUkpkME40WW5vNFEzbHpRalJNUjBoWVpYbDNiMjB4T1hCcE5WTlZRbVZ1VVVkRFFWbzNSRlJaYjNKS2NrWmZZVlEwWjFOblpXeFRVVWxEVWt0elpXOTNkVGhyTms5SVR6QnVXSEZXVlRSWWFqUllWMTlLY1hwUmJWOU5TMFpoT0ZSWmVsZEtaMWhMVm1GRFIyOW9iR2t3TUdwTWJEaExObXhsYzJ4UVpFaG9SbmhtWVVaUWJrd3lTRUphVG14Zk1WQjZURTlXUnpacVowWnBaM2hJVkV0alh5MTNOMVEwWXpOaldtdGFWUzE1VUdONVJIUnpXVFpUU1Zwb1VXbHlVbXM0ZGs5NGRVaEliMGhtWVZSSmNEbG9ZVFozWTJwYVRYWXpZVzVyTkROSWExVmlOM04zUWtaME5XRm5SRnBxWldZeVRYSktjbFJYYURSVlpsRllZbnBFYVVRNFlreHhRWGxrT1RsQ2NVaExjRkl3TkRsc2MybFBWMlZOTTFkUllWaEhPV3B5YUdKWmIwWjZjVzV3YlRoYWNWSjRUVFpQVVRSc00zUkpiRTV3U1hVNGRUZzNTRVpyU2prMVExRjNZbEpJYVdnNVoyNVVNbE5sY1MxNlRWTkNTMncxWTNaeGNteDVVREJwWjJoM2RXaHdSMk5HWTNwc1psbHRXWEJST0VkWmVuRmpPVW95VFZKRFNURlNXRGRsYUY5cGVURmxlbmQ2UVVsTk1UVjJTMmhSUzBOaFlpMWlRMEY0WTFaZlFVSmhiREozVm1vNVZqVm5XRkp1WW1keFp6ZGhjelpQYjAxalpYVjBTVXBOV2xGeVgyNUhlQzFZZURFNU1WWk1abVExVDJKRldWcFVjblY0WDBJeU1uVjRUVFpsU1RaelRsOXdXbE4yZEU0elN6WTNka05pWTJGclNWZEhaMVp1ZEhGRmF6aFhTa2xOU1RkQ05FOHRUak5wZFdKU1kydHNTaTE2WkZkZmRVdDJSRWR5UXpsQlREUkJaa3R6Um1waU5rRnZOSGRWZWw5aGNXMUVRVWxKYlhwU1RFSTBkMkZuWlhReGIydGZia2wxY25oNVNVeFZTVlZHTXpoNkxUZDVRVk16TTJkQ2RWcDFkMmhCVUZGcmQxSkZhbUpzTm1vd1JIVm5kRFJUVDBnelRWVnFSbkF5TkRWZlIwY3RTM2RuVWxkYWVYRnJYMGx1V0d4dVZsY3hWMWRFTkdOeFZraENNRWxrYTFORWJrdHlPVkV5U1ZKT1MyRktNMlpCTTJveWIyWTNhMUp3TWpaSWVFZGxWbm90UTJwMlMxcHRla3g2T0ZGclFUWTBSRTVZVjNkbllVbzVhSFJYTTJwSlJUUm1kMUkwVVhKbFoyVnJUVzh0Um5JNFRUaGpibEE0VjFwck5WTkpYM0pEUmsxbU9ESklNMkZ4U1dsamFHbzJaMmd0ZFZaV1dVaGFUVmhSU1ZaUlNtMHhiV3RLU0ZsVldGOWZZV3RqUW1wa2RVRkZTVjloVkRkRU9XRTNiMFpyUjJ4YVZFNTNMa1pEZDA5cGMxVlFWekpqVWsxVVZrUnJWRE50ZWxFLktCUDExY3dZZjJ3RG55dWJEZmhaX2piTXBrZ2FiaXFoUkJjSVBtcXlZLXMiLCJleHAiOjE3MTA0MjE1NDgsImlhdCI6MTcxMDQxOTc0OH0.hwqFYS1ceQEjusbRaNndlh1w3pUkBl5R2SzGvU4EA3k\",\n \"callbacks\": [\n  {\n   \"type\": \"TextOutputCallback\",\n   \"output\": [\n    {\n     \"name\": \"message\",\n     \"value\": \"retrySMSSending\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": \"2\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"ChoiceCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"options\"\n    },\n    {\n     \"name\": \"choices\",\n     \"value\": [\n      \"Enter OTP\",\n      \"Send again\",\n      \"Change Mobilephone\"\n     ]\n    },\n    {\n     \"name\": \"defaultChoice\",\n     \"value\": 0\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": 0\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						{
+							"name": "ChangeMobilePhone",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoibzV1cTltZmc1NTVuMHE1dTluaDQ5Z3BrOWkiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1TWVFaHZYMFpOUm5nMGNTMUhjVkZXVWtKMlJWOVJMbmM0YmpsRFlWcEZTMVpZUzJscE1IUkNSR2s0YldkaE5VTlpaa0ZwTWxRME9ISlVlVEJDVEd4ZlUzcFZibkYxTWxBeVRWRTJTamxKVW1sbFNraFZieTExWTBWNVpUbE5OakpuUTJsc1RqZG5SRmMyT1RoeWFFNWtNVUo0Vm1kMFJHWkZUWEl4WlVrek5GQkRXbGhPYkd0VFNHMU1WSFpwZUdzeU5FeHplRU40VDBvNFkzbENVbWx6YUU5TldWQlpPR1JmU0hKVmJtRnNSWGd3Wmt0SU4ySlNTa3BuVWxSZloyd3lTalUxVTJRd1gyRkJiVjgyYTJoWk4za3dkMnhVWldoeGJVZENSR3h3YkUwM1kyZzNRbEZIVGtKRU5XWjFOV1JHVEdsU2NUWlNkazlpVWpsRmVGYzBkbWxHV1RONExYTnFWa0ZrUm5samVuZzRjSGxoTFROSFNYUm5kbWhKT1ZneVlXWTNRa1ZGYVZoTlluVkZMVEJhUjJ4bmNXNWhiMVZTV2t0S1drMWZWRVF3U3pkclRsbEhaaTEyUmpWTVEyTk1WRk5NVW1GbWEySkxaWGhmVDB0VlJUZEtaMkYzVGtaUmFFTlFhbUZSZFhkRVVtRmxlVE56TTNWWFF6QnJiRzlaWjNveFZUZHBUSEkwVjJscGJVZ3dUblJQYjFSQlMwVkNOMUppVmxsSlZuZHZSalpvYkc1WlIwbFdVVzlSTjFrdGExWk1PVWQ0UTFveGExRldja2d0VTNVMVh6UkxTbHB6ZVd0c2R6SjRRVkJEV1dGNGJuTTJORnBUVUVaUlkxUnZiRXBJT1ZseVdHdFBPRmQ1UXpOU1pHMVZUR05mU1ZSc01YaGZXa2RpV0dKMVgwWTVhVWgxWjNGWWRqaDVZVFpwVldjM1JYVnJPREF6Vkc5TFNTMVBSM296TWpsVlRYaDZjMm8xTkhWMFlUWmFWRGRwYURoSFlqbEdlVWs1V0doTExXTkZPRFZPTW5wUlRUVnZhVjgxVUdScVNHNUZWV0ZzVm1ab1dHUnpkRk5YUjNvNFJHeFhkMDUyUW1GNldqSmhjR010Ym1VMVpEQTRaamd5TlZacUxUUlpWelp6Tkhoa1pXMHRiakJLVTJzeVpXTmZjazl6T0dwRlVWOHlTVUpDVEZCdFpuVjNNSEZMYXpoWGQyRjNWM2RrWW1ocU1uTllhRzVmZFRsS1FtZFBVMWhXTmpGWVNUWTVNRmRaVEVveU5qZE9XSGxKY1RnNU1uZGpWSEJLU0VOSU5qZEVhbkowVldkYVZYVmlkVGh0VUVsV1JqWjVkWHBqYVY5WmRGaFhkalJ1WlZGT1VtNVVNa042UzE5eU1tNDBZazh3Y0RORmRUaFljR0pFWTJVMGIwOWtSRU41V0RabFYycFZiMHBhVTFOMVRHUmlZM0J3ZGw5aldIWjZWamRDUm1sSFdsZ3dNMDVqTWxoMlQyOUNWemhIVTBsV1pXOVNlakkzTldwNlFsOVZkblpwU25OWlpHbGhhSEJGU0ZaTmNqRjZWVTF0U3paRlptcEdVR1pPUW5CS1FXVTBZVkprY0RKUWRYbHZkMFF6V1hONVREaHhTbkJIV0d0RlgycFphSFp4YzIxT1EyOVNTMFZ6Y20xNlZuSjFTV2d3ZUdsc1NWZElVbU01ZVRaelZqSTNNbVpzWmxNMWJESnRRVnBLZEZaTFJWcHhjemN4TkVaMFZFNXpiRlJUT0dOdGNVaEdaRTVmTTFsWGFXcG5UMUJMVFd4YVZXRjNaVXAwYTBWaVVUTlhhbFpWYVRZMGVuaFZWWGRxUlZWNVFVeDVVbWxzV1ZSVGVGZzBMVFJLY2paSFZsOHdaV3hrU1VGek9URlBRVnBSTVY5dGNqWTVjRGwyU0ZWSmQzbHpWbkpTUWpCMGR6WTRiRlpuZVRZd1p6QjJRVkZaUWs5cFVYUkRhMDF5V2tkeWFXcG1lWEUwVkVKVU5FczJRVXBSYm10V1FXdFZWWE15UVRkc1MxWjBNR3RHVUdkTlQyMXNaMlpVWTBaclV6aDVTbmRZWHpjd1VFVjBkMlJuZERKVlJXeFVSeko2VlZsd1dXSkJOMTlDZVY5M09IVXdhVkkxV0VKVmJXNVVSR3cyUm05VVFsTjJObkpmU2xkbVZuTmxZVXR3TFc5cFJ6YzBZVmw1VEZsWmJsbGFjRVZSWWt4dmN6QXhRVXN3WlU0MlNFZERaSGR3ZW1ONWFFTjJZM2Q2UzNOclNIZE1PVTlOV1VwMWNYRnVXblp2TnpCWU0weEljM0Z5ZFZKdlgxaFBVbnBpVFV0TGNXRkxiR2huTVc5MFNHMVJNVmxKWjFaU1ZuSm9heTVWVjBSTlVuWlpTbkJZYVZZNE1saERZVmxMWTFkbi5TdFhzN2daZ1BLX1hSTm5kZmIxdERndlNnWER5NGtUUTVmdVpHS2lMOGhvIiwiZXhwIjoxNzEwNDIyMjQxLCJpYXQiOjE3MTA0MjA0NDF9.1Qxt72Jc5ERfgftZw4W-NzIZOMykxlAVWvHPtLBBmso\",\n \"callbacks\": [\n  {\n   \"type\": \"ChoiceCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"options\"\n    },\n    {\n     \"name\": \"choices\",\n     \"value\": [\n      \"Enter OTP\",\n      \"Send again\",\n      \"Change Mobilephone\"\n     ]\n    },\n    {\n     \"name\": \"defaultChoice\",\n     \"value\": 0\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": 2\n    }\n   ],\n   \"_id\": 0\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiM3AwcDdxcTZsYTMzb3VlYjlzNm9uZWNzOXUiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1dFpUSjNOV1U1Vm01cGEwSnlZa2xCUkdsMmRHMUJMbkZyUmtVeFpWRTNWM0pYT1dWc05UVldhRlJUZUVWdmJ6aG5lVEJXWWpGWk1XMHRUWEU1VTNWelNqSlVRMVJTV1c1dFpHaEdTbnBwWDFnMVltMUljR016YVZFNVV6VkNibHBzUzFKWGRtbzBaRFJ4ZURoYWRWSXdOM3BFZFVkcmVFUk9UV1ZGTldaZmRWVnNhRk41T0haUFJFWnRhRzlQVUdwdFEwdFBNbk4yVEZKV2JuWm5UM1ZrVm14MU1XdEpUblJPY2sxQlh6RkJOMW8xT1U5cFpFOW1RVW81VjFBNWFXZHliRFJ4ZEU1eVVVTmpOMnhyZUZsNVYzQlVaeTFtUlZad1VqVm9XRFphV1hWamRtNXBkM2szVWxKdFRXMVBlV1ZWTW5VdGJuaFdNV3h2ZFdwaVFYaDBZbFJLYjFKQ1NIaDVWMWt4VEVKdGRXTjZUWFEwTkRKcFVsazNiMDlaTVdsMFRVNXRaV3cwWkRrNU4zTnljMEpUYTJGdk5uZFZVak5ZWlhkNVpHSmZhRUpaU1ZaQ1VGOTFSVTlpVFdFemVtNDJSRGhuTm1WbWVtNU9WRWxQT0ZSRVIzaEtUVEZVYmpGQmNtWTVkbXh5ZHpkb1JrTnBibTlIUTA4dFQzWkZRWEJJVWxFNVMxTjNUbFIwTTBwaFkxZFpSMk5XTjFZMlJGRXRha2N0ZURadGN6aHBNRTFyZGt0aFJ5MWplVnByYjBSclJGbEJWVVpuZWt4bExWaDNSRVZaUkdGaU5WOVhXakZXU25oWE0yMWxha2RLWWtSU2J6TkpjakpNV0U5aVRqRlhTMnhaUTE5NlpFUjNlWHA2Y1daV1RITXpUVVUzTWxOWU56RnZWV05oVW5ob00zWkJRVlZzWlY5UGNXMVNiM1UzZVhSd1JIWTVUMWx0VG1SRVJVZDZhWFY0YUVkUk5qVTBTVXRXUkdjMU4zUlJRbU41V1hsd01XeDFSbTlvVFZFdGFFVmZhRWhHWkdRd2JUTnhaMUZRWDBremJrbzJPWFpTVVd0c1l6QlBiRWgzVG1sUlFWcFdWVGxsZEdGU1lsWkpRM04yT1hORmJXaEZlVlZYTm5CV1pEaEJUMUZUZVRWalJVZzBTMFJmTUc1blVGRnJUMFpRU1hWVFpHWmpibVk1V1UxV1FVWklaR3RSYTJaaFExVndTVUphYlcxcmRFOUpaazFDWTNKMlVHUjBhR1ZuYlRoMFpYaEVjR0pVT1VWeE1XTXRlVkpOZDJkb2FuSm9YM2wxT0RKR2NXRkJjamhFWVhreVluRnNjbXcyTjNaelozTlJUbU5rYms0ME1sOHlNa3BqZURaRlZsQXhiMHRVVjFoRE1GVlJibDlNZDNWS1QxSk5MVXAxYm04MGIzbzBNbXBMVkdkV2RqbDBha0pmY1VjNFpqUmZWMlp3YVZkdmIySkhPRVJzVjJseFZtWjBVM1F0Y2pGV05GTnJlV0pIV2kxMk1rZ3pVR3BKUVhCa1lXOU1lRmcxVmtWd2VUbG1MV1IzUVhWT2RtSXhkR1JCZFZKeWNrcFlVRWxFYUZZNU5EZGZiM1JrVEZBeE1uZGtabWx1WnpKdlZVTnRjMm93TUZKV1JsQkxZM2xDV1c4eExWVnVVbWRsZDE5R2JVWTFhMUZJU1hkRGR6UjBiVmhOYzFGVlpWRm5Nbmh0WkU5RWQzWjRNbEJMYmtKbVdtbHBNazVQUzJKV1lXVkpjQzFyT1RSdldVTkJia3hJUkRodU1UUXdiRUp4U1RSU2JIZFBaR3RxZEhsMGNtSXpSRFp3YW01bVRYSnJUekptYmpsamJIQnBhMUU1TlZCUlVHSlFRWGRCVHpaMlRsOUllVGhJUzNaUGJVRlhNWGd5V2pWWVMxZG5iMlJETmt0M1pUQkdNSFptWTBRNFMxTm9kVGsyWXpRd09FMUxWekp5VlVkaU16ZEVUMTgzYjNKNGRUZFliVmxpU1ZsVFdYTnZVMlJuYkdKRE5WZFhNM0JOWVdGNFRXdzNWVEpsYkd0ZlJDMTBWa05SWjFkYVVEUnpWMDQzY21OMlQxRjFZMk5RWTB3Mk1uQXRSMUZwVGpSb1EycEdTelJvYjA1NmRHVklUM0k0T1dKNmRGQk9RbkpZVm5oblJYZzJhR050WjJSeExVZDRUR1ZIT0RGWE1qWkJYMGR0Wmxwa01GbGxObms1UlMxMVVsRkNRMWcyU0VwWGRVRkJWMlEwV0V4ZmRWbHFRMFp1YzJKWWJqaDRVV0l3VVhNMlRIYzFZVzVpWTFWT0xUaEpZVWRtWlVremRVNDFNR1J3WlUxQlZVRlpjV3RyVWw5TWFFVm5XWFp0TmtsSFJXZHZVUzR5ZEZoVlZ6WjJOREpEWmw5aWFXZ3RlVFZ0UlhGbi55MnU2UDk5R2QtaGkxRWdlNVBLa3VHa3ZXZVFFaUt6bEpNcTNzaGxyVkFzIiwiZXhwIjoxNzEwNDIyMjQxLCJpYXQiOjE3MTA0MjA0NDF9.jLl79ZWF7qMgOxQmDgjTysQ0Otw-0fnjxKCX9SmgPSk\",\n \"callbacks\": [\n  {\n   \"type\": \"TextInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"mobilephoneNumber\"\n    },\n    {\n     \"name\": \"defaultText\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 0\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						{
+							"name": "SubmitValidOTP",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": ":authority",
+										"value": "id-ciam-2275.aws-0414.cloudfirst.digital",
+										"disabled": true
+									},
+									{
+										"key": ":method",
+										"value": "POST",
+										"disabled": true
+									},
+									{
+										"key": ":path",
+										"value": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+										"disabled": true
+									},
+									{
+										"key": ":scheme",
+										"value": "https",
+										"disabled": true
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br, zstd"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-length",
+										"value": "3169"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "origin",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital"
+									},
+									{
+										"key": "referer",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital/am/XUI/?realm=/customer&authIndexType=service&authIndexValue=selfservice_changeMobilePhone"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
+									},
+									{
+										"key": "sec-ch-ua-mobile",
+										"value": "?0"
+									},
+									{
+										"key": "sec-ch-ua-platform",
+										"value": "\"Windows\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "x-requested-with",
+										"value": "forgerock-sdk"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiMTVpMGx2YzkwbGxoZDdydmZja3Fza3FoYzkiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk0NWRXMXJPV2hHY2twd2FtTXpUVmxYYUVaaE56Um5MbVZuWmxWVU1qZDFTRTkxWldKbVNUTnVSa2xSZUc1d1RGZGpiM1JZT1ZKQlpsWnlXWFZzVG05UFFWSnFZeTEyTFc5blNXODJVMWRyZG1SUk5FaHFVRmgwVTNaUFZsOXJVRWxFYjJNeWQyYzBObkJxY0d4VGNHZEVjM05YTmtWRFpETlhRbloxTkhwUFpGWXpkekExVkU5UFpISk1WelJqTFRjdFRYcGlZbEpWT1RSRE5FUjZSMmxhVDFKalprZDBOR3M0TFRGUlVtNW1UME5VWVRWWlZEZ3ROWGRHT0V0eFVUaGtjRWhKZEU0eVVFSm1kVFZwWDAxM1YwVk5kWGRvY0hveGMzSnNYMDEzWmpCb00xZDFkM3BOYWsxNWQyOTJYMDlIWkdaa2JqbDRRWEJ1YmxWbGRGRmpVbFZFVkZCNmJXRk1iMkY1YkRoQ09FSnFZV0Z3YjI5a1pUUTFUVzF1YUZaNmVtSnhia05WZVhOUmJsRnFUMFZ0Ylhad2IweGhOa00wTnpCbVZWZEVMVEpEVW5GUFR6bEZjR1JKY3pOa2IzbGhaVEJ2TW1VME4xUlpSR0ZQVWtFek56SkxiV2hpYUZkc2MyZEpURkZEWm14RlFsa3hjMmxaTVU1ZmVFTTFaRzlxVG5ONmRsaEpMVkp1ZFRGcVZETnZRbkprVjBoaVdUaDRiMmN6WldsNk1GSmhNbWQ0UzA1VmMyUktaRzFsTlZwcGEwWTBaVTh3U0VKaVJ6WXdZelpDT0dONVEzTlZhbEUyVFRKRWNtVjJOR2xEVTNwVFNVaEpjMmR1Vm5jMGRqVTFhbmRwT1VadUxVaHdRakI0Y2pFMFlrbzROMUJRYjBjeVVrWk5UbGwxZWpkS2JUSm5TVE5mVFdobldtRlVVSEpsTFUxbk0xTklWWGxhV0ZZMloxOVBja2xvU21WUFpWOTJhekZLVUZJeGRFVlNkbHBNWWxWclYwWlpjRkZpUjBObE5VOUpSMlE1YUhvNFVtcFZZems0UVhKa2IyVlNVMDQyT1ZKTWRsOXliVFoyWVRVM1owUTBOVmg1UmkwNFkwZE5WR1pqVkdwb09YWXpaV1ZvWDNaa2NIZENUbE5FVUU5TFdXVnNaMU0zY0hWMVkzazRhREJKZG5GeGJYVlpObXMzVHpoUmQwNWtNMUZQWDNaWVpXSnJjV2hmYzI5T0xYbFpOVGhwYzJScGFUZzBha2gzUW1KRlVUUTVWWEl5TWpGNlJrRnljbEYzT1dSaVRVUmpWbko0V1ZFNE5uTnZTa2RwYmpBeFgyMVpNMkpaTVdoVk5pMDFMVjlXTm5GMFdXOWxOa2M1ZDFWV1JucE1lWFJ5VUdObFVqUmhjMUphV1RGd2VraHNiRGsxZVd4Q1QzVTVaekJIY2tkc1FpMDJiWEZsYURJekxUQXhTbkJzYTJ0TGJUQnFXRjlwZURsVFpFSkxSbVJJT0U5NldXUjJZemt0YW01aFYxcE1WVUV6VVRGdE9XMHpXR0ZYZHpWMWNXaHRaVXR0YlV0c2IwUjZWVm8yVmtkcVpGTXpObmxGUTFWM1lraEVMVWhpYmtKcE5UTkZXaTFSVGpsaU1tZ3RPR0pTVVRGMU4wRndTMVZrUnpOdFkzSnZPRWw1VFhFMGVXTlZhbmRUU0RKaWNWVnZUVEpKYnpOU1gzZHJVakZNTUhCMlNVNTNNMGh2VTBsS1ZVTlZTVzQ1V1VwUlVXbFpia2hVV0VwbmQzTnROVmxITFZGZmVrUjVMVGhXUjBaS1NuRlpObm90Y21kV05HSkhWbEZKYWxCTFpIVmtORk4wZW14cVZHNTVWa1JWZERWSlgzRkVSbEpZT1dWTVZ6aFNjakZpUjNSQlRVeHRSbmxKVGw5VFlXWmhTRzF0Y1VweVZsbzRRbXBtTFVWMGNuUjVRWEZLVTJsTVVUSnlWRFl4UlRKWVVIZDVjM0owYkdscFZWVmxlR013U0UxMk1uQlBUbHA2YTJoMFJsOVFhRmRLYUZsR2FFcEtUVkZTYW5OeE5VZFdWa3h5Um1sMGVtMVFjRkJwZG5Sd01uazVZVTgwVVhSdlpFNXRiaTFvT0ZwUVdsUnZlbEY2UjJnNFoyTnFUR1ZqTlZkYWVtbEdOMngwUkU1RlJqY3lVRFJoUXpaeGRrdFhSa3hMWDNwWmVHdFZMV2t0VGxkVlZFVjFXbTVTZFdSWVV6Tk9OVUo1U3pOdk1HbDRNa3hoUlVaT2QxTTFOMGhoTkhKYWFuZG9OVGRFV21WTUxWTkxNM00wTGpkdFNERjJSaTFOTld0aWVIRjJUMlZUWjNRM2FFRS5oUGhPRXJCemdzR0RLd3kxUUo2OGNGQ1ZVQ2hMbkJKZWRVTE5jbGxQNTlZIiwiZXhwIjoxNzEwNDIwOTI3LCJpYXQiOjE3MTA0MTkxMjd9.PJyN0g6UBFJeYyb8lQg7yE7M-cMAcM_i8mKvHatLFZc\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "2969"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 14 Mar 2024 12:26:44 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "118"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoidmxqNmM4ZTVwa2t2bDFibnAyZzdtb3M3bDAiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1VlVERlNUMWRFUldFeU5qRTFVVFppVlRWak9IUkJMbkZ2ZGpkRU16Sm1hazk0UjB4dk5HbFlTVTlUYlhKTVdsSkpMV3R2YUhsemRHVjFjR0ZoVjB0aFYzRXdiRVF5YVVaUE9WaERjbTVZVlZVM1oycFFPV3Q1ZG5CbFVHcHNjMWhyV0RSMlkzbHpSSEZYUW5NMVVsRjNMV3QwY3kwelNWYzNVWEp4VlRoMGIwcDZPRzlIV201S00ybHZOVWhFTkZFMVJrSkhNbEpPTTBnMWRVVTRlRWQ2V21KWFltRlVUMEZ2Um1nNVNITjNZVk5PTjFCSFVGVjVaRlZRZWs1b1NtUTRMVGx5TFhSc1RETjFaMkk1TTFWaGEyWjRNVUk1TkZsWFNqSmhVak0xYkZoWFgxOHhhSGxQYWtsSmNsOXlXVFoyTW5abWFqVmtaRXR1YkVSME1tWTFOVTVQZVdGcE5tRkZPSFpIUVhKS1NtdHpjMDE1UkZOMWJrNUlOSEZJWVhsV09EZzFMVU5hT1hoeVpXTXdVVTR6VkVjMGRGODNSblI1WkRWcllYaHFNWEpMYkMxamJtOUlPWFJ5WDNOeFNUQk9jbEkyVW05WWJ6aFZVVWxwTFcxSWQyNU5aVTQzYWtvd1RteFRTRVpEZUVsT1JsTmtRa3hHT1dWcFJIUm5RekJGUmw5VU5URlRXRXAzT0dKWGFWQmFVMlZPTlZORVEyOUdiRm96YzJOMGVqSkZhbE5WZWtsRFlYSjFWM1ZPWlRSaWNYUlVhM3BKYkMxUFgzRkZaRGR4VDFkbk4zaERRbk55TFc1S1VsQTNVR1o2ZEZsNFJsRlJWbWhJTUZCSFYwUkJVRnBFVW05WkxWaE1VV2swTFVoNFpHNUhkVmxaY0cwM1JVTnJXRkpVTlhKV1JuSk5UalpUZEZKTFRVVTNkV2xhV1dkdlNXdGFVbk53VkZwVlVFbGFORWgyT1VsYVR6TktUWG80Y1dKeVh6RmxUbEkwYkRNNVZXOXVUR1J2U2xaZmRUTTJjbkZSTlhkc2RWTmhNak5rU0ZFNFozQm5aVTl1VjAxcE1VSlFNMFpZWlc1eVJsUm5OM2hVWkdwVFFUaHllazlrY2t0QmFqaDNiekJoWWpKRGFVWTNVVXh2V2w5SFZXNTFUREV5VDI1NloyZEVRamhuU1VaTlJWcDFNa0pvVG14WWJGSnRjM1UyVlc0dGIzTlRZVEZFUlRJM1JqUnlSVmhPUXpCZk4yeFdVMk5oUm1wVkxWcDNlRFZDYTBaeFNuQmtOMWx5Y1RGTk0zTkpRWFpRT1ZsT1VITjZPRE13VnpkdmNuRjVXRGxCTTJ0S2FsVk9Tak01V2twaUxUYzViMUpmUnkxTlUzSlBWM1I0WkhKT1VuTkZiemRhU1hKSFNrTk9kSG8xTTBwaUxXNVpXVnBtVnpGTlpEQTJjVVZSYkdNemJqVjVYMVZtYjFoSExVcEpYMmszYlc5T1lWTldWRWhJVVVaVFVXbExhUzFqWWpGbFdGZG1hMGxqTUZCVGVsUlhUVFZ2Vm5Wb2RUTnFURWswV1RSMWFFdE5TRkZ3TVRCbFIwWnJTRVIyYWxnMWNuaHFWMUYwVGxCTk4zZDRkelZtYzJ0RFdXWlZVR2hLVmxkR1NsaGxjbVJpWXpGV1kxRXpTR2d4ZFVsM01uZHdkbUV3TkZwcGFGbGpWemhIWVU5MmExRk5jRWRqVjBrdFRWSlhOMWR1U2tOUGRWRk1MVmd0TUZab1gzSllVVXQ2VDJGdlVFRmplakpKUnpKTVUyMHdZVGxXWW1OMlEwb3daV2xJU0ZReGIyNWtZVlY2TTB4MWRqVjJSMnBYYTBSUFl6a3VVWEEyTmsxT1IwWkxibkpXTlZkdlgwTnVNemhGZHcuZjZDY25RX3daUnlpT3ZyRm8xTzgxQVo0ck10T2ZGRkhscVZHcjBJY19abyIsImV4cCI6MTcxMDQyMDkyNywiaWF0IjoxNzEwNDE5MTI3fQ.hCtx-5J2r2yUSjR-DOoDEiWBXMwXisR7SqVx1lLzbzY\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"Mobilephone is successfully updated.\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"0\"\n                }\n            ],\n            \"_id\": 0\n        },\n        {\n            \"type\": \"ConfirmationCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": 0\n                },\n                {\n                    \"name\": \"options\",\n                    \"value\": [\n                        \"Yes\",\n                        \"No\"\n                    ]\n                },\n                {\n                    \"name\": \"optionType\",\n                    \"value\": -1\n                },\n                {\n                    \"name\": \"defaultOption\",\n                    \"value\": 1\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": 0\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"status\": 200,\n    \"ok\": true\n}"
+						},
+						{
+							"name": "EmailSent_ConfirmationYesOnSuccessfullUpdatedMobilePhone",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": ":authority",
+										"value": "id-ciam-2275.aws-0414.cloudfirst.digital",
+										"disabled": true
+									},
+									{
+										"key": ":method",
+										"value": "POST",
+										"disabled": true
+									},
+									{
+										"key": ":path",
+										"value": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+										"disabled": true
+									},
+									{
+										"key": ":scheme",
+										"value": "https",
+										"disabled": true
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br, zstd"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-length",
+										"value": "2992"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "origin",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital"
+									},
+									{
+										"key": "referer",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital/am/XUI/?realm=/customer&authIndexType=service&authIndexValue=selfservice_changeMobilePhone"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
+									},
+									{
+										"key": "sec-ch-ua-mobile",
+										"value": "?0"
+									},
+									{
+										"key": "sec-ch-ua-platform",
+										"value": "\"Windows\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "x-requested-with",
+										"value": "forgerock-sdk"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoidmxqNmM4ZTVwa2t2bDFibnAyZzdtb3M3bDAiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1VlVERlNUMWRFUldFeU5qRTFVVFppVlRWak9IUkJMbkZ2ZGpkRU16Sm1hazk0UjB4dk5HbFlTVTlUYlhKTVdsSkpMV3R2YUhsemRHVjFjR0ZoVjB0aFYzRXdiRVF5YVVaUE9WaERjbTVZVlZVM1oycFFPV3Q1ZG5CbFVHcHNjMWhyV0RSMlkzbHpSSEZYUW5NMVVsRjNMV3QwY3kwelNWYzNVWEp4VlRoMGIwcDZPRzlIV201S00ybHZOVWhFTkZFMVJrSkhNbEpPTTBnMWRVVTRlRWQ2V21KWFltRlVUMEZ2Um1nNVNITjNZVk5PTjFCSFVGVjVaRlZRZWs1b1NtUTRMVGx5TFhSc1RETjFaMkk1TTFWaGEyWjRNVUk1TkZsWFNqSmhVak0xYkZoWFgxOHhhSGxQYWtsSmNsOXlXVFoyTW5abWFqVmtaRXR1YkVSME1tWTFOVTVQZVdGcE5tRkZPSFpIUVhKS1NtdHpjMDE1UkZOMWJrNUlOSEZJWVhsV09EZzFMVU5hT1hoeVpXTXdVVTR6VkVjMGRGODNSblI1WkRWcllYaHFNWEpMYkMxamJtOUlPWFJ5WDNOeFNUQk9jbEkyVW05WWJ6aFZVVWxwTFcxSWQyNU5aVTQzYWtvd1RteFRTRVpEZUVsT1JsTmtRa3hHT1dWcFJIUm5RekJGUmw5VU5URlRXRXAzT0dKWGFWQmFVMlZPTlZORVEyOUdiRm96YzJOMGVqSkZhbE5WZWtsRFlYSjFWM1ZPWlRSaWNYUlVhM3BKYkMxUFgzRkZaRGR4VDFkbk4zaERRbk55TFc1S1VsQTNVR1o2ZEZsNFJsRlJWbWhJTUZCSFYwUkJVRnBFVW05WkxWaE1VV2swTFVoNFpHNUhkVmxaY0cwM1JVTnJXRkpVTlhKV1JuSk5UalpUZEZKTFRVVTNkV2xhV1dkdlNXdGFVbk53VkZwVlVFbGFORWgyT1VsYVR6TktUWG80Y1dKeVh6RmxUbEkwYkRNNVZXOXVUR1J2U2xaZmRUTTJjbkZSTlhkc2RWTmhNak5rU0ZFNFozQm5aVTl1VjAxcE1VSlFNMFpZWlc1eVJsUm5OM2hVWkdwVFFUaHllazlrY2t0QmFqaDNiekJoWWpKRGFVWTNVVXh2V2w5SFZXNTFUREV5VDI1NloyZEVRamhuU1VaTlJWcDFNa0pvVG14WWJGSnRjM1UyVlc0dGIzTlRZVEZFUlRJM1JqUnlSVmhPUXpCZk4yeFdVMk5oUm1wVkxWcDNlRFZDYTBaeFNuQmtOMWx5Y1RGTk0zTkpRWFpRT1ZsT1VITjZPRE13VnpkdmNuRjVXRGxCTTJ0S2FsVk9Tak01V2twaUxUYzViMUpmUnkxTlUzSlBWM1I0WkhKT1VuTkZiemRhU1hKSFNrTk9kSG8xTTBwaUxXNVpXVnBtVnpGTlpEQTJjVVZSYkdNemJqVjVYMVZtYjFoSExVcEpYMmszYlc5T1lWTldWRWhJVVVaVFVXbExhUzFqWWpGbFdGZG1hMGxqTUZCVGVsUlhUVFZ2Vm5Wb2RUTnFURWswV1RSMWFFdE5TRkZ3TVRCbFIwWnJTRVIyYWxnMWNuaHFWMUYwVGxCTk4zZDRkelZtYzJ0RFdXWlZVR2hLVmxkR1NsaGxjbVJpWXpGV1kxRXpTR2d4ZFVsM01uZHdkbUV3TkZwcGFGbGpWemhIWVU5MmExRk5jRWRqVjBrdFRWSlhOMWR1U2tOUGRWRk1MVmd0TUZab1gzSllVVXQ2VDJGdlVFRmplakpKUnpKTVUyMHdZVGxXWW1OMlEwb3daV2xJU0ZReGIyNWtZVlY2TTB4MWRqVjJSMnBYYTBSUFl6a3VVWEEyTmsxT1IwWkxibkpXTlZkdlgwTnVNemhGZHcuZjZDY25RX3daUnlpT3ZyRm8xTzgxQVo0ck10T2ZGRkhscVZHcjBJY19abyIsImV4cCI6MTcxMDQyMDkyNywiaWF0IjoxNzEwNDE5MTI3fQ.hCtx-5J2r2yUSjR-DOoDEiWBXMwXisR7SqVx1lLzbzY\",\n \"callbacks\": [\n  {\n   \"type\": \"TextOutputCallback\",\n   \"output\": [\n    {\n     \"name\": \"message\",\n     \"value\": \"Mobilephone is successfully updated.\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": \"0\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"ConfirmationCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": 0\n    },\n    {\n     \"name\": \"options\",\n     \"value\": [\n      \"Yes\",\n      \"No\"\n     ]\n    },\n    {\n     \"name\": \"optionType\",\n     \"value\": -1\n    },\n    {\n     \"name\": \"defaultOption\",\n     \"value\": 1\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": 0\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "175"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 14 Mar 2024 12:26:47 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "49"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "InvalidOTP_TooManyRetry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeMobilePhone"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "EnterNewMobileNumber",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"mobilephoneNumber\"\n                },\n                {\n                    \"name\": \"defaultText\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{newMobilePhoneNumber}}\"\n                }\n            ],\n            \"_id\": 0\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3546"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:18:06 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "306"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoib2UzZzA5NTdvMWF0MHVia2pkN2Nqc3A4MGUiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk0M1JXeDZOVFZQWTFjemRVSktlblZLZDJsMVJVMUJMa05VTTFCYWJVOXJhM295WjFsSVprMHRRVkpVVjFZd1dXZzNORUZWUXpOUU16VndaVk50Y21ONFRVNXBjWFJWWTJwWWJsbEZWVWQxZERKNldqVm9aVzVHTlVaRmVXUnlVM1pPYzFKeGNURkpWVTh4VHpOSFZsRkJiVXRDZG5sTlZFeGlkSGxTUjBobFZTMVhURkZLYVRKV09YSTJjbGhOVG1OdlpXTmhRekZ4WDBoeGFGbDZVVTA0Y1UxaFkwaERVbEl3UmxKQ1gzUXlZVGxMU0RKSU9GSjVOVkZGTlZwcmQyNTBhMFpSZGpVNFRUZ3RRME5ZTFcxSlUyUjBkMmhxWTFoaFdEaDBRMDlhUkZZNWFqUklhalk0YUY5WVdEaDBkMVo1VjFjMmQySjViMWxsUlZOMFJtWnRaVmgwUlZZeWMwNUhja1YyYzFoc2VHRkJRV1ZJY1RaMGJIRm1iMVJTWkRCeWJYUjJkRFJpVVdoQldHMDBWSEkxTjJRelZsTk1SRXN3YlMweGVHZFNSR1o2WTBwc1YwZzJYMG94ZURkUlNIbDRZM05wWkVwcU5tdFJMVFZtV2tSR1lsaFlORzFyYVVoQlJ6RkJPVkpvWlhOWlVHUlRiR3BFU21aTlJYUldSbUpxVUc1NmEzRmpRbUphZUVWYVkyUjZUSFJ1YTBObE1USXRTV2huWTFReWNWWjFPVWRVUzBOVFRqVnpWbE5LV2tsemQwdGFTbWx2U2pGT1duRXphRVl3VUdwcVRsSmhZbGt6TlZKVVlsZFhabEpNY3pGaFRsOTNVVzB6VjJkbGNXeFBlbGt0VGxaQmVrRnVaRk5wZWsxblZVVndjVUZmZEhOd1JVOXhRV0pxV1dnNWRtMVlSaTFhV1ZKMVNXa3liVjlIZVdkZk4zcDVNRmRLYW1wTFdrUmZTSFUxZUVSbU1rUjVSR2xITTFFd2IySnhUVTFTWTJaQ1VWQmxYMVEzUjBaeWJUZHVkVlpEUWpBMWRGSlRVRmxQWWpoamFFNVRTV2MzYVdWQmFXaEZVMHc1Wm05TFpUTTJWM3BuTWpRdE1YSkNlSEZJWkdKdVdVaG9aMDVZVDJSVFp6UnVNakJ2Y0ZOR1QxcHFiMWhMZWxFeGFIZHliRkpvVkZGSE0wRmFVRUYxT1VSU2MybGZSa1poVjBjMlJsOU1aalJTUmpSVGJWbzNVa2RhYkRWamNrdEVUVFJOTTBoQ2J5MTFTMHRWUTFGQ2JHaGxSbE5qZFhCVk1tdEJXWGxOWW1WTmJHUmxOMjF0UjAxaGIzcFZWVFZ5TjA5SGNGOVBOMlJzWW5oM1ltZEZaek5VYUZwSVRUUk5RMmhwV1dOMFNHdzFRemhKTnpodFpXUlFXRm96ZGt4b1RsZ3hNa1pLWjJ0bU5sbFBiazg1WHpGNkxUZ3pWVzVpWlUxWE5VMWtZVGhVVEZwR09Fc3lWVmxtUlVsblJXNTROWEphVDNKR2NITm1kalJxZW1Wa1ZuaHdOSEJMZUVoeWNHSjZZMDV4Y2tKSldtSjFTa05DT1ZCSlpHeHdMWGd6V0VGeVkzTmxaQzF4TTJwVVdrOUNVV1poWlVoNGVHRjFaMnBNY2pGV1VHcEpWbXhtVEVWeVVrRXlORXRGVlZBMVlYUTVTV0l4U1RJMVEzTlBXV2xaU2poWmIyaHZUVmRWWlZJeVlWTnJhMFphY21aMWNtMUJUMDV3YlRSclFYUTJXakJxZW5ScFVHaGpkM1pMWnpSMFIwdGxjMUJ1ZWpGb1RqQkhSM0owTTFoM1ZYUllNek51UjFkRVJHcFVOa0ZYWlVRMk5HaFFZVEZDZFVocmJXbGpaVjl4YUc0eU5HMXlZbTVYYjFSRGJWWm9ObWh0TWpKaWVHdFdiMUJoVGpKa2RrSXdOSE5wYURoV2FIbE5SWEpqTm5jM09YVTBPVlI2U2t3M2FYQm9ZM055VDNFNFJ6SjJiVVZaVmxBM1NtTnVVMTg0YzNaclJucHVTakJhUlZsbFpWOHhjRVl5UjI1WVVYRkNRMWxuV2pVeFZUaEpjRmxhU0RKR1MxSXdkMEU0VW0xaGRreG5kMjVrY2s1bVMwMWlRa1JaV2xoTWFGVnZUamhUZEZnME1VSjZhbUZrVmxkQlRVOWxZWEZoWlZoblduWnJWRlpMTFhBeU1EbDBNekp3UkZSRlRFMHhaMEpKU21kV1drOVdRbFJ1ZVdGNE5HUjJVbk5OYlRkMFl6aEZkbEZHY0Y5MllVMWpla2RPYldjdE0zcEdVMnhhVHpoVVUxSkNWRk5qVGxvM05YUjZUVjl5VlU1VGNEUnFhMnQxVHprNGNuTktYM05GZFhKSmNtTTVheTU1VFVGQ1EyaDVaVFYxV0hSSFNHcHBhak5NYm1oUi40bnNoLUgxUXRSUHBheGc0WThvbElRdUE5V2V3RmI1eHUtejZVMnBkSXh3IiwiZXhwIjoxNzEwNDE1NzYzLCJpYXQiOjE3MTA0MTM5NjN9.UO1LB_3pqagBgeb5-QxhpW0rBfeOGgaGxkEIeabZM98\",\r\n    \"callbacks\": [\r\n        {\r\n            \"type\": \"ChoiceCallback\",\r\n            \"output\": [\r\n                {\r\n                    \"name\": \"prompt\",\r\n                    \"value\": \"options\"\r\n                },\r\n                {\r\n                    \"name\": \"choices\",\r\n                    \"value\": [\r\n                        \"Enter OTP\",\r\n                        \"Send again\",\r\n                        \"Change Mobilephone\"\r\n                    ]\r\n                },\r\n                {\r\n                    \"name\": \"defaultChoice\",\r\n                    \"value\": 0\r\n                }\r\n            ],\r\n            \"input\": [\r\n                {\r\n                    \"name\": \"IDToken1\",\r\n                    \"value\": 0\r\n                }\r\n            ],\r\n            \"_id\": 0\r\n        }\r\n    ]\r\n}"
+						},
+						{
+							"name": "SelectOTPChoice",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"ChoiceCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"options\"\n                },\n                {\n                    \"name\": \"choices\",\n                    \"value\": [\n                        \"Enter OTP\",\n                        \"Send again\",\n                        \"Change Mobilephone\"\n                    ]\n                },\n                {\n                    \"name\": \"defaultChoice\",\n                    \"value\": 0\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": 0\n                }\n            ],\n            \"_id\": 0\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiMTVpMGx2YzkwbGxoZDdydmZja3Fza3FoYzkiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk0NWRXMXJPV2hHY2twd2FtTXpUVmxYYUVaaE56Um5MbVZuWmxWVU1qZDFTRTkxWldKbVNUTnVSa2xSZUc1d1RGZGpiM1JZT1ZKQlpsWnlXWFZzVG05UFFWSnFZeTEyTFc5blNXODJVMWRyZG1SUk5FaHFVRmgwVTNaUFZsOXJVRWxFYjJNeWQyYzBObkJxY0d4VGNHZEVjM05YTmtWRFpETlhRbloxTkhwUFpGWXpkekExVkU5UFpISk1WelJqTFRjdFRYcGlZbEpWT1RSRE5FUjZSMmxhVDFKalprZDBOR3M0TFRGUlVtNW1UME5VWVRWWlZEZ3ROWGRHT0V0eFVUaGtjRWhKZEU0eVVFSm1kVFZwWDAxM1YwVk5kWGRvY0hveGMzSnNYMDEzWmpCb00xZDFkM3BOYWsxNWQyOTJYMDlIWkdaa2JqbDRRWEJ1YmxWbGRGRmpVbFZFVkZCNmJXRk1iMkY1YkRoQ09FSnFZV0Z3YjI5a1pUUTFUVzF1YUZaNmVtSnhia05WZVhOUmJsRnFUMFZ0Ylhad2IweGhOa00wTnpCbVZWZEVMVEpEVW5GUFR6bEZjR1JKY3pOa2IzbGhaVEJ2TW1VME4xUlpSR0ZQVWtFek56SkxiV2hpYUZkc2MyZEpURkZEWm14RlFsa3hjMmxaTVU1ZmVFTTFaRzlxVG5ONmRsaEpMVkp1ZFRGcVZETnZRbkprVjBoaVdUaDRiMmN6WldsNk1GSmhNbWQ0UzA1VmMyUktaRzFsTlZwcGEwWTBaVTh3U0VKaVJ6WXdZelpDT0dONVEzTlZhbEUyVFRKRWNtVjJOR2xEVTNwVFNVaEpjMmR1Vm5jMGRqVTFhbmRwT1VadUxVaHdRakI0Y2pFMFlrbzROMUJRYjBjeVVrWk5UbGwxZWpkS2JUSm5TVE5mVFdobldtRlVVSEpsTFUxbk0xTklWWGxhV0ZZMloxOVBja2xvU21WUFpWOTJhekZLVUZJeGRFVlNkbHBNWWxWclYwWlpjRkZpUjBObE5VOUpSMlE1YUhvNFVtcFZZems0UVhKa2IyVlNVMDQyT1ZKTWRsOXliVFoyWVRVM1owUTBOVmg1UmkwNFkwZE5WR1pqVkdwb09YWXpaV1ZvWDNaa2NIZENUbE5FVUU5TFdXVnNaMU0zY0hWMVkzazRhREJKZG5GeGJYVlpObXMzVHpoUmQwNWtNMUZQWDNaWVpXSnJjV2hmYzI5T0xYbFpOVGhwYzJScGFUZzBha2gzUW1KRlVUUTVWWEl5TWpGNlJrRnljbEYzT1dSaVRVUmpWbko0V1ZFNE5uTnZTa2RwYmpBeFgyMVpNMkpaTVdoVk5pMDFMVjlXTm5GMFdXOWxOa2M1ZDFWV1JucE1lWFJ5VUdObFVqUmhjMUphV1RGd2VraHNiRGsxZVd4Q1QzVTVaekJIY2tkc1FpMDJiWEZsYURJekxUQXhTbkJzYTJ0TGJUQnFXRjlwZURsVFpFSkxSbVJJT0U5NldXUjJZemt0YW01aFYxcE1WVUV6VVRGdE9XMHpXR0ZYZHpWMWNXaHRaVXR0YlV0c2IwUjZWVm8yVmtkcVpGTXpObmxGUTFWM1lraEVMVWhpYmtKcE5UTkZXaTFSVGpsaU1tZ3RPR0pTVVRGMU4wRndTMVZrUnpOdFkzSnZPRWw1VFhFMGVXTlZhbmRUU0RKaWNWVnZUVEpKYnpOU1gzZHJVakZNTUhCMlNVNTNNMGh2VTBsS1ZVTlZTVzQ1V1VwUlVXbFpia2hVV0VwbmQzTnROVmxITFZGZmVrUjVMVGhXUjBaS1NuRlpObm90Y21kV05HSkhWbEZKYWxCTFpIVmtORk4wZW14cVZHNTVWa1JWZERWSlgzRkVSbEpZT1dWTVZ6aFNjakZpUjNSQlRVeHRSbmxKVGw5VFlXWmhTRzF0Y1VweVZsbzRRbXBtTFVWMGNuUjVRWEZLVTJsTVVUSnlWRFl4UlRKWVVIZDVjM0owYkdscFZWVmxlR013U0UxMk1uQlBUbHA2YTJoMFJsOVFhRmRLYUZsR2FFcEtUVkZTYW5OeE5VZFdWa3h5Um1sMGVtMVFjRkJwZG5Sd01uazVZVTgwVVhSdlpFNXRiaTFvT0ZwUVdsUnZlbEY2UjJnNFoyTnFUR1ZqTlZkYWVtbEdOMngwUkU1RlJqY3lVRFJoUXpaeGRrdFhSa3hMWDNwWmVHdFZMV2t0VGxkVlZFVjFXbTVTZFdSWVV6Tk9OVUo1U3pOdk1HbDRNa3hoUlVaT2QxTTFOMGhoTkhKYWFuZG9OVGRFV21WTUxWTkxNM00wTGpkdFNERjJSaTFOTld0aWVIRjJUMlZUWjNRM2FFRS5oUGhPRXJCemdzR0RLd3kxUUo2OGNGQ1ZVQ2hMbkJKZWRVTE5jbGxQNTlZIiwiZXhwIjoxNzEwNDIwOTI3LCJpYXQiOjE3MTA0MTkxMjd9.PJyN0g6UBFJeYyb8lQg7yE7M-cMAcM_i8mKvHatLFZc\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						{
+							"name": "SubmitInvalidOTP",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": ":authority",
+										"value": "id-ciam-2275.aws-0414.cloudfirst.digital",
+										"disabled": true
+									},
+									{
+										"key": ":method",
+										"value": "POST",
+										"disabled": true
+									},
+									{
+										"key": ":path",
+										"value": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+										"disabled": true
+									},
+									{
+										"key": ":scheme",
+										"value": "https",
+										"disabled": true
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br, zstd"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-length",
+										"value": "3169"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "origin",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital"
+									},
+									{
+										"key": "referer",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital/am/XUI/?realm=/customer&authIndexType=service&authIndexValue=selfservice_changeMobilePhone"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
+									},
+									{
+										"key": "sec-ch-ua-mobile",
+										"value": "?0"
+									},
+									{
+										"key": "sec-ch-ua-platform",
+										"value": "\"Windows\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "x-requested-with",
+										"value": "forgerock-sdk"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "2969"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 14 Mar 2024 12:26:44 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "118"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiNnI3bzBndW4yN2JlamdqMTA2NjBicnAwcjAiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1Zk4xRjBkbVl3WW05d2QwaHBUa0ZYYjNOeGQzbFJMblY0Y0VseFVGZFZhSFZtTW5vNUxUZG1lWEJDYjBsVFExQnhNbGhyTUd0a2JDMTRaV1J2Y0c5a1gwNTNWbkpOT1RGZmIxVk1VV0p0WWtrelRtMTVSWFYyTFcxbVJuSlVaREZWUTJsTGNuRTNjekJMT1d4emMwNWxXbEJOYXpCbVJqZEZUME13V25GVFlrWlNaM04wZW1Kd2JEQkZiSGQxVWpOalYwZFFaWGd3ZERoM1JsZDNVVXRDVkVSYWVXOVFSV2htZG0wNWNHZDFOV3RhZEVFelNEQmxWell4Ym5OdlpqbFdZek5sVWpSd1prUXRSM05uZERCc1oxQkVSR05UUVhSQmVtcFVRbUZITmpSWGNYSktSMmRTTW5wUGIzRnRWREJzVVhGdFpUSjVUVWMwWlRRellVOHROMWRoWTJoSk9EbHZMVTAzUTJ4R2IzWk5XRE51YjNKeWJHOUhiRWN5VEVzM1IybENOMWMxVGt0dlVEaEpUM2hhWDBsblYySjRlVEV3VUhFNE0yWnFOWEI2VTE4elNVcDFiRnBwUWt4NFZXaDVUbEIzWkVWQlRqWmhjVUp3V1ZvMGVWTnJRV1EwUlRoT2NuQm1RWGhMUW1NMldFbzBkamxMUlZaQk5VaE1hek15V0RObk0wTlJVVXhaVlVGQ016QnFaMDh0YTJ4SGFqWmxXa1ZGTTA5T1NYRkhjbGxpUzFoYU5XNDVWMHcxTW1ST1VXYzVlbVJrZUhCa1EwSkxaR0V6YjJST1dVaDBiMDlyVlVVeVExVlRSR3hZUTB0SGEyTnlTMGhKZEVKaFdqUm5Ra2N6UlV0WGQybENjRmRJZDNvMWNrOXpTbWRtVkUwMVgxWlRUbDl6YTFWalMxQlVXV2syTkZBNFYzRmlWRVY1U0RSRlRIVkpVR2hLUVd0M1pqbDZNVVkzVmtWd1EwZzBZM0pzZFVsaFNXWkNha04xYm5kcFgySkxlR2xDTVZCMlVWZzRVVXh4VmpGTE5HWTVNa1Y0TTJkdldHSXRWVmd4VmtKUk5XRnFTVXM0UlU5bk1qWkZaR2gxUmt0emJHTmZVVzVPWkhRNFVIcDVTR1pFVGtsRlh5MHpURnB3UVVweFRHcHpkWEZqVjNNeVFYWm5hRUZIWTNSRmFHUkxTa1poWVRKWU1HZzFlbVI0VlhCUE0zaFpYMnBZVkZWR1dWUmlPREJJWWxKV1dYQklhWE0wTTNJM1dVMXdMVmc0VGxvdE4zcFlOSGRNY0dwalRYUlVkSGd0Wm1oQmNUaHhkMFYxZUdSUlV6RjZUV3M1WjBKc05UaDVRMkl3VXpCV2NTMHhSV1Y0ZGpGVlZscE9lRXR4WkZST1JuVjRlWHBhYUZNeGRFTkZaREpqUkhSbFdVVkVhbWRGVDFOU2RsVXlWSFIyU2tWRlFWZzRORGRVZVhoaGJVRjVYMlIwVkZSdWVFTlpZM1o2TnpNNVZYbHhhMW8yYVhVMWFsUXpXRE5TWkMxWFRtOXVjMVpYTnpFMWNIVm1VVWRxY0VoaVkzZEVVVFJDTmxJeVkyWk5UR0k1WkMxSE5uTjNiR3BVUVhWd2IyazRkM1Y0WDBKa0xUaGtMWGwyY0VkT05YZGpiM0JGYkV4SkxXSTVaM2hSV2poeVVXNU1aVU5PTFVOVVJtb3hPRlZhUmtacVRsY3hObEZQWDNoTFJqbGFZVlZPUVdabmEwbDJibk5oZURsQmVVWnFiV3RwV1hOSGJ5MU5URFoxYzBKNldqbFJNVkowWkhkb1RubzVTV0ZpUXpOcFRETnNTMlJSTVVWeE9GWk9XRUp3TjJOc01GWlpURTB4VG1wVVdHZGFlSFJ5TFRSR1YwWjRlR3czZWtkWFZuUklOekJWZFdKb1NtOTZNbmx5Ym1GVmNqTTNTbFkyVWxKc09XeEJXRkYxUTJ0QmQwTTBjVVozTmtRMk0zRnhkMEV5TlROSFVITnVRa2xMUVdWUVJtVkNaRFU0WmpKbGVURmZRVlEwUTFST1praGlSbk5yVFRoa1dURlZlVWhIYm5WUE5XeDZkSG94ZDI1RWVYTlRlbGhVTkVWcmVFUlJjRXh4T1RoSVVFbFpWR1poTjFkS2VsSTBTa1JEVVRsUVUxVjZObTE0VFVacVEyNHdlbmN5VTA4M1NVcGxZMWgzUjFOUE1qVmpaRFk1Um05YVRFbHdZbXhSVlc1ek9XSmxPVTlVTmpoclZ6ZFpNMFptT0hKd2JIQjFObTR0WjNSdmIzbzJTRmxIYm0xVVZXdDRaMkZ6UVhoa1JUa3dUMFJDV25sZmRqbGtWR2hzWlZSaU1ESnpOWGRvVFhsdGRXRlJja0pKTVdaVVVFUjBZek5DYjI1ek5HSjJWbmRRV0dOdVREWnVRMGR0TFZaR2RFMW5jM0JmZGw5eFdtUnNjVlYyTVZWVVJuSXpZM3BaZVZSQ1NFSndhbE16TWt4bWJ6ZEVaWFZLYVY5TlEwMXhMVEkwWWxsWFRqSlpRMHhYY1Y4eU5EZFRiSGMxVG1GblFYcDJTbWxwWjI1RU9XcEJMbWd6UzBkRE5GODFlVEJ1VXpCbmVWOXVlRU4xUjBFLlF5YXdPNVhFY01ET1B4R0xvYmVudDFxek5sV2RmelVfMGdGUTM2NHpsS1EiLCJleHAiOjE3MTA0MjIyNDEsImlhdCI6MTcxMDQyMDQ0MX0.1rP4AcBsQPiV3p8onP43WpaizaQaLxpXdyEpNOgCKaU\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"retryEnteringCode\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 0\n        },\n        {\n            \"type\": \"ChoiceCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"options\"\n                },\n                {\n                    \"name\": \"choices\",\n                    \"value\": [\n                        \"Enter OTP\",\n                        \"Send again\",\n                        \"Change Mobilephone\"\n                    ]\n                },\n                {\n                    \"name\": \"defaultChoice\",\n                    \"value\": 0\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": 0\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"status\": 200,\n    \"ok\": true\n}"
+						},
+						{
+							"name": "SelectOTPChoice_RetryEnteringCode",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": ":authority",
+										"value": "id-ciam-2275.aws-0414.cloudfirst.digital",
+										"disabled": true
+									},
+									{
+										"key": ":method",
+										"value": "POST",
+										"disabled": true
+									},
+									{
+										"key": ":path",
+										"value": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+										"disabled": true
+									},
+									{
+										"key": ":scheme",
+										"value": "https",
+										"disabled": true
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br, zstd"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-length",
+										"value": "3813"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "origin",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital"
+									},
+									{
+										"key": "referer",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital/am/XUI/?realm=/customer&authIndexType=service&authIndexValue=selfservice_changeMobilePhone"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
+									},
+									{
+										"key": "sec-ch-ua-mobile",
+										"value": "?0"
+									},
+									{
+										"key": "sec-ch-ua-platform",
+										"value": "\"Windows\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "x-requested-with",
+										"value": "forgerock-sdk"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"TextOutputCallback\",\n   \"output\": [\n    {\n     \"name\": \"message\",\n     \"value\": \"retrySMSSending\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": \"2\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"ChoiceCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"options\"\n    },\n    {\n     \"name\": \"choices\",\n     \"value\": [\n      \"Enter OTP\",\n      \"Send again\",\n      \"Change Mobilephone\"\n     ]\n    },\n    {\n     \"name\": \"defaultChoice\",\n     \"value\": 0\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": 0\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3442"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 15 Mar 2024 12:23:37 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "86"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoia3BzMDU0bW03NTV0aGxjMTdlb3A0MGtzaTkiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1a2MwSjZkbFEzVjBWVVZEaDFiMUpXVGxGa1ExZG5MazVTVm5SdmFWcG5ZMnBmWVhOcGNYWk5TMEpSYWtOUlZDMTNRVWR1UnpZeFR6a3hkbkZZYmpGbVJUVktaVk01TXkxRmFWWlplRXhoT1daVWJtOWFXRGxHV0doblozWTBaVGhmWVhOMldrOWhVVXd0WWxGMlNVazRXbkUxU0ZBek1VSk5VVWhNWmt0ak5rZGtNRVJaVlcwMVEydEtUVGN3YmpsUWVIbzVXbGxsYlZBeVpEVnJlbTltWjBFNVl6VTBRbU41VTBjelJsZFVaVFpLYjFNMU4wUlFTVkpZTm01RGQwdFJVako2UWxoUVMzcENXRU5vVURrMVEySkpPVTgyTjE5Nlp6Rm5lRXAwVEVGdloweDJVWHBJYjNkRWFXVmtVMFpUVVZoNlowTTBTMFpPVFVwZmJuaHJWbTlqYlhFNVFtSlNTbGxoUTBOTE5GWlhaM0ZoUzJaU1JIVnBOak5ZY3pSVlNtcExWM0J3T0VwaU1XTlhNemgwTFRSR2JGbFVSMHB5VFRoNVVXbFdOVXcwUld3d1RYSkthMGsxY21kWU4wazRjbE5MYzBKS1lsTjFhSEp2V0RSTlVqWkNjbmxtT0Vad2RFTkthMlpuVkhwaE9VOUlZak5rVFVKcmEyUnpjWFp0WXpkWFQwbFFXREpRYVRsSVJWVmhkUzB4ZGpkT1NGTnFXR05aVjBoaFdYaHBWRkZhUmxoZlZrNUJiMmhYTTJsMlZWWmhVamd3YUMwellVRnFia2RhWmsxMWNYbHRibk00VlRSb1FuSktaekZNTnpSUFkySjNTRFZ5ZVUwNU9VcEljRkExVDFsb2RGaDVRamg2VWxoNVJYTk9hRzVrT1haaVJ5MUllVGRLZDFscmRUTnJXbkZmYW5GdVVHSlhPWGhLZWxkRWVsQjJWM05WYkZOclYxbEpiMmx6V0U0MlRqSTFUa1ZpUW5ndFVXSnVjMFJ0TmpOMmFuZFRZVTg0WlRoWGEzWjRSVmxqVFhWc1MybEdNVk5NWVRSV1RrMUJUM280Y1ZCVmQzcE9RbGxWZGxCUlMyaGpOMnQ1UmpBdGVtczNTbkJCWDFJd05saEdlazFyUW5ZM1kzSm5aRkJJVUU0ME1WQkViVWw2TUhKQ2NtRTNUM2hUTlVST2FGaFNjbGR4VFdweU9YSmlVREJpVFRWdWVYaFhWbHB3TlVReldURXRhVkY2YkRFMWVYZE5XamcxVHpkWmFIcGtRM0Z3T0RRMllsbGxXR1JNU1VaMldFdzBZekp4U1dObGQxbFdVMU5LVVZGUWJscElPSFZCWkZkVWJuTkJWekJtU0ZsYVZEbDZNSFJyU2t4b1NURnRZV1YzY2s5NGVFTkxSalJYT1RkMFpISmxYMWxOZEZwUFFtNXBaWEYyYlVOMWIzZEpXRTh3TTNreWVrMTRaRVppWjFKeFRVeGxURXcwY1RKR2JGQklUbk53U1c1R1JuVnNaVk5vVkVsNU9WRlRTRU5LVjA5d2FqbDBNVmxJUjBGWmJuUkhiM2gzYUhGS1prTjZlbTVWY0RCWlZHbExVa3BaYW5SVllsRmhRVTFDZEVaTVNqaERNemhzWWt0eGRFWmtlbXByY0Y5dVdFRkhSVUpTTkdocFIyeFBOREZ6ZHpWWU5HTllNWHB4ZURKc1QxQlZlVlp5U1MwNU5XMTVZMU5DT0Mwd05GRkpUMjlKZG1Kc2VWSjJhRUkyUnkxWU9UZ3dhWFJyYUdOWVRtdG1URVp2WWxwQ2REbENlVEY0WlVRMFpFWmFjbUV3U2xWTVQzWkNUeTFLUVdsRWQzbDVNSEJhZVZoSVpDMTJZMVZHUWxoMVFtWkZOekIxWDBGcVgzQk1NMWhwWkUxV1N6bFVNVmxOWVZCeVkxZEVNR3BUWDFVeGRuUmxVRFJQTjBkRFNWSnhkVlZyUlMxMlZXMU5XbU10V2pWbVgxQjRabEZOZW1WbmJrbFpjRWxSVGt0dlpYbEdjV0pITURZeFJuWlBNak5DUldWWFluWkhSM1JoZW5vMlVtODVUakpRU2sxeFJ6bEZXVkYwTjJkUloxWjNOSFY1WW5sQlRsVmpZMUU1TlZWS1VHWTBhbTkyWVUxM04xWktWVGRzVlhkbGJYRTNha1pCWkhCaFQyRkxhbEp3TFRSQ1JrZzBXbEpqVEUxWWFrcHhiV2d6UmpkM2NWQkdZVWRHV0Zabk1HRm5OMHQ1UXpGaFkwTnNlbDlmWnpWWU9WQkNPRWt0YmpsWmR6Sk1ia1ZrUWxRMmEwdGFZVUpuZVRSdVNXeEVOMGx6U0VselFXbFdiVkZJT1ZSR1RVcHZOM2xxU25Jd1NFZG9WbE5GU2toelZGQndYMFZITkhod1pEWnliM0IyTUVzeE5VOXRXa2xKU0VaamJqSkpNR2RvZERocmVrdE9URzR0ZEhKT1pHRk1abG81YVMxVFdIVmljSFI1WVhoV1J6TnlWM00yYkc1U1ExQmFXRmRqTXpsbU56UlhaM0JqU21ocmJEbFphalZrYjFVd2NGRjBjVzlmTTJKb1oyWXdNbGREY21saWRVNHRYek53TVVNemMxTXlNME5KTGtwM1UyWmFPRFYwTjNnMmJHZ3RiekZDT1VOc00yYy42UDc2MXRtYU5tN214TEtCSzdzclBZQ3VvQzNpYWN5bTBLc2ZKYjdJcXA4IiwiZXhwIjoxNzEwNTA3MDgwLCJpYXQiOjE3MTA1MDUyODB9.DqkkatnCWpBm6iSTMGu4plcJby_e-u4V6UYnZJtf-HU\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ]\n  }\n ]\n}"
+						},
+						{
+							"name": "TooManyRetry",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": ":authority",
+										"value": "id-ciam-2275.aws-0414.cloudfirst.digital",
+										"disabled": true
+									},
+									{
+										"key": ":method",
+										"value": "POST",
+										"disabled": true
+									},
+									{
+										"key": ":path",
+										"value": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+										"disabled": true
+									},
+									{
+										"key": ":scheme",
+										"value": "https",
+										"disabled": true
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br, zstd"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-length",
+										"value": "3469"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "origin",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital"
+									},
+									{
+										"key": "referer",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital/am/XUI/?realm=/customer&authIndexType=service&authIndexValue=selfservice_changeMobilePhone"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
+									},
+									{
+										"key": "sec-ch-ua-mobile",
+										"value": "?0"
+									},
+									{
+										"key": "sec-ch-ua-platform",
+										"value": "\"Windows\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "x-requested-with",
+										"value": "forgerock-sdk"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "61"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 15 Mar 2024 12:23:41 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "213"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": 401,\n \"reason\": \"Unauthorized\",\n \"message\": \"tooManyRetry\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Non-GermanMobileNumberChange",
+			"item": [
+				{
+					"name": "NewMobileNumber",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeMobilePhone"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "EnterNewMobileNumber",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"TextInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"mobilephoneNumber\"\n    },\n    {\n     \"name\": \"defaultText\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{newMobilePhoneNumber}}\"\n    }\n   ],\n   \"_id\": 0\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3546"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:18:06 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "306"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZU1vYmlsZVBob25lIiwib3RrIjoiZ3NlbmxwaG1kMjBzcjlmbWUzdGs0MXZhcGYiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk0NWJ6RnNUVWxNVW1KclNqWm9ja0paZFdzellrUlJMa3RpWmtOcFkwWXdhVFZXUWtoSFEwa3pia3BMWVRreFZESlpTamhGZVROQ1lYaEdZMWQ0Y0RWMFJXMXJTMHR0TmxocE1tMVlRbVp1VkRWVWMyWnBZMGRZVTA1Sk0ydElOMnN0Y2s1dFlXdDFTV2RVZWtaUmRIaEpOMHBrWWtWUGExUkJWeTFCZEV4VVZEWlVaRFJuZEVKWE0xWmtiazFHWVRWSU9HeENNV1JtVnpkT05XZzBhMGhrUjFZMFJWcDZiR2QxWTFrd2MzSlNUemw2ZDI5bFpUaHpaMncxUVVsSVUzTlViM2xKVVhCeGVuQllOWEF6Ym5SbGJ6RkNXa3R5WTNwc2JFVnFOazFVTlRScFZHVnlPRmRpVTJ3eFJFRlBjMHBqTUV4V1ZsWmZlWGRsYVd0QkxVc3djMVJyTWxsdmFUTnBUbE4zYkRZMFRrVnlha05HYjBKQ1VtODNVMjltZFZWa1ZqVk1YMDVpZFRaaE1rYzVkMjV0T0RFMFkyUkdORVV4Vm5wNWFEVlBRakZrTXpVMWRqRnViVE5DVGtoUmNFcDRiMlp4ZEZrMFVHcGlhWHBxVEdGeFN6UXdhMGh0U1VJM1JVcFVlRkZNYTBWeVYxaEZhSEpxTUhsUFEzUndhR0owWWt4dVVXRmpSbGxEWlMxWFQyWTRSakJoY25OMmEwRmphWEExTm10NVpXSlhOemN3U3pGRk1qTklWMFpqUmpGUVNucG9YMDVyWWxOWFZGWkVUVXBZTWxSMGMxUnhNWGwyVnpSMWNEZzRXRFV4ZVdjMmNWWkpTbVpIV2tGTFlrNHpXRTFPWkhKUE4zZDZWMkZPVkd4UmIxbG9aRXB5TWxSUGF5MDBRV3BNY1RkUFJFbERlSEZoV1VGclNVOWhXbWhGZUdKNVoycHdkVjl1VW10WVpVWm9NMlZUYldoRVlqbElibnA1WlVwaWIwcExjV1JzWTFNd1ZEVlpMVTQwUWxCaFlUUkZjV3g0VFc5M1R6VnpTRTFtTVVnMWFGQkZlVlp2WjBzeVUyWjBOVlZHVFVsZmNrMVhZemxQTVV0RFEyOUJTRnBmY1MxdVkycHZSamxTTTFWNlFWcENlVmxmVjJWb2NqbEdUa0p4TlV4T2REaEhWakIwT0hZMmEySkNWa05SVlZSaE1tMVRPSE5FTUY5b2NIRkZlamczTXpjMGNtUkJUVlpxYWprd2FWaEVVM04yV1VaaVZVRlFkWHBsYmw5cFNHOXVkSFZTZFhZM01sQmxiMVJmUzI5clZXcHVhekZrYkRaRVdUZHJTbkUyUkVaNWFFRlVObk4yWWxoUU1EWTRTSFJsYURCelFrOVBXV3BrYVRGdVdqTkdYMHQxYlY4MVprSmhVbFpvUlVNNFEwWlFOVWRSU1dvMk56WnBPVlUwV0ZNMUxXcDJTVGt0YXpoU1pIUndWVEUzT1VGNFRHUnJibkpLVURNME1VVklVMGh2UTBSQ2RtZFBhVVpyWVhSdk9DMDFaVWd6UmxSTVozWjZNVkp2UVhsTFFqQnNkbmxpYUhveFZHRTVWR2xpZUMwdFFUTTRPSGxsYUhJemVrcFhZazQyV2sxeFNXaEZVbEZEYWtsNGFHdHlVWHB2UzBWbU1qQm1OWGxOVjFsTmIyVlNabTFwUmxreldtZzNkR3RmVjFscVZrc3dOV2wwYlZZeU1tNVFSbnBMT1VaRFMxVkVhR2RJV2pWV05tUlhlVEZpZVhCcmEydElPREJGV2toMFprOHRlVWxFWjFsR01XWlFWMnBFZDJKM1RWQmlhRGRKTkdKaVdXZDBTMHRpV0daS1ZHVXVSRGhYWkdoZlQxVkVUVXQ2WkRGcmJFSTFjbXgxUVEuUlN5SnplS3pnLUQwTTh4VzVRMWwyT0tKczd3RzJMS2JxbUtYQ1FEdGhmWSIsImV4cCI6MTcxMDQyMTMzNSwiaWF0IjoxNzEwNDE5NTM1fQ.EUJz4PGTZzd8_NROkJQAJWbGpApvEJIpOpgCXu9IatE\",\n \"callbacks\": [\n  {\n   \"type\": \"TextOutputCallback\",\n   \"output\": [\n    {\n     \"name\": \"message\",\n     \"value\": \"Mobilephone is successfully updated.\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": \"0\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"ConfirmationCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": 0\n    },\n    {\n     \"name\": \"options\",\n     \"value\": [\n      \"Yes\",\n      \"No\"\n     ]\n    },\n    {\n     \"name\": \"optionType\",\n     \"value\": -1\n    },\n    {\n     \"name\": \"defaultOption\",\n     \"value\": 1\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": 0\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						{
+							"name": "EmailSent_ConfirmationYesOnSuccessfullUpdatedMobilePhone",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": ":authority",
+										"value": "id-ciam-2275.aws-0414.cloudfirst.digital",
+										"disabled": true
+									},
+									{
+										"key": ":method",
+										"value": "POST",
+										"disabled": true
+									},
+									{
+										"key": ":path",
+										"value": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+										"disabled": true
+									},
+									{
+										"key": ":scheme",
+										"value": "https",
+										"disabled": true
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br, zstd"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-length",
+										"value": "2992"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "origin",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital"
+									},
+									{
+										"key": "referer",
+										"value": "https://id-ciam-2275.aws-0414.cloudfirst.digital/am/XUI/?realm=/customer&authIndexType=service&authIndexValue=selfservice_changeMobilePhone"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
+									},
+									{
+										"key": "sec-ch-ua-mobile",
+										"value": "?0"
+									},
+									{
+										"key": "sec-ch-ua-platform",
+										"value": "\"Windows\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "x-requested-with",
+										"value": "forgerock-sdk"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"TextOutputCallback\",\n   \"output\": [\n    {\n     \"name\": \"message\",\n     \"value\": \"Mobilephone is successfully updated.\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": \"0\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"ConfirmationCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": 0\n    },\n    {\n     \"name\": \"options\",\n     \"value\": [\n      \"Yes\",\n      \"No\"\n     ]\n    },\n    {\n     \"name\": \"optionType\",\n     \"value\": -1\n    },\n    {\n     \"name\": \"defaultOption\",\n     \"value\": 1\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": 0\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeMobilePhone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeMobilePhone"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "175"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 14 Mar 2024 12:32:33 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "56"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "any"
+		},
+		{
+			"key": "authId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "userName",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "otp",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "tokenId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "newMobilePhoneNumber",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "oldMobilePhoneNumber",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

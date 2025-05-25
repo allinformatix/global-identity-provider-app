@@ -1,0 +1,149 @@
+{
+  "name": "Product fetcher endpoints",
+  "condition": "${find(request.uri.path, '^/ig/productFetcher')}",
+  "heap": [
+    {
+      "name": "CommonClientHandler",
+      "type": "ClientHandler"
+    },
+    {
+      "name": "SystemAndEnvSecretStore-1",
+      "type": "SystemAndEnvSecretStore"
+    },
+    {
+      "name": "capture",
+      "type": "CaptureDecorator",
+      "config": {
+        "type": "Slf4jLogSink",
+        "captureEntity": true,
+        "captureExchange": true,
+        "logSink": {
+          "config": {
+            "base": "org.forgerock.openig"
+          }
+        }
+      }
+    },
+    {
+      "name": "AmService-1",
+      "type": "AmService",
+      "config": {
+        "capture": "all",
+        "url": "http://am/am",
+        "realm": "/",
+        "agent": {
+          "username": "ig-agent",
+          "passwordSecretId": "ig.agent.secret"
+        },
+        "secretsProvider": "SystemAndEnvSecretStore-1"
+      }
+    }
+  ],
+  "handler": {
+    "type": "DispatchHandler",
+    "config": {
+      "bindings": [
+        {
+          "name": "Fetch products Test endpoint",
+          "condition": "${find(request.uri.path, 'test$')}",
+          "handler": {
+            "type": "Chain",
+            "capture": "all",
+            "config": {
+              "filters": [
+                {
+                  "type": "OAuth2ResourceServerFilter",
+                  "config": {
+                    "scopes": [ "mail" ],
+                    "requireHttps": false,
+                    "accessTokenResolver": {
+                      "name": "TokenIntrospectionAccessTokenResolver-1",
+                      "type": "TokenIntrospectionAccessTokenResolver",
+                      "config": {
+                        "amService": "AmService-1",
+                        "providerHandler": {
+                          "type": "Chain",
+                          "config": {
+                            "filters": [
+                              {
+                                "type": "HttpBasicAuthenticationClientFilter",
+                                "config": {
+                                  "username": "ig-agent",
+                                  "passwordSecretId": "ig.agent.secret",
+                                  "secretsProvider": "SystemAndEnvSecretStore-1"
+                                }
+                              }
+                            ],
+                            "handler": "CommonClientHandler"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "handler": {
+                "type": "StaticResponseHandler",
+                "config": {
+                  "status": 200
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Microsoft Azure products",
+          "condition": "${find(request.uri.path, 'azure$')}",
+          "handler": {
+            "type": "Chain",
+            "capture": "request",
+            "config": {
+              "filters": [
+                {
+                  "type": "OAuth2ResourceServerFilter",
+                  "config": {
+                    "scopes": [ "mail" ],
+                    "requireHttps": false,
+                    "accessTokenResolver": {
+                      "name": "TokenIntrospectionAccessTokenResolver-1",
+                      "type": "TokenIntrospectionAccessTokenResolver",
+                      "config": {
+                        "amService": "AmService-1",
+                        "providerHandler": {
+                          "type": "Chain",
+                          "config": {
+                            "filters": [
+                              {
+                                "type": "HttpBasicAuthenticationClientFilter",
+                                "config": {
+                                  "username": "ig-agent",
+                                  "passwordSecretId": "ig.agent.secret",
+                                  "secretsProvider": "SystemAndEnvSecretStore-1"
+                                }
+                              }
+                            ],
+                            "handler": "CommonClientHandler"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "fetchProductsAzure",
+                  "type": "ScriptableFilter",
+                  "config": {
+                    "type": "application/x-groovy",
+                    "file": "fetchProductsAzure.groovy"
+                  }
+                } 
+              ],
+              "handler": "CommonClientHandler"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "monitor": true
+}

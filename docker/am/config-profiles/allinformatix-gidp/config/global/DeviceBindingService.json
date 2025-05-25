@@ -1,0 +1,24 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "deviceBindingService",
+      "collection": false,
+      "name": "Device Binding Service"
+    },
+    "defaults": {
+      "deviceBindingAttrName": "boundDevices",
+      "deviceBindingSettingsEncryptionKeystore": "/home/forgerock/openam/security/keystores/keystore.jks",
+      "deviceBindingSettingsEncryptionKeystorePassword": null,
+      "deviceBindingSettingsEncryptionKeystoreType": "JKS",
+      "deviceBindingSettingsEncryptionScheme": "NONE"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "DeviceBindingService",
+    "entityType": "DeviceBindingService",
+    "pathParams": {},
+    "realm": null
+  }
+}

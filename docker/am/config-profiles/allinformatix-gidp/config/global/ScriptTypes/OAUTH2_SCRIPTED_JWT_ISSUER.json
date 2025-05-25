@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "OAUTH2_SCRIPTED_JWT_ISSUER",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "400e48ba-3f13-4144-ac7b-f824ea8e98c5",
+    "languages": [
+      "JAVASCRIPT",
+      "GROOVY"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "OAUTH2_SCRIPTED_JWT_ISSUER",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

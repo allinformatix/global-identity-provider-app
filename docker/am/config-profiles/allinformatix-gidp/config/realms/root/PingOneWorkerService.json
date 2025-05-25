@@ -1,0 +1,18 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "pingOneWorkerService",
+      "collection": false,
+      "name": "PingOne Worker Service"
+    },
+    "enabled": true
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "PingOneWorkerService",
+    "entityType": "PingOneWorkerService",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "selfServiceTrees",
+      "collection": false,
+      "name": "Self Service Trees"
+    },
+    "enabled": true,
+    "treeMapping": {
+      "forgottenUsername": "ForgottenUsername",
+      "registration": "Registration",
+      "resetPassword": "ResetPassword",
+      "updatePassword": "UpdatePassword"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "SelfServiceTreeConfig",
+    "entityType": "SelfServiceTreeConfig",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

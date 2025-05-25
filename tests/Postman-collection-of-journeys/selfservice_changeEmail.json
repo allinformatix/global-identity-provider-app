@@ -1,0 +1,1733 @@
+{
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"exec": [
+					""
+				],
+				"type": "text/javascript"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"exec": [
+					""
+				],
+				"type": "text/javascript"
+			}
+		}
+	],
+	"info": {
+		"_exporter_id": "21237178",
+		"_postman_id": "72bf9611-1ed3-4701-a90e-39487e6e40a6",
+		"description": "selfservice_changeEmail Postman Collection",
+		"name": "selfservice_changeEmail",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"item": [
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// clear cookies\r",
+									"const jar = pm.cookies.jar();\r",
+									"const url = pm.variables.get('url');\r",
+									"jar.clear(url, function (err) {\r",
+									"    if(err) {\r",
+									"        console.error(err);\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"cookies cleared!\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "getAuthId",
+					"request": {
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoicTZyYjkyNWNoOTU5Mmg5ZmlvcWtldmJvc2kiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1TGNtWXhSbVJvV0Vsc05Vb3lZbDgyUkhwNE1XTm5MblkyTm5GQlJrTk1hVFp5WXpkWVl6WlNUWEZuZUdWUlozWTNhVVF6VlU0d00wazBYMjR4Y0ZobVQyOVBaMEppVTNCWWJFdG9lbXBoWTNSSlh6UlRla1l3Y2tNeVUwbDNjemxPV1hKYUxVdE1SRUZrT0drNFEyNWtRVmx4WjNsbVNtdDNSMmRyTTBWS2RVZFJUbU5hVEcxcVkyUlFlVUpJV2tGRFFVTkdaVTFFY2sxb1lWQnVSMVJXVWpOTk5GbG9kVWxmZGxwcVRXNU9jMGwzUVZka2FXaE1ObVZCTkUxZldtNXFXRzAxU2xoNE9VaGpOMGRLTFRRNVREbGZTbmRSTkhWSlFWRjFhSEZtZFVFeFpsZHNaMnBVZEZOa1VWQnpNVVZVUW5GdU5Gb3RZV3hNZDNWRGJIcHNhakY1YUdzdFpWSlNWbWgyVW1SdGJVRm9SbkYzYmt0VGQwZzFabXhGWTBWUlRFYzBZbXBwWlhWcFJrNWtkak0wVUVZM1NrSXlaVGRTWVdOalVuaHhObkI1T0dST1RqRldNSEJ5WmxJdFUwVllTM0ZZWVV4T2VHNVJlbEE0VG5aMlZqVkRSMUJLV0RsMU4wdGxTbWxKZUdjMk1XSXdRMVpzWkdSUFdVZ3RaRWRuVjJ0RE5FeGphemRWTjNwemVqSkZSeTAyZVhCTFNVMXFiMkpJWkRFMmJESlFaWFZCWDBWTmJWODVOMVpWWmtoSmJGZG9MVXhQZFVsaFR6Qnpia3h0VEdOMU0xQjNNMlkxUjJsV05ubG9ibWhsYmxwMVZucExlRXgwWjNGZlExVTBja2x5Y1RsRFIycE1Rak5zYlhCT01XaEdhM2xoVnpGV09WTlRVVkpmUVdZMmNERkVkbXRCTm1sa1QxSnZYM0E1TldSTlQxUTNkbXhtTm1OVWF5MUJkMU01VEVSV01GUjZOVWxKVjJkc2VqSktXRlpPWVRKRmJWUmFRVzQxZEZka1dqUm9hRzV1WVRBMFEzcHdUWEZCZUdkR1VFeE9jRkIyUVd3NFdWVmZja0ptVHpCVFVVZFZZMGR1Y0ZaS2RHbzNRV1ZYY3pKb1FWQk9WM3BaU1hVNFJEY3dhVEZ1ZFZVNFRXUkRhV3A1UlVseU1ubEpaemt5VGxCRFgxUnphbFkwUmxCU2N6SklVWEJQWmtFM1NVMWpNME10UkhWRWRYQTViWEpqVFY4eGMxOXJMbVIxY25sNVZXSnhWVVk1ZW5keFlrdFVlazlyVTJjLmRyalNoTzlsQ2Y2RFg5c3VyTDZDNGhKZFdqT0JvaWZidFJRaThLbUFwS3MiLCJleHAiOjE3MDk3MDg4NDUsImlhdCI6MTcwOTcwNzA0NX0._0dsCzAmm1V6tSAg_0HEvEwAw6IbZDcpCKeZicleXxA\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 1\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "2166"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:37:25 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "19"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "successfully / 200",
+							"originalRequest": {
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							},
+							"status": "OK"
+						}
+					]
+				},
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "passUserData",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{userName}}\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"{{password}}\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoib2JzNWRtMHBsOWJuNGVuaGozcWgzamY4N3IiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1Q1YwTm5Na3N3ZDBSWldYWm5hazF4WlVSS2NUZEJMbkpIZVZNNVIxaHZXblZ0U1VaUGFUVnJSWEYwVUdKdVIybFVWRnBhZUhwU1RGRnhVMGR4U0VKUmVVRjVhMGRyV2psaU5GQjRlSFZZU1VGbFZucEhjMGQwZUhGWGVVVkJhemRDY0cxWE9XRllNWGRMV1hOalowSTBVRVpoVWtOaWRGTnBNbDkxWVRsSU1tVXRWVTl5ZGtSM00ydHdWMDQ0WDJKMWNsWmhaVVYxTWxOTll6QkRWalJaU0VNeGJDMHpibXhqUWpCNmRtdDZhbFJoUldWdlQyMUZOR0ZqUVMxeWQwMDNjRXRNUVZJMGEwNTROelZzZVZOb1JubEllVVZEYm1WdU5YSnZUbXRMWkZCS2JrNXRVVlZLYWxSMGQyaFVNM1YzWWxoVWVsTndaemxPVXpnMGN6aFVORU55ZEZGSWVFRnRUVU5NZHpSUlRXOXJWV05sYjNoa1NGcFpiRlZXUTFaaWNYTkRkMjVWVFRWMmNGVjZiRmRKUTNkQ1FUUnRlSEY1YUdvMU5Vd3dVR1kwUTNoTE1XNVdVRzFNYjE5V1lUZEdVWFZHZURscWNtbzFkMWxLTTA0MVRXcGFRVXhzUTJ4M1lVdEhkbkl6YVU5ck5WUnBjWFpDZWtKTFRWbzJibHBJU0dSRlVYaHVOMXBKU25semJrazVOa2hETW1sa1lYVllaMnRmTWtaa2FGaGtkM3BoYTJNeU0xbFVhSEZOYjFCRFdVSnVia3RQUkV4d1UyZ3RTWEZPUkhCdlJGQnBaVmxsUTNSQ1kydG5SMlZKVDBST2EycE1ja1ZwUkdWUVdHaFJVRmRvWjJGdU0yUm1iRmxvZEhBd1lrbERUREpEVmtaWlZucGFjR3BEYUhWVWNHbzVUMUJtYW1oVWJXRnRjalkzTkRGb2VISjRiRGcwU0RoSVUxbEdRMWR1WHpWdFlrUjRVMVY2ZVc5TVEyVkdkekUwUlVkM09XTTFiVVZuVWxOUE9EUlNXbFpTUlV0NFZHaGhPV0ZRUWtoRExVbG5Za3BHYm1kRFdHdGFWR1ZMVFhZelFWVTVNRTFGU3pGclJWSlBUV2cwT1VwNVpGQTRlVkEwYWpCNGVrOU1aR05oTUdFME4xOHhVekZ1UWt3MFEyTnNVbDlpTjJGWU5rMHRRVXA1WmpaMU5GTjJNWGgzTkhOZmFuTjBWSEYyY1dOT2JsZHlaVk5KWjBOT0xYZHlNWEpYZG1Wd2RqVmpObGhZTjNWb1pHdFZURFkxVnpVMlNqVXRPSHBPVUZreWVFWXpUa3BPY3pnd0xUaFpUMlIxZEdaVVlrZ3diV0pOYkc0elVYcHdaRzVLVGxkeWJVWnVOa3RUWlU5S2EwcFFNVmN3UWxwZmRWbDVlVWh2YzJ0RVYwcEdVak5zTlZKdU5uWjZNV3RHUWxSMVluUllWRkUzTTNCalIwNXhUbmxVZEVGZlZubGtSVWxpYlRKaVkwVTFPRlptZVhSMWNtaEdjeTFGYlVkTmVHUkhURFpVVDA1eVNqbFhkbkpZVlhWNFgzQXlSazlrYkRORFpIUmFUM2RzUmtKR1R6Vk9RVEV4ZGkxMFRVVlFSVUZJZFRobGRWOWtkV3hhUVdscU9EVXRabW96U1hscVFVazJjamx4YTBGVlZUbFJTVFI1WTFKNVJsUkJaMnRtTUVwTk5qZHBaV2cyWkVaaGVVcE5YMlV3ZVd0RU5tbDZUV1pNYUU1elVtOXNiVmh6TWxnMVNFSjVjMjVLWkhKdWVFMXJXa3RDYW1KcGFGVmplSGd5VXpSQ2RUZzBkbkJpVWt3NVVtZFFNRE50UlV4MGNYcFpXRGhRYWtoMGRUSXdYM2hUVlUxRWRVaHNhMjFxWVVoU1dFMXhSVkpPVlhsM2RIWmtUak0zTW5WVWRUQkxlV04zU0Rkb2JFVkpNVGw0ZEVFM2FqVkhlbXRPZGtKTU0zWlNkbEZrVkUxbk9VTllhalpUZVRoeFgyOVdObkpDWmpsUFFrdzVVbmxoVHpkTVJ6UmllbVp5UjE5VFl5MWlaREZqYzE5aGJHazVSR1pXVmt0UFExSlJSbVk1U1VKaGVrSkhhRVJPVGt4NWVUZENZakZqVTFJd2NGQm5jRVZhVm14Q1kxOXdjM1IwV0VaaldYZERUV1JJTmtkbk0yeGhkbTQ0VjFWME1YSkpPRFphYmtwVFlTMUtlVmsxY25oMlgwZFBiRmREZG1Oa00xWlZZa1ZZV2tKbFVFUnpVSEZ2TURobVoyNUZMVzlNUW1KYVJVcEdORWw0WWxGR09ITmpOaTFxYjBOVWNUWkJTRWRVYTB3eVNHcHBiR3cwWjA1a01ubDRlbUl4YlcxdFJHZzRjbk4xWTFKbVJsOWFOVTVWVWswM1RFOVplRlZCYjBKTVIzaGFiVXN6YzJWbE5GQTNhVE5KYWxobVNXUnFiV1p6UjBkV2JFOXJjM2hUTTNWdlZIQjZiM1oxY1dOeWJuVlJVMkl6YzNSSU1rcFlVVFZPVDNWMldYQjBMVVIwTFVwWE1qUm9lVWx1TVZKd2QyaHBUakJ5VUVOaE5GSmFNV2hvVDBGcmJVNDFWaTFFUVRJM01tVkZZMWh5ZWtoamNXZDFhVTVNWVU1Q1kzbDRVek14WkZoVWJ6bGlkRE5pWjFkc1dHSkhlVTkzVld0Q1pUVk1OVFJpYlV0dU1qQXRaSGhVVGtseGMwNTNWVWx6VFVaTFVXaHRXRzkyZFZoU1NFUk5UR3QwUm5WNVpqVk5jM1UyUW5nMk5sUmtkbTlVVEdOTWExQnpTbFZwVVRSUFZrVktRVzlwWjFJemFGQnRhVUZwY1VKa1VHOVpUM2sxZEdoVU4yTnFlVk5VYzA1UmJFRTNObVkxV0ZZek1rTXlVekZYWmtkYVRVSnJhblZUVlMxMWJWTkJUa0pQWVZCbk1XaG1YMnBvYWtOcGFVNVZRVzEzTXpKUVkySXdZM1prWjNGQ2JYcEpkV1pOVjJkakxYQk1WbE4yYmtKV1lXeEVYMDh4Y1RkU1ZXWlVUR2RwTmtwbWJFOTBNV1EzYVRkblVEVlNhRWRGYUVWUk5sSlhia1ZrYzBkbVEybFZVMDlLYlY5WlIycDVXbFU0YmxSQlFWTlhNVFZpZEZsdVJHZHpUbE5hZWtsT2FWQlFVVVl3Y0RSSGMyOWlXSEZ4Um1sSlpDMDBWbGMwTjJGdlVHcGZlRzQwUzJWVGFIVm5OemRvU0ZSd09XWlVRMkpmUW5KbWQwbEpYMEp3TldkV0xVTkJWa1ZTUWxwWk0yaHVYMGRNUVRoaU5ETnpPVTEwY0VOZmFsbFpZMDlSUkhOUGJ6SXpMV2RZUW5Zd2JEWnBRMGRHUlhWQllUUkVaWEpWT1RreFdXNXhTVkJWYWpWQmFFSkJTemhvTmtkUVVuTmpPRWQwWVV0Wk0yRXpNUzFXUVUxVVMya3diVko0WDNSUmVWRlViVEl3YjBOU1ZXaHJUMFV0UmtaRVlWWnFZbUYxVDNGM2NUazJSMWhEWW5NMWEyeDNZMUpQVG5OWk1XVm5TRUZCTVdaU1dVUnpjREZSWkd4aFQzZzJOMHRJU0dodllsazNhVzkzYkdKVVMzUmlSbWxCZGxNNWJXVk5ZVFptVGpsaWVISXhNbFZDWjNZNFExWjVjVXRyVjFsNlpuTnhZbmxpUlMxaFJHazRaMVZSWDNKeWNIb3pTMTh3TlcxcGIxUm5PVzAxU2tGV1IwbzFVbVYzV2tsaVFqaFNXVTlJU1VWSVptNVNhWGxzZEhjekxWWmFVemgzY0V0RVRGWnhOamRzWVZSVGRtNDFRUzAzTm5wYWQzUkxOamxTWVhCVGMzZGtkVGxoTW1SbVZWbE5RVXRMWmxkT2QzUkNWVGhUUTNsZmNqbGpWV013TXpoeVZHSjRVM0F4ZFZsS1FqbElUMmx0V0ROallubGlSMHBDZGxaNE56RnlRa0pzY0U4M1FrSmhURGRIY1RoVE56aGhWV0ZPTlRCM1ZYTlBhMU4yUVdWeWEwbFFkSFppZDFKT1VsOWlORmRKV1VveE1tNTNka3BmUkhSNlRsaERNVXhRYW1sa1lrNVZZalU0WXpCMldrOW1aeTU1WTBSZlkzWjZOSGh4YVhGd05VUlVWbkJsYzB4bi52V0V6UmJEc0pJbURTeFVLaDNhZDMtSTNmUHlhX2tXelUxa05wQ1BWTWxNIiwiZXhwIjoxNzA5NzA4ODQ1LCJpYXQiOjE3MDk3MDcwNDV9.J5_MB-LRfZ2AzX330G8LXLJ_hLV-tOTMocuxGPBq3L8\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ]\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "4926"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:37:44 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "8310"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "successfully / 200",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoicTZyYjkyNWNoOTU5Mmg5ZmlvcWtldmJvc2kiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1TGNtWXhSbVJvV0Vsc05Vb3lZbDgyUkhwNE1XTm5MblkyTm5GQlJrTk1hVFp5WXpkWVl6WlNUWEZuZUdWUlozWTNhVVF6VlU0d00wazBYMjR4Y0ZobVQyOVBaMEppVTNCWWJFdG9lbXBoWTNSSlh6UlRla1l3Y2tNeVUwbDNjemxPV1hKYUxVdE1SRUZrT0drNFEyNWtRVmx4WjNsbVNtdDNSMmRyTTBWS2RVZFJUbU5hVEcxcVkyUlFlVUpJV2tGRFFVTkdaVTFFY2sxb1lWQnVSMVJXVWpOTk5GbG9kVWxmZGxwcVRXNU9jMGwzUVZka2FXaE1ObVZCTkUxZldtNXFXRzAxU2xoNE9VaGpOMGRLTFRRNVREbGZTbmRSTkhWSlFWRjFhSEZtZFVFeFpsZHNaMnBVZEZOa1VWQnpNVVZVUW5GdU5Gb3RZV3hNZDNWRGJIcHNhakY1YUdzdFpWSlNWbWgyVW1SdGJVRm9SbkYzYmt0VGQwZzFabXhGWTBWUlRFYzBZbXBwWlhWcFJrNWtkak0wVUVZM1NrSXlaVGRTWVdOalVuaHhObkI1T0dST1RqRldNSEJ5WmxJdFUwVllTM0ZZWVV4T2VHNVJlbEE0VG5aMlZqVkRSMUJLV0RsMU4wdGxTbWxKZUdjMk1XSXdRMVpzWkdSUFdVZ3RaRWRuVjJ0RE5FeGphemRWTjNwemVqSkZSeTAyZVhCTFNVMXFiMkpJWkRFMmJESlFaWFZCWDBWTmJWODVOMVpWWmtoSmJGZG9MVXhQZFVsaFR6Qnpia3h0VEdOMU0xQjNNMlkxUjJsV05ubG9ibWhsYmxwMVZucExlRXgwWjNGZlExVTBja2x5Y1RsRFIycE1Rak5zYlhCT01XaEdhM2xoVnpGV09WTlRVVkpmUVdZMmNERkVkbXRCTm1sa1QxSnZYM0E1TldSTlQxUTNkbXhtTm1OVWF5MUJkMU01VEVSV01GUjZOVWxKVjJkc2VqSktXRlpPWVRKRmJWUmFRVzQxZEZka1dqUm9hRzV1WVRBMFEzcHdUWEZCZUdkR1VFeE9jRkIyUVd3NFdWVmZja0ptVHpCVFVVZFZZMGR1Y0ZaS2RHbzNRV1ZYY3pKb1FWQk9WM3BaU1hVNFJEY3dhVEZ1ZFZVNFRXUkRhV3A1UlVseU1ubEpaemt5VGxCRFgxUnphbFkwUmxCU2N6SklVWEJQWmtFM1NVMWpNME10UkhWRWRYQTViWEpqVFY4eGMxOXJMbVIxY25sNVZXSnhWVVk1ZW5keFlrdFVlazlyVTJjLmRyalNoTzlsQ2Y2RFg5c3VyTDZDNGhKZFdqT0JvaWZidFJRaThLbUFwS3MiLCJleHAiOjE3MDk3MDg4NDUsImlhdCI6MTcwOTcwNzA0NX0._0dsCzAmm1V6tSAg_0HEvEwAw6IbZDcpCKeZicleXxA\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"chetraleng\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"ChetTest@123\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							},
+							"status": "OK"
+						}
+					]
+				},
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('tokenId', response.tokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "passOtp(sms)",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						"description": "To get tokenId, make sure the user has accepted terms & privacy condition.",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"tokenId\": \"F1sHWAv9sMeL4LrmWCLcTOx2kiY.*AAJTSQACMDIAAlNLABxWNXdEU1FCaTNwZ2tHS01hRDNibW9TeFdDZWc9AAR0eXBlAANDVFMAAlMxAAIwMQ..*\",\n \"successUrl\": \"/am/console\",\n \"realm\": \"/customer\"\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "175"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:38:09 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "234"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "successfully / 200",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoib2JzNWRtMHBsOWJuNGVuaGozcWgzamY4N3IiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1Q1YwTm5Na3N3ZDBSWldYWm5hazF4WlVSS2NUZEJMbkpIZVZNNVIxaHZXblZ0U1VaUGFUVnJSWEYwVUdKdVIybFVWRnBhZUhwU1RGRnhVMGR4U0VKUmVVRjVhMGRyV2psaU5GQjRlSFZZU1VGbFZucEhjMGQwZUhGWGVVVkJhemRDY0cxWE9XRllNWGRMV1hOalowSTBVRVpoVWtOaWRGTnBNbDkxWVRsSU1tVXRWVTl5ZGtSM00ydHdWMDQ0WDJKMWNsWmhaVVYxTWxOTll6QkRWalJaU0VNeGJDMHpibXhqUWpCNmRtdDZhbFJoUldWdlQyMUZOR0ZqUVMxeWQwMDNjRXRNUVZJMGEwNTROelZzZVZOb1JubEllVVZEYm1WdU5YSnZUbXRMWkZCS2JrNXRVVlZLYWxSMGQyaFVNM1YzWWxoVWVsTndaemxPVXpnMGN6aFVORU55ZEZGSWVFRnRUVU5NZHpSUlRXOXJWV05sYjNoa1NGcFpiRlZXUTFaaWNYTkRkMjVWVFRWMmNGVjZiRmRKUTNkQ1FUUnRlSEY1YUdvMU5Vd3dVR1kwUTNoTE1XNVdVRzFNYjE5V1lUZEdVWFZHZURscWNtbzFkMWxLTTA0MVRXcGFRVXhzUTJ4M1lVdEhkbkl6YVU5ck5WUnBjWFpDZWtKTFRWbzJibHBJU0dSRlVYaHVOMXBKU25semJrazVOa2hETW1sa1lYVllaMnRmTWtaa2FGaGtkM3BoYTJNeU0xbFVhSEZOYjFCRFdVSnVia3RQUkV4d1UyZ3RTWEZPUkhCdlJGQnBaVmxsUTNSQ1kydG5SMlZKVDBST2EycE1ja1ZwUkdWUVdHaFJVRmRvWjJGdU0yUm1iRmxvZEhBd1lrbERUREpEVmtaWlZucGFjR3BEYUhWVWNHbzVUMUJtYW1oVWJXRnRjalkzTkRGb2VISjRiRGcwU0RoSVUxbEdRMWR1WHpWdFlrUjRVMVY2ZVc5TVEyVkdkekUwUlVkM09XTTFiVVZuVWxOUE9EUlNXbFpTUlV0NFZHaGhPV0ZRUWtoRExVbG5Za3BHYm1kRFdHdGFWR1ZMVFhZelFWVTVNRTFGU3pGclJWSlBUV2cwT1VwNVpGQTRlVkEwYWpCNGVrOU1aR05oTUdFME4xOHhVekZ1UWt3MFEyTnNVbDlpTjJGWU5rMHRRVXA1WmpaMU5GTjJNWGgzTkhOZmFuTjBWSEYyY1dOT2JsZHlaVk5KWjBOT0xYZHlNWEpYZG1Wd2RqVmpObGhZTjNWb1pHdFZURFkxVnpVMlNqVXRPSHBPVUZreWVFWXpUa3BPY3pnd0xUaFpUMlIxZEdaVVlrZ3diV0pOYkc0elVYcHdaRzVLVGxkeWJVWnVOa3RUWlU5S2EwcFFNVmN3UWxwZmRWbDVlVWh2YzJ0RVYwcEdVak5zTlZKdU5uWjZNV3RHUWxSMVluUllWRkUzTTNCalIwNXhUbmxVZEVGZlZubGtSVWxpYlRKaVkwVTFPRlptZVhSMWNtaEdjeTFGYlVkTmVHUkhURFpVVDA1eVNqbFhkbkpZVlhWNFgzQXlSazlrYkRORFpIUmFUM2RzUmtKR1R6Vk9RVEV4ZGkxMFRVVlFSVUZJZFRobGRWOWtkV3hhUVdscU9EVXRabW96U1hscVFVazJjamx4YTBGVlZUbFJTVFI1WTFKNVJsUkJaMnRtTUVwTk5qZHBaV2cyWkVaaGVVcE5YMlV3ZVd0RU5tbDZUV1pNYUU1elVtOXNiVmh6TWxnMVNFSjVjMjVLWkhKdWVFMXJXa3RDYW1KcGFGVmplSGd5VXpSQ2RUZzBkbkJpVWt3NVVtZFFNRE50UlV4MGNYcFpXRGhRYWtoMGRUSXdYM2hUVlUxRWRVaHNhMjFxWVVoU1dFMXhSVkpPVlhsM2RIWmtUak0zTW5WVWRUQkxlV04zU0Rkb2JFVkpNVGw0ZEVFM2FqVkhlbXRPZGtKTU0zWlNkbEZrVkUxbk9VTllhalpUZVRoeFgyOVdObkpDWmpsUFFrdzVVbmxoVHpkTVJ6UmllbVp5UjE5VFl5MWlaREZqYzE5aGJHazVSR1pXVmt0UFExSlJSbVk1U1VKaGVrSkhhRVJPVGt4NWVUZENZakZqVTFJd2NGQm5jRVZhVm14Q1kxOXdjM1IwV0VaaldYZERUV1JJTmtkbk0yeGhkbTQ0VjFWME1YSkpPRFphYmtwVFlTMUtlVmsxY25oMlgwZFBiRmREZG1Oa00xWlZZa1ZZV2tKbFVFUnpVSEZ2TURobVoyNUZMVzlNUW1KYVJVcEdORWw0WWxGR09ITmpOaTFxYjBOVWNUWkJTRWRVYTB3eVNHcHBiR3cwWjA1a01ubDRlbUl4YlcxdFJHZzRjbk4xWTFKbVJsOWFOVTVWVWswM1RFOVplRlZCYjBKTVIzaGFiVXN6YzJWbE5GQTNhVE5KYWxobVNXUnFiV1p6UjBkV2JFOXJjM2hUTTNWdlZIQjZiM1oxY1dOeWJuVlJVMkl6YzNSSU1rcFlVVFZPVDNWMldYQjBMVVIwTFVwWE1qUm9lVWx1TVZKd2QyaHBUakJ5VUVOaE5GSmFNV2hvVDBGcmJVNDFWaTFFUVRJM01tVkZZMWh5ZWtoamNXZDFhVTVNWVU1Q1kzbDRVek14WkZoVWJ6bGlkRE5pWjFkc1dHSkhlVTkzVld0Q1pUVk1OVFJpYlV0dU1qQXRaSGhVVGtseGMwNTNWVWx6VFVaTFVXaHRXRzkyZFZoU1NFUk5UR3QwUm5WNVpqVk5jM1UyUW5nMk5sUmtkbTlVVEdOTWExQnpTbFZwVVRSUFZrVktRVzlwWjFJemFGQnRhVUZwY1VKa1VHOVpUM2sxZEdoVU4yTnFlVk5VYzA1UmJFRTNObVkxV0ZZek1rTXlVekZYWmtkYVRVSnJhblZUVlMxMWJWTkJUa0pQWVZCbk1XaG1YMnBvYWtOcGFVNVZRVzEzTXpKUVkySXdZM1prWjNGQ2JYcEpkV1pOVjJkakxYQk1WbE4yYmtKV1lXeEVYMDh4Y1RkU1ZXWlVUR2RwTmtwbWJFOTBNV1EzYVRkblVEVlNhRWRGYUVWUk5sSlhia1ZrYzBkbVEybFZVMDlLYlY5WlIycDVXbFU0YmxSQlFWTlhNVFZpZEZsdVJHZHpUbE5hZWtsT2FWQlFVVVl3Y0RSSGMyOWlXSEZ4Um1sSlpDMDBWbGMwTjJGdlVHcGZlRzQwUzJWVGFIVm5OemRvU0ZSd09XWlVRMkpmUW5KbWQwbEpYMEp3TldkV0xVTkJWa1ZTUWxwWk0yaHVYMGRNUVRoaU5ETnpPVTEwY0VOZmFsbFpZMDlSUkhOUGJ6SXpMV2RZUW5Zd2JEWnBRMGRHUlhWQllUUkVaWEpWT1RreFdXNXhTVkJWYWpWQmFFSkJTemhvTmtkUVVuTmpPRWQwWVV0Wk0yRXpNUzFXUVUxVVMya3diVko0WDNSUmVWRlViVEl3YjBOU1ZXaHJUMFV0UmtaRVlWWnFZbUYxVDNGM2NUazJSMWhEWW5NMWEyeDNZMUpQVG5OWk1XVm5TRUZCTVdaU1dVUnpjREZSWkd4aFQzZzJOMHRJU0dodllsazNhVzkzYkdKVVMzUmlSbWxCZGxNNWJXVk5ZVFptVGpsaWVISXhNbFZDWjNZNFExWjVjVXRyVjFsNlpuTnhZbmxpUlMxaFJHazRaMVZSWDNKeWNIb3pTMTh3TlcxcGIxUm5PVzAxU2tGV1IwbzFVbVYzV2tsaVFqaFNXVTlJU1VWSVptNVNhWGxzZEhjekxWWmFVemgzY0V0RVRGWnhOamRzWVZSVGRtNDFRUzAzTm5wYWQzUkxOamxTWVhCVGMzZGtkVGxoTW1SbVZWbE5RVXRMWmxkT2QzUkNWVGhUUTNsZmNqbGpWV013TXpoeVZHSjRVM0F4ZFZsS1FqbElUMmx0V0ROallubGlSMHBDZGxaNE56RnlRa0pzY0U4M1FrSmhURGRIY1RoVE56aGhWV0ZPTlRCM1ZYTlBhMU4yUVdWeWEwbFFkSFppZDFKT1VsOWlORmRKV1VveE1tNTNka3BmUkhSNlRsaERNVXhRYW1sa1lrNVZZalU0WXpCMldrOW1aeTU1WTBSZlkzWjZOSGh4YVhGd05VUlVWbkJsYzB4bi52V0V6UmJEc0pJbURTeFVLaDNhZDMtSTNmUHlhX2tXelUxa05wQ1BWTWxNIiwiZXhwIjoxNzA5NzA4ODQ1LCJpYXQiOjE3MDk3MDcwNDV9.J5_MB-LRfZ2AzX330G8LXLJ_hLV-tOTMocuxGPBq3L8\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"360122\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"code\": 401,\n    \"reason\": \"Unauthorized\",\n    \"message\": \"2FA method Not Found in User profile\"\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "incorrectOtp",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							}
+						}
+					]
+				}
+			],
+			"name": "prerequisites"
+		},
+		{
+			"item": [
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "getAuthId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"tokenId\": \"{{tokenId}}\"\r\n}"
+						},
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeEmailTrigger"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsVHJpZ2dlciIsIm90ayI6Ijc4Yjc3bWg1MDkwanA1a2JvNTM1M3RxZnNjIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNDNXV05UUW1OWlVtZGpkVEIyVUZCWlIzbFVZMEpSTGpGcWVsbFhSVEZFVWkxblZWTnVVMk5KV0RKRGRGWjJhaTFRYm1waVF6Uk1OamxYYjJReE56aFBTVFZSZEdjMU0yaGxURnBUU3pJM2NVZDFPRmRHTlZoNE4wUk5YMmxSYTI1Q05tUktZM2hIYXpSQmVEZGhXRVZmTlc5UE9XbElSRVZSZEdNMVpYZGhiMmROTjNwTldWVXphelpSY2xoak9YazRjbVF3VlRseFFtcEZlVEJMVkhSU1owUkZjbnBIVVUxalUwcFBia1pLTjFOWFExTnJVamd4TUdGM2QzQXhNMmh4TTBVMWVIcHNTVFpTYUd4WVlqQnVTMjVzT1c1TVVIbGtNVWROU21KblluWTFSRmc0TFV0MVJHTkpRVnBuVFd0cGFVOWxkR2hGYTNkcGVHWXdWMnB4UWtwQlZURjRiMWxRYXpsalMzTllhRmRYY0hnNFQwSTBXV3R5VUdoeFNFNWhNM0ppZVROZmJIUk9UVTExWmpVMk1sbGlOamhCVnpoRVFuZEpjV0phVDFSeGEyeEVWWEoxY0RCVFVuZHNjRmxTWW5kT1puVlFNbVJGVFRscmNXWkZjSFZ6WjJGNlIxaFRkVkpCVUhScFZYRkNZakZNY0Rsd1gzZDBiM0V6Tm1rdFpsZGFhVUV6VG5sUlQyd3hPVFp4WTFWcldqQndlR1pvUjI1Vk5YWnBYelk0ZFhscFdsTTBUVjkzYkhkSU4xTnNlbXB5UVV3eE5XaEdVVkpoUzNGTlQybDZOV1Z0Y0VzNFNuVkVSMUZTVnpFek1rWnJaMWRoVW5sek1XdGZObUpMT0dkdVVucE9iblZ3YldWNVdFeDFUQzFEYVV4M1owVkVUMnRHVVhwWVkyTnBiMU5mZDFsamQzTTBWbTVLVnkweVoxcExMVnBoWmtKaVVXTXhlRkZOVTBvMlRteFRUWE4xVTFkTVIzZHpPVk5QYjBOU1ZuUXpTVUpNUlVaMGNVMXBNWEJoT0U5bFRteHFOa2Q2VW01d1VTMDFRbUZyZUdsTlZHSnNXUzFtTkZoUVVEQk9Na0o1V2t4YVptdEtRazR4V2tWNFoxSnBYMGhHTWpSb2Vra3hVMk50TVhKNU9UZEpXRWhEWVhwek1tdEpkbVJhYVRsd09YSlZPVEI0Y1cxME1ESlVRamQyWTFkTExUZHhSMnhwU0doNE4ycEpjRXRUVWpKS09GSmxhV2xrYjBGaU1XMUNTbU5ZZFhKc1FtWjFNVGR0V1ZGVFpGRmtkMW80YWpWcGEzaG1WRTlKY1V0NmIwcHJNazFFY2tsWlptVmZUbVJIWTBWU1FXTTVORmRrVG01cWN6VlhXV28yYkZWU1ltUnRjVnBWWlZBMFdWbE1iRkZYZVV4NWNsTlBkV1IxYWpsTFlXSTRVbE5xTmxGTVVYUmtWVGd5YUdnNGNHWTFVbFZUYUVKdGNXZHdVVXBFUldoa1VGUXlSekJJY20weWIweGZiVmxJY1UxSVpuVnRTMHROVlUxMGVXWjJiMnRwTUdOb1JuZGtNbWhLTlU1b1RYa3dObEZ5YkhKaGFuRTJkMFZpY2tvdFNsQk5iVnBITlVSVlkzRkJPSEZDVVdnM1VFaHpVR3hYY1Vkd2JXaHdkbmxZWnk1YUxWWmZZVlJ3WDJ4VmJ6TklNM1ZtWDNwTVN6QjMuUm1STDhrd1UzaW53YkJEZmtUVE9BZEYzcWVUbWNkQnk3VWZiM1NWZXZPUSIsImV4cCI6MTcwOTcwNzY3OSwiaWF0IjoxNzA5NzA1ODc5fQ.BsoV1NveyZ6GPTse9ggk0UjvKYKjgGPjBmt5ISgXtek\",\n \"callbacks\": [\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"newMail\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"New Email Address\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"VALID_TYPE\",\n       \"VALID_EMAIL_ADDRESS_FORMAT\",\n       \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"newMail\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       },\n       {\n        \"policyId\": \"check-email-address-validation\",\n        \"policyRequirements\": [\n         \"VALID_EMAIL_ADDRESS_FORMAT\",\n         \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n        ]\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"IDToken1validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 0\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3162"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:17:59 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "120"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "success",
+							"originalRequest": {
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailTrigger"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"code\": 401,\n    \"reason\": \"Unauthorized\",\n    \"message\": \"Login failure\"\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "Session Undefined",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\r\n \"tokenId\": \"{{tokenId}}\"\r\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailTrigger"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+								}
+							}
+						}
+					]
+				},
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "passNewEmail",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"newMail\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"New Email Address\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"VALID_TYPE\",\n       \"VALID_EMAIL_ADDRESS_FORMAT\",\n       \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"newMail\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       },\n       {\n        \"policyId\": \"check-email-address-validation\",\n        \"policyRequirements\": [\n         \"VALID_EMAIL_ADDRESS_FORMAT\",\n         \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n        ]\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{newEmail}}\"\n    },\n    {\n     \"name\": \"IDToken1validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 0\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeEmailTrigger"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsVHJpZ2dlciIsIm90ayI6Imw1YzN1dnIxM2c4aDl1bGxvOWxuNmJqZTJsIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNW5NM05pZEdod1NsSmtMVUo2Wmw5WmRsbERjR3hSTGt4SGQyZElXVmh1ZFUxc2NUVXlhV2R1VGswelRIQnlPWEJuY0V0bWJYSlJRa0Z3VGtOWWQxQkhiVjluWnpOMWMwMWZkRFZPVm00emMyUk5Sa0Z4YlVSQ1RtbDJiVXRTU2tkQmNIa3dTVGhZUVhVd1FYRk5VREUzVTFoak1tb3dTbHByWkhOdldERXhORkpyYzI5Tk4zSkNTbEp3ZUROemJVUlFjVVpKY1RGak1VOWtaVnAyVDBGT2RqVlBOblU0TjJOR2VIZFNNbDl4WkdORGFqQnJNRUZDYkhsek1taExlVEpIWVVGM2JFcFNaaTFsYUU5T1dXbzBTRVZCUVRkbGRUSlhTSGRmVjB3eU4zWllkRGhJUm05RFJqZGxPRU5LZFY5aU9HNW5WMGhWVm1kWmVXbFphbll4VHpKaVVtNUJTM1pKWDB0VlkwVlBTbHA0YUc1QlpFSmliRzFsZWpCM1FVdGFNMDlLY1VkNFJXbGlPVXQ1YkU5bWQyeEhRekpOUkZBd1NucDZXbkJuTnpoTVpEWmZaRXRHWkcxblIwMVNkbVpuYUdScFZqbHNjbGwzTUhGelVGRmphVFZEY0ZvdE1rdzJhVnBLYlZWVllqVlpSSE0wVTNGa1pXbFViRGx6UW0wMGEzbEJWWGxDVEZCVUxTMVFZME5rTmtoSlZ6Vm9RemhEUXpNMlRHazVkRTVWVG5kYVRFa3dOREYwUmxSVFVIaDFWMW81ZVZwNU4zUkxNRU5mYmpCWFNWOVdUWEJxZFZaR1owWjVSMUpNVmtacU5qWk1SVlZLTkhsSWFtbHVWbTVpZFZCWVEzTTFSR1JzTjI1d1NtZDZRMGs0WVRJME0ydHNXRWh5UjFwRlJUZGZNV2wyVlRnNWVpMVhaWFpQV0U4M1NVSmZTRGxqWmsxdFptY3lORVZWVEcwd1lUZG9aV2xvTmt0Q01XZHlSRWx5ZUVJd2NYTnhVVTExVjNSblNHYzJMVVZwVWpaTFdWcHJlVEl5WjBKQ2VHa3lZVEl3ZFc1SlMxQllUMWx2VjFwMFMzTmZURTEyVWtzeWF6SnhNVmhtWVRGTlgwUk5iVnBHU1dkUWFEWlFYMTh0Y0daQ2JrbHJaaTFwZEV0WlpEQnNTV0ZFZFU5eU0yUlBURXB4V2w5U2JUVlBNakpwVDB4MldUWnRRM05IVkZFMVlscG5RMWRqTW05clNrTlBObGREVDJRd1EzRTNWbWROYlZsUFlYVTFSMWRWYWtkUlJsTkZZMnQwTjFWbmVGWnRUbkl0VlhsdU9VSjVaRGt4YkU1dmJWQldVVXhQYkZJeVRFaGpUVmczVmxwblRWOVlOR0ZZVEVKV2IyMVpVV2R2YmtWTU5teDVabXBTWmxaTWN6Rk1iVWhqU1VZdGRFMVVXR1pzYWpaVmRsWXlia0pWZUhwU2NIaFJOMEp3Ykd0MlJWcFpYM1JRYldWMFZtUnNNVFUwV0U4NUxUZFBiV0p3WmpaSllUTjNNMjR0U2tGdU1URlpSV05pUjJKUWRFOWtlbWQ1VGpKYVRUWkthRWhLWmpsRWVVUjRXVzVQZWpScVYwVTRUamhGV2xCdE4yZzNVMjB5Tkd4Zk5XTkdRMUF4Y1dwWmJFWnliRzh6YTNoM2VteHNRVTVtTW5wa1NUTTNORzFsWlRSMmJIRmtTWFI1U2tsWlVuYzNVRE5qYlhwc1prZFBSbnB2VUY5eGNHWnlValpKT0ZwRU1XY3dZa1k1Wm5BMFZuVk1OM04xWVVodkxWcFpZbFIwVms5WmRXcGtTVEJmV0RoRVlqZFJaRGcyU1hSQmRGODVTV0ppZGtwa1FrVXRhMUZSTm1aR09UTXdjRkl3WWs5MlVuUkNiME5VUzA0d1lrSnlkRTl2Wm1KeVRtZ3lNblZmWkZWU1VrWlZSek5ZU1RSMmVYSXRiVGsyWWpKd2NtdHdUbTU0ZG1oNVV6SXpTSHBXV1Rkc1IybFdjR0UzWVZZNFNrTmZWREY1TURabVNUQnVRVVZSZWxsNFZ6VjZiWFJUY2pGWFR6QnRUbUpOUnk1TE1rZFNOMjFYV0ZORFRIWnJVRlF0TlZJMGFrTlIuLVJ6RTJuYk9DYU9NSkwzcGhqdGhGYWZxd3dTblNYeU5rcGJjUElZVS1VNCIsImV4cCI6MTcwOTcyMjY0MSwiaWF0IjoxNzA5NzIwODQxfQ.jrRU9qkgt36cUAJSxFueIapnjbS8VUbxpggMGYGMg3s\",\n    \"callbacks\": [\n        {\n            \"type\": \"ChoiceCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"options\"\n                },\n                {\n                    \"name\": \"choices\",\n                    \"value\": [\n                        \"Send again\",\n                        \"Change Email\"\n                    ]\n                },\n                {\n                    \"name\": \"defaultChoice\",\n                    \"value\": 0\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": 0\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"description\": \"please confirm new email-address\"\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3546"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:18:06 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "306"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "confirmEmail",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsVHJpZ2dlciIsIm90ayI6Ijc4Yjc3bWg1MDkwanA1a2JvNTM1M3RxZnNjIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNDNXV05UUW1OWlVtZGpkVEIyVUZCWlIzbFVZMEpSTGpGcWVsbFhSVEZFVWkxblZWTnVVMk5KV0RKRGRGWjJhaTFRYm1waVF6Uk1OamxYYjJReE56aFBTVFZSZEdjMU0yaGxURnBUU3pJM2NVZDFPRmRHTlZoNE4wUk5YMmxSYTI1Q05tUktZM2hIYXpSQmVEZGhXRVZmTlc5UE9XbElSRVZSZEdNMVpYZGhiMmROTjNwTldWVXphelpSY2xoak9YazRjbVF3VlRseFFtcEZlVEJMVkhSU1owUkZjbnBIVVUxalUwcFBia1pLTjFOWFExTnJVamd4TUdGM2QzQXhNMmh4TTBVMWVIcHNTVFpTYUd4WVlqQnVTMjVzT1c1TVVIbGtNVWROU21KblluWTFSRmc0TFV0MVJHTkpRVnBuVFd0cGFVOWxkR2hGYTNkcGVHWXdWMnB4UWtwQlZURjRiMWxRYXpsalMzTllhRmRYY0hnNFQwSTBXV3R5VUdoeFNFNWhNM0ppZVROZmJIUk9UVTExWmpVMk1sbGlOamhCVnpoRVFuZEpjV0phVDFSeGEyeEVWWEoxY0RCVFVuZHNjRmxTWW5kT1puVlFNbVJGVFRscmNXWkZjSFZ6WjJGNlIxaFRkVkpCVUhScFZYRkNZakZNY0Rsd1gzZDBiM0V6Tm1rdFpsZGFhVUV6VG5sUlQyd3hPVFp4WTFWcldqQndlR1pvUjI1Vk5YWnBYelk0ZFhscFdsTTBUVjkzYkhkSU4xTnNlbXB5UVV3eE5XaEdVVkpoUzNGTlQybDZOV1Z0Y0VzNFNuVkVSMUZTVnpFek1rWnJaMWRoVW5sek1XdGZObUpMT0dkdVVucE9iblZ3YldWNVdFeDFUQzFEYVV4M1owVkVUMnRHVVhwWVkyTnBiMU5mZDFsamQzTTBWbTVLVnkweVoxcExMVnBoWmtKaVVXTXhlRkZOVTBvMlRteFRUWE4xVTFkTVIzZHpPVk5QYjBOU1ZuUXpTVUpNUlVaMGNVMXBNWEJoT0U5bFRteHFOa2Q2VW01d1VTMDFRbUZyZUdsTlZHSnNXUzFtTkZoUVVEQk9Na0o1V2t4YVptdEtRazR4V2tWNFoxSnBYMGhHTWpSb2Vra3hVMk50TVhKNU9UZEpXRWhEWVhwek1tdEpkbVJhYVRsd09YSlZPVEI0Y1cxME1ESlVRamQyWTFkTExUZHhSMnhwU0doNE4ycEpjRXRUVWpKS09GSmxhV2xrYjBGaU1XMUNTbU5ZZFhKc1FtWjFNVGR0V1ZGVFpGRmtkMW80YWpWcGEzaG1WRTlKY1V0NmIwcHJNazFFY2tsWlptVmZUbVJIWTBWU1FXTTVORmRrVG01cWN6VlhXV28yYkZWU1ltUnRjVnBWWlZBMFdWbE1iRkZYZVV4NWNsTlBkV1IxYWpsTFlXSTRVbE5xTmxGTVVYUmtWVGd5YUdnNGNHWTFVbFZUYUVKdGNXZHdVVXBFUldoa1VGUXlSekJJY20weWIweGZiVmxJY1UxSVpuVnRTMHROVlUxMGVXWjJiMnRwTUdOb1JuZGtNbWhLTlU1b1RYa3dObEZ5YkhKaGFuRTJkMFZpY2tvdFNsQk5iVnBITlVSVlkzRkJPSEZDVVdnM1VFaHpVR3hYY1Vkd2JXaHdkbmxZWnk1YUxWWmZZVlJ3WDJ4VmJ6TklNM1ZtWDNwTVN6QjMuUm1STDhrd1UzaW53YkJEZmtUVE9BZEYzcWVUbWNkQnk3VWZiM1NWZXZPUSIsImV4cCI6MTcwOTcwNzY3OSwiaWF0IjoxNzA5NzA1ODc5fQ.BsoV1NveyZ6GPTse9ggk0UjvKYKjgGPjBmt5ISgXtek\",\n \"callbacks\": [\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"newMail\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"New Email Address\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"VALID_TYPE\",\n       \"VALID_EMAIL_ADDRESS_FORMAT\",\n       \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"newMail\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       },\n       {\n        \"policyId\": \"check-email-address-validation\",\n        \"policyRequirements\": [\n         \"VALID_EMAIL_ADDRESS_FORMAT\",\n         \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n        ]\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"chetngavei.raleng@ic-consult.com\"\n    },\n    {\n     \"name\": \"IDToken1validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 0\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailTrigger"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsVHJpZ2dlciIsIm90ayI6Imw4aG10M2kydTFyaGVhOXRxc3VzcTNqcWFwIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNVBNRTF4ZEV4V01rUkRlRjloWVY5RVZWOWllbUYzTGtsbmRIQnJhbDlsVm0xTVZWVXRMVXBxZEV0TGRYTmFTalZxUkdNNU9UWTFaSGhCWkZoVmRtUTBiM3AzYWpacU1ubElhazVqYld0MWJFWjNlRXd0ZDBaRE9XVnNSMUZWZEhSVmIwMXNiVVI1U1hKV1RteG5iV05NVkVsc04xWXRUVTFyTTFNdFR6VkxUVzlWTkc5b1RqUlBlazlMWjFsUmJrWk1PWEUzV0hCRFFXdE9TRTF6U2pCMU9YcGpkMEUzWWxSRVgyRTJiV3BsU21abU1tbEhjSE5FYW05WU4zYzVTaTFzZEVwU1RraG5iMnhzTFZZdFYxbENRMUUyWjA5b1VtMTZXVXM1ZWtaMGNFUXdWelJ1UWtzeFVYTkJkbEJCTTJWSFdtY3RVVVptU1RkeWNVSldPRzA1YUVOWFJsRjBNamwxU2s5bldIbzJXRjlpTVVOcWRHeFZVRFJvTjNSMFUxVTVRalpsVlU1dU1IcFFTVGd0WTBzMFMwRlNXR3hqVm5CMmRqVXlkVFJvYW01SlZXdENTblEzV1RkNFlWa3hibGRoZDBJMlZHUk1ObkpoUjI5QmJEZDBWek5rUkdaQldVWmtiRTEyYlV4alRXdDJVbmx2T1VvdFZFSlJXWFo0WjNOMmRVMTFVRXRtZGtwRFVXbzFieTB4VTNwMVdHRTJZbnBoYVhCRGNISjFRa3M1UlVWek4wRjFWa3hTYlRObFdERnlUWE41Tm1sb01FOUxNMWxmVjAxeWRHbDRNalpRUjNaWVpVTkZSekJ1ZEVrdFVWbE9VMHhtV1dvMlFrbzVkbXR2TFRKV1FXUkRRMHRqVDFac1pWUlhkMmRvVmpkSU56UlVabVZSVFd0aU5rMDVkRXBGZEhaRk9GUm1iMDVZVFRsTGJXRnVVMlp6Y0U5bGFUTnZUa2hoWjI1clRsOXRSRnBhWWxOWWRUZFNhbXRuUmt4cmMyeHpjbVJRVjFoMVRGTjRVMEV4WlhORFNGRkRVbVJyWm5CeFJFRnJjazl3UW5oWlRteEZYMVJVZG5CaE5HVjRRbGQ2VG1sZlRqWlJka2RZTmpCemVYcGpTSGN5VW1neE5EUlJjazVHTFhrMlZuZENjM0ZPU2xRMmEySkdUVWR6WDFCR1kxRkRSVzlWUlZGa1RYaG5ZWFZ5UXpCVFRFWllSRkJ2TFhKUlIyRXdVbXBaWmpoalIxcFpOV1ZxYm5vdGJVa3hWRTVYVlZkQk9GSlJOMUF0V0dkMWRFeENXVkUxZDB0dVJFNHlObVUyWXpsdVJrWk1aV1JHUmxvdGNUVk1lazF3YmtGNlRGUkRTV0Z1VTNsUlR6TlJMVWxTUWtkS2FHeHJjMDB3TUZsb1NUTlRlbkpVVERJek4zUkVWRFZ1VHpWa1lVSnNkVFpwV1dWT1l6RndOa3Q2VmxwRlpqZFZXVzVzY0hOaFdUbElWWFI1UzJwWVlVOXdaMnhxWkMwdFdtMW5OVGswV0UxNFRtc3hNM0l6TjNCcWRqSjRlWGx0VUd0NmRsQnBaMXBDYUhONFIweG1kbUpvTFdFdFdHc3dZemwzY1ZKVVQyeFVOMGhtUlZKMVkyVTBXbXAxTFUxd05qaEVSVGgwUVc5QlZucENhbnA1TTAxV1QxcFVhRGc1T1UwMWFIUm5hWGRPZVROc1NGWmlWM0o2ZEcwMUxUQlNWemgwZUdwMFRWUnhSM2xvUVVoTVVsQm9TRGN5Ym5WMVRXcFVTMmx4U1ZCc1RtczBjVGhoUm1zd1VraGFXalJWV2pVNFIxcEVXRkYwTVdwUVFrTm5PRmQyTW5CemRXTmlWMWN1Wm5nMlYyaHplakphVkhwRWEwNWpjSEZUYkhoQlFRLnpGRTNRZlltaEpCR2FGZlRvWlBsVlk2cnpjbXl0cm5vWTlpMm80SDJvV2siLCJleHAiOjE3MDk4MDY0ODksImlhdCI6MTcwOTgwNDY4OX0.EOBffzetND7FtrtLSt3PUM3yWvmDqbs5boOhPeSpU3Q\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"emailNotDifferent\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 1\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"newMail\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"New Email Address\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"VALID_TYPE\",\n                            \"VALID_EMAIL_ADDRESS_FORMAT\",\n                            \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"newMail\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"check-email-address-validation\",\n                                \"policyRequirements\": [\n                                    \"VALID_EMAIL_ADDRESS_FORMAT\",\n                                    \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"chet.raleng@ic-consult.com\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"chet.raleng@ic-consult.com\"\n                },\n                {\n                    \"name\": \"IDToken2validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 2\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "emailNotDifferent",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"newMail\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"New Email Address\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"VALID_TYPE\",\n       \"VALID_EMAIL_ADDRESS_FORMAT\",\n       \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"newMail\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       },\n       {\n        \"policyId\": \"check-email-address-validation\",\n        \"policyRequirements\": [\n         \"VALID_EMAIL_ADDRESS_FORMAT\",\n         \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n        ]\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{newEmail}}\"\n    },\n    {\n     \"name\": \"IDToken1validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 0\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailTrigger"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+								}
+							}
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsVHJpZ2dlciIsIm90ayI6Im1hMTJ0M2hwOThqYTgxYnI0OXRpam11NTNtIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNTBZMDVGZVVodk5UaHpjbU0wWkdSdFRrOUlNRzFCTG5vdFlreDRVVkV5UjI1RFUwSk5NVTR5ZWtjMldXWk5XREUxUkhka05rZzNlRXh0VlZwUFZGbEdhMGxqTjNOSlYzVm9WMlowVFVaMlREWmtTRXBUZEd0VGMycHRORXQyWWt3eVozWmZUbHBEVVdKeE1UUXdWR3h0WTIxdVZqYzRVbGMxVlVKNWFrWXlTblpwU0dKWGFYcDRlWFJYUzBwSWVHcG1VMkZGTW5JNWJYVlZkbTlEZVZKQlgxTjNPVTR3ZERKMVpXNXNUVmN5WlUwM1FXSlVVbXBmUVVObFdsSXhNa1I0U1c5c01VcEpXV0p4ZERGQ1JGUmphMnBPWVRGTVRIRTNURTlKWTB4UlVuQnhXRGN0T0VsNldsQndVRk5mZHpKQllrSlRRa1UyWkhsa09VeFhjelpMTVZvemJYaFRUMHhJYms4NFoxQmtVeTF0V2xWaVJHcDVYMlZ0TFZCeldVUkxOVU53UW1SYWRuSTVZbFpTT1VsNlVXRmlMUzFGZG5aQmIwZDViV2RFT0ZOT1kweFdiakZuTFRGVFNtUnJia1pwVlRkSlgyRktVa0pwZW1kRmRtVmZVVUp2TTJaNFdEWlVURVpQTWtSSmRXdEZSbTF6UjJReUxUbHFZV1UwZG5sV1MzbHBNVlJDUjJKeFJVY3lWREkwTlhWNFdtdDJkbTQ1Tmtsa2RWRmlOVk5ITVdVMmIyRmhNMmQ1UTBWQ2JtbFlUakJwWW1GWlEwNXZlSEp0VjA1SlgwWm1UWGRsTW5VNVoydHVSMUJvVG1RM2RXZ3dTbDgwUkdObFgyZE1VSEpqVERCbGNVcFNlVVJwZUVKS1gxaFJXbmxPYzFkTFZYTnJVMlJZV0ZFNWJIUktXRWxVUzJwcVRsUlRXRmxKZUMxa2VrUTVjWGxGUVdaRVdrZFBYMk5IYlY5b1ozUkRPRkprVWtwaVVqVmZUVEZaYkUxS00yZzJPV1JGZW0xYWFucE1PQzE2VVV4VVFVRTRWR3RXVUhaNlpqRmhUUzEwWlVoSVFXMW9abVZ5VFdjMVIwUmtUVjlaTUhZdFF6VXphbDlKTjA5U1EyNXlaM1o1V0dKVFREWmxiSGxNVEd4SVFtMU1ORTVSTmxabFRsRllZVGh2UVZkNlFVZEtjR0p5UzBSbFpGSjFOekpPZVhvMVNIVjNaVFkwVEZKamIyUkpjWGxuY1cxV1dEaFNlblJWTURkTlZXWjBVV3BOVWpSR1NGQkxOVUZvWVZkd1FrSm9TV3c1Y1hBeWVYTkthbkJUVFVGYVZIZDRTRnA2V2xsRGRtTk1RemRwTjI1QmVGbGhTekZEU1ZSTlJuaEhWR2hCZG1FeVVubHBVMkZZUkc1cFN6ZzNTRlJZYVdrNWFsRlJOekl6U0hoS0xVVnBYM1I1U21aaFFVdDNjR0p4TW1SR01tTkdZbnAyU0c4NFUxVTBXRXc0V1ZWMFFsTXdZVWh1WXpKVFZVMDNWRTVIU0ZrMlEwTjVlVFpsTkZBMk1FZGFRWEZ6ZEc1Vk16Y3laWE0zZVVKd1EzcFdUMEpNTVZkbVdFMVlTazFUWVVkc1JucG5ZVGMxYUhCaFJUbEJVSGt3UTBKd2JIRmpNR0o2T0RKNVNWOHhNVUYyU2tKSGJUUjJOSEpxZG5wa05YTkZabWxMTkcxbmRqZFVka3gzU1Y5U00wTktkVVJ4TkhObGRHdHFTRE51Wm1RMlFtTjVNVU5WTldKSWNWQkxOV3BHYW1ocGJ6UnlNRU5yTTNjMU9EWXlUa1IxZVZwRlNEUXVjbU5NWTB0MFJIZHBjSEIwV0UxTk4xVnpVVWxsUVEuU241S28xSjdPWkhWbXRIWDVwRndOU0cwZlY3TWtXc2ZwSktXbGlWZEFBcyIsImV4cCI6MTcwOTgwNjU0MSwiaWF0IjoxNzA5ODA0NzQxfQ.mJVp0DZdpTTyoUSgAY5NYYLdRwdaiwRZeXGbyBB_tzE\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"emailInUse\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 1\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"newMail\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"New Email Address\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"VALID_TYPE\",\n                            \"VALID_EMAIL_ADDRESS_FORMAT\",\n                            \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"newMail\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"check-email-address-validation\",\n                                \"policyRequirements\": [\n                                    \"VALID_EMAIL_ADDRESS_FORMAT\",\n                                    \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"test@gmail.com\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"test@gmail.com\"\n                },\n                {\n                    \"name\": \"IDToken2validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 2\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "emailInUse",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"newMail\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"New Email Address\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"VALID_TYPE\",\n       \"VALID_EMAIL_ADDRESS_FORMAT\",\n       \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"newMail\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       },\n       {\n        \"policyId\": \"check-email-address-validation\",\n        \"policyRequirements\": [\n         \"VALID_EMAIL_ADDRESS_FORMAT\",\n         \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n        ]\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{newEmail}}\"\n    },\n    {\n     \"name\": \"IDToken1validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 0\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailTrigger"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "choices",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"ChoiceCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"options\"\n    },\n    {\n     \"name\": \"choices\",\n     \"value\": [\n      \"Send again\",\n      \"Change Email\"\n     ]\n    },\n    {\n     \"name\": \"defaultChoice\",\n     \"value\": 0\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": {{choices}}\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"description\": \"please confirm new email-address\",\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "accept-encoding",
+								"value": "gzip, deflate, br"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeEmailTrigger"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsVHJpZ2dlciIsIm90ayI6InVnZ3UyZWg1MTEwMzE3MGhvYnBlcTdzM2hkIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNW1hREpSUTFGT1QwWXlaR0pvWTFWcFQzbHNUMWwzTGpkalptcExkVFZaWVRaS1RGZExOSGRKTUVWcUxVMWlOMGRsV1U5amVHMXJUelZ0VFdaclVFOWpSME16YzB3MmFVRm9PWG80V25keVVVZFlVbFV3WTFWNVpqQlBTME5RY205dExXVmhPR3gwTTJFMFJ6RkNOVkJ1WDNsRmJXWTFRelo1YTFRNE9YUjRWalp5Vmw5eFlqUk5WbTAwUVc1R09FMU1XbFJpYkVSUE5UTjBkRU5rTFZwM09DMHhVazlyUkdabmVrMURUVnAxVERJM1ZqVkpVVXRGZGs1NVQwbEtja3haYmw4NGJGWjNiblpLYm1ZeWRuQnhNVUUwWW01MVptUTVhalZqZGpOV2VsUnljbTFJWTFseFVVSlZTa1JTWW5KTWFVOW1iamt5YTNaNVkwTmhjV1l4V21oMmMwRXpYMU5OWWtGaFFVY3pTQzFwYVVGa1oxSlJkM0pFYTJ0WmNIVTFWRFZqWkRCWlpGSTFaSFJOZHpoNlF6TndOVFpMVlVabVFtMDRZVXBpVVVRM2NuQTBaVGxUVm5aek5UZHpNV0pRT0VNelMyZGlTM1pQVG5oSVdtUmhXbTB5Vkd4RlVGY3djbkk0Y0daUGF6UTVhMGRvVGs1cFJXOTJhR3RpY2tJMmJYTjVMWFl5WkdadGFFc3hjbTVKY1ZCeVNsaG9VMjFPYkZkMmFVZHFaWHAzY3paMGFqZDBablI1TVRSdFpsb3RRMlF0WDA5cllsUk5RMHhLVERkU1EwVklhSGh2WlZOWVRYZG5YMEZ1U0hoV2FEZFVSSGM0ZEZKU2NFWlNSM2hOTlZWQlNYcHhabFkyV0hwcmFGOVBhMEZmUmxwdVdWZHNNSGRITlhreFJucEZXWFZZTUdsd01uVlVNMVF6TTJwcVJXMXBWRmwxYm14c1lsSk5WV0kwTlRoTU5GTkRSMWx4WTNJM1RWcGpUbFJIWmkwdFMwSnFlR1Y1UlZacWRUQkJiVEZhU1hWUU1UVkRUbWhLVms5U2NEUXhTM0prTjBGQlgyb3hiVmRaY1dselExVm9kSHBPUzA1aVMweEhkRmhoYkdoVFNuZEtWRTFIZFZkdlowbFhiV0U1VlhKRlRWWlFSbUZTYlVaWmRFY3lZbVI2T0djeUxWTlZaRjlGVkdsUFYwUmhibEYwVEd0c1FqQm5VMDFNUVZCV1NYQm9kbkIxYVhCWFRFbGlPSEJZTTJ0NE9VOTRORTFsUTNOV01rOTRiMjlXUW0xSU9FNVJTazl2VVVveFJqSnNTMlZyYW0xalZ6bFVWRm8yTkVSNVJ6WnhNek5tUWxGVmFISmtTMGxoVjFBdGFtbGpOMFJIWHpkT2RUQmtlQzEwTXpkV2EwRkpXV3hMVTNkWFltWkxRMjFhVmpSU1NFcGhkbFpFT1ZRMGQxSklPV1pGV25obVRIZzFTMUpCYVRSeE4zQXdMVFJLYWxwVmJHTTNORk15U2xreExWVlBNbVZLY2s1M1ZtNWxWVVIyUzFGdE9WbzVaR2xxUzBsRWFUQlVjRXRXYTFZd2RESTJXSGRzT1RkT1dIVjZjSGRXU2tsNFRrTnpZMjVEY3pSTlVWbE5kVlJDU2psSUxXOUlWRFZoZFMxVlh6SnBWMFppWmpoeGNFdHBNRUZaWm1ZeFEzZFlWMDVJU1daM2FqaG1hbXRLZFhSclVIRmlkMDU2TkZwZlUwczNTbEJHY1RCcVZ6ZHRRV1ZRZVhsdlQxTmhXbXh2WVdkWlZXSjFPV0l4WjJkRUxWcGhiMDFPVnpkemFEVkVabDlSTjFOc05YVXdjbnBzYW1ZeFZIUnZkRU5xWDFoYU5rTlFMVk5UWldaSlRsbE1UemRCVEZwbVRWTlhXR1J6Y0UwMlNWWTFTRkZ6UW5WNU5sQjJiRlZtUnpOWGFFMXFTVmw2U0dWVlVXUjRhMjh3TlRSUE5rcHVlbmxQWlRGbVNGUjNiM2gxVVdwUGJIUlljVXR0TVdkRU5sZEtSMEZyY0VsV09YUnZVVmwwV0RNeUxWOVZaSEptTm5WM1prbHJURE4zVVM1QlFtNVBOM1J1WVhKc1JtbzBlRVJOY2xwcExXeFIuNTVpRUpWNzFCUHpRZ2hoTEhJbXBqa05ORC1pampTeWJJVU9MbHloanY2dyIsImV4cCI6MTcwOTcyNzA1NSwiaWF0IjoxNzA5NzI1MjU1fQ.bNnfkSYjeuirVBRdquqw-IeL9aL0JGz8w_qbtyEq-jY\",\n    \"callbacks\": [\n        {\n            \"type\": \"ChoiceCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"options\"\n                },\n                {\n                    \"name\": \"choices\",\n                    \"value\": [\n                        \"Send again\",\n                        \"Change Email\"\n                    ]\n                },\n                {\n                    \"name\": \"defaultChoice\",\n                    \"value\": 0\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": 0\n                }\n            ],\n            \"_id\": 0\n        }\n    ],\n    \"description\": \"please confirm new email-address\"\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3642"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 11:31:36 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "141"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "send Again",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsVHJpZ2dlciIsIm90ayI6ImdjZ3ZpcTlkbGM0cTkzcWZhMjI0YWxlNmhpIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNU9Va1p1VFY5aE9UaG5SREY0Y0VoU2NrVmFORGRSTGxBMlgzZFNYMVJmWkRGTWVtcE9lbXc0VldaVWRXbFVkazE2Vmpabk1VRXlUeTF3Y2xWTWRVMW1VeTAyYzFoV2NESnhabTVLWlRSNVNtdGpSMTk1V21Vd2QySXpha2xDTWpFeFowY3pOVzQxTkhKTmRXMUdOekJDZWtwMlNWWkxlRWhDVTNGemJsUTNRVGhHYVVWd1UyRkVRbkIxVG5CYWRERnphR0ZzVkRBNFoxQTJOMUF3ZDBKb00xZHpUVzQzYlVwMVUwdGZXWFZGUjFkcFRuRjBTR0YxWW0xV1lXWllOMU5hU0VKT016aGtSVTk2U3psQlNHTm5la2hTT1dFdGVHWnNURlpFT0VwWVozUldabVZITkc5V2IzTXhOemxNYm5kM2EwTnRNbXhqZVVGRU5qa3RiMFJHVUdabWVrWjZSREZ4Y0djd01rWTROREJ6Yld0RVIxcDJaM2hNU2pVeldVTjVjV05ZY0V0bldrMDRkR3B3YWxGeFNtMW1YMjlQZEVsUlR6VkNVVVV0VjI5clNXOWFTV2cwUTB0dFJuUkNXVFZuYUVwUFVtcHNRV0ZoZEdwWGNYSjZVV3BNWkhwNWJsTlpiakp3VVZKTGJsaDBVVE5qTlVGMmFFaFZiMWxsUkZNM2FsVkdXbDkyVjJreGRGSk5NMGxKTTFWcGJWbFdhVmg2TmsxSWIzTnhNRmxpVjBKUVkwRnpVWGhSY3paRVNVOWFSMWcxVVY5elozcHNhRkY1VkU5d1lsQnRRM1ZoVlVSTE1FcExXVVpGWmpCWVpESTBlbDl5Tm5ab1kxTnViRlJRV0VVelFrTkNNMDFOTTFNelIxaHJTalIxVmxObVdqa3dlR2gxWlROSlZHdFVUVkpuUlZOMmNHOUtSMjl2ZVhaWk1rWkJOMlJsVFdSWGVuSXhlSGx2VFVKb2VtZHlUSFZvTUVVMlUyRkpkWHBTY3podFJuTnpXR1JKZDFoSmJ6QlVXV1ZtVlVwTlVsTnNaVGM1VkdkZmVtZG9jVFJVUVhGUlJsTTBUemhmYTIxa2RWcFpOMXA2VXkxbFdGcFViSEpDUm5ONVVrOVJkR1kzUVdkaVltNDVOMUZ0U1ZoYWFXUmFNR1IyUVVNelYzSXlTV0V5TTJoSVNXRkhka2MzVmpkM1dISmFSRkpRV0Rod1JVdFBjVWhMYW5kdWVXWm9WMnhNVmt4NVUwcHBPRzVGTkhkelVGTmtSbGxETW0xRU1HdzFUREJLZVZvNGRWTktPRUp0VUV4U2RubGlTR3MzTVVKa2FWaFhPRFpIU0RGWVRubEJXRTQxVTBFMlVGTlVaVWxvVFZSTGIzWnpielZEVDNoc1RFZzFjak5FVW05alpGaFdZWEpIY21Wa1FVZHVaWFYyT1ZwaWVrbHBjVzl1ZDB0c1oyYzBTSGREWjNkelFWWnRjMVpVZUdSWFdFdDRMVmhITlhjM2JIbEpaREZRV2tkc2VXMU1hVkp4Uld4SWFVRTFjUzFIVGtVdFExRkNjVkJZYzBSTk9YRlVjVFZZWkU5MU4zWjFTamxWU1hwNmNsWlVRemREUTJaeUxURlpka1pTVW1sRk5sOUdVRWxwY0Y5YWRVNTJaV041VTAxeGRHeDFOSGRxTjFodGEyZEdaRGRSUlVsRlJqQnpSRVk0VUhGb1kzbFBZVkIwYVZBeGFXMHhjbmc0TXpKdVNUWXhlV0psV21OU2RtaFVkMGRsTm1kaGEyVldSblp0WmxoU2JraGxRMU50UTJsemRIWktRak5sTWsxUmFsQlBVakpqYVVaaVJrRjVSemRQYkRoMmFsUmpWSE5XV21oS1dtbDZkMnRIYVUxcE1UQnVhbXB4T1RaS1p6Wk9aMFZLVEhaVGVtNWxiMWx0WVRsaFpGVmFUa2h4TFZkelVrSk9NVFJRYUdvMU9YaFNWa0ZOT0RacFJ6SkNXWGx3VDA5dlQzbEdUV05LYWpCcE5VcEtjMmRDTFRnM00xbFZVMjlyVm5seFlWTTRiRTlyU1V0NUxXcEdla2x6ZVhvMFRFeHdjbFppVGk1S1ZFaEVZemgxTVd0eVNUazFZaTAyUVVKSlFVbDMuR1dMd3pKTmlGNG9vTnMyLWhvbFUtcXdyLUFMNzFwbGs1M2lOWVVjcGpoWSIsImV4cCI6MTcwOTcyNjQ4MywiaWF0IjoxNzA5NzI0NjgzfQ.jUk1d08UeHS2hw-JqQ6RpSSgl2Tdt44xTMIbWKBO2Ew\",\n \"callbacks\": [\n  {\n   \"type\": \"ChoiceCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"options\"\n    },\n    {\n     \"name\": \"choices\",\n     \"value\": [\n      \"Send again\",\n      \"Change Email\"\n     ]\n    },\n    {\n     \"name\": \"defaultChoice\",\n     \"value\": 0\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": 1\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"description\": \"please confirm new email-address\",\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailTrigger"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsVHJpZ2dlciIsIm90ayI6ImxndTdlajRzc2EzYzdubGI0Mjh1dDJoaGZiIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNHdSbXgyYUZoaWFGbG1helo0UTNwQ1kwSlBjRzFuTG10VllYZGplRTlNV0dablZHdHhXSGMyUTNGR1VIaHliVEpJUjNnd05GbEpTa3R4VDJZeVdqUnBiblpXUTJaRU9FWXdkbVkwV2tKemJucFlURGh4U1cxak9FVlNNWFpKWTBWa1VrcHhVak5wTTNSTmFUQlZaMmxVVEVGcFltTk1hV2RQTjJ4YU5FTXhkV3hhTTNSYWFEQnhPV1ZtWWw5Q05tWnFaRXhWWldsWVpTMVRRM1p6UlZKblRYWTBSRmxRZUY5VE0wRjFNRlZxVVMxMmJIaEJjVkJUVEVOSFgxaEhVRTUyVWsxeFZ6QlZjVVpqZG5STWJTMTVTbkJhWlY4eWFtMHdTVWg0V1UxTllVbGtWVEppVTBaWFNFUm1NbXRCVGt4RkxVMVRSWEZ0ZG5aUU1GVnRZbFpDWTFWMFVsZFFXbXN4ZWtzMFptZHZOMmxMT0RGTFoxaEdPV0ptUVhWeVJXTkdkSFJ2VldKemFscFZXV2x0VEZoeGIwMXhhVlUwWkZKRVZqaERTWGxKUVRGQ1UyZGtaRkJ1TmxKQ1IxTmZNMUI1Um10VGVIQXdaelF4UTBSNFIwbzVla0k0UjFwTlN6TktTRjlKWDBNNWQxUjBRbmxaV2pJd1FXTkRNRFJqTmtkZlluTlZXRmRRVFY5QmRGUkplRFZSTmtaVVZuWnhMVjl5UzB0MmR6aHRlVWR5V1hSaVVtZFNkUzB4WTNJMFIyb3dTV3hIZEc5d2RHMU5XVVpFWTB4SlltcDZaVWRWU0RSaGFYZzVZbEZ3VVhwUlYwVlJkMjQxV1ZKMWFtdFBTMXB2UmtkV1kxRnBXak5zTm1WaGNsTk9Za3B4Tld0Zk1WZGlZelYwUmtKTmQybEJiRTlrYW1VdFNsZHdkVFJVVDJwc2JqQmZOMHhQVmtwb2JWUk9lbTlqY21SSFdXMHRVWFYxVFRoRVF6ZDVaa3hYZW1KTlIxVlZSVEV6TUZsWWJDMHRjelE0Y1ZkVFFsUlBUbVpIWTNnd01WbEZkbkUwVjNSeVpWaGxTa1IxTld4U1ozRTBPSEJ5UzNVNE5sQkRXbms0VDNKV1VYcERkR2hVUTE5VlRtZzNlblJwVmpGNU9ESm9NMVZmTjNabk0wOURYM05pY1hKdWFIZGpaRWxuV0VkemQyeGZja3g0U2xwbFJFVlRYMUpoWTNwUVJXOTRaMHg1WDFsYVVscDZjbHBpUjFJNGFXeHpWMFV0ZFhjM1l6Vk5WRXR0U0hBM2IxcHFhM1pZWW10bFNucEpSbmx0U2tGbFNsUkpSV3RFVEdocVJEVmxXVGhMZEdsVlRta3paSEpJZUVGSFdHbGpSVUpJZWxZNVltVlVYME51YzFkUFptRmtOVmxSYmkxbk1sUlZPUzB3WVRBMmNYSkxiMHhJUjFKVFFtSnFabGxrTTBacU5ETkdNREZHYTFrMFNEZ3lNazFhZEVSRVkxVkNRemd6V2s1MVNsaHBSRXcwYmxWWVNsQjNWWGg0VlRGWFpIRkxVa0ZSVTJKbk5tZFJZV04wVG1sUlRERllRVTlWTFVVeGJXTnhibTVpZVdWbWRHSTNjRkZ1UWpGMUxURmtjblU0Y0haMFNFcFNOVUl5ZW0xaldtTllVSGMzVFc1MFIwOXdYMUE0VjJsRmJEVmZlVlp6ZEdwSWVsRTNUR1ZxYjBoS04yTXhVR1I1UlU1blR6TlpXbDl5TldSNk56aGhZV2t3UWtwTWRXdFJNMWh6V1dGMk1HRlBhMjlWV1hkdlkwWnJRbXhzYjBFdFRYWkxjMjFQTVZCTlYxbE1hRkI1TmtaVll6ZG1XRTUxY2tWQ1F6VlZhbFk1V1RoWU5HRlhlRmxhYTNGQ09HVkZXbVIzV2pJelFVWjFVMnhRWVROVGFIUlBaMUYzYWxCWFZWVkhOWFZ1UkdkaFdIUnBOVXhIWTJSaU1qRkJia1pHVVRjd1kxbzJhQzFGVkZsTFZXUkphSFpYZW1wQk5UQnNPVFpKUmw5eWRuWmlRV04zY3kxNVlrUlRPRTh4VjNsVE9VNVhNR0ZyY2k0NVkwVjVZM0pETFc4elprVkVOMnhCWHpscGFrSlIuUVlKNXdjdkZUMFFRTVBsTWVILUFCZjhDMDBhYXNGT01la1BDb01QSmhaYyIsImV4cCI6MTcwOTcyOTQ0NiwiaWF0IjoxNzA5NzI3NjQ2fQ.lgfZEo7NXY9qpeti_TeA1D3rZFhfDuTNOAT5kA7NLOY\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"newMail\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"New Email Address\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"VALID_TYPE\",\n                            \"VALID_EMAIL_ADDRESS_FORMAT\",\n                            \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"newMail\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"check-email-address-validation\",\n                                \"policyRequirements\": [\n                                    \"VALID_EMAIL_ADDRESS_FORMAT\",\n                                    \"CHECK_EMAIL_ADDRESS_POSTFIXES\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"chetngavei.raleng@ic-consult.com\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{newEmail}}\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 0\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [],
+							"name": "change Email",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"ChoiceCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"options\"\n    },\n    {\n     \"name\": \"choices\",\n     \"value\": [\n      \"Send again\",\n      \"Change Email\"\n     ]\n    },\n    {\n     \"name\": \"defaultChoice\",\n     \"value\": 0\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": {{choices}}\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"description\": \"please confirm new email-address\",\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailTrigger"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailTrigger"
+								}
+							}
+						}
+					]
+				}
+			],
+			"name": "changeEmailTrigger"
+		},
+		{
+			"item": [
+				{
+					"name": "confirmEmailChange",
+					"request": {
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeEmailResume"
+								},
+								{
+									"key": "JWT",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjIzNS5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDk4MDQ3OTksImV4cCI6MTcxMDIzNjc5OSwiY29kZSI6ImNoZXRuZ2F2ZWkucmFsZW5nQGljLWNvbnN1bHQuY29tIiwic3ViIjoiNjIzYzBkZWItOWVkMi00MmVjLTk3MjMtOTE3YWNkODFjNmJmIn0.46G3buYyLDgbIBeDCaHD9rneMsAU8iO7r4DAhs1npldv0mwhGsZrUMYesTj3dz9xJiWb1m25kz65X6-G4HXbKg"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailResume&JWT=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjIzNS5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDk4MDQ3OTksImV4cCI6MTcxMDIzNjc5OSwiY29kZSI6ImNoZXRuZ2F2ZWkucmFsZW5nQGljLWNvbnN1bHQuY29tIiwic3ViIjoiNjIzYzBkZWItOWVkMi00MmVjLTk3MjMtOTE3YWNkODFjNmJmIn0.46G3buYyLDgbIBeDCaHD9rneMsAU8iO7r4DAhs1npldv0mwhGsZrUMYesTj3dz9xJiWb1m25kz65X6-G4HXbKg"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsUmVzdW1lIiwib3RrIjoia3FvY3ZtNjdqZGUxcTR0ZTluNGdiY2owYWEiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1MGRYQjFRV05IVDAxR1lrcG1NMU42UjJONWMxWkJMbU5CYW5KM1VuWTJhMkZ6TlUwM1VrbFpTVlUyVFRZeExYVnRPRkp0WlhGRllrRkRYMnhWWDJkRlkycHVORTV5ZUVsS2IwdFdNblZCUzBzMVMzUkNka2RMZFZGdmNsUXlYMDVIV1cxSVZEQk9XbTB5UVhOTVIxazRTRzFhVDFoblNUWTJjRFl4TWtGZlJURmZialJPVFUxYVlsWm5NWEoxY1dOaFluTTVMVTVxTUhOTE1YRkVlblJxZHpsWlgzZzVOM0p3ZUZvNFpqaDBOblJMWWpoSk0zTkNYMGwxTFRaTFJUaDVXRGh4U0VrMlRqSjZPRGhtYkhvMk9FUTVSRU00WTJVME1EaFJaR1JKTVRsaU5UTjBWR0ZUZVRaV1FrSTJaMFJ0UldwRFVGWkpSMXBxZVhSbmNtRkxhalIwWkVKYVRFZEVhbEZ1YlVSQlpHVkRhbHAzV0ZSZlMwMXlRM0JWVDNaWE4ycGZaMWgwUzBWZmVWWlFXblJYVURsSVN6UkNZbVJwUWxaNWNscGFORVYyVVcxVWNDMW9SRXBLUVRaWmEyUm9NRVJyV2tSbWNVZFNOM05ZWlRaWWEwUXhkVmx6ZUhGcloySnRTRGxVU1hKNmFFMDRWMGwzVjNKemVqQkVlRzUxYlU1RFVHSXRkVFZxY2s4MU9YaENVRXBRZGxkTFEzSkdZME5mYVMxTldFVXhkbU15VG1FeFN6WlZPR1JLVTBsbWNUTmFYM1ZJYmpCWFQxOVVlRmd0Y0ZWelJtcHhaemMzZUdoYWFXUkZNMTgyUzFCSFdERk5TMWRmTm5kMGExaDZSak51ZEdoRVdVTjFjemhDTVhneVIyWXhWa0ZIYzFCWk5WRnBNMDFZVG10UmIyeDZkMHc1TmtOR1oxbHJURkl3Vldrd1VscHdaVFJtTXpoc2NITTVWMHBVVEd4MVMySldjSGxMTVdaaFRHaEdSR2M1VDBSTE5WbE1NSFpmZUhCeGIxUjJObTVwY0RsQlNUVjZSVWhhYmpWMVNGa3pWbGM0TW1SeGR6Y3lUemh3VWw5VFRVeGhjMGhEZVZjNU0xTXRlRm90VDA1RllWZFlVbkpKWDNkcFEyeFVUa0ppYWs1ZllUTkdVRW8wUjJZeWNqbHlSbTF2VjI5eFRUQjRlalF5Y2poTlRuUktXRFZtYkhveExXMUllblYyTVZWUGRUQjNPVkZzTkhRdGVHMDVibWxvVWxkVlZWZDBjREYwVFZwaGNVOTJTMlYxY0MwdGMxSnNPSFZyYjBFeFEwaG9URWhpWjFOek9ETktRM1J4TjI1U1RERlFlRVpLWWsxbFRESnJXVzVJV205WmRsUkJkV1ptUzFwM1JGYzRVRTg0TFdZeWFHaG9aazE1U1Uxd1pHWklVV0owVVUxUVVWSnlRbk16WDFSc2FVeFllSGhNZGprMFIyNURaMlJzWlVWQmRHcFJOV016U0dGdVVVOVpUbnBaT0ZoeFNGb3lSbWwxTjNObGJXeEdWRlZCVG1wc2JYUnJNWFl4ZW1SSFFuVXdiMFZEYzNCSExUQjRaek52ZUdkRVVrNVpPRGRUVWxreVpVeHhhVE5oU1hFeU1WOVVPV2htZWs5elVraHVNRU54ZDFRMWJrNDRiV1pmY2tSYVpEaEhUa3hMT1Y5dE0xQmtURFV3UVZad1JtdDVOVTVTVkZWQlJFeERTRTFLUlhoc05FRjBOV1pFYVROeU1YZHRSM0UxTUU5bU4zWkxUV2QxV1V0alFUSlJYelp2ZVVRNVZVeE1ZMVJ2U3poUFJIVmlkelZCZG5GVk1EQTNaWFprWm5SaFRuVnBXakZ6TkRWM1lXdDJiMlYyTjJselNVcHRaV1kwZGpGcGEzZGhVMGhYYlUweWNrRnROM2R4V1V4elN6UnNTMGRrZFRsalRUZDFTVEZSV0ZJME9XUm9SazE0U0VsTFVIVmlZM1p3VkVOVmR6ZHVZWEJsYXpab1JUUk1TWGxMZFc1NloySXliamhFWkRGU1YwaFJhR1I2Vm0xcFgxQlRTMFZ4VlRGNldHRmtiSHBEUjJwa2IxcFZWRUY0UjJNNVZYQjZaa2RvY1hCVVoyaFZXVFJDVjJkcldVbFdTRzVEYTIxdUxTMTJTSFl4UWxCRFMzUnNVbUpKTTFkRlNGb3dPVU5xYkZkSmNWbHFXVWx2VURkRGMxbFVTbE5RYkhwS05YZDRlblV3VnpWM2FXeEJObTFUZUhGNlpFWTJYMjFhYzA5a2JtWnhPREF3UmpSeFpHVnBiMncxTGpGS1JqZFJWSEYwYUhaeU9HOXBTV3N5YzNGQmNXYy5nM0tydHBtMmc4QWZVWHctUzk3Zm8zenIwRnJzZTZGM01MOEZPY1ExcWFnIiwiZXhwIjoxNzA5NzI1MjY4LCJpYXQiOjE3MDk3MjM0Njh9.bKP_ZuQ6bCz-cnvU6bcF8ZA2oBwO0f0jJHdjvYzoeUg\",\n \"callbacks\": [\n  {\n   \"type\": \"TextOutputCallback\",\n   \"output\": [\n    {\n     \"name\": \"message\",\n     \"value\": \"email is successfully updated.\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": \"0\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"ConfirmationCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": 0\n    },\n    {\n     \"name\": \"options\",\n     \"value\": [\n      \"Yes\",\n      \"No\"\n     ]\n    },\n    {\n     \"name\": \"optionType\",\n     \"value\": -1\n    },\n    {\n     \"name\": \"defaultOption\",\n     \"value\": 1\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": 0\n    }\n   ],\n   \"_id\": 1\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3417"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 11:11:08 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "409"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "emailUpdated",
+							"originalRequest": {
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailResume"
+										},
+										{
+											"key": "JWT",
+											"value": "eJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjIzNS5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDk3MjMzOTgsImV4cCI6MTcxMDE1NTM5OCwiY29kZSI6ImNoZXRuZ2F2ZWkucmFsZW5nQGljLWNvbnN1bHQuY29tIiwic3ViIjoiMWE2ZjMyZjEtMDExNC00ZDE5LTg1Y2ItMmMxOTFiZDk0OTk5In0.hLZ7bFdjdDTjeB80BGXAYooKdo9PGYpZklJExuPGHz7DxOC34rLumbm6qJFBczuAEUIkj5IDWYGSp3bSX7ICAw"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailResume&JWT=eJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjIzNS5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDk3MjMzOTgsImV4cCI6MTcxMDE1NTM5OCwiY29kZSI6ImNoZXRuZ2F2ZWkucmFsZW5nQGljLWNvbnN1bHQuY29tIiwic3ViIjoiMWE2ZjMyZjEtMDExNC00ZDE5LTg1Y2ItMmMxOTFiZDk0OTk5In0.hLZ7bFdjdDTjeB80BGXAYooKdo9PGYpZklJExuPGHz7DxOC34rLumbm6qJFBczuAEUIkj5IDWYGSp3bSX7ICAw"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\r\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZUVtYWlsUmVzdW1lIiwib3RrIjoiZXNyNW4yNzA2dDhvamVhYmxia3U0bTY5cGIiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk0NE9GTlJUMVo0WmtOQldXcFdaMjAwZVhvMVRWTjNMbkZKZFZCcUxYTkZhRzB5VVZFeWJ6WjBMVE15UVhsUU5EWlZTRFJGZEdocWFWRkdSVTl3TTNsdVlrZDJTRU5SVGpOZlRtbFdhSGswYzB4RlUzSmxTbHBmYXpaS1VIRkhXWGhSV0VsUk5HdHNRa0p6UW1FeVdrYzVXWFY1WjJ0c2JqTjJOV1JqTkdWNVF6bHlRVjh3ZEhWTlVtMHRibVZSTVRsb1UwTnNiVTltYlV4SVFsSlhZV0k1VDBSWmVHZG5kbTgwTmxZeVJFZzJOR2hZVm00eU1FRjRhRzB4T1RaU2VtNUNRazlEVEROa1gyZFZPRlpEUzJOTVJWVjZTRE16Y0RBdGVGOURTSFJWTWt4aVFtUkVTMVV5ZEZGeVR6ZHlkVzlDY1VoNVZHSjNjSEZVUmpGa1FtWnVTRVZKT0VWeWNtNHplbFZMWkhWSlVucFdjR2hxWkVOUlNDMUtlVkU1ZERWSFZrZFJVSGhoT0RJeGVFeFVaRXhWWVRkVlRETTJiazVmWTFjeVZGOHlPRlY0VDJjNVNtTXhlREZLVWtZMVFrVjVRbXQ1UkZCcloyY3hTakJXUm5seVpYTnZVVzAxT1Mxc09VY3lOM2RzTkRaQ1lsazBjMmhXUVc1dk1VbG1PRlJOZEdWVVRtRnZZVko0VUU1ak5teEZOSGt4UkhodlpqTk1ZbE5ZVm5WRlUwVnNZbTFKYjJvdGJsVjZaMmg1Wmtkb1NERkRVMGx4ZGpNMFVsSmpVbUoyYjNCT2NFUjFPV1kzUzI1UlZFTkJTak5XZURsQ2VWSndXWFpxUTJNMmIxVnVUVGxQUzFsa2R6aGhZVlpzVkdaMmEzVmtNMHhXYTBaRGFVOHRSVE5sUzB3MGFUVmpiek5oU0VzM00yRlVibEZmVFVsaVptZENSVEZFYkhJdGVYUTFXVEpWVFhWQlVqazNVVlZrVVVRd1JrVmxRM0JhZEhwTlREQlROMUZUZVdKNmREZDJZMmc0VVZkclZXeGpWVE13ZUc1eE1EbDNlbnBwTkV3dGF5MWZhRUZvVm1OaldGOU5OSGhOYkdSVFZHOWlXSGRRVmtSRFEycDRTRUl3TmkweFZrZG1aVFpCWjFWWFFqUkdlbGxOVkU1TmVtNU5NWE0wV0ZOTlVsa3Rla3hVUkhsV1ltRkpTbUV0YkMxNFVsRjNRbWt0TmxCR1ZqWTNSVUZ5YkRWRWFqWnlRbVJPT1ZkcU1raHBOazVVU205VFpIUjBkVE13V1ZKdmQwNHdiMm8xY21GSE9GWkhlWEJmU0doR1UyNDNaM0ptYjJ0VldVOTZja1pIUkcxU1JrVjRNbmR1ZERWek1FMVBUblphVXpCc1RsaHFORFowVm1WU2QyWjJSRzgzTTFWSVptOVNSR2RDUlRKeFZWZ3dWM0EwY21WaFNUSndlR0pOZDA5cGVWZFdTblZGVDNZeWNXUkpZM0YwY0hOT1IxOTNjazFSYTNCS2FHeHFPR3R5TUdkblFTMVBORk42TkRKU2JXRlVVRmRIUTFOdllXeDVZWHBxTUhwUVowSjVZbWxHT0VGemR6WjNjVGRxTVhsWFMwNVpjSGQyWlZKM1RIQmthbW90YUhVM1duUklhRzlMWDJWUU9GaFhkR3BFYldscGFFcFJVblpIV2sxb1RHY3pSa0pFT1ZCTlJtSTJZM0kxYUdsaVIxaFdiVTlaTUVsM2FIQTFhVVZtZGpkemVYWk1Ta1puV2tObFJqWkljVE50UkhWSVNsUnZjME5oY2xaUFRGQlZaVEYzYVUxVFMxTk9aMUpLUjNOYVowaHVSVVp4VXpCUVpXRTFXRTFMWkhWRVgyMURVRXB3VG1scGJrbHdZMU0xV0MxQmN6QmlhVXhHVjFRM09IQnZNV05NVVZZd2IybFRaREZIUjBOM1NFTjZSRVk1VkRoVVVqQmpkbUoyVDFCUlZYazJWbE5VUjBKWE16QkxOVWhvUnpWWGFrdFJZMjB3Vm1selREbDRMWGN5TkhCc1dTNUtlRXBGVWpFNU4zWm5VRVZ6ZW5aYWRpMUtaVlozLjBiTWRUaFZNSnNRYUtnM1oyVHZ5X0JIYjFHazNhaUZ1TkMzZ2VBUnRiZUUiLCJleHAiOjE3MDk3MjU5ODAsImlhdCI6MTcwOTcyNDE4MH0.lfoS5XtBPays-QrGO9gDL7CF5c2e2kSakCCvLViWb6w\",\r\n    \"callbacks\": [\r\n        {\r\n            \"type\": \"TextOutputCallback\",\r\n            \"output\": [\r\n                {\r\n                    \"name\": \"message\",\r\n                    \"value\": \"invalidLink\"\r\n                },\r\n                {\r\n                    \"name\": \"messageType\",\r\n                    \"value\": \"2\"\r\n                }\r\n            ],\r\n            \"_id\": 0\r\n        },\r\n        {\r\n            \"type\": \"ConfirmationCallback\",\r\n            \"output\": [\r\n                {\r\n                    \"name\": \"prompt\",\r\n                    \"value\": \"\"\r\n                },\r\n                {\r\n                    \"name\": \"messageType\",\r\n                    \"value\": 2\r\n                },\r\n                {\r\n                    \"name\": \"options\",\r\n                    \"value\": [\r\n                        \"Ok\",\r\n                        \"Cancel\"\r\n                    ]\r\n                },\r\n                {\r\n                    \"name\": \"optionType\",\r\n                    \"value\": -1\r\n                },\r\n                {\r\n                    \"name\": \"defaultOption\",\r\n                    \"value\": 0\r\n                }\r\n            ],\r\n            \"input\": [\r\n                {\r\n                    \"name\": \"IDToken2\",\r\n                    \"value\": 0\r\n                }\r\n            ],\r\n            \"_id\": 1\r\n        }\r\n    ]\r\n}",
+							"cookie": [],
+							"header": [],
+							"name": "Invalid Link",
+							"originalRequest": {
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-length",
+										"value": "0"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeEmailResume"
+										},
+										{
+											"key": "JWT",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjIzNS5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDk3MjM4NjYsImV4cCI6MTcxMDE1NTg2NiwiY29kZSI6ImNoZXRuZ2F2ZWkucmFsZW5nQGljLWNvbnN1bHQuY29tIiwic3ViIjoiMWE2ZjMyZjEtMDExNC00ZDE5LTg1Y2ItMmMxOTFiZDk0OTk5In0.2sEU7iyVFv_84wcE1hb7wEtNcRjmRQPke9feVfOE4ik-tLQttpugJ7d1kQuNtaeLyvmm83W_yOVRJZEbko4tLg"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeEmailResume&JWT=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjIzNS5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDk3MjM4NjYsImV4cCI6MTcxMDE1NTg2NiwiY29kZSI6ImNoZXRuZ2F2ZWkucmFsZW5nQGljLWNvbnN1bHQuY29tIiwic3ViIjoiMWE2ZjMyZjEtMDExNC00ZDE5LTg1Y2ItMmMxOTFiZDk0OTk5In0.2sEU7iyVFv_84wcE1hb7wEtNcRjmRQPke9feVfOE4ik-tLQttpugJ7d1kQuNtaeLyvmm83W_yOVRJZEbko4tLg"
+								}
+							}
+						}
+					]
+				}
+			],
+			"name": "changeEmailResume"
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"type": "any",
+			"value": ""
+		},
+		{
+			"key": "newEmail",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "authId",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "userName",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "otp",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "tokenId",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "choices",
+			"type": "default",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.default.authentication.modules.persistentcookie.signing",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "hmacsigningtest"
+    ],
+    "secretId": "am.default.authentication.modules.persistentcookie.signing"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.default.authentication.modules.persistentcookie.signing",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

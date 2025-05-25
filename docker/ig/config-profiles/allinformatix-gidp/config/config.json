@@ -1,0 +1,98 @@
+{
+  "handler": {
+    "type": "DispatchHandler",
+    "config": {
+      "bindings": [
+        {
+          "condition": "${request.uri.host == 'ig'}",
+          "handler": {
+            "name": "router-api",
+            "type": "Router",
+            "config": {
+              "scanInterval": 2,
+              "directory": "${openig.configDirectory}/routes-product-fetcher"
+            }
+          }
+        },
+        {
+          "condition": "${request.uri.host == env['FQDN_API']}",
+          "handler": {
+            "name": "router-api",
+            "type": "Router",
+            "config": {
+              "scanInterval": 2,
+              "directory": "${openig.configDirectory}/routes-api"
+            }
+          }
+        },
+        {
+          "condition": "${request.uri.host == env['MY_POD_IP']}",
+          "handler": {
+            "name": "router-pod",
+            "type": "Router",
+            "config": {
+              "scanInterval": "disabled",
+              "directory": "${openig.configDirectory}/routes-pod"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "heap": [
+    {
+      "name": "SystemAndEnvSecretStore-1",
+      "type": "SystemAndEnvSecretStore"
+    },
+    {
+      "name": "JwtSession",
+      "type": "JwtSession"
+    },
+    {
+      "name": "MyCapture",
+      "type": "CaptureDecorator",
+      "config": {
+        "type": "Slf4jLogSink",
+        "captureEntity": true,
+        "captureExchange": true,
+        "logSink": {
+          "config": {
+            "base": "org.forgerock.openig"
+          }
+        }
+      }
+    },
+    {
+      "name": "CommonClientHandler",
+      "type": "ClientHandler",
+      "config": {
+        "_keyManager": null,
+        "_trustManager": null,
+        "connectionTimeout": "10 seconds",
+        "connections": 64,
+        "disableRetries": true,
+        "disableReuseConnection": true,
+        "hostnameVerifier": "ALLOW_ALL",
+        "numberOfWorkers": 4,
+        "soTimeout": "10 seconds"
+      }
+    },
+    {
+      "name": "AmService-1",
+      "type": "AmService",
+      "config": {
+        "url": "http://am/am",
+        "realm": "/",
+        "agent": {
+          "username": "ig-agent",
+          "passwordSecretId": "ig.agent.secret"
+        },
+        "secretsProvider": "SystemAndEnvSecretStore-1",
+        "sessionCache": {
+          "enabled": true
+        }
+      }
+    }
+  ],
+  "monitor": true
+}

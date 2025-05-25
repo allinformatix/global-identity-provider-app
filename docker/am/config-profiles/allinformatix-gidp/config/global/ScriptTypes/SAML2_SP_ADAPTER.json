@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "SAML2_SP_ADAPTER",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "[Empty]",
+    "languages": [
+      "JAVASCRIPT",
+      "GROOVY"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "SAML2_SP_ADAPTER",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "extends": [
+    "stylelint-config-html"
+  ],
+  "ignoreFiles": [
+    "./**/coverage/**/*.{html,css}",
+    "./packages/platform-shared/src/views/AutoAccess/**/*"
+  ],
+  "rules": {
+    "at-rule-no-vendor-prefix": true,
+    "at-rule-allowed-list": [
+      "font-face",
+      "import",
+      "media",
+      "keyframes",
+      "include",
+      "if",
+      "else",
+      "while",
+      "mixin",
+      "supports",
+      "use"
+    ],
+    "at-rule-no-unknown": null,
+    "color-named": "always-where-possible",
+    "custom-media-pattern": "^([a-z]+-?)*([a-z]+)$",
+    "custom-property-pattern": "^([a-z]+-?)*([a-z]+)$",
+		"declaration-block-no-duplicate-properties": true,
+    "font-family-name-quotes": "always-where-recommended",
+    "font-weight-notation": "numeric",
+    "function-allowed-list": [
+      "calc",
+      "change-color",
+      "color",
+      "counter",
+      "cubic-bezier",
+      "darken",
+      "fade",
+      "format",
+      "hsla",
+      "lighten",
+      "linear-gradient",
+      "minmax",
+      "repeat",
+      "rgba",
+      "rotate",
+      "translate",
+      "translateX",
+      "translateY",
+      "translate3d",
+      "map-merge",
+      "scale",
+      "scaleX",
+      "skew",
+      "str-replace",
+      "theme-color",
+      "url",
+      "math.div"
+    ],
+    "function-url-quotes": "always",
+    "media-feature-name-no-vendor-prefix": true,
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": true,
+    "no-eol-whitespace": null,
+    "property-disallowed-list": [
+      "float"
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "composes"
+        ]
+      }
+    ],
+    "property-no-vendor-prefix": true,
+    "selector-class-pattern": "^([a-z]+((-{1,2}[a-z0-9]+)|(_{2}[a-z0-9]+))*)$",
+    "selector-max-attribute": 1,
+    "selector-max-id": [
+      1,
+      {
+        "severity": "warning"
+      }
+    ],
+    "selector-max-specificity": "3,5,0",
+    "selector-max-type": 3,
+    "selector-max-universal": 1,
+    "selector-no-vendor-prefix": true,
+    "selector-pseudo-class-allowed-list": [
+      "hover",
+      "focus",
+      "global",
+      "not",
+      "after",
+      "before",
+      "first-child",
+      "focus-within",
+      "last-child",
+      "nth-last-child",
+      "first-of-type",
+      "last-of-type",
+      "nth-of-type",
+      "nth-last-of-type",
+      "active",
+      "export",
+      "checked",
+      "indeterminate",
+      "disabled",
+      "only-child",
+      "focus-visible",
+      "placeholder-shown",
+      "deep"
+    ],
+    "value-keyword-case": [
+      "lower",
+      {
+          "ignoreFunctions": ["v-bind"]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "deep",
+          "global",
+          "export"
+        ]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": [
+          "deep"
+        ]
+      }
+    ],
+    "string-quotes": "single",
+    "unit-allowed-list": [
+      "%",
+      "dpcm",
+      "px",
+      "em",
+      "vh",
+      "vw",
+      "rem",
+      "s",
+      "deg",
+      "fr",
+      "pt"
+    ],
+    "value-no-vendor-prefix": true
+  }
+}

@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+# defines config map patches to set SMTP connection details for DEV
+patches:
+- target:
+    kind: ConfigMap
+    name: platform-config
+  patch: |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: platform-config
+    data:
+      SMTP_FROM_ADDRESS: "no-reply@e-mail.dev.allinformatix.com"
+      SMTP_HOST: "mail-tx.dev.allinformatix.com"

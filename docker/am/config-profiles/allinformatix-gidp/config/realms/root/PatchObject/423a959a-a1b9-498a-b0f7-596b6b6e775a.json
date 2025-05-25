@@ -1,0 +1,31 @@
+{
+  "data": {
+    "_id": "423a959a-a1b9-498a-b0f7-596b6b6e775a",
+    "_outcomes": [
+      {
+        "displayName": "Patched",
+        "id": "PATCHED"
+      },
+      {
+        "displayName": "Failed",
+        "id": "FAILURE"
+      }
+    ],
+    "_type": {
+      "_id": "PatchObjectNode",
+      "collection": true,
+      "name": "Patch Object"
+    },
+    "identityAttribute": "userName",
+    "identityResource": "managed/user",
+    "ignoredFields": [],
+    "patchAsObject": false
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "423a959a-a1b9-498a-b0f7-596b6b6e775a",
+    "entityType": "PatchObject",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

@@ -1,0 +1,99 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+configurations:
+- kustomizeConfig.yaml
+
+# The env vars below can be passed into a pod using the envFrom pod spec.
+# These global variables can be used to parameterize your deployments.
+# The FQDN and URLs here should match your ingress definitions
+configMapGenerator:
+- literals:
+  - FQDN=default.iam.example.com
+  - FQDN_API=api.iam.example.com
+  - FQDN_LONGHORN=""
+  - TLS_SECRET_FQDN_LONGHORN=longhorn-sslcert
+  - TLS_SECRET_FQDN_API=api-sslcert
+  - AM_URL=/am
+  - AM_ADMIN_URL=/am/ui-admin/
+  - IDM_ADMIN_URL=/admin
+  - IDM_UPLOAD_URL=/upload
+  - IDM_EXPORT_URL=/export
+  - IDM_DS_USERSTORE_ADDRESS="ds-idrepo-1.ds-idrepo"
+  - PLATFORM_ADMIN_URL=/platform
+  - IDM_REST_URL=/openidm
+  - ENDUSER_UI_URL=/enduser
+  - LOGIN_UI_URL=/login/#/service/Login
+  - PLATFORM_UI_IS_FRAAS="false"
+  - FRAAS_LOGGING_URL=""
+  - ENDUSER_CLIENT_ID=end-user-ui
+  - ADMIN_CLIENT_ID=idm-admin-ui
+  - THEME=default
+  - AM_STORES_CTS_SERVERS="ds-cts-0.ds-cts:1636"
+  - AM_STORES_USER_SERVERS="ds-idrepo-0.ds-idrepo:1636"
+  - AM_SERVER_FQDN="$(FQDN)"
+  - AUTORESTORE_FROM_DSBACKUP="false"
+  - DSBACKUP_DIRECTORY=""
+  - DSBACKUP_HOSTS="ds-cts-2,ds-idrepo-2"
+  - DISASTER_RECOVERY_ID="initial-restore"
+  - CERT_ISSUER="default-issuer"
+  - ENABLE_WORKFORCE="true"
+  - OPENIDM_WORKFLOW_REPO_HOST="postgres"
+  - OPENIDM_WORKFLOW_REPO_PORT="5432"
+  - OPENIDM_WORKFLOW_REPO_USER="idm_workflow_user"
+  name: platform-config
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+# The variables defined below can be referenced in resources using the syntax $(VARIABLE)
+vars:
+- fieldref:
+    fieldPath: data.TLS_SECRET_FQDN_LONGHORN
+  name: TLS_SECRET_FQDN_LONGHORN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+- fieldref:
+    fieldPath: data.FQDN_LONGHORN
+  name: FQDN_LONGHORN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+- fieldref:
+    fieldPath: data.IDM_DS_USERSTORE_ADDRESS
+  name: IDM_DS_USERSTORE_ADDRESS
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+- fieldref:
+    fieldPath: data.TLS_SECRET_FQDN_API
+  name: TLS_SECRET_FQDN_API
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+- fieldref:
+    fieldPath: data.FQDN_API
+  name: FQDN_API
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+- fieldref:
+    fieldPath: data.FQDN
+  name: FQDN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+- fieldref:
+    fieldPath: data.CERT_ISSUER
+  name: CERT_ISSUER
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config

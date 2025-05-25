@@ -1,0 +1,20 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "SocialIdentityProviders",
+      "collection": false,
+      "name": "Social Identity Provider Service"
+    },
+    "defaults": {
+      "enabled": true
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "SocialIdentityProvidersConfig",
+    "entityType": "SocialIdentityProvidersConfig",
+    "pathParams": {},
+    "realm": null
+  }
+}

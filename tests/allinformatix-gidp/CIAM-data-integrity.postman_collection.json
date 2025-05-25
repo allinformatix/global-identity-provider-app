@@ -1,0 +1,849 @@
+{
+	"info": {
+		"_postman_id": "fbeaef95-0f52-4090-8dda-8ef0e9717a7b",
+		"name": "CIAM integrity tests",
+		"description": "CIAM data integrity test.\n\nThe collection is divided into three phases - init, test and cleanup. Whenever upgrading CIAM infrastrture and data integrity needs to be tested the init and test phase should be run pre-upgrade. After the upgrade test and cleanup phases should be used.\n\nIf the test phases gives the same result in both runs, the test is successful.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20626077"
+	},
+	"item": [
+		{
+			"name": "INIT",
+			"item": [
+				{
+					"name": "t_customerpotal-auth",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// clear cookies",
+									"const jar = pm.cookies.jar();",
+									"const url = pm.variables.get('url');",
+									"jar.clear(url, function (err) {",
+									"    if(err) {",
+									"        console.error(err);",
+									"    }",
+									"    else {",
+									"        console.log(\"cookies cleared!\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Has non-empty tokenId for root realm\", function () {",
+									"    pm.expect(jsonData.tokenId).to.be.not.empty;",
+									"    pm.expect(jsonData.realm).to.equal(\"/customerportal\");",
+									"});",
+									"pm.environment.set(\"amadmin-session\", jsonData.tokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-OpenAM-Username",
+								"value": "{{tecuser_name}}",
+								"type": "text"
+							},
+							{
+								"key": "X-OpenAM-Password",
+								"value": "{{tecuser_password}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-API-Version",
+								"value": "resource=2.0, protocol=1.0",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/authenticate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"authenticate"
+							]
+						},
+						"description": "Authenticate technical CUPO user (t_customerportal)"
+					},
+					"response": []
+				},
+				{
+					"name": "create-cupo-user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"testUserUUID\", pm.variables.replaceIn(\"{{$guid}}\"));",
+									"pm.environment.set(\"testUserUsername\", pm.variables.replaceIn(\"{{$randomUserName}}\"));",
+									"pm.environment.set(\"testUserEmail\", pm.variables.replaceIn(\"ergotest-{{$timestamp}}@icconsult.33mail.com\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Right values\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.realm).to.eql(\"/customerportal\");",
+									"    pm.expect(jsonData.mail[0]).to.eql(pm.variables.replaceIn(\"{{testUserEmail}}\"));",
+									"    pm.expect(jsonData.username).to.eql(pm.variables.replaceIn(\"{{testUserUUID}}\"));",
+									"    pm.expect(jsonData.givenName[0]).to.eql(\"Ergo\");",
+									"    pm.expect(jsonData.sn[0]).to.eql(\"User\");",
+									"    pm.expect(jsonData.origin[0]).to.eql(\"KuPo Automated Tests\");",
+									"    pm.expect(jsonData.dn[0]).to.eql(pm.variables.replaceIn(\"uid={{testUserUUID}},ou=users,ou=consumer,ou=identities\"));",
+									"    pm.expect(jsonData.cn[0]).to.eql(pm.variables.replaceIn(\"{{testUserUUID}}\"));",
+									"    pm.expect(jsonData.uid[0]).to.eql(pm.variables.replaceIn(\"{{testUserUUID}}\"));",
+									"    pm.expect(jsonData.universalid[0]).to.eql(pm.variables.replaceIn(\"id={{testUserUUID}},ou=user,o=customerportal,ou=services,ou=am-config\"));",
+									"    pm.expect(jsonData.loginName[0]).to.eql(pm.variables.replaceIn(\"{{testUserUsername}}\"));",
+									"    pm.expect(jsonData.inetUserStatus[0]).to.eql(\"Active\");",
+									"});",
+									"",
+									"var schema = {",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"realm\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"username\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"mail\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"givenName\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"origin\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"_rev\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"objectClass\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"dn\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"cn\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"createTimestamp\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"uid\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"universalid\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"loginName\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"etag\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"inetUserStatus\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"_id\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    },",
+									"    \"sn\": {",
+									"      \"type\": \"array\",",
+									"      \"items\": {",
+									"        \"type\": \"string\"",
+									"      }",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"realm\",",
+									"    \"username\",",
+									"    \"mail\",",
+									"    \"givenName\",",
+									"    \"origin\",",
+									"    \"_rev\",",
+									"    \"objectClass\",",
+									"    \"dn\",",
+									"    \"cn\",",
+									"    \"createTimestamp\",",
+									"    \"uid\",",
+									"    \"universalid\",",
+									"    \"loginName\",",
+									"    \"etag\",",
+									"    \"inetUserStatus\",",
+									"    \"_id\",",
+									"    \"sn\"",
+									"  ]",
+									"};",
+									"pm.test('Schema is valid', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-API-Version",
+								"value": "protocol=1.0,resource=3.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{testUserUUID}}\",\n    \"loginName\": \"{{testUserUsername}}\",\n    \"userpassword\": \"Ergo2022!\",\n    \"mail\": \"{{testUserEmail}}\",\n    \"givenName\":\"Ergo\",\n    \"sn\":\"User\",\n    \"origin\":\"KuPo Automated Tests\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/users/?_action=create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "_action",
+									"value": "create"
+								}
+							]
+						},
+						"description": "Create test user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TEST",
+			"item": [
+				{
+					"name": "t_customerpotal-auth",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// clear cookies",
+									"const jar = pm.cookies.jar();",
+									"const url = pm.variables.get('url');",
+									"jar.clear(url, function (err) {",
+									"    if(err) {",
+									"        console.error(err);",
+									"    }",
+									"    else {",
+									"        console.log(\"cookies cleared!\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Has non-empty tokenId for root realm\", function () {",
+									"    pm.expect(jsonData.tokenId).to.be.not.empty;",
+									"    pm.expect(jsonData.realm).to.equal(\"/customerportal\");",
+									"});",
+									"pm.environment.set(\"amadmin-session\", jsonData.tokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-OpenAM-Username",
+								"value": "{{tecuser_name}}",
+								"type": "text"
+							},
+							{
+								"key": "X-OpenAM-Password",
+								"value": "{{tecuser_password}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-API-Version",
+								"value": "resource=2.0, protocol=1.0",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/authenticate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"authenticate"
+							]
+						},
+						"description": "Authenticate technical CUPO user (t_customerportal)"
+					},
+					"response": []
+				},
+				{
+					"name": "get-cupo-user-by-uuid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Right values\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.realm).to.eql(\"/customerportal\");",
+									"    pm.expect(jsonData.mail[0]).to.eql(pm.variables.replaceIn(\"{{testUserEmail}}\"));",
+									"    pm.expect(jsonData.username).to.eql(pm.variables.replaceIn(\"{{testUserUUID}}\"));",
+									"    pm.expect(jsonData.givenName[0]).to.eql(\"Ergo\");",
+									"    pm.expect(jsonData.sn[0]).to.eql(\"User\");",
+									"    pm.expect(jsonData.origin[0]).to.eql(\"KuPo Automated Tests\");",
+									"    pm.expect(jsonData.dn[0]).to.eql(pm.variables.replaceIn(\"uid={{testUserUUID}},ou=users,ou=consumer,ou=identities\"));",
+									"    pm.expect(jsonData.cn[0]).to.eql(pm.variables.replaceIn(\"{{testUserUUID}}\"));",
+									"    pm.expect(jsonData.uid[0]).to.eql(pm.variables.replaceIn(\"{{testUserUUID}}\"));",
+									"    pm.expect(jsonData.universalid[0]).to.eql(pm.variables.replaceIn(\"id={{testUserUUID}},ou=user,o=customerportal,ou=services,ou=am-config\"));",
+									"    pm.expect(jsonData.loginName[0]).to.eql(pm.variables.replaceIn(\"{{testUserUsername}}\"));",
+									"    pm.expect(jsonData.inetUserStatus[0]).to.eql(\"Active\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-API-Version",
+								"value": "protocol=1.0,resource=3.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "CustomerPortal",
+								"value": "Kz-Xl9QAWaVnDAXHURUrbP1beqM.*AAJTSQACMDIAAlNLABxHdVA1MFRKbERmbVU3MkFCL1cvYm0wcFJQeHc9AAR0eXBlAANDVFMAAlMxAAIwMQ..*",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/users/{{testUserUUID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"users",
+								"{{testUserUUID}}"
+							]
+						},
+						"description": "Get test user by its UUID"
+					},
+					"response": []
+				},
+				{
+					"name": "user-auth-init",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// clear cookies",
+									"const jar = pm.cookies.jar();",
+									"const url = pm.variables.get('url');",
+									"jar.clear(url, function (err) {",
+									"    if(err) {",
+									"        console.error(err);",
+									"    }",
+									"    else {",
+									"        console.log(\"cookies cleared!\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"authId returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('authId');",
+									"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Returns right callbacks\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.callbacks[0].type).to.eql(\"NameCallback\");",
+									"    pm.expect(jsonData.callbacks[1].type).to.eql(\"PasswordCallback\");",
+									"    pm.expect(jsonData.callbacks.length).to.eql(2);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/authenticate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"authenticate"
+							]
+						},
+						"description": "Initialize tree to get callbacks"
+					},
+					"response": []
+				},
+				{
+					"name": "user-auth-submit",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// clear cookies",
+									"const jar = pm.cookies.jar();",
+									"const url = pm.variables.get('url');",
+									"jar.clear(url, function (err) {",
+									"    if(err) {",
+									"        console.error(err);",
+									"    }",
+									"    else {",
+									"        console.log(\"cookies cleared!\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Has non-empty tokenId for root realm\", function () {",
+									"    pm.expect(jsonData.tokenId).to.be.not.empty;",
+									"    pm.expect(jsonData.realm).to.equal(\"/customerportal\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"authId\": \"{{signin-authid}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"NameCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"User Name\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{testUserUsername}}\"\n                }\n            ],\n            \"_id\": 0\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"Ergo2022!\"\n                }\n            ],\n            \"_id\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/authenticate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"authenticate"
+							]
+						},
+						"description": "Enter username and password in callbacks"
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-by-uuid-as-the-user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// do not test request body if status is wrong",
+									"if (pm.response.code == 200) {",
+									"    var jsonData = pm.response.json();",
+									"    var testAttributes = [",
+									"        { name: \"realm\", value: \"/customerportal\" },",
+									"        { name: \"mail\", value: pm.variables.replaceIn(\"{{testUserEmail}}\"), index: \"0\" },",
+									"        { name: \"username\", value: pm.variables.replaceIn(\"{{testUserUUID}}\") },",
+									"        { name: \"givenName\", value: \"Ergo\", index: \"0\" },",
+									"        { name: \"sn\", value: \"User\", index: \"0\" },",
+									"        { name: \"cn\", value: pm.variables.replaceIn(\"{{testUserUUID}}\"), index: \"0\" },",
+									"        { name: \"uid\", value: pm.variables.replaceIn(\"{{testUserUUID}}\"), index: \"0\" },",
+									"        { name: \"roles\", value: \"ui-self-service-user\", index: \"0\" },",
+									"        ",
+									"    ];",
+									"    testAttributes.forEach(attr => {",
+									"        pm.test(`Attribute '${attr.name}' has the expected value of: '${attr.value}'`, () => {",
+									"            pm",
+									"                .expect(attr.index ? jsonData[attr.name][attr.index] : jsonData[attr.name])",
+									"                .to.eql(attr.value);",
+									"        });",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-API-Version",
+								"value": "protocol=1.0,resource=3.0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/users/{{testUserUUID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"users",
+								"{{testUserUUID}}"
+							]
+						},
+						"description": "Get own user by UUID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CLEANUP",
+			"item": [
+				{
+					"name": "t_customerportal-auth",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// clear cookies",
+									"const jar = pm.cookies.jar();",
+									"const url = pm.variables.get('url');",
+									"jar.clear(url, function (err) {",
+									"    if(err) {",
+									"        console.error(err);",
+									"    }",
+									"    else {",
+									"        console.log(\"cookies cleared!\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Has non-empty tokenId for root realm\", function () {",
+									"    pm.expect(jsonData.tokenId).to.be.not.empty;",
+									"    pm.expect(jsonData.realm).to.equal(\"/customerportal\");",
+									"});",
+									"pm.environment.set(\"amadmin-session\", jsonData.tokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-OpenAM-Username",
+								"value": "{{tecuser_name}}",
+								"type": "text"
+							},
+							{
+								"key": "X-OpenAM-Password",
+								"value": "{{tecuser_password}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-API-Version",
+								"value": "resource=2.0, protocol=1.0",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/authenticate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"authenticate"
+							]
+						},
+						"description": "Authenticate technical CUPO user (t_customerportal)"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-cupo-user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Test successful values\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success, \"sucess\").to.eql(\"true\");",
+									"    pm.expect(jsonData._id, \"ID\").to.not.be.empty;",
+									"    pm.expect(jsonData._rev, \"Revision\").to.not.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-API-Version",
+								"value": "protocol=2.1,resource=3.0"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/am/json/realms/root/realms/customerportal/users/{{testUserUUID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customerportal",
+								"users",
+								"{{testUserUUID}}"
+							]
+						},
+						"description": "Delete test user"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+	]
+}

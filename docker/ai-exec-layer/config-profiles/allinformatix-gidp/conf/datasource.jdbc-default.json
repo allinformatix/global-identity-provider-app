@@ -1,0 +1,13 @@
+{
+    "driverClass" : "org.postgresql.Driver",
+    "jdbcUrl" : "jdbc:postgresql://&{ai.exec.layer.db.repo.host}:&{ai.exec.layer.db.repo.port}/&{ai.exec.layer.db.repo.db}",
+    "databaseName" : "&{ai.exec.layer.db.repo.schema}",
+    "username" : "&{ai.exec.layer.db.repo.username}",
+    "password" : "&{ai.exec.layer.db.repo.password}",
+    "connectionTimeout" : 30000,
+    "connectionPool" : {
+        "type" : "hikari",
+        "minimumIdle" : 20,
+        "maximumPoolSize" : 50
+    }
+}

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ig
+spec:
+  rules:
+    - host: $(FQDN_LONGHORN)
+      http:
+        paths:
+          - path: /()(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: ig
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - $(FQDN_LONGHORN)
+      secretName: $(TLS_SECRET_FQDN_LONGHORN)

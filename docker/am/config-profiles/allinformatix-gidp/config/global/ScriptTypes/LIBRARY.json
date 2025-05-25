@@ -1,0 +1,21 @@
+{
+  "data": {
+    "_id": "LIBRARY",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "[Empty]",
+    "languages": [
+      "JAVASCRIPT"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "LIBRARY",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

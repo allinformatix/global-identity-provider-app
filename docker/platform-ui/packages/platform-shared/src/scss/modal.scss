@@ -1,0 +1,22 @@
+.modal-dialog {
+  .modal-title {
+    font-size: $fr-modal-title-font-size;
+    line-height: $fr-modal-title-line-height;
+  }
+
+  .modal-content {
+    @include media-breakpoint-up(sm) {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+.modal-fullscreen {
+  .modal-dialog {
+    .modal-content {
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+    }
+  }
+}

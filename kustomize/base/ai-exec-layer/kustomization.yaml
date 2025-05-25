@@ -1,0 +1,23 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- configmap.yaml
+- deployment.yaml
+- service.yaml
+
+configMapGenerator:
+- files:
+  - config/logging.properties
+  name: ai-exec-layer-logging-properties
+
+generatorOptions:
+  disableNameSuffixHash: true
+labels:
+- includeSelectors: true
+  pairs:
+    app: ai-exec-layer
+    app.kubernetes.io/component: ai-exec-layer
+    app.kubernetes.io/instance: ai-exec-layer
+    app.kubernetes.io/name: ai-exec-layer
+    app.kubernetes.io/part-of: forgerock
+    tier: middle

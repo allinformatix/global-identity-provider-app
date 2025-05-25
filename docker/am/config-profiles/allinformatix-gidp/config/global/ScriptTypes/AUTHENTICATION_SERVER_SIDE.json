@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "AUTHENTICATION_SERVER_SIDE",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "7e3d7067-d50f-4674-8c76-a3e13a810c33",
+    "languages": [
+      "JAVASCRIPT",
+      "GROOVY"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "AUTHENTICATION_SERVER_SIDE",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

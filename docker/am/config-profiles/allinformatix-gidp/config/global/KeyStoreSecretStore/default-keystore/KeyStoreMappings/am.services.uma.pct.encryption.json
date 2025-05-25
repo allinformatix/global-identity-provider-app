@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.services.uma.pct.encryption",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "directenctest"
+    ],
+    "secretId": "am.services.uma.pct.encryption"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.services.uma.pct.encryption",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

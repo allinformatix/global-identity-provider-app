@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+# defines config map patches to allow connections from localhost for OAuth2 apps
+patches:
+- target:
+    kind: ConfigMap
+    name: platform-config
+  patch: |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: platform-config
+    data:
+      EXAMPLE_CLIENTS_SPA_REDIRECTIONURIS: "http://localhost:5002/signin-oidc,http://localhost:99//l0/links/logout-confirm.aspx,http://localhost:99//l0/login,http://localhost:99/login,http://localhost:99/login.aspx,http://localhost:99//L1/Handlers/ImplicitFlow.ashx"
+      

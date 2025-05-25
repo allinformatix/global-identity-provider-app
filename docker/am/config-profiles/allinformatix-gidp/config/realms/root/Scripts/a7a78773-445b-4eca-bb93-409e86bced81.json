@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "a7a78773-445b-4eca-bb93-409e86bced81",
+    "context": "SOCIAL_IDP_PROFILE_TRANSFORMATION",
+    "createdBy": "id=dsameuser,ou=user,dc=openam,dc=forgerock,dc=org",
+    "creationDate": 1433147666269,
+    "default": true,
+    "description": "Normalizes raw profile data from GitHub",
+    "evaluatorVersion": "1.0",
+    "language": "GROOVY",
+    "lastModifiedBy": "id=dsameuser,ou=user,dc=openam,dc=forgerock,dc=org",
+    "lastModifiedDate": 1433147666269,
+    "name": "GitHub Profile Normalization",
+    "script": "LyoKICogQ29weXJpZ2h0IDIwMjIgRm9yZ2VSb2NrIEFTLiBBbGwgUmlnaHRzIFJlc2VydmVkCiAqCiAqIFVzZSBvZiB0aGlzIGNvZGUgcmVxdWlyZXMgYSBjb21tZXJjaWFsIHNvZnR3YXJlIGxpY2Vuc2Ugd2l0aCBGb3JnZVJvY2sgQVMuCiAqIG9yIHdpdGggb25lIG9mIGl0cyBhZmZpbGlhdGVzLiBBbGwgdXNlIHNoYWxsIGJlIGV4Y2x1c2l2ZWx5IHN1YmplY3QKICogdG8gc3VjaCBsaWNlbnNlIGJldHdlZW4gdGhlIGxpY2Vuc2VlIGFuZCBGb3JnZVJvY2sgQVMuCiAqLwoKaW1wb3J0IHN0YXRpYyBvcmcuZm9yZ2Vyb2NrLmpzb24uSnNvblZhbHVlLmZpZWxkCmltcG9ydCBzdGF0aWMgb3JnLmZvcmdlcm9jay5qc29uLkpzb25WYWx1ZS5qc29uCmltcG9ydCBzdGF0aWMgb3JnLmZvcmdlcm9jay5qc29uLkpzb25WYWx1ZS5vYmplY3QKCnJldHVybiBqc29uKG9iamVjdCgKICAgICAgICBmaWVsZCgiaWQiLCByYXdQcm9maWxlLmlkKSwKICAgICAgICBmaWVsZCgiZGlzcGxheU5hbWUiLCByYXdQcm9maWxlLm5hbWUpLAogICAgICAgIGZpZWxkKCJ1c2VybmFtZSIsIHJhd1Byb2ZpbGUubG9naW4pKSk="
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "a7a78773-445b-4eca-bb93-409e86bced81",
+    "entityType": "Scripts",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

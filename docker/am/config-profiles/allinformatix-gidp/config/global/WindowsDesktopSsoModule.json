@@ -1,0 +1,24 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "windowsdesktopsso",
+      "collection": false,
+      "name": "Windows Desktop SSO"
+    },
+    "defaults": {
+      "authenticationLevel": 0,
+      "kerberosServiceIsinitiator": true,
+      "lookupUserInRealm": false,
+      "returnPrincipalWithDomainName": false,
+      "trustedKerberosRealms": []
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "WindowsDesktopSsoModule",
+    "entityType": "WindowsDesktopSsoModule",
+    "pathParams": {},
+    "realm": null
+  }
+}

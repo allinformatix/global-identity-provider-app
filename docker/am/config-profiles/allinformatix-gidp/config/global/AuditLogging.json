@@ -1,0 +1,25 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "audit",
+      "collection": false,
+      "name": "Audit Logging"
+    },
+    "auditEnabled": true,
+    "blacklistFieldFilters": [],
+    "defaults": {
+      "auditEnabled": true,
+      "blacklistFieldFilters": [],
+      "whitelistFieldFilters": []
+    },
+    "whitelistFieldFilters": []
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "AuditLogging",
+    "entityType": "AuditLogging",
+    "pathParams": {},
+    "realm": null
+  }
+}

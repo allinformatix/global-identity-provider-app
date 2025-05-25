@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "SOCIAL_IDP_PROFILE_TRANSFORMATION",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "1d475815-72cb-42eb-aafd-4026989d28a7",
+    "languages": [
+      "JAVASCRIPT",
+      "GROOVY"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "SOCIAL_IDP_PROFILE_TRANSFORMATION",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

@@ -1,0 +1,36 @@
+dn: cn=schema
+objectClass: top
+objectClass: ldapSubentry
+objectClass: subschema
+cn: schema
+attributeTypes: (
+  allinformatixConsumerUUID-oid
+  NAME 'allinformatixConsumerUUID'
+  DESC 'The UUID of business Users'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE X-ORIGIN 'allinformatix'
+  )
+attributeTypes: (
+  allinformatixConsumerUserRole-oid
+  NAME 'allinformatixConsumerUserRole'
+  DESC 'contains the user role'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  X-ORIGIN 'allinformatix'
+  )
+objectClasses: (
+  allinformatixConsumerUser-oid
+  NAME 'allinformatixConsumerUser'
+  DESC 'Custom ObjectClass for allinformatix consumer customers'
+  SUP inetorgperson
+  STRUCTURAL MAY (
+    allinformatixConsumerUUID $
+    allinformatixConsumerUserRole
+  )
+  X-ORIGIN 'allinformatix'
+  )

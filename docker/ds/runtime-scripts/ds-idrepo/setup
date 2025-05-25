@@ -1,0 +1,277 @@
+#!/usr/bin/env bash
+#
+# Default setup script
+# Setup the directory server for the identity store, idm repo and config backends.
+
+# This uses PingDS setup profiles. If the schema for a profile has not been
+# changed it may use an older version. For example, PingAM 7.5 still uses the 6.5 schema for configuration
+set -e
+
+CONFIG="am-config:6.5"
+AM_IDENTITY_STORE="am-identity-store"
+IDM_REPO="idm-repo"
+DS_PROXIED_SERVER="ds-proxied-server:7.1"
+
+setup-profile --profile ${CONFIG} \
+                  --set am-config/amConfigAdminPassword:password \
+ && setup-profile --profile ${AM_IDENTITY_STORE} \
+                  --set am-identity-store/amIdentityStoreAdminPassword:password \
+ && setup-profile  --profile ${IDM_REPO} \
+                  --set idm-repo/domain:allinformatix.com \
+ && setup-profile --profile ${DS_PROXIED_SERVER} \
+                  --set ds-proxied-server/proxyUserDn:uid=proxy \
+                  --set ds-proxied-server/proxyUserCertificateSubjectDn:CN=ds,O=allinformatix.com
+
+# Kopiere benutzerdefinierte Schema-Dateien aus dem Image
+cp -a /opt/opendj/custom-schema/*.ldif /opt/opendj/data/db/schema
+
+# Kopiere weitere Schema-Dateien aus deinem spezifischen DS-Profil
+cp -a /opt/opendj/runtime-scripts/ds-idrepo/schema/*.ldif /opt/opendj/data/db/schema
+
+# Bereinige temporäre Verzeichnisse
+rm -rf /opt/opendj/custom-schema
+rm -rf /opt/opendj/runtime-scripts/ds-idrepo/schema
+
+# The default in 7.x is to use PBKDF2 password hashing - which is many order of magnitude slower than
+# SHA-512. We recommend leaving PBKDF2 as the default as it more secure.
+# If you wish to revert to the less secure SHA-512, Uncomment these lines:
+#dsconfig --offline --no-prompt --batch <<EOF
+##    set-password-storage-scheme-prop --scheme-name "Salted SHA-512" --set enabled:true
+##    set-password-policy-prop --policy-name "Default Password Policy" --set default-password-storage-scheme:"Salted SHA-512"
+#EOF
+
+# These indexes are required for the combined PingAM/PingIDM repo
+dsconfig --offline --no-prompt --batch <<EOF
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:equality \
+        --type generic \
+        --index-name fr-idm-uuid
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:equality \
+        --index-name fr-idm-effectiveApplications
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:equality \
+        --index-name fr-idm-effectiveGroup
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:presence \
+        --index-name fr-idm-lastSync
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-user-manager \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-user-meta \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-user-notifications \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-user-roles \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-user-authzroles-internal-role \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-user-authzroles-managed-role \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-organization-owner \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-organization-admin \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-organization-member \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:ordering \
+        --type generic \
+        --index-name fr-idm-managed-user-active-date
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:ordering \
+        --type generic \
+        --index-name fr-idm-managed-user-inactive-date
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-user-groups \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-vlv-index \
+        --backend-name amIdentityStore \
+        --index-name managed-group-by-cn \
+        --set base-dn:ou=groups,ou=identities \
+        --set sort-order:+cn \
+        --set scope:single-level \
+        --set filter:(&(objectClass=fr-idm-managed-group)(objectClass=groupOfURLs))
+create-backend-vlv-index \
+        --backend-name amIdentityStore \
+        --index-name managed-user-by-id \
+        --set base-dn:ou=people,ou=identities \
+        --set sort-order:+fr-idm-uuid \
+        --set scope:single-level \
+        --set filter:(&(objectClass=devicePrintProfilesContainer)(objectClass=forgerock-am-dashboard-service)(objectClass=fr-idm-managed-user-explicit)(objectClass=fr-idm-managed-user-hybrid-obj)(objectClass=iPlanetPreferences)(objectClass=inetOrgPerson)(objectClass=inetuser)(objectClass=iplanet-am-auth-configuration-service)(objectClass=iplanet-am-managed-person)(objectClass=iplanet-am-user-service)(objectClass=kbaInfoContainer)(objectClass=oathDeviceProfilesContainer)(objectClass=pushDeviceProfilesContainer)(objectClass=sunAMAuthAccountLockout)(objectClass=sunFMSAML2NameIdentifier)(objectClass=webauthnDeviceProfilesContainer))
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-assignment-member \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-application-member \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+create-backend-index \
+        --backend-name amIdentityStore \
+        --set index-type:extensible \
+        --index-name fr-idm-managed-application-owner \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.7 \
+        --set index-extensible-matching-rule:1.3.6.1.4.1.36733.2.1.4.9
+EOF
+
+BACKENDS=(
+  "gidpBusinessTenantsRoot|dc=Business,dc=Tenants,dc=allinformatix,dc=com"
+  "gidpOrgDataRoot|dc=org,dc=allinformatix,dc=com"
+  "gidpConsumerTenantsRoot|dc=Consumer,dc=Tenants,dc=allinformatix,dc=com"
+)
+
+for entry in "${BACKENDS[@]}"; do
+  IFS="|" read -r name base_dn <<< "$entry"
+
+  echo "📁 Creating backend: $name with baseDN: $base_dn"
+  dsconfig --offline --no-prompt --batch <<EOF
+create-backend \
+       --backend-name "$name" \
+       --type je \
+       --set enabled:true \
+       --set base-dn:$base_dn \
+       --set confidentiality-enabled:true
+EOF
+done
+
+dsconfig --offline --no-prompt --batch <<EOF
+create-backend \
+       --backend-name idmAiExecLayerRepo \
+       --type je \
+       --set enabled:true \
+       --set base-dn:dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com \
+       --set confidentiality-enabled:true
+EOF
+
+# LDIF-Strukturbaum importieren
+for entry in "${BACKENDS[@]}"; do
+  IFS="|" read -r backend branch <<< "$entry"
+
+  echo "📥 Importiere LDIF: $branch → $backend"
+  import-ldif \
+    --offline \
+    --ldiffile "/opt/opendj/runtime-scripts/ds-idrepo/ldif/allinformatixDirectoryTree.ldif" \
+    --backendID "$backend" \
+    --includeBranch "$branch"
+done
+
+echo "📥 Importiere LDIF  → idmAiExecLayerRepo"
+import-ldif \
+    --offline \
+    --ldiffile "/opt/opendj/runtime-scripts/ds-idrepo/ldif/idmAiExecLayerTree.ldif" \
+    --backendID "idmAiExecLayerRepo" \
+    --includeBranch "dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com"
+
+CSV_FILE="/opt/opendj/runtime-scripts/ds-idrepo/ldif/idmRepo_index_table.csv"
+BACKEND_NAME="idmAiExecLayerRepo"
+
+echo "📦 Erstelle Indizes für Backend: $BACKEND_NAME aus CSV: $CSV_FILE"
+
+IFS=','
+tail -n +2 "$CSV_FILE" | while read -r index_name index_type index_entry_limit extensible_rule big_extensible_rule; do
+  echo "🔧 Erstelle Index: $index_name ($index_type)"
+  CMD=(dsconfig create-backend-index
+        --backend-name "$BACKEND_NAME"
+        --type generic
+        --index-name "$index_name"
+        --offline
+        --no-prompt)
+  IFS=';' read -ra TYPES <<< "${index_type//,/;}"
+  for t in "${TYPES[@]}"; do
+    CMD+=(--set "index-type:$t")
+  done
+  if [[ -n "$extensible_rule" && "$extensible_rule" != "-" ]]; then
+    IFS=';' read -ra RULES <<< "${extensible_rule//,/;}"
+    for r in "${RULES[@]}"; do
+      CMD+=(--set "index-extensible-matching-rule:$r")
+    done
+  fi
+  if [[ -n "$big_extensible_rule" && "$big_extensible_rule" != "-" ]]; then
+    cleaned_big_rule="${big_extensible_rule%\"}"
+    cleaned_big_rule="${cleaned_big_rule#\"}"
+    IFS=';' read -ra BRULES <<< "${cleaned_big_rule//,/;}"
+    for br in "${BRULES[@]}"; do
+      CMD+=(--set "big-index-extensible-matching-rule:$br")
+    done
+  fi
+  CMD+=(--set "index-entry-limit:$index_entry_limit")
+  echo "${CMD[@]}"
+#   "${CMD[@]}"
+  if ! "${CMD[@]}"; then
+    echo "⚠️ Index '$index_name' konnte nicht erstellt werden – möglicherweise existiert er bereits." >&2
+  fi
+done
+
+# Define unique-attribute plugins: pluginName|baseDN|attributeName
+UNIQUE_PLUGINS=(
+  "Unique Consumer UUID|dc=Consumer,dc=Tenants,dc=allinformatix,dc=com|allinformatixConsumerUUID"
+  "Unique Business UUID|dc=Business,dc=Tenants,dc=allinformatix,dc=com|allinformatixBizUUID"
+  "Unique Business OUs UUID|dc=Business,dc=Tenants,dc=allinformatix,dc=com|allinformatixBizOUsUUID"
+  "Unique Organization UUID|dc=org,dc=allinformatix,dc=com|allinformatixEnterpriseUUID"
+  "Unique General User login names|dc=org,dc=allinformatix,dc=com|allinformatixID"
+)
+
+for plugin in "${UNIQUE_PLUGINS[@]}"; do
+  IFS="|" read -r plugin_name base_dn attr <<< "$plugin"
+
+  echo "🔐 Creating Unique Attribute Plugin: $plugin_name on $base_dn for attribute: $attr"
+  dsconfig --offline --no-prompt --batch <<EOF
+create-plugin \
+  --plugin-name "$plugin_name" \
+  --type unique-attribute \
+  --set enabled:true \
+  --set base-dn:$base_dn \
+  --set type:$attr
+EOF
+done
+
+echo "Done."

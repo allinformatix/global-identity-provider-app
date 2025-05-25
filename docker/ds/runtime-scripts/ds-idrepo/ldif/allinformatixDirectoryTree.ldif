@@ -1,0 +1,133 @@
+dn: dc=org,dc=allinformatix,dc=com
+objectClass: domain
+objectClass: top
+dc: org
+
+dn: ou=service-accounts,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: service-accounts
+description: contains all service-accounts
+
+dn: ou=users,ou=service-accounts,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: ou=groups,ou=service-accounts,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: ou=config-items,ou=service-accounts,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: config-items
+
+dn: ou=archive,ou=service-accounts,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: archive
+
+
+dn: ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: internal
+description: OU of allinformatix Enterprise internal employees
+
+dn: ou=de,ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: de
+description: OU of allinformatix Enterprise internal employees in DE (Germany)
+
+dn: ou=service-accounts,ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: config-items
+ou: service-accounts
+description: OU of allinformatix Enterprise DE (Germany) service-accounts
+
+dn: ou=config-items,ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: config-items
+description: OU of allinformatix Enterprise DE (Germany) config-items
+
+dn: ou=users,ou=de,ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+description: OU of allinformatix Enterprise internal employees in DE (Germany) all users
+
+dn: ou=groups,ou=de,ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+description: OU of allinformatix Enterprise internal employees in DE (Germany) all groups
+
+dn: ou=external,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: external
+description: OU of allinformatix Enterprise external employees
+
+dn: ou=suppliers,ou=external,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: suppliers
+description: OU of allinformatix Enterprise all suppliers
+
+dn: ou=config-items,ou=suppliers,ou=external,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: config-items
+description: OU of allinformatix Enterprise all external config-items
+
+dn: ou=archive,ou=suppliers,ou=external,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: archive
+description: OU of allinformatix Enterprise archive for external ressources
+
+dn: ou=domains,ou=config-items,ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: domains
+
+dn: ou=servers,ou=config-items,ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: servers
+
+dn: ou=printers,ou=config-items,ou=internal,dc=org,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: printers
+
+dn: dc=Business,dc=Tenants,dc=allinformatix,dc=com
+objectClass: domain
+objectClass: top
+dc: Business
+description: contains all allinformatix Business Tenants
+
+dn: ou=archive,dc=Business,dc=Tenants,dc=allinformatix,dc=com
+objectClass: allinformatixBizOUs
+objectClass: organizationalUnit
+objectClass: top
+ou: archive
+description: contains all allinformatix Business Tenants which has been archived
+
+dn: dc=Consumer,dc=Tenants,dc=allinformatix,dc=com
+objectClass: domain
+objectClass: top
+dc: Consumer
+description: contains all allinformatix consumer Tenants
+
+dn: ou=archive,dc=Consumer,dc=Tenants,dc=allinformatix,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: archive
+description: contains all allinformatix consumer Tenants archives
+

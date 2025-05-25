@@ -1,0 +1,18 @@
+{
+  "data": {
+    "_id": "Federation",
+    "_type": {
+      "_id": "federation",
+      "collection": true,
+      "name": "Federation"
+    },
+    "authenticationLevel": 0
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "Federation",
+    "entityType": "FederationModule",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

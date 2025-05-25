@@ -1,0 +1,939 @@
+{
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"exec": [
+					""
+				],
+				"type": "text/javascript"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"exec": [
+					""
+				],
+				"type": "text/javascript"
+			}
+		}
+	],
+	"info": {
+		"_exporter_id": "21237178",
+		"_postman_id": "3bd314f8-7d2b-4e06-a858-e69a90d586cc",
+		"description": "usernameForgotten Postman Collection",
+		"name": "usernameForgotten",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"description": "<url>/am/XUI/?realm=customer&authIndexType=service&authIndexValue=usernameForgottenTrigger",
+			"item": [
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "Collect User Details",
+					"request": {
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "usernameForgottenTrigger"
+								}
+							],
+							"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuVHJpZ2dlciIsIm90ayI6Ijh0ZTJoN2lvbzdjaGlhN2owcHV2MWNhZ3FyIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNHhiMUZuVFU5Q2FHUk9WV1Z3VVhsRlpYVm1PWEpCTG01NFVuUTVMVmRTVkdJdFZsVmxUbk5QYlRWU09WZGlVa1ZRZFUxNU1YcEpkVEJSUjJwTFVtMXVORzF3TWs5amJtNUtkV3BxVWxobldYWkdURzlYU1ZKQ1FXcEtiVEF3V0U0eWQzcEdkREZyY0V4dVJ6VmhiRlU0TWpCMGIyUXRNRFJDWXpVeU1WOHlOVUpzYm1sa1MxSnZTV2QwYm05TFYySkVRMjFNZGtoYU1XdFZkbmRSVFU1TGNUTmZkRVpqYUdsZlNIRTRTVFpJYkZsSmIzY3dWbXMxZUdsWE5sbDFTM2MxWm1wTk0xQmtUbUZYV0hSbVdVWmxka3BzU0hoUGRqWjRNRUZoY2xWVVFVdDRTMDFNVjA1YWFXcHRaVkpqZVZkdWNWa3lXbk5ZYjNSQlJUSkRNMGcwYkVWRmJ6ZHJjMkZCTms5aE5sQlpVSFZQY21SdWFWbFNVMjlMV2tKRFFUWlBTR0UxWkVWdlNGTmtOQzF2Y25KcE1VTklhMjUwVURKT2J6bGxja3hYYzNWVWJuWm1TR1p0WVV0UU1rZEdUekIyUmtWdFoxbDRjbTgyVTBKb2FHRjViRkZKTmxKV1drcHVNbVExZVVKWk9YcHZXVWd3YlRNNFQyeG9VWEUwYVdsVFQxVkNWbkpqZWxCcVYwWlpUVGx1UTA0M1RHeGxlRXhrVVdaTFVGVnRjVGRqVGxWcmFrNTFiRlJVWVVkVlRWaFZaamxNU0ZGYWJYWmxlVFUwWjJsb1VWRXhiV1pIUnpkb2ExWm1aME5qY2t4NlMwOVVaMGhVYUV4T04xSjRYM05IYnpoelJtTTJUVkJEUTJkSU9IQnBVV1JDVjJGelYySXhZMEpYZG1ZeFZVVmtMVGhUZEdoQ1JURmthMUpzYWtFd1JGcEZMWEEwVDJwS1dIQkVTVU00WkRjMlV6bHRabmhvUkZKTGNVdEtXa1JNV2pNeFZUVlllVFJPYzJWdE1taHRNR1p0ZERkMlV6SnBOeTFUZERoUk1HNVJNMmw0TlVNek5GRXhNalY2TWxOdlVVYzFSSHBLVTBReVowOVRYMjVLUVZFeWNuWnhTV1JDT1VOWk0wUXpRM0p1TjA5S2JETkdlVFJzTWtZMU9VOWpVMU13UTJnd2RHNXNZbmhCTUVGdVNHeElOVnB4VWpGTVJsZEdkM3A2U1RkcVVqSXpUVk5vWjBaaFRuYzNaa0oxTTNsdGRtVTNPVEppTkhGTGVIb3hibmxCUTI5MlduQklSa3A1VFZobFVqRkVWamxpVlZoMVpHZGhNekZTZGxaRmRsbHNNWEpWWDFoTmRURlNkMHhJYmxWTWEwbExWSGx6VW5VNE1HOURXR3BIVkhFMVMydHFWMU50VDNKa1ZWOWtVMUprTlU5WmJsWTFZVXRzTjJ4VGQybFVNbGRYWWw5T1NYQkVXWGcyYmtWbFpVZERha3BoWjJad2VEbHBibTVZUzNWdVRpMVhaVmgxVFdKc1NrUlBTa2RWVUUxcFowMUVhMnA1VDA5a1dFTXliSFIzVGpsdFlXSkJZV041TldWTFVsbERWamh4UmxKdFExSmZibVpXU1ZsTVRYcFpjbFpGVEY4NGRHaHlhMk0yWjBJNFNtRlVaM04wWnk1NVpVOTJVSFJITkRFdFFtTnJNbWg1VkZCVFMwdDMuRUFtT3VmaXBQOTNBTHdFWlhqaktnUm55aFRrVjRCSzdycUlMZk1oalNjWSIsImV4cCI6MTcwODk0NjA4MSwiaWF0IjoxNzA4OTQ0MjgxfQ.JgIs-Y6CQv-HeAZLojzKymZMdkwk_6WAmo_TiUTytuU\",\n \"callbacks\": [\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"givenName\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"First Name\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"REQUIRED\",\n       \"VALID_TYPE\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"givenName\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"REQUIRED\"\n        ],\n        \"policyId\": \"required\"\n       },\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"IDToken1validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"sn\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Last Name\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"REQUIRED\",\n       \"VALID_TYPE\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"sn\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"REQUIRED\"\n        ],\n        \"policyId\": \"required\"\n       },\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"IDToken2validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 1\n  },\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"dob\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Date of Birth\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"REQUIRED\",\n       \"VALID_TYPE\",\n       \"MATCH_DATE_OF_BIRTH\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"dob\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"REQUIRED\"\n        ],\n        \"policyId\": \"required\"\n       },\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       },\n       {\n        \"policyId\": \"customer-dateofbirth\",\n        \"policyRequirements\": [\n         \"MATCH_DATE_OF_BIRTH\"\n        ]\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken3\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"IDToken3validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 2\n  },\n  {\n   \"type\": \"TextInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"policyNumber\"\n    },\n    {\n     \"name\": \"defaultText\",\n     \"value\": \"\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken4\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 3\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "4606"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 26 Feb 2024 10:44:41 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "129"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "successfully / 200",
+							"originalRequest": {
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenTrigger"
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger"
+								}
+							},
+							"status": "OK"
+						}
+					]
+				},
+				{
+					"name": "Submit User Details",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\r\n \"authId\": \"{{authId}}\",\r\n \"callbacks\": [\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"givenName\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"First Name\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"givenName\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken1\",\r\n     \"value\": \"{{givenName}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken1validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 0\r\n  },\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"sn\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Last Name\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"sn\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken2\",\r\n     \"value\": \"{{sn}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken2validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 1\r\n  },\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"dob\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Date of Birth\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\",\r\n       \"MATCH_DATE_OF_BIRTH\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"dob\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       },\r\n       {\r\n        \"policyId\": \"customer-dateofbirth\",\r\n        \"policyRequirements\": [\r\n         \"MATCH_DATE_OF_BIRTH\"\r\n        ]\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken3\",\r\n     \"value\": \"{{dob}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken3validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 2\r\n  },\r\n  {\r\n   \"type\": \"TextInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"policyNumber\"\r\n    },\r\n    {\r\n     \"name\": \"defaultText\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken4\",\r\n     \"value\": \"{{policyNumber}}\"\r\n    }\r\n   ],\r\n   \"_id\": 3\r\n  }\r\n ],\r\n \"status\": 200,\r\n \"ok\": true\r\n}"
+						},
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "accept-encoding",
+								"value": "gzip, deflate, br"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "usernameForgottenTrigger"
+								}
+							],
+							"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuVHJpZ2dlciIsIm90ayI6InBxMTYwOXYxNDYyYW02dm1kNnRzZmhjYXJnIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNUNVbWxsV1VwV2VYVk9TWFJVU1VNM05WUXdlR1ozTGtwTlpWaFZUbGhNU2pFNGJGUlVja2c1ZDB4aU5HdzNlblpCYVRkeldFWlFkbGxMTFhoeVp6VlBTMmgyV0VKaU4yUk9kRzVvVkRoTGJGWjBaVlpHT1dkMWVUSnNOMGRuVDNGbk1FNXJkbDluT0ZkeFlWRkZjMmd4VDNKNmF5MW5MV05zYm1KblZWTkZNMFpVTTFRME0ySnBlbGhYWlhacFJHdEJVV05oWWpCNmJVZ3RibEJKVWtwWlRFUnZkRzVWY1ZadE9HeFpTR2hFY0VoQlpqTm9XbGd6UzNSUlJEUkJNbDlzY1RocFYyb3pZVEo1WHpkelgxWXpXVkJJVlhWdVF6SnJSVVJaVGxWUlRWWktaemx4WVZWWGFtbHZPVlZDTm5sQlJ6bDZhbFZVY1hkUlYzaHpVa2RvYmxGb2QzbFRURWhIYUhaalRsSmFlR1Z3WlVkUU0xZDJUVlU1VERVeGREbGllWEZNT1dkUU5taHRlVGQ2VjBkaGFGQkJWMUpUUkZCdmMwMDNUSHB5T1RRd2VpMTZkMWhPZVhWUlkxQTBibVYyZVVwMWFrTlJkbXMzY2xod1J5MXlXSE4yVkMxc1lXMHpaR2xNUkZSU2VFOTRjVVpUUkdzM2JEazRPRU5EYVdWRk1HeHhTMnhxVFV4SlZuSk5abVJTTnpCbFVITlRZa2xXUmtOa1NYbGlNV054TWt0QmJVNWxVbk4yZGt4SVQyRXlXVmRNTkZsM1dWSlRTMkprTkZkelRrWkZOWGxUWXpCV1EyVnJNVEExZDB4eldVbEVNVVJrU0dwM2ExbFBlVmxsVjJaR2MyaDBhMmxGVjBoYU5IbDFObUpWTlZwWmJYbFRRak0xVFVzeVNHVlJjWFUxWldOS2NERXhNaTFFWmtweU5pMWFkVVpwTUdWUmFXNW9MV3hqVDJveVZFVkNWRWRyWXpaVmJVVk9ZMVF0ZVVFdGJGVTRUSHBHTXkxS2JsRjNiV3BTWDBaME4yMTFVSE40YUV4UFZqSlBXVk5uTVMxc2IxZHRka1ZLTVhSaU5HOTBRM1ZzWTJOUVlXTTNOa00wT0Rab1RuQXlNRkV0Ym5KWFVISmhaMk5QWkZWaFZURXpPVlJKZFRKaFZsSjJVVWxOVkRjMmR6WlVSV056YmkxNFdDMTRaM3B0TVVwZk1IbExOVzVzV20xdGRERnNSVUYwWm1OUVFVZGxabk16YjIxQ1NGRnRSVEpIVGpreU5GcDBWVVpCZFV4UWVGbFFRMFpVWjE5M2N6Qk9RVXR0TVdwcWRUWXpWMEprUVhOS1ZIYzFlRTgzWW1OTFRUWldZWE56VURadFJHRkZlVzlrY1VOak5HTXlhVXB1V0hSMldXZGpkbkJCTkdKdmRreHpNR3hzTlY5NFpFUkdabFJYVDJKdFFteDNjemRaWmpKTVpGRjNOa1Y1ZVRaeVh6bDViMnh3V1U5c1EwY3hiVWxwTUd0c1VpMUxaSE5YUjJGWFJqUjNkbkZNVG5OeU5HODNTa000ZGpOSmQwZFFTV3hUZW1kbU5qQnlURTlmVjJoeWEwMVFTM2xCUzJvM1pEVXlkMFZ6TkZwS1VVSlJWakIwVlROSE5HbFRXamxMVjBScmNIQkxhWGN3TkdWdk1XOXFaM1ZhVGtOMk1UQTVZbTVDVUVkcmJUZFFlVGxmWmxSRFpXNWZia3QzWTFRdFZsb3lkRGx6T1hkaGEyNWZVbFF3V0dONVJucHJXWGhEVVhodGEweFFaWFF4V0hRMWFuaElZbkU1VUZaR09IQnZSSGxHZUZsMVNrVTFTV2RaZUdkcVNXOVBXbkpNYkZCM1pEQkRXblEyWDFSVlRWVjNTRU5uTFdGS2NqZGZVa2RtYWsxNWMzRlZhbkpxTm1kNWIwdFJhRlJXYm14YVpucGFZVmxXUlVZM1kwRlljMmh0ZG5CS2RGaG1hbkZUWHpoRFN6SlNibmhqVDBveVYyZGxkRmczUmtsVVIwczJTV0p5ZERKelRtSnhOSEZGVTNwblZrTkdRMVZHUW1oSFpsTmxNbU5sYzI1WVZuZEZXbkZEUmpOcmVWTmFaVVYyY3pWalpsRkxWRWxsU1VwRE5FdEhOMGN6WTNWTlNHRnNOemsxV1ROV01VMTFNbTl0ZW1ReE9HaGtVSFJaYldGblZUSm5NME54ZFZCdFVGRm5lbnBsWHpKWk1HOUJMakpVZEhaelJ6RlhPVWQwT0RRMWRuRnBYMHBqY1hjLkVOWi0wTDgta2JyYV9rU185bnNKQmJDcDFRN05XaElhVDFIc2NnY0FudUEiLCJleHAiOjE3MDg5NDYwODEsImlhdCI6MTcwODk0NDI4MX0.w6uQCvJlSaiZ_c6qe0dhNHQyQu-pvE529b_P8yMCHn8\",\n \"callbacks\": [\n  {\n   \"type\": \"TextOutputCallback\",\n   \"output\": [\n    {\n     \"name\": \"message\",\n     \"value\": \"Email link sent. Please check your mailbox\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": \"0\"\n    }\n   ]\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3079"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 26 Feb 2024 10:45:18 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "2696"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "Email link sent/ 200",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuVHJpZ2dlciIsIm90ayI6IjZjamRuZHMycTE2OWFlaGxiZDZqZzJyY2JoIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNWlTVVZ1TjI1VGEwSlNWMUZsWkhOa1F6bHpZVTkzTG5wUFJXcHZTRE5mYTBsMWFHaERTa3RDYlU0MFZrd3RlbmRRWlZwTlpESm5VbWsxV0hKQ1FUZElVa1F4YzFBeU5YWk5WaTB0YUd4T2JHUkpjVXRNVkhWeU1VNVZjWEJIWjIxclVHbFRaVzlxVVVsVU1WRlhkRTVsYWpObFZUUlZYM2g0ZFVkNVoxQmlaV2Q2V1ZCS1IzaFZNbVphVVMwelkwbHdWVGxIZHpGU1YxUmlaM1ZZZVVORlVsTXpSM2hoVkRkaExVaHFNWE51YW5kS0xWOU9Sbk5sTnpkVlRqQkpSak0yVVhSelZIbFlYM1I0ZWpWUVRsVjRTRzFsVGxrd1ltTjVjekpKTW5SZk5qRjZlRzVFV0VSUGNuTlRRWGhGZGpORE4yeHJRMmw1Y1VnMU5VUlpVMGhVTUZCRFRXOU1jbXRYUWpWUWQycHBhVjgzYm5aMFJVcENjMUY0U3pkQ2JITjVkSFpxWWpWck0xRnlVVFJMY0ZwWVlqZ3pVRXBtV1dOaGVHRkZTWEV4YlhaWGNrOXRaMWRPVDJaNlRGVmhUbmRMWlZGa1JtdDJSRzUxVlhWRFpEUnhSVzEzWlRKMGREZGliRGsyZVZsYWJGaDJaSFJyUVVOQlpEUlhRVk0yVFdocGFtZEVVVk01WW1ZelpYVjJWSFZKVWtseVZrWldPSE5PVEVOeVluSnRRekpMUzB0aGFsUklXVzVNZDFJMmRGWktlVUpZTFMxRFpEUklUazk2V2pNeFNucDZkMnQwZFhCQ0xXSnFSMEZJVkRoNlUzUnVUM3BIZGtsWmVVOUlWR0Y0YjNSd2FsODNZbEZXVldWbWExSlRPRmxtVms5Q1pEUTVOMmt3YTFCMmJGbHJWR1ZZUWtGZk5FcGxkSHBIU25OallsWkxPRWd5TlVOT1F6ZHZWMFZWYURSdU1FeFZaMFJoVUZwbFlVdHpTbUpsVlU4NFJFaHBaM2xQUmpORFdFOUVTWGxEWjBOT2REaDFUMFZOT1hSdVUycGtaMUJPVmxsTk9ESmpiMDlCUTA4eVVHWlNSRFIxVm10RlZUZHVPRmc1UTBkRGVHOVVWV2RUVUVOdlVVNVhVbkZLYWtzNFlsWnpRa2h1ZVdsSk4yUllkMmxuYlZCV1YwTjNNVk5ZY1UweWJXOXZTbXBGYmxVemJqZzJSbWczUkdSWFFXRmhUa0ZTZFhOT05VZHRTMU50Y0ZKT2RIbDFjV2hETkZsamVGQlFUbUoyTlU4MGRrcG1kRlZJTldKdVRVWTNNMFpSYTFsWVNsWTBVR2RxYzNCTWR6WXlha05aUmtnNVowaEpja042WTBKNVVtTTBUVEJmUWkxUk5XNW9hVVpXU0RKeFNWTjBSMWRSY3kxWmNHRXhaVVUxTjFwbFNISllTMUZWV1hkTkxYSnpkbkF4UzBSamJDMVRhRFZ5V1UxcFNEUnpTRU5ETWtaUllYQTVZVVIzY1d3emFVUTVWWEUyV0UxQ2FqbFZTVUZqUXpWamNsQmZRek5mVkcxb1EzRTNRMmR6V21SYVYxQndTMGxUV0dGQlFrUkRWR0Z2YmxsMVZtRlhNVzF2U2pKUmFXbExSVnBJYlMxWFVYTlpiMnhWZVhsU2QzSjZTRkJUZG5oNFVTMTJlall5VUV0MU1UUnRSWFpSV2kxVGVteHpORkIzV201NFpWUmhVR3BuUlhkNExYWmtaV0ZWU0VGUVdqTXRWRTlwY2s4MGFucHBYMmgwVFdGMVIxZGxiblZJY1ZWa1oxbzFibWM1UVV0MldGWktSM3BFZUZRNFpsVmFOMlF6TUZOV2EzaEdXa1ExZEc5QmEyNU1WM2xJY0U5UWJYSnFSR3BxVGxvdFdHWnFNMVJvY0RCdlZIQjNiMVpYYWxrNU1FMUpUa2hNYUhoeGJFaDNNWGhxV0U4emNUaHhNMDVvY1RWWE5IZFFRMVJCYkVRdFUzUlhPR1U1WmxwcFQwYzNSVnBVYzNkSGNWaDBNalYwVm1oelptWXpiM0pEZDJKT1JFbEhlR3BwTkhoQlp5MVdiWEF0TVROcVRWQklZVXhXVVdKa2RGUldkVWxKTURaNFNGSk5VemxLVUhnME4yUk9URGh2UVhaUU0yczRiRzlLYldSVE1FZDZVVGxrV1dGZlpWWlhSblJrVkdGdFJ6SjZSMU5uUTNaeFV6RkZXVTlGTFVkQ2NrSm5MbTlxTFhaWFZXWlZhVm81U1ZSbFdGWlpSRVE1YzNjLlVULUhJM243VVhxbWs2aGo5RXJtUlBlRUtFLUxoMFhlY1V3WmNFOHctM2ciLCJleHAiOjE3MDkxMTgxMDUsImlhdCI6MTcwOTExNjMwNX0.kFi_gKbTmY4U-x4xh6WNiUltBLvFMgHks27D_IawYf4\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"Email link sent. Please check your mailbox\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"0\"\n                }\n            ]\n        }\n    ]\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenTrigger"
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuVHJpZ2dlciIsIm90ayI6Im1sdW1hMzBlaGRocHNpNDA0bzU3OWZqdjZqIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNVFPVGxOVG5rNGJGZFlabU5aVG1oRmNrSnlRVlJuTGpsQlJGbGpWbnB2TTJOTlozQnBUbGt4YVRORVQxRk9YMjAyV25WTVJtMVJWMFZMYXpWRVV6RmxSRGRMYlc0eUxYRnBZVXRsVEVodGNIWlhiMDlaVFd0eExVNUxSV1pCVFUweFgyOU5UbVZqWjFjd01VaEJVM1ZoTTAweWREWmhSVGgyUTJ0TlMyVnNObmRFTjFOTWFFOTVjVXRoUjNRMFJrWjJRa0V0WWtNMFVVOTZWRUZhZEZsMlQwMVRNM0pqUTE5U1VYbE1Tak5EWDFFM2FTMXNkekpoT1RkU1NtWm1VamRUYmpoT01IQkNiMUJRVVRFNVZqRm1PVjlaTW5wclgyVkNSakJEZVhwQ1lXSm1ZelJUY0ZoeE5FTTBNRVZoUTA1T1kxRnZjbFl0VWt4aWNuRTNNMW8zU0VZNU1YZEtPRkJOZUY5MFVsaDBhVGh1UWt0bFNuRTRNVms1UkVvd05HWXpOazB5TUdsTFZtVmZVSGRoUVRRMmNESldla1ZZTFZoeVpGUXhSVEZmZDNWbFVIZ3pjM1ppT0ZwNWRtMTBaM3BRVmxOVGFETkRkM2xyVmpWSGJuUllaMkkyUm05Q1IwRndjakZVWVcxd2NXSTBWMGhoV1ZGclYzSm9UbmRxWlc1M2IxZzNYeTF6V1haT1NEUmhZV0paYkhkWlNFNHhWRlExTm5KdllXaDZjVVJ2U25SMlFUZEdOazB0UTFobVVIZG1VMk5GVlVWSmRVbFBXa2RqWW1GSk1sRTFaMlJxZG5SV2RtRjBVM295VW1SQ1oyNW5ZbXhyYzBwcFNVTmxaMUE0UTNORE1UQmpZM3BxVVhwMFFYUm1hbFJJTWw5RFdGUnJOazlRTlRWcmIwaEhhV290VUVwYU5GcDViRGw0TkhGQ2IydHlaM0kxVm1aNVgwUjBXWEJKYkU1Uk1sTlVXRWhLWW5oNVlXa3hhRzlPZW5CaloyeFhUM1JuVlhock1ITnNPSGc0ZUVKRFVUWmhRakJoVkVodVpIRjFiMDgyVkZCU2NERnlMV0kxVjBwVk9WUkxWa3QzU25CR1NVaFNORlJyVWpGWGNGOXpkRjk0V0cwNGRIQlJkeko0Yms5NFMxOXdRalZQTkRKS0xXbERRMGhsYm5sMU5HVmFXWGxZZDBsRVpIWmlOVmgwZUMxcVl5MDBRVVIzYzE5cVdVOXNZVFpLVTFsclJYcGhNMFZLWVV4MFVFdExRV2x5YVc1a1ZXNXRZemxKZW05UlEzRTRiblZtWjAxMWFUbE1VbGxHVFZvMGRGaFFObVEzVGtSRlVtYzBObVJOVUV4TGVIUkZTalZhTUZaRU5WaE5ibmd3WnpSelIwMU1Wbmx0TkhoWVNteE9VM1pJYURoSWRVeHhRV2h5VVdwcVRXRmhSVFZhUTJSQlJrdERhbkp2VWxnMU0wd3hUbWN3WmtOeVdraEpSV05LUTNoSmFXNHhWRXh4UzBWa1lUWmlRVzVRTW5GTVRYcFdjWHB0VjBwTVkyZFJWSFZoZG1oMFIzQktlV2RLV1RJdGVuZE5TMFZEWjBVNVUwNU5UVEpTVFd4elozaE1jelo2YzNKQ1QyVk5XSGhZVnpGMGN5MTFkVEZoZVdWQlFtbFVXWGxYT1hkYU9UaHpNaTFzWVdWM2FVVllPRWROYWs1MlpsTnFaREEwVTBoeE5HaG1OSGxFVVRabFptdFhRWGsxYWpKb0xUaHZWR2xHZEhGb1owbE9XVjl6WnpOSGF5MVhNRVJHVlZndGJtVnZYMjlHZWs1NFVXZHJNV3hMU0ZOc1RWOVVPV3RhVFhkb2EwdE9ZMXB2ZHpjeGVsRm1Va3RRT1RaVFJtNVlOSEY2T1V0VVlsWjNURXBPTVdnd1YzaFJhbWxMT0ZCVU5uaGFlRGRQZERGb1JHczNiVEJDVXpsUGEzQjRhVVV6WW5Fd1JEUkpWRzlyVm5WQ1EwZzFiR2wzTUVkTU5qWnRWV3hxWmw5U1JYbzJTME0zTTJoeVZEWmlXVVZJWTBkdFkwcFRjMHRsWkROWlducDBXbkpMT0RGemVYbDZTalJvTTNkRlkxOWFUR1Z6ZFRoTWIwRnZVV3gxVXpCaU4wVkRNMUozVkRORFJraGlXVFF1VWpacVpYSTJOV3RpVVhoTloyZG9VMXByV2s5aFFRLjJ1Y1kwek42X3VqX3FJRUNMdl83MDF6Y3prazdaYkVDZ2lTZVZHbUZyLXMiLCJleHAiOjE3MDkyMDc0MTUsImlhdCI6MTcwOTIwNTYxNX0.15He0Ri8f4tF7P2qtrLZAX-AZGt__9EKK6gF1DatFe0\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"tooManyRetry\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 4\n        },\n        {\n            \"type\": \"ConfirmationCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": 2\n                },\n                {\n                    \"name\": \"options\",\n                    \"value\": [\n                        \"Ok\",\n                        \"Cancel\"\n                    ]\n                },\n                {\n                    \"name\": \"optionType\",\n                    \"value\": -1\n                },\n                {\n                    \"name\": \"defaultOption\",\n                    \"value\": 0\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": 0\n                }\n            ],\n            \"_id\": 5\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [],
+							"name": "tooManyRetry",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\r\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuVHJpZ2dlciIsIm90ayI6ImN1YXRrZHBoaGdjZWIwdnJubGlubHZoNHFiIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNU1MVE4yYTBrNVpXbFJOMk5SY1dwTlJGcG5jbHBSTGpad01saGlTa2swZUY5SllXWnhXRE54TVdSUlVrNWpNMmRQU0VnMk9FVktaWEI2VlhKb2Nsa3lSMVIyVXpaelRIUlFkMmhNY2twRk5HazFhVUppUnpjeGRHeEdXbGhTZG5CUVRrRXRibmN5WTFBMWFEUnhWaTFoWmw5aFpVbzJaWGMxVVdOdlRXSXRZV2MzV21acVRuSkxXbkZYUlZFek1uWjBOa3d4TUc1VVJrMXJjRXhJTlhoZlFWbEhXRWRpVVROUGNGSjNjVE5QZWt0R2QwOWxWRUl0VlhOTldEWlFXa2hyVG0xQmJYUk9SbXRoWDJSUk1FaFFiMFZyY2xkSk5HRnFTVTlPTVZKdVVYTlJaMGxoTVVwWFlYZFpOelE1T1dOeU5sUm5VbmN0TUZOc1VXMHhRMWcyWWxaUVRIQlhUbGhQWm1aaFVXbFVhR281UkZCUk5XbHRjRkZETkdWbmVsRTJla2gzU0hwa1JEZG9NMGxoVVd0aWNtNXNiRVJUVUdwelJtOUVPREJuVDJKalVUWlNSR1EwZWtOQmFEUm5hR0Z2TjB4SVJWaFBWRGxVZEhCaFNGTmtRM0JmYzBwVFkzcERURFJQTVVsb2NXVjJaVTFJZGsxQlgxaHJaakl3TTFKU1owUkJPVnBpUzJsdU5VdFRaamxVVXpkalRYZEpWbnBUVGpoamJIZGliMFJxZWxsV2VETXdRbGRLU3kxWFdXbGtMVzVmYW0xSE1HNTRVSHBtYjNKbk1GVTFSekpHWDB0ZmJteDZhMkp5YUdsUll6VkJSbVpRU201YVlWVXhXamMyYzNSQlNVOTZXRGQ2Umxsd2NFbHBTbnBIWnkxaFNDMVhZVmhwVUhNM2JFNXRSVWhHVTNCTloxWkJWVkZ5UlMwNFRGRnBTMVZRTWtad0xVTmlWMTh6UzFjMFVGWjFVVUZ4Tmpkc1dsVldRbFZHZUdaRmFYUlpWbUpIYW1NMFIwTjVYMU4yUkdVNVIwOWpUMnBzZDJKek9DMUZSV2Q1TmtORFVtMUxiVVZDVGtaM1NGWnpUSEZSYkhsRlFVZHhhMHRtTjA5TldWbDJjVEkyUldoR2RXaFpiVkZoVVdGQ1luZGZlRXhQUTFvME1VUk1kbWRrVEZZNVpVNVhka2RPUVdWZlIxYzNiMjlwYzFkRmNXOHdWVTlKYkd0Nk5uWnViV3B5U20xaVEyeE1VMVJMYjI0M2IyNXZkM1ZoTUhFdGVXWlpTSGRvUlhSa2VqUXhUR2x6VjNWTGFVVkpUbmxsWjFKWFFpMDJRM2cxVkdkcE1teHViME5xU0hWaFJFSmpSVlpPVWxwVldIRndTbTg1ZG5BMWVXeFpNamhPY1hZMVFreGpSMUZMVTBkSmJHUmxOSFZEWTNKNGRYUkVNRXc0V2tKVE0xSjNNVTlUZVhBM05HWmlVR1kxY3pKeE1XRXlPRmxYUkV4amRpMUhSV0ZTWjJOQ2NsUnRha1ZaVGtGR1RYWjJORXMzTUZGVmFqVkxVM1UwZHpsVWRVNVlja3AyWDBSeGR6UnZXakV0ZG5CYVVUWkdWa3N4Y0U5bmJIRldSbFZrU2tkSk4wOVVNRTh4U2pSaWVtdGhMWGd6VFRGMldYbENYMkkyZHk1M1prNTZWSEpsVWxOMmMwSlFOMjA0VlhwaVpITjMuY3RLbGxkVXpGcnUwajVRMnMwMjN1WEVHZlJRajZLenJ5R3p1ZTM1NjUwcyIsImV4cCI6MTcwOTIwNzQxNSwiaWF0IjoxNzA5MjA1NjE1fQ.RuU9RRNHWIxKt5apoehw3Oppny9Y3QyuGXJRrfV7nWs\",\r\n \"callbacks\": [\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"givenName\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"First Name\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"givenName\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken1\",\r\n     \"value\": \"Halgard\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken1validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 0\r\n  },\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"sn\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Last Name\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"sn\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken2\",\r\n     \"value\": \"Flutsched\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken2validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 1\r\n  },\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"dob\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Date of Birth\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\",\r\n       \"MATCH_DATE_OF_BIRTH\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"dob\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       },\r\n       {\r\n        \"policyId\": \"customer-dateofbirth\",\r\n        \"policyRequirements\": [\r\n         \"MATCH_DATE_OF_BIRTH\"\r\n        ]\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken3\",\r\n     \"value\": \"1980-01-01\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken3validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 2\r\n  },\r\n  {\r\n   \"type\": \"TextInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"policyNumber\"\r\n    },\r\n    {\r\n     \"name\": \"defaultText\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken4\",\r\n     \"value\": \"1021500386277\"\r\n    }\r\n   ],\r\n   \"_id\": 3\r\n  }\r\n ],\r\n \"status\": 200,\r\n \"ok\": true\r\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenTrigger"
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger"
+								}
+							}
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuVHJpZ2dlciIsIm90ayI6IjU2OTRjN245NnI1NXJtcGxibW5kM2hya2FuIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNXZNWFl4UmtGa2JGQnlhVnBwWW5aVk1pMHhhbk4zTG5GU2QwRlNaV1IwUlVkWE5YRTJjbkJhUzFkTU1FeDRhblozTjJsVFRHVTVPVVJ0Ym1SUGVVaHpiR3BmU0V3M2NXcHNhMHBZV0RCTlRtRjJaUzFJZVVkclZ6a3RZVVF0WnpaRloyaE9XVk5VY25oTFgzUlpMVXRqYjBWNlIzRnFXa3h5YldSV1Jtc3daVXB6UWpBdGNrRmpVakZGVVVSaFQxZDZOREJDUkdaQ1JteFRjWEJSUzJaNlUycDNhVFo2Um1oQlN6SjViSFJNTlZkUFpXNXZOV3hZVHpGV01XOUtOV05UT0hSSmFtVjBlRVpCV2tsUVNHRlJlamRpZERaamFVZHVlbEExUlVoTVNYVXhjRzQxVjBrMFVYQjBjMkUzWVdoT2QxUk5VVTlJV2padFptZDBXbWhZZVhscE4xQktTbTExVG5JeFZtaGFXRVJXZHkweVdXMXhXbTkyTFROMWNsOVdjVnBEYkd0UVZXTldiRnB5TUd4cWJFRm5VWFY0T1ZCbldGbHJiR0pKZDBSZlNXdHBUMGxrVTFCeVZuTkxRaTF1VTJwMmJqbDJWVnBXVGxoQ1oxVm1iekZYVTBsSlEzaElZbUUyVEdzemFHeFVURWgxTVZOcWJYVjBkV2R5UXpOVFJYWXhORmwxWlhOTGRGTk1SRzVsUWxoUk0ydFdObk16VGxaRE0zUnFVVms1ZEdVeU5XSTFWVzlVU1RVMldqUnVlRGhqYVdSMFVHcEtkRzk2Vm5GSFdUbFZTME53UVZkQmVISjBMVGgzVGtVeE1saDRVbkkwWWpka2NEVkpaR3hIZFVsRWQzZHFjV0kzTTNkcGRtUkJVSGhRYkZOMlJUUlNka0p5YUVGUlNEaHNhbkpyYUc1aFdtSkNhM2xtWkRnd1VGcHliVWhHT0Vwbk5WUXdhbmxTVjB0RldGTkZRME00YVhOcFRVeGhaWEp4T0VoTGVHUnBhbGxhVVdKaU0yVjNPRTFwTWtWRVowWkxXRmRFY1hKMWFVOUlaMHR1U0ZoT1h6RjNhV1oxVmxWcVRtWmlValYzYXpSWlRVb3pjSE0zYVhORmNGOUJXRzU0ZDNsNVVIaEZZa3A1Y1doMmNGZGxkMDlTWkhoMWRIa3ROazE0UjBoemVHMUxUbTh6TnpJMVZreHBkMHgxY2sxUmFYWldkeTEzVmtZMGVIZFNXa2RGWnpsdk1YUk5ZbDlOZVVrMVZUWnhNRWx0UjJGVk0yeDVOMlJMT1Zaa1Iza3pWM2ROYUZwaVJGWkVWMmxUVjNadGVWSllWVWhMYzBoZlFsVkdabFZXVkMwd1FtMU9hVWxITVUxRFFUWlRZMmxuVTJrNVVuVktPVmhMTTJocVZsRjFaMlphVTFWc2NGOWtNV1Y0VFV0bVpUTmhkR0p5ZUZSbWFsRjBjME5EZEdWeGJEWkpOM0pWWjJwNE5IUTFOMG8xZVZsbFIxUllTek5YU1RnNFVuSmlaRjlNYjNoZlgyeFBTREY0ZVRGZkxWSk1UVGM0VjBwbGEwODBSa2xxZDJsQ2NUVkpTbU5FUzFkVFMwSmpSalJMYldRNE1ITmZiVGQxU0MxNFZVbFVSVXQ1TFRGTk56VmlYMVJtUTBadWRHRTNkazloWHpkTVVEVXhUbGhTUzE5YVptNTBWblpvU25Oek9XUmxTV3hSTlc5UmVGQkdURGMyU2xFeU9TMWhjQzFaYUhCaE5uaGphbGgyTjBoSE9HaFdXamN6WW5sc2JqaFRNR2QxU2pFMlIxOWpOMGxST1ZJMlNVdE9UVWRqUmtSdk1WQkpZVTF2Y2xOWU1FSXpORWwzZEhCblUyNHhSR05mTWxKcFlYRnZaRlZaYzFoWFNHMTFTSGRtVGpWc09WQTJTVXBzVEhOTlluZ3djRk15TlVOU05HNVJNbVZ0YTBaaU1HbFdlbEJVVUc5WE9HeDNZMjU0VTJKbFRWcGxTbHBFZUUxS2FFaERkMVJtUzJZNFNYZDNXR05hZGpVMmJYWnNiME5KWDFkMFJXazNablEzTjFBNVdrMVdVVVZpTVRkQ01VWnhRV2xwY21wSE9VWktPV1Z6Y21OeFRuTkxWM1J3V0RNemFuRkxVMUpJYmxNMlREaFRUbGszWm1kbE5tWnJhakZ4VWxSVmVIQnhjVko0VW5saGMxUk1VMUV6Y25Sc1UxVkhMVjkwVVhsaFRHRjNMa0YyU0hwWWNGWjFkbXBNU0hoTFMybGtNak14UkdjLm1haFMtMk9BQVJyWjdQWURKelYzOXFiMlNVdzVsN2tyLVprOElsaU14d28iLCJleHAiOjE3MDkyMTE2ODQsImlhdCI6MTcwOTIwOTg4NH0.P1E7Rm5iOvIRHpLaT835Zi0URdqRzmscM81gmwP6mmY\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"idNotFound\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 4\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"givenName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"First Name\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"VALID_TYPE\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"givenName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"required\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"Halgard2\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"Halgard2\"\n                },\n                {\n                    \"name\": \"IDToken2validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 5\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"sn\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Last Name\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"VALID_TYPE\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"sn\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"required\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"Flutsched\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken3\",\n                    \"value\": \"Flutsched\"\n                },\n                {\n                    \"name\": \"IDToken3validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 6\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"dob\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Date of Birth\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"VALID_TYPE\",\n                            \"MATCH_DATE_OF_BIRTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"dob\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"required\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"customer-dateofbirth\",\n                                \"policyRequirements\": [\n                                    \"MATCH_DATE_OF_BIRTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"1980-01-01\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken4\",\n                    \"value\": \"1980-01-01\"\n                },\n                {\n                    \"name\": \"IDToken4validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 7\n        },\n        {\n            \"type\": \"TextInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"policyNumber\"\n                },\n                {\n                    \"name\": \"defaultText\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken5\",\n                    \"value\": \"\"\n                }\n            ],\n            \"_id\": 8\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [],
+							"name": "idNotFound",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\r\n \"authId\": \"{{authId}}\",\r\n \"callbacks\": [\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"givenName\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"First Name\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"givenName\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken1\",\r\n     \"value\": \"{{givenName}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken1validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 0\r\n  },\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"sn\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Last Name\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"sn\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken2\",\r\n     \"value\": \"{{sn}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken2validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 1\r\n  },\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"dob\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Date of Birth\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\",\r\n       \"MATCH_DATE_OF_BIRTH\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"dob\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       },\r\n       {\r\n        \"policyId\": \"customer-dateofbirth\",\r\n        \"policyRequirements\": [\r\n         \"MATCH_DATE_OF_BIRTH\"\r\n        ]\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken3\",\r\n     \"value\": \"{{dob}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken3validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 2\r\n  },\r\n  {\r\n   \"type\": \"TextInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"policyNumber\"\r\n    },\r\n    {\r\n     \"name\": \"defaultText\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken4\",\r\n     \"value\": \"{{policyNumber}}\"\r\n    }\r\n   ],\r\n   \"_id\": 3\r\n  }\r\n ],\r\n \"status\": 200,\r\n \"ok\": true\r\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenTrigger"
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger"
+								}
+							}
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuVHJpZ2dlciIsIm90ayI6Im42OWViNG0zcmk5bWNnODQ3bjFybWRna3JkIiwiYXV0aEluZGV4VHlwZSI6InNlcnZpY2UiLCJyZWFsbSI6Ii9jdXN0b21lciIsInNlc3Npb25JZCI6IipBQUpUU1FBQ01ESUFCSFI1Y0dVQUNFcFhWRjlCVlZSSUFBSlRNUUFDTURFLipleUowZVhBaU9pSktWMVFpTENKamRIa2lPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LlpYbEtNR1ZZUVdsUGFVcExWakZSYVV4RFNteGliVTFwVDJsS1FrMVVTVFJSTUVwRVRGVm9WRTFxVlRKSmFYZHBXVmQ0YmtscWIybGFSMng1U1c0d0xpNUpVMHRPY2w4MVpscHlkVzB6TmxCSU9YZE5UV3BuTG1sdVYybHFRMVowWDAwek1VeFZTV1pKTlRoNVFqZzRaa05rV2preGVuWk1TV1IzY0dwak1qRnBjMXBsT1dJd1dVVXpRa0l5YlhKUmFqRlphRFZEVTFabFprVlZUSFl5YmxNNVFXVlBjVzlMYUdnNGFVcFZXWHA0WTFoalNHSTBSemxpT1VZM1Qyc3dhUzB5U0d4cVdERkVZV295YjFvNVZuSTNibmxhTVVKZk9IcHdTSGx6WkZKb1V6QnNXVzlKYVZWUlpWWnNPWHBTTjNGVlJUbHVjbEk1V2s1bFNEZzFUWEJvWTFSM2FVSk5RVkZEZDFoRVdubFBkVUZqWTBkcE5IWkhXV3d4ZHkxWVVEaEZWbWhLYVZSdFlsWnhkbTVaTkRGUkxWRXRabFZ2VFdGMWFuRklXa28yUVRVdGNXaHFZVW95UkhOMmNEQmpjVFJ5WkdaU09EaFJVRGd6YjJGNVgxQkpOMTlmUW5sRGJHZEljVFF0Y2tkVVduQkNkRnBGVmxoU2RHZGZOV2REU1haWGQxcFZZbEpsVEdWMlZsaGFZVlpVV21KRWEybFFiRzR4VEVOdFVHWmFUVmROZDB3d1pVbFphVlZ5UW1WeFIzbGhSVnA0V1hjNFZYbGhNM0JNV1ZwdlQzbE9ka1JTVUZBNWRVNXlhbEpuTFZsa09VMXBjbXRFVTJ4YU5rZ3dZbVJEVVZkTGJHSjROblE0ZW1GVk4xVnFTMjU2WlY5M2RWQnZXaTF6WmxGYVJ6ZHFhRGx1WDFKRWIwSkxZVVpzV1MxSmRVMUthM28wYTFoS05VTk1ZVWRsT0VscWRIaFdTRXgxZEZsV1kyaEJUakI0VldGT01uQlNaSE16VUhkbGVuWlVNRkpHYm5ndFEyeEZUMlJxWTJwQmFGZGZkR0o0VjNGWVZIZDJiekpzTFc4M1ZFd3pRMDlKU1VGdmFGTnpSMkpxTFVrME5FZDNOVjk2TWtVM2FESmhaVkZmYkZSbVh6aDFRV2wwUnkxT09IbzFVMngyVWxadVMyMVRUMHhqYTNCUlozZFpkMWcwU21sVVJTMVlXVkZGUTFGSmFXdEVia1U1UWxsd2RUbFJlak5QWWxOR1dFZGpaRnAxVEZkWmFVMVFRVTVTY25Cd2VFeDJTRlJPV0hwbmJ6bFVVWGhTTkd4NWFXdFpVekpXZHpWTk5WQTViazFqUVZWbFFtMVlaWEpPUVhOSWJtOVlWV3BRU25GSWNUbHdjSGhmTVZCb2VUbGtZMVZyWVROaVpWOW5NbVZwYm5wbFRHaElOazVYZUhoUlUycHlOMFUxZUVWQmR6UjNRVGREWmkxd2RVSnVTMWhKV0dkclduZGlhM0JRY25aVFJYQnZVV3gyZFRCR1ZUWm5lVWRUTjBjMU1FVlpNbTFYTm5wTk0ySllUazVDU0RVMFFWWTJTRlJMVjNKa1lrdzRWMVJmVGxCQmNpMXhXVEJSVWxjMFRqWjJUblZ6TFUxWlNWUklSMXBQZURCck1GWkZibFpIZVZGcWFYaDZiRmhTUVVsV1NXdGtiREF3T0d4bWIxTTRkbVppT0VacWVYQkxVRUpKWmw5alJXbzFlVFpLWjFOeFExSnFkRUo1YzJaNk0yVnhlVjkxUzJoTVVWbFpSVTkwYTFsR1MyRjNXbGRCWVVKaGVtSnlaV05TV1ROVVdteE5VWGRpVjBGME5HTldVRTVCYjJST2RGTnhOM1JyTWs5U1NqaHNTWEZpVkZFdWIwOU5SVFZ3WlRReFpXUm1TMTlOZFROcVltOXpkdy5ZQXQtVUdsTEFGMW9nZmFOLUhfLVNQTEp2MUY1czFhVHZOQk5Md2ZPWmtVIiwiZXhwIjoxNzA5MjEyNjE3LCJpYXQiOjE3MDkyMTA4MTd9.doYQQ_sGki-ArMvxPtmfaxvcJD9JNKrilCwMFFsV_TQ\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"givenName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"First Name\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"VALID_TYPE\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"givenName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"required\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 4\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"sn\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Last Name\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"VALID_TYPE\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"sn\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"required\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"\"\n                },\n                {\n                    \"name\": \"IDToken2validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 5\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"dob\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Date of Birth\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"VALID_TYPE\",\n                            \"MATCH_DATE_OF_BIRTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"dob\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"required\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"customer-dateofbirth\",\n                                \"policyRequirements\": [\n                                    \"MATCH_DATE_OF_BIRTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken3\",\n                    \"value\": \"\"\n                },\n                {\n                    \"name\": \"IDToken3validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 6\n        },\n        {\n            \"type\": \"TextInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"policyNumber\"\n                },\n                {\n                    \"name\": \"defaultText\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken4\",\n                    \"value\": \"\"\n                }\n            ],\n            \"_id\": 3\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "Missing variable  input",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\r\n \"authId\": \"{{authId}}\",\r\n \"callbacks\": [\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"givenName\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"First Name\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"givenName\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken1\",\r\n     \"value\": \"{{givenName}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken1validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 0\r\n  },\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"sn\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Last Name\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"sn\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken2\",\r\n     \"value\": \"{{sn}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken2validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 1\r\n  },\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"dob\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Date of Birth\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\",\r\n       \"MATCH_DATE_OF_BIRTH\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"dob\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       },\r\n       {\r\n        \"policyId\": \"customer-dateofbirth\",\r\n        \"policyRequirements\": [\r\n         \"MATCH_DATE_OF_BIRTH\"\r\n        ]\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken3\",\r\n     \"value\": \"{{dob}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken3validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 2\r\n  },\r\n  {\r\n   \"type\": \"TextInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"policyNumber\"\r\n    },\r\n    {\r\n     \"name\": \"defaultText\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken4\",\r\n     \"value\": \"{{policyNumber}}\"\r\n    }\r\n   ],\r\n   \"_id\": 3\r\n  }\r\n ],\r\n \"status\": 200,\r\n \"ok\": true\r\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenTrigger"
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger"
+								}
+							}
+						}
+					]
+				}
+			],
+			"name": "userNameForgottenTrigger"
+		},
+		{
+			"item": [
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "getAuthId",
+					"request": {
+						"header": [],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "usernameForgottenResume"
+								},
+								{
+									"key": "JWT",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjE4Ni5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDkyODcwMzIsImV4cCI6MTcwOTI4ODgzMiwiY29kZSI6MS44MzA1MTQ1OTFFOSwic3ViIjoiYzZmOGQ1ODEtYjdlNy00YWMwLTk5Y2ItNzMwMjI2MWMxNTc2In0.szpmx4KIOY8gYHqu0IngdovTE7_qxG5cHklfY4FQekSzjZUNnaFKPltAganqHw4btWKHrQ9A1RK41FHmpo0q4g"
+								}
+							],
+							"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenResume&JWT=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjE4Ni5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDkyODcwMzIsImV4cCI6MTcwOTI4ODgzMiwiY29kZSI6MS44MzA1MTQ1OTFFOSwic3ViIjoiYzZmOGQ1ODEtYjdlNy00YWMwLTk5Y2ItNzMwMjI2MWMxNTc2In0.szpmx4KIOY8gYHqu0IngdovTE7_qxG5cHklfY4FQekSzjZUNnaFKPltAganqHw4btWKHrQ9A1RK41FHmpo0q4g"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuUmVzdW1lIiwib3RrIjoidHFsMG8yOGk0dGVsY2ZwMmdhMDIxZW04NjEiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1d1ZVbHdZVFYwY1hkQ1NYRkRNMnhSYUhOSFVtRm5Ma2RVWWpCRloxUkVVR3g2YjNkRWVWaGZUekpLVFdac1QwRkxOR0pYYlZaTmVUaEhibmx4YlRVMFVtUlBPVkJWUlRSWlpYZzVkVVJ1Y0hoYWN6WkVkR0pCTVdoZlVETklaM2wzTlcwNGIyNWFkRFkzVURGM2RVeE5aelZ2Y0VGbU1UQXlNMUZsUzFoQmQwazBjVTUwTlRKNWVITklWWFJDV0hwRVR6UnhjekpITWtobFFuYzJOMFJzVHpSeGNHdHdOM1pQZFhWeWN6QndWM0phT1V0NU5URm1jM05qTWtob2RGRktlak5XVEY5MkxUTXdiMDFLYkU5SU0zUkhSRlV0YWtZeFZWZ3dhV0psZUdJelpWVkRlalowUVRoSVRFOTVRMkZzWTBWVlMxQjNURmRyVGtNd2JUSndiM2hyY0d3ek9WUjBRMVJDZVVWUFVFaHRiMHRLU1ZONmRXVk5aSEIwVFROSVptTXpNUzF3VERkM1JtaEJSbmhPYTNGR2RXdHBZVWRpY1doa05sVmtVRE5PWmt0VllVTkJSMFZmU0dVdE0wVldSa0Z1Y201aVpURnROalJNTkc5Zk1VODNTalEzY0ZkR1IwMDJUSGQyZDA5R1VDMHdhMWg0ZFRGd1QwOVpaMlZOT0RoUmVIaFNRUzFhTUVab1NHWklNMlp6WDBWVk9FZzBORXR1UWpGek1qaDJTa2d6WWtwWk5rMHRYekZHY21kM1MyZFlkbmQzVHpoNlZtOVZVVFpLVWpoMVFXSk9lbEZwVXpCUFZYaGlkMmQzUkU0MExYcDRNMEpRTldKdlMwZDNNVGxOVEZKak5rdFZVMmgzUXpOS1duTTVNbkpUWW5FeGJHeEJSWEZhYlVaRFFrTm9ObVYyVFVWZlFXOW5lUzAwVFZOYVIxQnpRV3hPVjJ4VU1ITlRPRWRWYXpsTlpuTjZlbkpvTkZwd2RrbEdlRVpJZUdsQloyNVFTMUV3T1U5cmRITTBWMGhDZG1NNU1WbG9TVTluTVc1SWRYTlFZVEk0VkhsQlEwd3RUVk5tUzNWQ2VqVklNVXQxTURGRlUwNXlWalpPYVRaQ1NVMUtja2xtWTE5d1JtTnZiSEk1YUZkUVZYWmpOR0YxTkZaZmRuSnNZVnBXU21Gb1ZHMVVlRVZXTlVKaGJtRlNlbkZ3VDBoQ1UxbHNORE5qV2t0UU5GVlhVM0V4VFd0dlp6aEJWRWxaZG5Ga1RYaGtielJqTUZaQ2RFeHFVbE5sVURSSFpsaEdMVTVyVW5veVgxUjJka2hGZFV4Mk9EbHhVRFJ5UlRSU1ZUTnBkM0IxUnpKTmJUUjBTRkZ3Vm5GZlNYTnVTRGxUYTFWVFF6aG5VRFJRVEVKNlVYQlVjbmRmY3pOdVltTXlSMHBKU0VZdFZ6Z3libEIwZVhaSU9IRlFOblZTUVRsNVdUaEJaVWhVU3pGMlYzWkxMVXBOZVdvMkxWUkdZbDlPV0RCSFpGTTJTbkZtTURoUFFsQnRhMXBLYW1oMFJXRkpMVWRzTm0xclNUaFFXbTVoVW1vNFVVUnFVbWQ0T1hSU1IzVTVTemxxVUZOQmExaEVjRUpPWjJ4alZHUnJPWFJaV1d0dVRVTnpZbnB4WmpkVmF5MUROMGw1Um5Od1psUjBTbVkzVEdWQlNqVTNha2hMT1c5RE1FNDVhRjgzYXpCeGNISkZjV2h3TFZOUmR6TlRkVU5QUW1wR1NVNXVNRTlvY0ZOVWVEVjZYeTFCYm5nMFYwUTJXbVYzVVRGcU0xSlZOR3hHVkdsVFRFSXhiblF5ZDJwR2NHVldWWFpIVmpCbFNISnNTRzFITFY5YVdXcHZNMHAwZDJOUllYZEdXbEpuTGxGRVYwUTFPRWRNYTA5SVRUZHVSSEo0ZGxweFUzYy5tNjVUSG5HX291T3ZWdDQ4NWhuWDQ5ZUhMcjBsOHNoX1RJYVk0S1BFM09nIiwiZXhwIjoxNzA5MjExMDg4LCJpYXQiOjE3MDkyMDkyODh9.HY6vq19tZqYem05w77AJ4oPECYG-auIQQesjpWVIYoQ\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"dob\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Date of Birth\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"VALID_TYPE\",\n                            \"MATCH_DATE_OF_BIRTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"dob\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"required\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"customer-dateofbirth\",\n                                \"policyRequirements\": [\n                                    \"MATCH_DATE_OF_BIRTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 0\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [],
+							"name": "success",
+							"originalRequest": {
+								"header": [],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenResume"
+										},
+										{
+											"key": "JWT",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjE3My5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDkyMDkyNDEsImV4cCI6MTcwOTIxMTA0MSwiY29kZSI6Mi4wMzg0NjY0ODVFOSwic3ViIjoiNTU1MGEwMzAtNWZlYy00ZDIwLWIyYWYtMzMzZDkzOGJiZDIzIn0.7AaA84ER1a8IsVnBng5oz_3BdJty-vUK5fpBdU68eNxgXu42KPlQKMhCixTfmyY6U3p5Qigzv8XpxUfhxBgQVw"
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenResume&JWT=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjE3My5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDkyMDkyNDEsImV4cCI6MTcwOTIxMTA0MSwiY29kZSI6Mi4wMzg0NjY0ODVFOSwic3ViIjoiNTU1MGEwMzAtNWZlYy00ZDIwLWIyYWYtMzMzZDkzOGJiZDIzIn0.7AaA84ER1a8IsVnBng5oz_3BdJty-vUK5fpBdU68eNxgXu42KPlQKMhCixTfmyY6U3p5Qigzv8XpxUfhxBgQVw"
+								}
+							}
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuUmVzdW1lIiwib3RrIjoiMTM3dTRzdmtucjVpOTVvczE2azQ4OTlmcWYiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1VFpuSnpZbmx6V2poaWRXbEVNWEZEVm1aNlYwSm5MbkpNWTJsRGVFSTJTRlZEYVMwNFJXUldaM2N6Um10aFEwZzFTWEZEUlc1WlIzVjZVV1JEV0ZaYVdFdEthMVJLU0hoNFNrdExORWQwWm5NMWMyWjFOblpwZWxkVmRXNW5NRVpIYW5BNFlVaE5NRGR6WW14VGJFMTNTWGh6VEhsdVJXcDVTMjkyYkhCbFptSjZhRkpHUjBweVIySnJhWEE1YlVsUWQydDRaa042VkVaNFQxUlJhMEZoZG04NVprSmxjWGRWTmtreE9HWnFOMDh3VmxWb1dIQlNXVk56UjJOeGVEQnhiSFJJWWpsTWJIaFpUbU5QZGs4dFYwRk1aR0p4Y0hOSU9FbFpWazh3TW5nNVNXVjROR1Z0T0dGQmJVdHVVVU5OV1VSdlIxUk5SSGQ1UVVGMVR6TnlXakY1TkZGU2RETnFYMmRaWkdzMWIydE5WVk50ZDJoV2MzcHNVRVF3WDFKdVdtUjFlVk5PVFZKMlJ6RnRUazkyVm1wZlowUjRRWHB2UmtGUk5qaG9Oa2xsUnpBd05IVkJNRU5GWWxScVJWRXdkakEzTmxJdFpHeEtOR2syTUZwSVEyUmxVelZsUW5GeU5VcGhiMGhGWVVGMlJXbFdOV05XWkdKdFZYaFNPVGsxV1RST1ZYTk9WVVJQYjBnemVsSkVPV281WTBWSFpUZDVkakp1TnpsR2IxWmxjMFJ4VFhaRWVsSkZkV05uT0hSWVJHaEtUWEpKY2twVGEyNTBPVEZQZEVkQmFIWmxibWhWVjFSTlVrdG1UbFJDV2tvellrMVVTMjVFWDFSNVYyb3lOMjVrUm1kcE1uaHpVVTEyZDJSSFYzTjFVbmhOVlZWSWFreDZOVVpYTm1wSE5VZEZOREJVU3pOQlFYUlBhbGRMTUhJM1pFVm1NV2RpVVhRNGFFcDNiR1UxWlV4YWVtaDVabVozYjJOQldGOVFaeTFWVWtzeVRHdG9lalJoV1VFNGFGcEZPR3R6YUVsWlpGUXdSREp2Tm5KS2J6bFJWMUV4VW5ZMk5XTkdXWFZLWXpORlVEaFdSV0pOWWpWWGJXWjZVek13ZVhkTWVVVkpTRFI2TkVSRGNXWmhWV1F0TUZaZk5FSkplVVZVVGxKNlgwZE1WRk5hY1hsU1JGRlJXVlJ6UjAxNFJUSnZXWEJmWWxOQ1FqZHBlSEJuUW5aaGFUTm5NM1ZMVWtaWWVuaFpUSFpLVUZkQ1QyRTNNbTVCYkRKUE1razVObVZvUTE4MU5IbHRTMDUwWjFOblRGTnVjMDlzUzNaSFNHMXRiVUZVU2xGVVFWVkpTSGcwZFhGcmIxbFdObTVLWm5weFNtRkZSRWxLVFhnNVdFSjRRMmRzTTIwMldWOHpSM1l5T0ZSQmJrTjJjM2hGUjFGT2VucDVZblI0Y0VSaWVsTXphVzVNZUZjMlgyaGFNVUZWVkRSMGMxWnZOazQzUm5CTFMzbFZMV1JzVG5wSFVVczJjRXByU0UxbE1reEhNbkJxUVdWeVZuSk5hMFJXUm1WTFYyNXNjRFZtVjFSWVoxbGFUVGhUV2w5aGREZHFNMDA0YUY5clYyTjRNVlJYWDB4T1oxVkZjRWR6V0ZOUVZXdGpiRkEwZVV4dVNuSlRkeTQzUXpGTGR6SjFYMVpEY2tGS01tVkhOVVIzVDBaMy5ISldSVF9paUh0b2g2TFdFeml2bExpV28zbWN1TlNzYy1ENWpVcC1Jd1FJIiwiZXhwIjoxNzA5MjE5Mjg1LCJpYXQiOjE3MDkyMTc0ODV9.0pkj5PvT4l3pPP4C0H7qMwmCOd6pqVjFnJtlykrKbzo\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"invalidLink\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 0\n        },\n        {\n            \"type\": \"ConfirmationCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": 2\n                },\n                {\n                    \"name\": \"options\",\n                    \"value\": [\n                        \"Ok\",\n                        \"Cancel\"\n                    ]\n                },\n                {\n                    \"name\": \"optionType\",\n                    \"value\": -1\n                },\n                {\n                    \"name\": \"defaultOption\",\n                    \"value\": 0\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": 0\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"header\": \"Error Page\"\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "invalidLink",
+							"originalRequest": {
+								"header": [],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenResume"
+										},
+										{
+											"key": "JWT",
+											"value": "usernameForgotten/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjE3My5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDkyMDk5NTksImV4cCI6MTcwOTIxMTc1OSwiY29kZSI6NC4xMjU0MzUyMjFFOSwic3ViIjoiNTU1MGEwMzAtNWZlYy00ZDIwLWIyYWYtMzMzZDkzOGJiZDIzIn0.U5KMw0aSqPowRAs8QlLOLOi90wZH4QlWtbz78VaEAebj8W2xAk0JclP-MiMLOgWLsqSx84gGpykQNXavGbZQtw"
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenResume&JWT=usernameForgotten/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjE3My5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDkyMDk5NTksImV4cCI6MTcwOTIxMTc1OSwiY29kZSI6NC4xMjU0MzUyMjFFOSwic3ViIjoiNTU1MGEwMzAtNWZlYy00ZDIwLWIyYWYtMzMzZDkzOGJiZDIzIn0.U5KMw0aSqPowRAs8QlLOLOi90wZH4QlWtbz78VaEAebj8W2xAk0JclP-MiMLOgWLsqSx84gGpykQNXavGbZQtw"
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Display userName",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\r\n \"authId\": \"{{authId}}\",\r\n \"callbacks\": [\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"dob\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Date of Birth\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\",\r\n       \"MATCH_DATE_OF_BIRTH\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"dob\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       },\r\n       {\r\n        \"policyId\": \"customer-dateofbirth\",\r\n        \"policyRequirements\": [\r\n         \"MATCH_DATE_OF_BIRTH\"\r\n        ]\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken1\",\r\n     \"value\": \"{{dob}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken1validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 0\r\n  }\r\n ],\r\n \"status\": 200,\r\n \"ok\": true\r\n}"
+						},
+						"header": [],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "usernameForgottenResume"
+								},
+								{
+									"key": "",
+									"value": ""
+								}
+							],
+							"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenResume&="
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuUmVzdW1lIiwib3RrIjoiczJqOWw0cTJza2R0YmFybzNva2phMmNpcXUiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1MGJUQkNTbWsxVUhaalFtMVhUWEpPUVhwSWRHcDNMbmgwYW5rNWJUZzJlVmxXYWtwck1qQlRTRE4wVmpoaVoyaDBabE5yVkRsdlRraHpVbWRIWkdaMWJXUlFSMUp0YjNVNU5sQnlXRWhDV2xvdE1ETmpjbFp6TUdGbllsQjZOekZhUldsMWJFOXdSM1JKVlRSZkxVaGlkWHBTUXpKaVIxUklkSGxETFRodVpFMU5hakZxZEVWb2NqRjNhbEV6VVZWeGJUVXdMVU5GYWs5c1dsOHlhV2gyUkhWS1dWaG9Vakp2VjNGMFpqTlVUR0pwVUZwMmNWWjRZMTlqV0ZKb09HUnNUMVZRWkc1TWNIVkZiVkpUVjJ0ek9HWnVRWGwyTW1od1RWRTRTVU01TkVZeWRVSkdTWEYyUjBWdk9GY3RXa3BRYjNoRU4xSkJMWGN0Vm5GUU5VaDBVblU1UXpaVFQycEpXVWRPZFZCWkxUVm5XbDluWVdwRFozY3hNR1ZKYzJwVldFbG9TM0ZNVEZKd04ySnRZVlZaU21Od2RUWkVSV3gxVEhsRGJGaHRaR2N0UVhsUldVaGZlamRDVUZZM1IydGFNbUpHYmxOQ1luZFBOVlJRU0ZJeFJtOTJXRFJpT1d0alFUVlZZWHBpTUZoNmFHWTNhMU5qYkZsT2VXeFhjMVYzU2twQmJuQnlORkZvV0VvNU9WRlRXRzVHYjFsNE1GcDNUM1JJUmxGYU9GVllObUp3YTAxTE5GaHpReTFSV1dsMVNrY3hlSFp2VmtsTWF6UmZPREZhVVVGaWJtMWZTM1pmZVhsNVIxQjJWMnRzT0ZseGRHZE1aR3AyV2xVNGJXeDRjVVExVjFOT01IaGxNR1EyTFhFeVgydFFNM000Y1dsUU1VWmlTR2hMWldJNFRVOVNMVjlYWmt0M1FUVnVkR3B1VDJOamIyZDBaM2N3YTNRM1ZXeG1RamwxY1Y5MmRsWnZPRGRUTVVjeVNHTkZXa2hmTmt4cUxVc3lVVE5PY1VWYVdrUlFjemRHUjJ4QldsRkRUR3RLZDFSbVowSkxia1JDTW10SlNFWnBVMEZ6VVZSTE4xQkJhbEZuYTFWV1VFRlFkaTEyWm1vMVREazJWRWgzWkU5UllUSlliVFJTVTJwTFMyMWZkMlZIYjBWV1NqRm5WbVkxY0VoV1kzb3hVRXN3YUc5UGJXSlFZVGt4UjFCSVYyWTBZMUZFVWtJMmEzRnhkbXh2UzA1UVV6RlVlamhVUjBwUmVWQmFWVkJHVWkxZllWUnNOVUZYUmpsamFqTXlkMUpQVnpaRmMxcHBVMEp6ZFY4d1VYSjRZbWRGU0RsMlNraENjMmhoVUZRdFdtRXlRMDQzWTNWa1FYQjFhRXBNVWt0WlVGbHdkbEV0TkVkc1NXUmZORkJxZVZsNGFHSlBZVGd4YVZFek1taHFhRWg2WjFsNlltdHhUM3B1WmxKSlFUWnhNVmhUYmxkSVlWZFVVbEpyV1VGR1JFTkJWbFZ4WWtKRGMxTkhkRkJUVUcxb1ZHeEhPV2c1TmpKak4zUnpOek5HVm14dlNVTk9kM0JVVXpsNFlVVkdOalJOTUZsVk5XbEljbmhwVDE5c00zTlZaRFZ3TFhGYU4wUmhkV2RsWm5aU09IQXhaRFJrVWw5UVNuQktkbTFQYTJZMFp6bGxiRWR2T1V4TE5tZERNVU5OTkhaeFJsTXhNRUZqWVcxTkxYTkZhVWRXWkRSRVlXSTFWaTAzWTBaaU9WSXhOalUwTmxGcVNEaEVVVXBsUlZKcU1GaDRSbmxoZERKVmQxRnlTVzlZV0RoRE9XRjVTWGhNZWxscmNVSmxOSGxCUjFSdmRua3dka0pUYkMxc1EwRmtMWFpxVEhObVJUUXlXUzFrTjJwRFRFSXdVV1pYV1haNmJsYzBVWFJXYWpZMlIxSnZRMko2Y0RWd04xUnBRVXd6TTNFNVJXWTFMbnA2WnpaSFFtVkJiMDQzTjI5bGIzQmpja1ppWVZFLnhuS0lOVnp1X3VWYVVEMFZDQ3RoYkYyaldPZ0wyTHp1NzRiWHF3UFlGd2siLCJleHAiOjE3MDkyMTEzNTAsImlhdCI6MTcwOTIwOTU1MH0.WrWG7hxkbwAKmRqr2QAbQp3uYgPARlD6WpSEFxaIZM4\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"chetraleng\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"0\"\n                }\n            ]\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [],
+							"name": "Display userName",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\r\n \"authId\": \"{{authId}}\",\r\n \"callbacks\": [\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"dob\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Date of Birth\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\",\r\n       \"MATCH_DATE_OF_BIRTH\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"dob\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       },\r\n       {\r\n        \"policyId\": \"customer-dateofbirth\",\r\n        \"policyRequirements\": [\r\n         \"MATCH_DATE_OF_BIRTH\"\r\n        ]\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken1\",\r\n     \"value\": \"1980-01-01\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken1validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 0\r\n  }\r\n ],\r\n \"status\": 200,\r\n \"ok\": true\r\n}"
+								},
+								"header": [],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenResume"
+										},
+										{
+											"key": "JWT",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjE3My5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDkyMDkyNDEsImV4cCI6MTcwOTIxMTA0MSwiY29kZSI6Mi4wMzg0NjY0ODVFOSwic3ViIjoiNTU1MGEwMzAtNWZlYy00ZDIwLWIyYWYtMzMzZDkzOGJiZDIzIn0.7AaA84ER1a8IsVnBng5oz_3BdJty-vUK5fpBdU68eNxgXu42KPlQKMhCixTfmyY6U3p5Qigzv8XpxUfhxBgQVw"
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenResume&JWT=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL2lkLWNpYW0tMjE3My5hd3MtMDQxNC5jbG91ZGZpcnN0LmRpZ2l0YWwvdWkiLCJpYXQiOjE3MDkyMDkyNDEsImV4cCI6MTcwOTIxMTA0MSwiY29kZSI6Mi4wMzg0NjY0ODVFOSwic3ViIjoiNTU1MGEwMzAtNWZlYy00ZDIwLWIyYWYtMzMzZDkzOGJiZDIzIn0.7AaA84ER1a8IsVnBng5oz_3BdJty-vUK5fpBdU68eNxgXu42KPlQKMhCixTfmyY6U3p5Qigzv8XpxUfhxBgQVw"
+								}
+							}
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InVzZXJuYW1lRm9yZ290dGVuUmVzdW1lIiwib3RrIjoiN3U1YXBzNWdkNG8wbWdrOWtyZ2pvbjJvc3IiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1aWVGWlJjR3BFVmpjMmVHeEpkSGhQUkV4QlMyUlJMbkkyT1ZWWUxYcENTa1ZKVFVKM2NHbFRZa05OV21GaGJrUmZSMUZEZG5GYWIyUmplakIwU1hWNGRVdHdkMHB2WW5GM1J6ZFBVa0ZXTTJSU01tcFVSa1pDVXpGUWFqWTBPWG96UmpWWlR6RlNabmN3YW1NeFgwRmpabHBMVm5BMU5Wb3hlbWhmUzFSeFR6SXRPRmhsYVd0bGVHTnFWalZCZDJoMU5XNXlSalZaWlU4eE9VWkNSMUZIZWt0VGFWTnhjMm90YUZWSVJXaFBZbmhQWWpnMmNHdElZVFIwY0doUVRreENSVVpVYmtoelQxQnhiMVIwV1RaMFFrMW5TemRwYlVrd09UWkZWMmgxYW5oQ1JHRlBiRWR0YTJGaWQxUkhURkZDUWtWVE0zaFBjVkpoTTNBd2VITlNlRU52ZVVsMGNVZFhZMWwzT1Zwdk9EQmtRM2RpZVhOSGNIcGlWWE5WTjFOME9ERnJPR2hqVWtweE0ySTFVeTFRY25obU5qaE5abW93UkdKVmJqSjRiVEJJWVd4d2IwTlNPV04wVmpsWGJXTnZRak0wWm5sRGRGSkZTbGRWV0VReVduRnZjMUoyVVZsNloycDZkV1ZwY0Zob2NEZHhhWGRzY25SWmFrZGtXbFExY0Zab1YzQmtTbXRyVFVWUVFuVTFjbTh0UmpkSFYwTkdabEZ3WkY5MmJsUk1YMVl4YjNCWk4xUkZhRUZDY2pseVJtbHVOMk5wWTNoTVVUVlpTRWRvYXpRekxWOWhkVk01ZVV0Wlp6TnFaSEJETlVOMllVRlBSRTFGZW1veFZqTnFUa2hMTWxCNU1rcEVMWE0xTkc1bFFrdzJkbU5IVGs1TVVWTmZORzV0TjBsMVZsQnZOelJ3WkRoNGRHUjNVMVZ0UzFKUU0ydFlWM0ZHT1doZkxYaE9WR3hVVEVFdGVqSkdOVXRaVlcxQlNYaFFOWGt3ZVVob2VtMUpaVFpsTVRWSmQwVTRXVmRyVkZCYUxVZHlaSFk1V21GV2NHTktTbk53UW1jMmMxbFRWMlZtT0ZsQlVtOTRTWGxNTTNkS2RXSkZRMkZyTWtSbWMzVk5lWGxhWTJkb1ZUTmpNMHR2WmpSNFEyTldkSGwxTWxSaldISjFZM0o2VEhkbVoxWTBNVE55TW1KMWMyWmxUR0ZMTm1SeFp6Z3RVV1F5VXpsUk9UZElSakp5UzBkaFJqTkxWRmhLUlVWeFoyNUxXVkJrTjNGT1JFOUVaRzFQYlRWeE1YVkhkSEF4UjA1RlNEQmFOMWt5VFRVNVRqSnBWRGs1YkRSNFUySllUR1U0WWtaRWRYRkxaRzF0ZGtodE5WOUVkVGh5U0MxU2EzUXpSMFZ0VFRKT09HTjRVVEUyWkhwWU1XWnFhR0YyU0ZWc1dWOHlXRlIzUkdseGNqTXpNSHBHV2tOdk1WWXlPVlY1YTFGRlQxaHVXVlpCVjNCbVNtSnhXWEJ0WW5ocWRGZFVXbTlyUkVOcWNteElXSFYxU2s5b1VUZFRWRFl0Ykc0eWJuZFFVMmt6U0ZoTlpGVjNWa1pZVkRWNWFIVkVTVTVpYlhWQ1NFRlFla0pVUTNsemEyNU1SV2xsU3pKNmVubG5USGd3VHpsd1FVNTBRa05KVUhCQ1JWZEhlVUZ2WW14RlExWTNWSGgzTUZSeFkzYzVkR1pNVVhKTmFsUkZXV3RmU0RkT2MwdGxWV1pNVXpoNVN6Sm5WazltUzNkbFRrMUZiMHBvYjFCMU9XdFFVVTVmYjFsaVMyNW1aMFpMWkUxV09VZElhVlZMUmtkMVNXTjZhelZaUWs1aFdsUkJaMEZuU1ZCTE9YSktabFIxWTNGcFZVVkJhbFY1V1hrMlp6WjRSRlZ1YWpWUFRYaFpMVmxSTjA1NU1UaERlR2R5ZGtWb1QzUmxVSFpqWVZOMVRrSmFiMTlmWldGbGJrcFVPSGR3VEV4aE1GcEhaV3hTVXpWdGQxa3pjSHBPVlRoQ2ExRk1ibGh5U3pWVVgyaFBSMFZuVEc1YVIyVnJXRkEzYjIwNVEybDRURGxWWjJKeGVXVjNNVWgzUlZVMVJreG9kbVZIY0dsQ04waE1SMFJOYTBkdmMydDNjVnA1UTFwM1JqWjJSRVJKU1dKYVVsQmxVM1JOVldJM1VtTmpTMjR1WlVOd1NHaGZkVVZqZW1kTlkyOXRhMTl2WW1VeVp3LjhyRUlBWTdYcnBJQ1Q0OHB4VEtGVDBMMDFHRVNsdkhHUW9RdmxpVlRNaHciLCJleHAiOjE3MDkyODg5MDYsImlhdCI6MTcwOTI4NzEwNn0.ipPUnoPZNA4sqlmRCcs0gWdQF_oT-KfAqL4TqHI7S84\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"dobNotMatch\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 1\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"dob\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Date of Birth\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"VALID_TYPE\",\n                            \"MATCH_DATE_OF_BIRTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"dob\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"required\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"customer-dateofbirth\",\n                                \"policyRequirements\": [\n                                    \"MATCH_DATE_OF_BIRTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"1980-01-02\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"1980-01-02\"\n                },\n                {\n                    \"name\": \"IDToken2validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 2\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "dobNotMatch",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\r\n \"authId\": \"{{authId}}\",\r\n \"callbacks\": [\r\n  {\r\n   \"type\": \"StringAttributeInputCallback\",\r\n   \"output\": [\r\n    {\r\n     \"name\": \"name\",\r\n     \"value\": \"dob\"\r\n    },\r\n    {\r\n     \"name\": \"prompt\",\r\n     \"value\": \"Date of Birth\"\r\n    },\r\n    {\r\n     \"name\": \"required\",\r\n     \"value\": true\r\n    },\r\n    {\r\n     \"name\": \"policies\",\r\n     \"value\": {\r\n      \"policyRequirements\": [\r\n       \"REQUIRED\",\r\n       \"VALID_TYPE\",\r\n       \"MATCH_DATE_OF_BIRTH\"\r\n      ],\r\n      \"fallbackPolicies\": null,\r\n      \"name\": \"dob\",\r\n      \"policies\": [\r\n       {\r\n        \"policyRequirements\": [\r\n         \"REQUIRED\"\r\n        ],\r\n        \"policyId\": \"required\"\r\n       },\r\n       {\r\n        \"policyRequirements\": [\r\n         \"VALID_TYPE\"\r\n        ],\r\n        \"policyId\": \"valid-type\",\r\n        \"params\": {\r\n         \"types\": [\r\n          \"string\"\r\n         ]\r\n        }\r\n       },\r\n       {\r\n        \"policyId\": \"customer-dateofbirth\",\r\n        \"policyRequirements\": [\r\n         \"MATCH_DATE_OF_BIRTH\"\r\n        ]\r\n       }\r\n      ],\r\n      \"conditionalPolicies\": null\r\n     }\r\n    },\r\n    {\r\n     \"name\": \"failedPolicies\",\r\n     \"value\": []\r\n    },\r\n    {\r\n     \"name\": \"validateOnly\",\r\n     \"value\": false\r\n    },\r\n    {\r\n     \"name\": \"value\",\r\n     \"value\": \"\"\r\n    }\r\n   ],\r\n   \"input\": [\r\n    {\r\n     \"name\": \"IDToken1\",\r\n     \"value\": \"{{dob}}\"\r\n    },\r\n    {\r\n     \"name\": \"IDToken1validateOnly\",\r\n     \"value\": false\r\n    }\r\n   ],\r\n   \"_id\": 0\r\n  }\r\n ],\r\n \"status\": 200,\r\n \"ok\": true\r\n}"
+								},
+								"header": [],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "usernameForgottenResume"
+										},
+										{
+											"key": "",
+											"value": ""
+										}
+									],
+									"raw": "{{URL}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenResume&="
+								}
+							}
+						}
+					]
+				}
+			],
+			"name": "userNameForgottenResume"
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"type": "any",
+			"value": ""
+		},
+		{
+			"key": "givenName",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "authId",
+			"value": ""
+		},
+		{
+			"key": "sn",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "dob",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "policyNumber",
+			"type": "default",
+			"value": ""
+		}
+	]
+}

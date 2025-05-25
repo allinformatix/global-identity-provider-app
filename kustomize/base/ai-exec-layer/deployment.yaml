@@ -1,0 +1,215 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-exec-layer
+  labels:
+    app: ai-exec-layer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ai-exec-layer
+      annotations:
+        "cluster-autoscaler.kubernetes.io/safe-to-evict": "true"
+    spec:
+      # nodeSelector:
+      #   kubernetes.io/arch: amd64
+      securityContext:
+        runAsUser: 11111
+        runAsGroup: 0
+      initContainers:
+      - name: fbc-ai-exec-layer-init
+        image: ai-exec-layer
+        imagePullPolicy: Always
+        env:
+        - name: FQDN
+          valueFrom:
+            configMapKeyRef:
+              name: platform-config
+              key: FQDN
+        volumeMounts:
+        - mountPath: /fbc
+          name: fbc
+        command:
+        - /bin/bash
+        - -c
+        - |
+          if [ -d /fbc/conf ];
+          then
+            echo "Existing openidm configuration found. Skipping copy"
+          else
+            echo "Copying docker image configuration files to the shared volume"           
+            cd /opt/openidm
+            cp -vr ui conf script /fbc
+            touch /fbc/conf/ui-configuration.json
+            cat <<EOF > /fbc/conf/ui-configuration.json
+            {
+              "configuration" : {
+                "selfRegistration" : false,
+                "passwordReset" : false,
+                "forgotUsername" : false,
+                "lang" : "en",
+                "passwordResetLink" : "",
+                "platformSettings" : {
+                  "adminOauthClient" : "idm-admin-ui",
+                  "adminOauthClientScopes" : "fr:idm:*",
+                  "amUrl" : "https://${FQDN}/am",
+                  "loginUrl" : ""
+                },
+                "roles" : {
+                  "internal/role/openidm-authorized" : "ui-user",
+                  "internal/role/openidm-admin" : "ui-admin"
+                },
+                "notificationTypes" : {
+                  "info" : {
+                    "name" : "common.notification.types.info",
+                    "iconPath" : "images/notifications/info.png"
+                  },
+                  "warning" : {
+                    "name" : "common.notification.types.warning",
+                    "iconPath" : "images/notifications/warning.png"
+                  },
+                  "error" : {
+                    "name" : "common.notification.types.error",
+                    "iconPath" : "images/notifications/error.png"
+                  }
+                },
+                "defaultNotificationType" : "info"
+              }
+            }
+          EOF
+          fi
+      - name: truststore-init
+        image: ai-exec-layer
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: new-truststore
+          mountPath: /truststore
+        - name: truststore
+          mountPath: /var/run/secrets/truststore
+        command: ["/opt/openidm/bin/import-pem-certs.sh"]
+        env:
+        - name: TRUSTSTORE_PATH
+          value: /truststore/idmtruststore
+        - name: TRUSTSTORE_PASSWORD
+          value: changeit
+        # secret agent generated truststore.
+        - name: IDM_PEM_TRUSTSTORE
+          value: "/var/run/secrets/truststore/cacerts"
+        # cert-manager truststore used for the connection to DS
+        - name: IDM_PEM_TRUSTSTORE_DS
+          value: "/var/run/secrets/truststore/ca.crt"
+      containers:
+      - name: ai-exec-layer
+        image: ai-exec-layer
+        imagePullPolicy: Always
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: AI_EXEC_LAYER_RS_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: amster-env-secrets
+              key: AI_EXEC_LAYER_RS_CLIENT_SECRET
+        - name: REALMS_ROOT_OAUTH2CLIENTS_ALLINFORMATIX_GLOBALIDP
+          valueFrom:
+            secretKeyRef:
+              name: ig-env-secrets
+              key: REALMS_ROOT_OAUTH2CLIENTS_ALLINFORMATIX_GLOBALIDP
+        envFrom:
+        - configMapRef:
+            name: ai-exec-layer
+        - configMapRef:
+            name: platform-config
+        - secretRef:
+            name: ai-exec-layer-env-secrets
+        livenessProbe:
+          httpGet:
+            httpHeaders:
+            - name: X-OpenIDM-Username
+              value: anonymous
+            - name: X-OpenIDM-Password
+              value: anonymous
+            - name: X-OpenIDM-NoSession
+              value: "true"
+            path: /ai-exec-layer-app/info/ping
+            port: 9080
+          initialDelaySeconds: 120
+          periodSeconds: 60
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: X-OpenIDM-Username
+              value: anonymous
+            - name: X-OpenIDM-Password
+              value: anonymous
+            - name: X-OpenIDM-NoSession
+              value: "true"
+            path: /ai-exec-layer-app/info/ping
+            port: 9080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+        ports:
+        - containerPort: 9080
+        - containerPort: 9443
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            cpu: 250m
+            memory: 1024Mi
+        volumeMounts:
+        - mountPath: /var/run/secrets/idm
+          name: ai-exec-layer-secrets
+        - name: new-truststore
+          mountPath: /opt/openidm/idmtruststore
+          readOnly: true
+          subPath: idmtruststore
+        - mountPath: /opt/openidm/logs
+          name: logs
+        - mountPath: /opt/openidm/audit
+          name: audit-logs
+        - mountPath: /var/run/openidm/logging
+          name: ai-exec-layer-logging-properties
+        - name: fbc
+          mountPath: /opt/openidm/conf
+          subPath: conf
+        - name: fbc
+          mountPath: /opt/openidm/ui
+          subPath: ui
+        - name: fbc
+          mountPath: /opt/openidm/script
+          subPath: script
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: fbc
+        emptyDir: {}
+      - name: ai-exec-layer-secrets
+        secret:
+          secretName: ai-exec-layer
+      - name: new-truststore
+        emptyDir: {}
+      - name: truststore
+        projected:
+          sources:
+          - secret:
+              name: truststore-pem
+          - secret:
+              name: ds-ssl-keypair
+      - name: logs
+        emptyDir: {}
+      - name: audit-logs
+        emptyDir: {}
+      - name: ai-exec-layer-logging-properties
+        configMap:
+           name: ai-exec-layer-logging-properties
+      tolerations:
+        - key: kubernetes.io/arch
+          operator: Exists
+          effect: NoSchedule
+

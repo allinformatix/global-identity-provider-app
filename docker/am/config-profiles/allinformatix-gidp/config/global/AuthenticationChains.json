@@ -1,0 +1,20 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "EMPTY",
+      "collection": false,
+      "name": "Authentication Configuration"
+    },
+    "dynamic": {
+      "authChainConfiguration": "[Empty]"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "AuthenticationChains",
+    "entityType": "AuthenticationChains",
+    "pathParams": {},
+    "realm": null
+  }
+}

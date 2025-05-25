@@ -1,0 +1,18 @@
+{
+  "data": {
+    "_id": "SAE",
+    "_type": {
+      "_id": "sae",
+      "collection": true,
+      "name": "SAE"
+    },
+    "authenticationLevel": 0
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "SAE",
+    "entityType": "SaeModule",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

@@ -1,0 +1,163 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgres-post-init
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: postgres-post-init
+        image: postgres
+        imagePullPolicy: IfNotPresent
+        command:
+        - sh
+        - -c
+        - |
+          echo "🔁 Warte auf PostgreSQL..."
+          until pg_isready -h "$PGHOST" -p "$PGPORT" -U "$PGUSER"; do sleep 2; done
+
+          echo "🛠️  Lege Benutzer an..."
+          export PGPASSWORD="$PGPASSWORD"
+
+          SQL=$(cat <<EOF
+          DO \$\$
+          BEGIN
+            IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${API_USER}') THEN
+              EXECUTE format('CREATE USER %I WITH PASSWORD %L', '${API_USER}', '${API_USER_PASSWORD}');
+            ELSE
+              EXECUTE format('ALTER USER %I WITH PASSWORD %L', '${API_USER}', '${API_USER_PASSWORD}');
+            END IF;
+            
+            IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${OPENIDM_DB_REPO_USERNAME}') THEN
+              EXECUTE format('CREATE USER %I WITH PASSWORD %L', '${OPENIDM_DB_REPO_USERNAME}', '${OPENIDM_DB_REPO_PASSWORD}');
+            ELSE
+              EXECUTE format('ALTER USER %I WITH PASSWORD %L', '${OPENIDM_DB_REPO_USERNAME}', '${OPENIDM_DB_REPO_PASSWORD}');
+            END IF;
+
+            IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${OPENIDM_WORKFLOW_REPO_USER}') THEN
+              EXECUTE format('CREATE USER %I WITH PASSWORD %L', '${OPENIDM_WORKFLOW_REPO_USER}', '${OPENIDM_WORKFLOW_REPO_PASSWORD}');
+            ELSE
+              EXECUTE format('ALTER USER %I WITH PASSWORD %L', '${OPENIDM_WORKFLOW_REPO_USER}', '${OPENIDM_WORKFLOW_REPO_PASSWORD}');
+            END IF;
+
+            IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${IDM_DB_CONNECTOR_USER}') THEN
+              EXECUTE format('CREATE USER %I WITH PASSWORD %L', '${IDM_DB_CONNECTOR_USER}', '${IDM_DB_CONNECTOR_USER_PASSWORD}');
+            ELSE
+              EXECUTE format('ALTER USER %I WITH PASSWORD %L', '${IDM_DB_CONNECTOR_USER}', '${IDM_DB_CONNECTOR_USER_PASSWORD}');
+            END IF;
+
+            IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${AI_EXEC_LAYER_DB_REPO_USERNAME}') THEN
+              EXECUTE format('CREATE USER %I WITH PASSWORD %L', '${AI_EXEC_LAYER_DB_REPO_USERNAME}', '${AI_EXEC_LAYER_DB_REPO_PASSWORD}');
+            ELSE
+              EXECUTE format('ALTER USER %I WITH PASSWORD %L', '${AI_EXEC_LAYER_DB_REPO_USERNAME}', '${AI_EXEC_LAYER_DB_REPO_PASSWORD}');
+            END IF;
+
+            IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${AI_EXEC_LAYER_WORKFLOW_REPO_USER}') THEN
+              EXECUTE format('CREATE USER %I WITH PASSWORD %L', '${AI_EXEC_LAYER_WORKFLOW_REPO_USER}', '${AI_EXEC_LAYER_WORKFLOW_REPO_PASSWORD}');
+            ELSE
+              EXECUTE format('ALTER USER %I WITH PASSWORD %L', '${AI_EXEC_LAYER_WORKFLOW_REPO_USER}', '${AI_EXEC_LAYER_WORKFLOW_REPO_PASSWORD}');
+            END IF;
+            
+          END;
+          \$\$;
+
+          ALTER DATABASE product_prices_azure OWNER TO api_user_product_prices;
+          ALTER DATABASE product_prices_aws OWNER TO api_user_product_prices;
+          ALTER DATABASE product_prices_gcp OWNER TO api_user_product_prices;
+          ALTER DATABASE product_prices_hetzner OWNER TO api_user_product_prices;
+          ALTER DATABASE product_prices_alibaba_cloud OWNER TO api_user_product_prices;
+
+          ALTER DATABASE ai_exec_layer OWNER TO ai_exec_layer_repo_user;
+          ALTER DATABASE openidm OWNER TO openidm_repo_user;
+
+          ALTER DATABASE ai_exec_layer_workflow OWNER TO ai_exec_layer_workflow_user;
+          ALTER DATABASE openidm_workflow OWNER TO openidm_workflow_user;
+
+          EOF
+          )
+
+          echo "$SQL" | psql -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE"     
+        env:
+        - name: DEBUG
+          value: "true"
+        - name: PGHOST
+          value: "postgres"
+        - name: PGPORT
+          value: "5432"
+        - name: PGDATABASE
+          value: "product_prices_azure"
+        - name: PGUSER
+          value: "fruser"
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-env-secrets
+              key: POSTGRES_PASSWORD
+        - name: API_USER
+          value: "api_user_product_prices"
+        - name: API_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-env-secrets
+              key: API_PRODUCT_PRICES_AZURE_PASSWORD
+        - name: IDM_DB_CONNECTOR_USER
+          value: "idm_connector_user"
+        - name: IDM_DB_CONNECTOR_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-env-secrets
+              key: IDM_DB_CONNECTOR_USER_PASSWORD
+        - name: OPENIDM_WORKFLOW_REPO_USER
+          valueFrom:
+            secretKeyRef:
+              name: idm-env-secrets
+              key: OPENIDM_WORKFLOW_REPO_USER
+        - name: OPENIDM_DB_REPO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: idm-env-secrets
+              key: OPENIDM_DB_REPO_USERNAME
+        - name: OPENIDM_DB_REPO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: idm-env-secrets
+              key: OPENIDM_DB_REPO_PASSWORD
+        - name: OPENIDM_WORKFLOW_REPO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: idm-env-secrets
+              key: OPENIDM_WORKFLOW_REPO_PASSWORD
+        - name: OPENIDM_WORKFLOW_REPO_DB
+          valueFrom:
+            secretKeyRef:
+              name: idm-env-secrets
+              key: OPENIDM_WORKFLOW_REPO_DB
+        - name: AI_EXEC_LAYER_WORKFLOW_REPO_USER
+          valueFrom:
+            secretKeyRef:
+              name: ai-exec-layer-env-secrets
+              key: AI_EXEC_LAYER_WORKFLOW_REPO_USER
+        - name: AI_EXEC_LAYER_WORKFLOW_REPO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ai-exec-layer-env-secrets
+              key: AI_EXEC_LAYER_WORKFLOW_REPO_PASSWORD 
+        - name: AI_EXEC_LAYER_WORKFLOW_REPO_DB
+          valueFrom:
+            secretKeyRef:
+              name: ai-exec-layer-env-secrets
+              key: AI_EXEC_LAYER_WORKFLOW_REPO_DB
+        - name: AI_EXEC_LAYER_DB_REPO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: ai-exec-layer-env-secrets
+              key: AI_EXEC_LAYER_DB_REPO_USERNAME
+        - name: AI_EXEC_LAYER_DB_REPO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ai-exec-layer-env-secrets
+              key: AI_EXEC_LAYER_DB_REPO_PASSWORD
+
+        

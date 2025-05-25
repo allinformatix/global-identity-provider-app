@@ -1,0 +1,39 @@
+kind: Component
+apiVersion: kustomize.config.k8s.io/v1alpha1
+images:
+- name: postgres
+  newName: docker.io/allinformatix/postgres
+  newTag: v-0.9.0
+- name: am
+  newName: docker.io/allinformatix/am
+  newTag: v-0.9.0
+- name: amster
+  newName: docker.io/allinformatix/amster
+  newTag: customized
+- name: ds
+  newName: docker.io/allinformatix/ds
+  newTag: v-0.9.0
+- name: ds-cts
+  newName: docker.io/allinformatix/ds-cts
+  newTag: v-0.9.0
+- name: ds-idrepo
+  newName: docker.io/allinformatix/ds-idrepo
+  newTag: v-0.9.0
+- name: git-server
+  newName: us-docker.pkg.dev/forgeops-public/images/git-server
+- name: idm
+  newName: docker.io/allinformatix/idm
+  newTag: v-0.9.0
+- name: ai-exec-layer
+  newName: docker.io/allinformatix/ai-exec-layer
+  newTag: v-0.9.0
+- name: ig
+  newName: docker.io/allinformatix/ig
+  newTag: v-0.9.0
+- name: ldif-importer
+  newName: docker.io/allinformatix/ldif-importer
+  newTag: v-0.9.0
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/part-of: forgerock

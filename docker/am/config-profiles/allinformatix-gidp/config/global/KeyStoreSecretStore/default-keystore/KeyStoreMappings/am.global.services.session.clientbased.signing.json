@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.global.services.session.clientbased.signing",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "rsajwtsigningkey"
+    ],
+    "secretId": "am.global.services.session.clientbased.signing"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.global.services.session.clientbased.signing",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

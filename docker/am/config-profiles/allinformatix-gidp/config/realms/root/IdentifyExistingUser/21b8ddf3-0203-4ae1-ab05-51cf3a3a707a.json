@@ -1,0 +1,29 @@
+{
+  "data": {
+    "_id": "21b8ddf3-0203-4ae1-ab05-51cf3a3a707a",
+    "_outcomes": [
+      {
+        "displayName": "True",
+        "id": "true"
+      },
+      {
+        "displayName": "False",
+        "id": "false"
+      }
+    ],
+    "_type": {
+      "_id": "IdentifyExistingUserNode",
+      "collection": true,
+      "name": "Identify Existing User"
+    },
+    "identifier": "userName",
+    "identityAttribute": "mail"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "21b8ddf3-0203-4ae1-ab05-51cf3a3a707a",
+    "entityType": "IdentifyExistingUser",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

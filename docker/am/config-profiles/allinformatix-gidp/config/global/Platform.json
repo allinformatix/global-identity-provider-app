@@ -1,0 +1,19 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "platform",
+      "collection": false,
+      "name": "Platform"
+    },
+    "cookieDomains": [],
+    "locale": "en_US"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "Platform",
+    "entityType": "Platform",
+    "pathParams": {},
+    "realm": null
+  }
+}

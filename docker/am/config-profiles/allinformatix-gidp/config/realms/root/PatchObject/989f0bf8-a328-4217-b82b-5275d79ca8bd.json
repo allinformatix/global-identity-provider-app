@@ -1,0 +1,31 @@
+{
+  "data": {
+    "_id": "989f0bf8-a328-4217-b82b-5275d79ca8bd",
+    "_outcomes": [
+      {
+        "displayName": "Patched",
+        "id": "PATCHED"
+      },
+      {
+        "displayName": "Failed",
+        "id": "FAILURE"
+      }
+    ],
+    "_type": {
+      "_id": "PatchObjectNode",
+      "collection": true,
+      "name": "Patch Object"
+    },
+    "identityAttribute": "mail",
+    "identityResource": "managed/user",
+    "ignoredFields": [],
+    "patchAsObject": false
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "989f0bf8-a328-4217-b82b-5275d79ca8bd",
+    "entityType": "PatchObject",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

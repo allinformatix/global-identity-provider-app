@@ -1,0 +1,138 @@
+# GIDP ADMINS Admin Group
+dn: cn=GIDP ADMINS,ou=groups,ou=identities
+objectClass: groupofuniquenames
+objectClass: top
+cn: GIDP ADMINS
+
+# GIDP ADMINS ACI for ou=identities
+dn: ou=identities
+changetype:modify
+add:aci
+aci: (targetattr="*||aci")(version 3.0; acl "GIDP Administrator:: Read, write and proxy identities"; allow (all, proxy)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+aci: (targetattr="+")(version 3.0; acl "Read operational attributes"; allow (all)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+aci: (targetattr="userPassword") (version 3.0; acl "Allow password change"; allow (write)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+
+# GIDP ADMINS ACI for dc=org,dc=allinformatix,dc=com
+dn: dc=org,dc=allinformatix,dc=com
+changetype:modify
+add:aci
+aci: (targetattr="*||aci")(version 3.0; acl "GIDP Administrator:: Read, write and proxy identities"; allow (all, proxy)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+aci: (targetattr="+")(version 3.0; acl "Read operational attributes"; allow (all)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+aci: (targetattr="userPassword") (version 3.0; acl "Allow password change"; allow (write)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+
+# GIDP ADMINS ACI for dc=Business,dc=Tenants,dc=allinformatix,dc=com
+dn: dc=Business,dc=Tenants,dc=allinformatix,dc=com
+changetype:modify
+add:aci
+aci: (targetattr="*||aci")(version 3.0; acl "GIDP Administrator:: Read, write and proxy identities"; allow (all, proxy)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+aci: (targetattr="+")(version 3.0; acl "Read operational attributes"; allow (all)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+aci: (targetattr="userPassword") (version 3.0; acl "Allow password change"; allow (write)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+
+# GIDP ADMINS ACI for dc=Business,dc=Consumer,dc=allinformatix,dc=com
+dn: dc=Consumer,dc=Tenants,dc=allinformatix,dc=com
+changetype:modify
+add:aci
+aci: (targetattr="*||aci")(version 3.0; acl "GIDP Administrator:: Read, write and proxy identities"; allow (all, proxy)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+aci: (targetattr="+")(version 3.0; acl "Read operational attributes"; allow (all)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+aci: (targetattr="userPassword") (version 3.0; acl "Allow password change"; allow (write)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+
+# GIDP ADMINS ACI for ou=identities
+dn: cn=config
+changetype:modify
+add:aci
+aci: (targetattr ="*||aci")(version 3.0;acl "GIDP Administrator is only allowed to read in the config ou!"; allow(read, search)(groupdn ="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities");)
+
+# GIDP ADMINS Priviledge
+dn: cn=GIDP Administrator Privileges,ou=identities
+objectClass: collectiveAttributeSubentry
+objectClass: extensibleObject
+objectClass: subentry
+objectClass: top
+cn: GIDP Administrator Privileges
+ds-privilege-name;collective: config-read
+ds-privilege-name;collective: ldif-import
+ds-privilege-name;collective: ldif-export
+ds-privilege-name;collective: backend-backup
+ds-privilege-name;collective: backend-restore
+ds-privilege-name;collective: server-lockdown
+ds-privilege-name;collective: server-shutdown
+ds-privilege-name;collective: disconnect-client
+ds-privilege-name;collective: cancel-request
+ds-privilege-name;collective: password-reset
+ds-privilege-name;collective: privilege-change
+ds-privilege-name;collective: changelog-read
+ds-privilege-name;collective: monitor-read
+subtreeSpecification: {base "ou=people", specificationFilter "(isMemberOf=cn=GIDP ADMINS,ou=groups,ou=identities)" }
+
+dn: uid=idm-admin,ou=people,ou=identities
+changetype: add
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: allinformatixEnterpriseUser
+allinformatixID: idm-admin
+cn: IDM Service Account
+sn: Technical User
+givenName: IDM
+description: technical user for IDM
+userPassword: password
+
+dn: cn=GIDP ADMINS,ou=groups,ou=identities
+changetype: modify
+add: uniqueMember
+uniqueMember: uid=idm-admin,ou=people,ou=identities
+
+dn: uid=idm-repo-user,ou=admins,ou=identities
+changetype: add
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: idm-repo-user
+sn: idm-repo-user
+uid: idm-repo-user
+userPassword: password
+
+dn: dc=openidm,dc=allinformatix,dc=com
+changetype: modify
+add: aci
+aci: (targetattr="*||aci")(version 3.0; acl "Read, write and proxy identities"; allow (all, proxy)(userdn = "ldap:///uid=idm-repo-user,ou=admins,ou=identities");)
+aci: (targetattr="+")(version 3.0; acl "Read operational attributes"; allow (read, search, compare)(userdn = "ldap:///uid=idm-repo-user,ou=admins,ou=identities");)
+aci: (targetcontrol="PersistentSearch||ProxiedAuth")(version 3.0;acl "Persistent searches and proxy auth"; allow (read)(userdn = "ldap:///uid=idm-repo-user,ou=admins,ou=identities");)
+
+dn: uid=ai-exec-layer-repo-user,ou=admins,ou=identities
+changetype: add
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: ai-exec-layer-repo-user
+sn: ai-exec-layer-repo-user
+uid: ai-exec-layer-repo-user
+userPassword: password
+
+dn: dc=openidm,dc=ai-exec-layer,dc=allinformatix,dc=com
+changetype: modify
+add: aci
+aci: (targetattr="*||aci")(version 3.0; acl "Read, write and proxy identities"; allow (all, proxy)(userdn = "ldap:///uid=ai-exec-layer-repo-user,ou=admins,ou=identities");)
+aci: (targetattr="+")(version 3.0; acl "Read operational attributes"; allow (read, search, compare)(userdn = "ldap:///uid=ai-exec-layer-repo-user,ou=admins,ou=identities");)
+aci: (targetcontrol="PersistentSearch||ProxiedAuth")(version 3.0;acl "Persistent searches and proxy auth"; allow (read)(userdn = "ldap:///uid=ai-exec-layer-repo-user,ou=admins,ou=identities");)
+
+# aci's
+dn: uid=idm-admin,ou=people,ou=identities
+changetype: modify
+add: aci
+aci: (target="ldap:///uid=idm-admin,ou=people,ou=identities")
+ (targetattr="*")
+ (version 3.0; acl "Deny all modifications and delete for all except admin"; 
+  deny (write, delete) (userdn != "ldap:///uid=admin");)
+
+# aci's
+dn: cn=GIDP ADMINS,ou=groups,ou=identities
+changetype: modify
+add: aci
+aci: (target="ldap:///cn=GIDP ADMINS,ou=groups,ou=identities")
+ (targetattr="*")
+ (version 3.0; acl "Deny all modifications and delete for all except admin"; 
+  deny (write, delete) (userdn != "ldap:///uid=admin");)

@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.global.services.saml2.client.storage.jwt.encryption",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "directenctest"
+    ],
+    "secretId": "am.global.services.saml2.client.storage.jwt.encryption"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.global.services.saml2.client.storage.jwt.encryption",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

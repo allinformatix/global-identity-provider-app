@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ds-backup-management
+spec:
+  schedule: "45 23 * * *" # every day at 23:45
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+          labels:
+            app: ds-backup-management
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: ds-backup-move
+            image: amazon/aws-cli:2.13.19
+            command: ["bash", "-c", "aws s3 mv ${DSBACKUP_DIRECTORY}/ds-idrepo-0/ ${DSBACKUP_DIRECTORY}/ds-idrepo-0/archive/$(date '+%Y-%m-%d')/ --recursive --exclude '*archive/*'"]
+            env:
+            - name: DSBACKUP_DIRECTORY
+              valueFrom:
+                configMapKeyRef:
+                  name: platform-config 
+                  key: DSBACKUP_DIRECTORY
+            envFrom:
+            - secretRef:
+                name: hetzner-s3-credentials
+            resources:
+              limits:
+                memory: 200Mi
+              requests:
+                cpu: 500m
+                memory: 100Mi
+          # - name: ds-backup-delete
+          #   image: ds-backup-delete
+          #   env:
+          #   - name: DSBACKUP_DIRECTORY
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: platform-config 
+          #         key: DSBACKUP_DIRECTORY
+          #   envFrom:
+          #   - secretRef:
+          #       name: hetzner-s3-credentials
+          #   resources:
+          #     limits:
+          #       memory: 200Mi
+          #     requests:
+          #       cpu: 500m
+          #       memory: 100Mi
+          # securityContext:
+          #   fsGroup: 0
+          #   runAsUser: 11111

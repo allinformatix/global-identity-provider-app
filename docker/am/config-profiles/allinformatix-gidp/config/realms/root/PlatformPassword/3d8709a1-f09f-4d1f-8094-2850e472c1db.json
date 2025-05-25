@@ -1,0 +1,25 @@
+{
+  "data": {
+    "_id": "3d8709a1-f09f-4d1f-8094-2850e472c1db",
+    "_outcomes": [
+      {
+        "displayName": "Outcome",
+        "id": "outcome"
+      }
+    ],
+    "_type": {
+      "_id": "ValidatedPasswordNode",
+      "collection": true,
+      "name": "Platform Password"
+    },
+    "passwordAttribute": "password",
+    "validateInput": true
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "3d8709a1-f09f-4d1f-8094-2850e472c1db",
+    "entityType": "PlatformPassword",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

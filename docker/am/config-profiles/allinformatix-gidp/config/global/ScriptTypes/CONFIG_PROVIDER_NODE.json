@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "CONFIG_PROVIDER_NODE",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "5e854779-6ec1-4c39-aeba-0477e0986646",
+    "languages": [
+      "JAVASCRIPT",
+      "GROOVY"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "CONFIG_PROVIDER_NODE",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

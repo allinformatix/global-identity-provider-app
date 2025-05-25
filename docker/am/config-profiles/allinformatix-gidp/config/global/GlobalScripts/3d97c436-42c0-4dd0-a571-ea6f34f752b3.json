@@ -1,0 +1,27 @@
+{
+  "data": {
+    "_id": "3d97c436-42c0-4dd0-a571-ea6f34f752b3",
+    "_type": {
+      "_id": "globalScript",
+      "collection": true,
+      "name": "globalScript"
+    },
+    "context": "SOCIAL_IDP_PROFILE_TRANSFORMATION",
+    "createdBy": "null",
+    "creationDate": "0",
+    "description": "Normalizes raw profile data from Itsme",
+    "evaluatorVersion": "V1_0",
+    "language": "GROOVY",
+    "lastModifiedBy": "null",
+    "lastModifiedDate": "0",
+    "name": "Itsme Profile Normalization",
+    "script": "LyoKICogQ29weXJpZ2h0IDIwMjAtMjAyMSBGb3JnZVJvY2sgQVMuIEFsbCBSaWdodHMgUmVzZXJ2ZWQKICoKICogVXNlIG9mIHRoaXMgY29kZSByZXF1aXJlcyBhIGNvbW1lcmNpYWwgc29mdHdhcmUgbGljZW5zZSB3aXRoIEZvcmdlUm9jayBBUy4KICogb3Igd2l0aCBvbmUgb2YgaXRzIGFmZmlsaWF0ZXMuIEFsbCB1c2Ugc2hhbGwgYmUgZXhjbHVzaXZlbHkgc3ViamVjdAogKiB0byBzdWNoIGxpY2Vuc2UgYmV0d2VlbiB0aGUgbGljZW5zZWUgYW5kIEZvcmdlUm9jayBBUy4KICovCgppbXBvcnQgc3RhdGljIG9yZy5mb3JnZXJvY2suanNvbi5Kc29uVmFsdWUuZmllbGQKaW1wb3J0IHN0YXRpYyBvcmcuZm9yZ2Vyb2NrLmpzb24uSnNvblZhbHVlLmpzb24KaW1wb3J0IHN0YXRpYyBvcmcuZm9yZ2Vyb2NrLmpzb24uSnNvblZhbHVlLm9iamVjdAoKaW1wb3J0IG9yZy5mb3JnZXJvY2suanNvbi5Kc29uVmFsdWUKCkpzb25WYWx1ZSBtYW5hZ2VkVXNlciA9IGpzb24ob2JqZWN0KAogICAgICAgIGZpZWxkKCJpZCIsIHJhd1Byb2ZpbGUuc3ViKSwKICAgICAgICBmaWVsZCgiZGlzcGxheU5hbWUiLCByYXdQcm9maWxlLm5hbWUpLAogICAgICAgIGZpZWxkKCJnaXZlbk5hbWUiLCByYXdQcm9maWxlLmdpdmVuX25hbWUpLAogICAgICAgIGZpZWxkKCJmYW1pbHlOYW1lIiwgcmF3UHJvZmlsZS5mYW1pbHlfbmFtZSksCiAgICAgICAgZmllbGQoInVzZXJuYW1lIiwgcmF3UHJvZmlsZS5lbWFpbCksCiAgICAgICAgZmllbGQoImVtYWlsIiwgcmF3UHJvZmlsZS5lbWFpbCkpKQpyZXR1cm4gbWFuYWdlZFVzZXI="
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "3d97c436-42c0-4dd0-a571-ea6f34f752b3",
+    "entityType": "GlobalScripts",
+    "pathParams": {},
+    "realm": null
+  }
+}

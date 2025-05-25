@@ -1,0 +1,20 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "datastore",
+      "collection": false,
+      "name": "Data Store"
+    },
+    "defaults": {
+      "authenticationLevel": 0
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "DataStoreModule",
+    "entityType": "DataStoreModule",
+    "pathParams": {},
+    "realm": null
+  }
+}

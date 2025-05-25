@@ -1,0 +1,32 @@
+{
+  "data": {
+    "_id": "StdOut",
+    "_type": {
+      "_id": "JSONStdout",
+      "collection": true,
+      "name": "JSON (stdout)"
+    },
+    "commonHandler": {
+      "enabled": true,
+      "topics": [
+        "access",
+        "activity",
+        "config",
+        "authentication"
+      ]
+    },
+    "commonHandlerPlugin": {
+      "handlerFactory": "org.forgerock.openam.audit.events.handlers.JsonStdoutAuditEventHandlerFactory"
+    },
+    "jsonConfig": {
+      "elasticsearchCompatible": true
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "StdOut",
+    "entityType": "JSONStdout",
+    "pathParams": {},
+    "realm": null
+  }
+}

@@ -1,0 +1,14 @@
+namespace: gidp-prd
+
+resources:
+- ../mini
+- secrets
+
+components:
+- ../platform-config/gidp-fqdn/prd
+
+patches:
+- path: platform-config-patch.yaml
+- path: ingresses/patch-longhorn-ingress.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization

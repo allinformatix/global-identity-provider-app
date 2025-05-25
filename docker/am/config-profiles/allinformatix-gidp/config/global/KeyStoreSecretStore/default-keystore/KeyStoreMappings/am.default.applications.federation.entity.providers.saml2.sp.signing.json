@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.default.applications.federation.entity.providers.saml2.sp.signing",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "rsajwtsigningkey"
+    ],
+    "secretId": "am.default.applications.federation.entity.providers.saml2.sp.signing"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.default.applications.federation.entity.providers.saml2.sp.signing",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

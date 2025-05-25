@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+# defines config map patches to set SMTP connection details for PROD
+# SMTP_FROM_ADDRESS value does not need to be patched, the default is ok for PROD
+patches:
+- target:
+    kind: ConfigMap
+    name: platform-config
+  patch: |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: platform-config
+    data:
+      SMTP_HOST: "mail-tx.allinformatix.com"

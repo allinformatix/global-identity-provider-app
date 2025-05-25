@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+# defines config map patches to allow localhost CORS URLs
+patches:
+- target:
+    kind: ConfigMap
+    name: platform-config
+  patch: |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: platform-config
+    data:
+      CORS_ORIGINS: "http://localhost:8083,http://localhost:8888,http://localhost:8080,http://localhost:8082,https://kunde-s.dvit.ergo.de"

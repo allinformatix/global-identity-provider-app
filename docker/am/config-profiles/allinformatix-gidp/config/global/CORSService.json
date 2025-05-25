@@ -1,0 +1,18 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "CorsService",
+      "collection": false,
+      "name": "CORS Service"
+    },
+    "enabled": true
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "CORSService",
+    "entityType": "CORSService",
+    "pathParams": {},
+    "realm": null
+  }
+}

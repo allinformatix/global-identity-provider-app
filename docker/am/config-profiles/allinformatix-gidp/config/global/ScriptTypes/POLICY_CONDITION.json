@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "POLICY_CONDITION",
+    "_type": {
+      "_id": "contexts",
+      "collection": true,
+      "name": "scriptContext"
+    },
+    "defaultScript": "9de3eb62-f131-4fac-a294-7bd170fd4acb",
+    "languages": [
+      "JAVASCRIPT",
+      "GROOVY"
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "POLICY_CONDITION",
+    "entityType": "ScriptTypes",
+    "pathParams": {},
+    "realm": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "data": {
+    "_id": "Lw",
+    "active": true,
+    "aliases": [
+      "&{fqdn}",
+      "am-config",
+      "am"
+    ],
+    "name": "/",
+    "parentPath": null
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "Lw",
+    "entityType": "Realms",
+    "pathParams": {},
+    "realm": null
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "scripting",
+      "collection": false,
+      "name": "Scripting"
+    },
+    "defaultContext": "POLICY_CONDITION"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "Scripting",
+    "entityType": "Scripting",
+    "pathParams": {},
+    "realm": null
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "name": "AI endpoints",
+  "condition": "${find(request.uri.path, '^/ai')}",
+  "heap": [
+    {
+      "name": "SystemAndEnvSecretStore-1",
+      "type": "SystemAndEnvSecretStore"
+    },
+    {
+      "name": "capture",
+      "type": "CaptureDecorator",
+      "config": {
+        "type": "Slf4jLogSink",
+        "captureEntity": true,
+        "captureExchange": true,
+        "logSink": {
+          "config": {
+            "base": "org.forgerock.openig"
+          }
+        }
+      }
+    },
+    {
+      "name": "AmService-1",
+      "type": "AmService",
+      "config": {
+        "capture": "all",
+        "url": "http://am/am",
+        "realm": "/",
+        "agent": {
+          "username": "ig-agent",
+          "passwordSecretId": "ig.agent.secret"
+        },
+        "secretsProvider": "SystemAndEnvSecretStore-1"
+      }
+    }
+  ],
+  "handler": {
+    "type": "DispatchHandler",
+    "config": {
+      "bindings": [
+        {
+          "name": "AI aws",
+          "condition": "${find(request.uri.path, 'openai-lambda$')}",
+          "handler": {
+            "type": "Chain",
+            "capture": "all",
+            "config": {
+              "filters": [
+                {
+                  "type": "OAuth2ResourceServerFilter",
+                  "config": {
+                    "scopes": [ "mail" ],
+                    "requireHttps": false,
+                    "accessTokenResolver": {
+                      "name": "TokenIntrospectionAccessTokenResolver-1",
+                      "type": "TokenIntrospectionAccessTokenResolver",
+                      "config": {
+                        "amService": "AmService-1",
+                        "providerHandler": {
+                          "type": "Chain",
+                          "config": {
+                            "filters": [
+                              {
+                                "type": "HttpBasicAuthenticationClientFilter",
+                                "config": {
+                                  "username": "ig-agent",
+                                  "passwordSecretId": "ig.agent.secret",
+                                  "secretsProvider": "SystemAndEnvSecretStore-1"
+                                }
+                              }
+                            ],
+                            "handler": "ForgeRockClientHandler"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "StaticRequestFilter",
+                  "config": {
+                    "method": "POST",
+                    "uri": "https://api.openai.com/v1/chat/completions",
+                    "headers": {
+                      "Authorization": ["Bearer ${env.OPENAI_API_KEY}"],
+                      "Content-Type": ["application/json"]
+                    },
+                    "entity": "{\n  \"model\": \"gpt-4\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"You are a helpful DevOps assistant who only responds with Terraform JSON.\"},\n    {\"role\": \"user\", \"content\": \"Generate Terraform code for a basic AWS Lambda function triggered by HTTP.\"}\n  ],\n  \"temperature\": 0.3,\n  \"max_tokens\": 512\n}"
+                  }
+                }
+              ],
+              "handler": {
+                "type": "ClientHandler",
+                "config": {
+                  "soTimeout": "60s",
+                  "connectionTimeout": "30s"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "test-capture",          
+          "condition": "${find(request.uri.path, 'test-capture')}",
+          "handler": {
+            "type": "Chain",
+            "capture": "all",
+            "config": {
+              "filters": [
+                {
+                  "type": "OAuth2ResourceServerFilter",
+                  "config": {
+                    "scopes": [ "mail" ],
+                    "requireHttps": false,
+                    "accessTokenResolver": {
+                      "name": "TokenIntrospectionAccessTokenResolver-1",
+                      "type": "TokenIntrospectionAccessTokenResolver",
+                      "config": {
+                        "amService": "AmService-1",
+                        "providerHandler": {
+                          "type": "Chain",
+                          "config": {
+                            "filters": [
+                              {
+                                "type": "HttpBasicAuthenticationClientFilter",
+                                "config": {
+                                  "username": "ig-agent",
+                                  "passwordSecretId": "ig.agent.secret",
+                                  "secretsProvider": "SystemAndEnvSecretStore-1"
+                                }
+                              }
+                            ],
+                            "handler": "ForgeRockClientHandler"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "handler": {
+                "type": "StaticResponseHandler",
+                "capture": "all",
+                "config": {
+                  "status": 200,
+                  "entity": "<html><body><h1>Capture success!</h1><br /><h2>Decoded access token with introspect endpoint: ${contexts.oauth2.accessToken.info}</h2></body></html>"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "monitor": true
+}

@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+MODE="${MODE:-offline}"
+
+echo "🔧 Running post-init.sh in $MODE mode..."
+
+declare -A INDEX_BACKENDS=(
+  [allinformatixID]="gidpOrgDataRoot gidpConsumerTenantsRoot gidpBusinessTenantsRoot"
+  [allinformatixEnterpriseUUID]="gidpOrgDataRoot"
+  [allinformatixConsumerUUID]="gidpConsumerTenantsRoot"
+  [allinformatixBizUUID]="gidpBusinessTenantsRoot"
+  [allinformatixBizOUsUUID]="gidpBusinessTenantsRoot"
+)
+
+# Index-Erstellung
+for attr in "${!INDEX_BACKENDS[@]}"; do
+  for backend in ${INDEX_BACKENDS[$attr]}; do
+    echo "🔍 Checking index '$attr' in backend '$backend'..."
+
+    if [ "$MODE" = "offline" ]; then
+      if grep -q "$attr" "/opt/opendj/config/config.ldif"; then
+        echo "✅ Index '$attr' für '$backend' ist bereits vorhanden (offline lt. config.ldif)."
+      else
+        echo "➕ Erstelle Index '$attr' in Backend '$backend' (offline)..."
+        dsconfig --offline --no-prompt --batch <<EOF
+create-backend-index \
+  --backend-name "$backend" \
+  --type generic \
+  --index-name "$attr" \
+  --set index-type:equality
+EOF
+      fi
+    else
+      # Online-Modus
+      ADMIN_PASS=$(cat /var/run/secrets/opendj-passwords/dirmanager.pw)
+      if dsconfig list-backend-indexes \
+        --hostname localhost --port 4444 \
+        --bindDN uid=admin \
+        --bindPassword "$ADMIN_PASS" \
+        --trustAll --no-prompt \
+        --backend-name "$backend" | grep -q "$attr"; then
+        echo "✅ Index '$attr' für '$backend' ist bereits vorhanden (online)."
+      else
+        echo "➕ Erstelle Index '$attr' in Backend '$backend' (online)..."
+        dsconfig create-backend-index \
+          --hostname localhost --port 4444 \
+          --bindDN uid=admin \
+          --bindPassword "$ADMIN_PASS" \
+          --trustAll --no-prompt \
+          --backend-name "$backend" \
+          --type generic \
+          --index-name "$attr" \
+          --set index-type:equality
+      fi
+    fi
+  done
+done
+
+# LDIF-Import (nur offline sinnvoll)
+if [ "$MODE" = "offline" ]; then
+  IMPORTS=(
+    "gidpOrgDataRoot|dc=org,dc=allinformatix,dc=com"
+    "gidpBusinessTenantsRoot|dc=Business,dc=Tenants,dc=allinformatix,dc=com"
+    "gidpConsumerTenantsRoot|dc=Consumer,dc=Tenants,dc=allinformatix,dc=com"
+  )
+
+  for entry in "${IMPORTS[@]}"; do
+    IFS="|" read -r backend branch <<< "$entry"
+
+    echo "📥 Importing $branch into $backend..."
+    import-ldif \
+      --offline \
+      --ldiffile "/opt/opendj/runtime-scripts/ds-idrepo/ldif/allinformatixDirectoryTree.ldif" \
+      --backendID "$backend" \
+      --includeBranch "$branch"
+  done
+else
+  echo "ℹ️ LDIF-Import wird im Online-Modus übersprungen."
+fi
+
+echo "🔎 Prüfe, ob benutzerdefiniertes Schema korrekt geladen wurde..."
+
+SCHEMA_OBJECTCLASS="allinformatixEnterpriseUser"
+
+if [ "$MODE" = "offline" ]; then
+  echo "🛑 Offline-Modus: Schema-Validierung wird übersprungen."
+else
+  ADMIN_PASS=$(cat /var/run/secrets/opendj-passwords/dirmanager.pw)
+  
+  if ldapsearch \
+    -h localhost -p 1389 \
+    -D "uid=admin" -w "$ADMIN_PASS" \
+    -b "cn=schema" \
+    "(objectClasses=$SCHEMA_OBJECTCLASS)" objectClasses | grep -q "$SCHEMA_OBJECTCLASS"; then
+
+    echo "✅ Schema-Objektklasse '$SCHEMA_OBJECTCLASS' ist vorhanden."
+  else
+    echo "❌ Schema-Objektklasse '$SCHEMA_OBJECTCLASS' NICHT gefunden!"
+    echo "🔁 Möglicherweise wurde die Schema-Datei nicht korrekt kopiert oder geladen."
+  fi
+fi
+
+echo "✅ post-init.sh abgeschlossen."

@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "baseurl",
+      "collection": false,
+      "name": "Base URL Source"
+    },
+    "defaults": {
+      "contextPath": "/am",
+      "fixedValue": "https://gidp.k8s.prd.allinformatix.com",
+      "source": "FIXED_VALUE"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "BaseUrlSource",
+    "entityType": "BaseUrlSource",
+    "pathParams": {},
+    "realm": null
+  }
+}

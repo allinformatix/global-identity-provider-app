@@ -1,0 +1,61 @@
+{
+  "data": {
+    "_id": "Agent",
+    "enabled": true,
+    "entryNodeId": "ab1230cf-1479-40f7-b9ad-efa0d4505bed",
+    "innerTreeOnly": false,
+    "nodes": {
+      "75bc4ff6-dfd0-4b24-a650-6da7bdbc53fc": {
+        "connections": {
+          "false": "e301438c-0bd0-429c-ab0c-66126501069a",
+          "true": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+        },
+        "displayName": "Agent Data Store Decision",
+        "nodeType": "AgentDataStoreDecisionNode",
+        "x": 570,
+        "y": 40
+      },
+      "ab1230cf-1479-40f7-b9ad-efa0d4505bed": {
+        "connections": {
+          "false": "c6f40130-da03-4552-b87a-5fa9edcc2ca1",
+          "true": "75bc4ff6-dfd0-4b24-a650-6da7bdbc53fc"
+        },
+        "displayName": "Zero Page Login Collector",
+        "nodeType": "ZeroPageLoginNode",
+        "x": 149,
+        "y": 30
+      },
+      "c6f40130-da03-4552-b87a-5fa9edcc2ca1": {
+        "connections": {
+          "outcome": "75bc4ff6-dfd0-4b24-a650-6da7bdbc53fc"
+        },
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 384,
+        "y": 159
+      }
+    },
+    "staticNodes": {
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 788,
+        "y": 23
+      },
+      "e301438c-0bd0-429c-ab0c-66126501069a": {
+        "x": 790,
+        "y": 111
+      },
+      "startNode": {
+        "x": 50,
+        "y": 25
+      }
+    },
+    "uiConfig": {}
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "Agent",
+    "entityType": "AuthTree",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

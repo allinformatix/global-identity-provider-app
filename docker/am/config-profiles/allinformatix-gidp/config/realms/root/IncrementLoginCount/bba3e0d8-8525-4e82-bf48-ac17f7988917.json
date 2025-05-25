@@ -1,0 +1,24 @@
+{
+  "data": {
+    "_id": "bba3e0d8-8525-4e82-bf48-ac17f7988917",
+    "_outcomes": [
+      {
+        "displayName": "Outcome",
+        "id": "outcome"
+      }
+    ],
+    "_type": {
+      "_id": "IncrementLoginCountNode",
+      "collection": true,
+      "name": "Increment Login Count"
+    },
+    "identityAttribute": "userName"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "bba3e0d8-8525-4e82-bf48-ac17f7988917",
+    "entityType": "IncrementLoginCount",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

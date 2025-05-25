@@ -1,0 +1,1336 @@
+{
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"exec": [
+					""
+				],
+				"type": "text/javascript"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"exec": [
+					""
+				],
+				"type": "text/javascript"
+			}
+		}
+	],
+	"info": {
+		"_exporter_id": "21237178",
+		"_postman_id": "08fc45c3-85d7-4ab5-b085-4b249b2be9ad",
+		"description": "Each Request can have different outcomes(see examples), depending on the variable values passed.",
+		"name": "selfservice_changeUserName",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"description": "Invokes requests for the login journey to establish user session.",
+			"item": [
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// clear cookies\r",
+									"const jar = pm.cookies.jar();\r",
+									"const url = pm.variables.get('url');\r",
+									"jar.clear(url, function (err) {\r",
+									"    if(err) {\r",
+									"        console.error(err);\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"cookies cleared!\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "getAuthId",
+					"request": {
+						"description": "Request login Journey to get AuthId",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoicTZyYjkyNWNoOTU5Mmg5ZmlvcWtldmJvc2kiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1TGNtWXhSbVJvV0Vsc05Vb3lZbDgyUkhwNE1XTm5MblkyTm5GQlJrTk1hVFp5WXpkWVl6WlNUWEZuZUdWUlozWTNhVVF6VlU0d00wazBYMjR4Y0ZobVQyOVBaMEppVTNCWWJFdG9lbXBoWTNSSlh6UlRla1l3Y2tNeVUwbDNjemxPV1hKYUxVdE1SRUZrT0drNFEyNWtRVmx4WjNsbVNtdDNSMmRyTTBWS2RVZFJUbU5hVEcxcVkyUlFlVUpJV2tGRFFVTkdaVTFFY2sxb1lWQnVSMVJXVWpOTk5GbG9kVWxmZGxwcVRXNU9jMGwzUVZka2FXaE1ObVZCTkUxZldtNXFXRzAxU2xoNE9VaGpOMGRLTFRRNVREbGZTbmRSTkhWSlFWRjFhSEZtZFVFeFpsZHNaMnBVZEZOa1VWQnpNVVZVUW5GdU5Gb3RZV3hNZDNWRGJIcHNhakY1YUdzdFpWSlNWbWgyVW1SdGJVRm9SbkYzYmt0VGQwZzFabXhGWTBWUlRFYzBZbXBwWlhWcFJrNWtkak0wVUVZM1NrSXlaVGRTWVdOalVuaHhObkI1T0dST1RqRldNSEJ5WmxJdFUwVllTM0ZZWVV4T2VHNVJlbEE0VG5aMlZqVkRSMUJLV0RsMU4wdGxTbWxKZUdjMk1XSXdRMVpzWkdSUFdVZ3RaRWRuVjJ0RE5FeGphemRWTjNwemVqSkZSeTAyZVhCTFNVMXFiMkpJWkRFMmJESlFaWFZCWDBWTmJWODVOMVpWWmtoSmJGZG9MVXhQZFVsaFR6Qnpia3h0VEdOMU0xQjNNMlkxUjJsV05ubG9ibWhsYmxwMVZucExlRXgwWjNGZlExVTBja2x5Y1RsRFIycE1Rak5zYlhCT01XaEdhM2xoVnpGV09WTlRVVkpmUVdZMmNERkVkbXRCTm1sa1QxSnZYM0E1TldSTlQxUTNkbXhtTm1OVWF5MUJkMU01VEVSV01GUjZOVWxKVjJkc2VqSktXRlpPWVRKRmJWUmFRVzQxZEZka1dqUm9hRzV1WVRBMFEzcHdUWEZCZUdkR1VFeE9jRkIyUVd3NFdWVmZja0ptVHpCVFVVZFZZMGR1Y0ZaS2RHbzNRV1ZYY3pKb1FWQk9WM3BaU1hVNFJEY3dhVEZ1ZFZVNFRXUkRhV3A1UlVseU1ubEpaemt5VGxCRFgxUnphbFkwUmxCU2N6SklVWEJQWmtFM1NVMWpNME10UkhWRWRYQTViWEpqVFY4eGMxOXJMbVIxY25sNVZXSnhWVVk1ZW5keFlrdFVlazlyVTJjLmRyalNoTzlsQ2Y2RFg5c3VyTDZDNGhKZFdqT0JvaWZidFJRaThLbUFwS3MiLCJleHAiOjE3MDk3MDg4NDUsImlhdCI6MTcwOTcwNzA0NX0._0dsCzAmm1V6tSAg_0HEvEwAw6IbZDcpCKeZicleXxA\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 1\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "2166"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:37:25 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "19"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "successfully / 200",
+							"originalRequest": {
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							},
+							"status": "OK"
+						}
+					]
+				},
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "passUserData",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{userName}}\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"{{password}}\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						"description": "Pass the user credentials required for login : userName, password.",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoib2JzNWRtMHBsOWJuNGVuaGozcWgzamY4N3IiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1Q1YwTm5Na3N3ZDBSWldYWm5hazF4WlVSS2NUZEJMbkpIZVZNNVIxaHZXblZ0U1VaUGFUVnJSWEYwVUdKdVIybFVWRnBhZUhwU1RGRnhVMGR4U0VKUmVVRjVhMGRyV2psaU5GQjRlSFZZU1VGbFZucEhjMGQwZUhGWGVVVkJhemRDY0cxWE9XRllNWGRMV1hOalowSTBVRVpoVWtOaWRGTnBNbDkxWVRsSU1tVXRWVTl5ZGtSM00ydHdWMDQ0WDJKMWNsWmhaVVYxTWxOTll6QkRWalJaU0VNeGJDMHpibXhqUWpCNmRtdDZhbFJoUldWdlQyMUZOR0ZqUVMxeWQwMDNjRXRNUVZJMGEwNTROelZzZVZOb1JubEllVVZEYm1WdU5YSnZUbXRMWkZCS2JrNXRVVlZLYWxSMGQyaFVNM1YzWWxoVWVsTndaemxPVXpnMGN6aFVORU55ZEZGSWVFRnRUVU5NZHpSUlRXOXJWV05sYjNoa1NGcFpiRlZXUTFaaWNYTkRkMjVWVFRWMmNGVjZiRmRKUTNkQ1FUUnRlSEY1YUdvMU5Vd3dVR1kwUTNoTE1XNVdVRzFNYjE5V1lUZEdVWFZHZURscWNtbzFkMWxLTTA0MVRXcGFRVXhzUTJ4M1lVdEhkbkl6YVU5ck5WUnBjWFpDZWtKTFRWbzJibHBJU0dSRlVYaHVOMXBKU25semJrazVOa2hETW1sa1lYVllaMnRmTWtaa2FGaGtkM3BoYTJNeU0xbFVhSEZOYjFCRFdVSnVia3RQUkV4d1UyZ3RTWEZPUkhCdlJGQnBaVmxsUTNSQ1kydG5SMlZKVDBST2EycE1ja1ZwUkdWUVdHaFJVRmRvWjJGdU0yUm1iRmxvZEhBd1lrbERUREpEVmtaWlZucGFjR3BEYUhWVWNHbzVUMUJtYW1oVWJXRnRjalkzTkRGb2VISjRiRGcwU0RoSVUxbEdRMWR1WHpWdFlrUjRVMVY2ZVc5TVEyVkdkekUwUlVkM09XTTFiVVZuVWxOUE9EUlNXbFpTUlV0NFZHaGhPV0ZRUWtoRExVbG5Za3BHYm1kRFdHdGFWR1ZMVFhZelFWVTVNRTFGU3pGclJWSlBUV2cwT1VwNVpGQTRlVkEwYWpCNGVrOU1aR05oTUdFME4xOHhVekZ1UWt3MFEyTnNVbDlpTjJGWU5rMHRRVXA1WmpaMU5GTjJNWGgzTkhOZmFuTjBWSEYyY1dOT2JsZHlaVk5KWjBOT0xYZHlNWEpYZG1Wd2RqVmpObGhZTjNWb1pHdFZURFkxVnpVMlNqVXRPSHBPVUZreWVFWXpUa3BPY3pnd0xUaFpUMlIxZEdaVVlrZ3diV0pOYkc0elVYcHdaRzVLVGxkeWJVWnVOa3RUWlU5S2EwcFFNVmN3UWxwZmRWbDVlVWh2YzJ0RVYwcEdVak5zTlZKdU5uWjZNV3RHUWxSMVluUllWRkUzTTNCalIwNXhUbmxVZEVGZlZubGtSVWxpYlRKaVkwVTFPRlptZVhSMWNtaEdjeTFGYlVkTmVHUkhURFpVVDA1eVNqbFhkbkpZVlhWNFgzQXlSazlrYkRORFpIUmFUM2RzUmtKR1R6Vk9RVEV4ZGkxMFRVVlFSVUZJZFRobGRWOWtkV3hhUVdscU9EVXRabW96U1hscVFVazJjamx4YTBGVlZUbFJTVFI1WTFKNVJsUkJaMnRtTUVwTk5qZHBaV2cyWkVaaGVVcE5YMlV3ZVd0RU5tbDZUV1pNYUU1elVtOXNiVmh6TWxnMVNFSjVjMjVLWkhKdWVFMXJXa3RDYW1KcGFGVmplSGd5VXpSQ2RUZzBkbkJpVWt3NVVtZFFNRE50UlV4MGNYcFpXRGhRYWtoMGRUSXdYM2hUVlUxRWRVaHNhMjFxWVVoU1dFMXhSVkpPVlhsM2RIWmtUak0zTW5WVWRUQkxlV04zU0Rkb2JFVkpNVGw0ZEVFM2FqVkhlbXRPZGtKTU0zWlNkbEZrVkUxbk9VTllhalpUZVRoeFgyOVdObkpDWmpsUFFrdzVVbmxoVHpkTVJ6UmllbVp5UjE5VFl5MWlaREZqYzE5aGJHazVSR1pXVmt0UFExSlJSbVk1U1VKaGVrSkhhRVJPVGt4NWVUZENZakZqVTFJd2NGQm5jRVZhVm14Q1kxOXdjM1IwV0VaaldYZERUV1JJTmtkbk0yeGhkbTQ0VjFWME1YSkpPRFphYmtwVFlTMUtlVmsxY25oMlgwZFBiRmREZG1Oa00xWlZZa1ZZV2tKbFVFUnpVSEZ2TURobVoyNUZMVzlNUW1KYVJVcEdORWw0WWxGR09ITmpOaTFxYjBOVWNUWkJTRWRVYTB3eVNHcHBiR3cwWjA1a01ubDRlbUl4YlcxdFJHZzRjbk4xWTFKbVJsOWFOVTVWVWswM1RFOVplRlZCYjBKTVIzaGFiVXN6YzJWbE5GQTNhVE5KYWxobVNXUnFiV1p6UjBkV2JFOXJjM2hUTTNWdlZIQjZiM1oxY1dOeWJuVlJVMkl6YzNSSU1rcFlVVFZPVDNWMldYQjBMVVIwTFVwWE1qUm9lVWx1TVZKd2QyaHBUakJ5VUVOaE5GSmFNV2hvVDBGcmJVNDFWaTFFUVRJM01tVkZZMWh5ZWtoamNXZDFhVTVNWVU1Q1kzbDRVek14WkZoVWJ6bGlkRE5pWjFkc1dHSkhlVTkzVld0Q1pUVk1OVFJpYlV0dU1qQXRaSGhVVGtseGMwNTNWVWx6VFVaTFVXaHRXRzkyZFZoU1NFUk5UR3QwUm5WNVpqVk5jM1UyUW5nMk5sUmtkbTlVVEdOTWExQnpTbFZwVVRSUFZrVktRVzlwWjFJemFGQnRhVUZwY1VKa1VHOVpUM2sxZEdoVU4yTnFlVk5VYzA1UmJFRTNObVkxV0ZZek1rTXlVekZYWmtkYVRVSnJhblZUVlMxMWJWTkJUa0pQWVZCbk1XaG1YMnBvYWtOcGFVNVZRVzEzTXpKUVkySXdZM1prWjNGQ2JYcEpkV1pOVjJkakxYQk1WbE4yYmtKV1lXeEVYMDh4Y1RkU1ZXWlVUR2RwTmtwbWJFOTBNV1EzYVRkblVEVlNhRWRGYUVWUk5sSlhia1ZrYzBkbVEybFZVMDlLYlY5WlIycDVXbFU0YmxSQlFWTlhNVFZpZEZsdVJHZHpUbE5hZWtsT2FWQlFVVVl3Y0RSSGMyOWlXSEZ4Um1sSlpDMDBWbGMwTjJGdlVHcGZlRzQwUzJWVGFIVm5OemRvU0ZSd09XWlVRMkpmUW5KbWQwbEpYMEp3TldkV0xVTkJWa1ZTUWxwWk0yaHVYMGRNUVRoaU5ETnpPVTEwY0VOZmFsbFpZMDlSUkhOUGJ6SXpMV2RZUW5Zd2JEWnBRMGRHUlhWQllUUkVaWEpWT1RreFdXNXhTVkJWYWpWQmFFSkJTemhvTmtkUVVuTmpPRWQwWVV0Wk0yRXpNUzFXUVUxVVMya3diVko0WDNSUmVWRlViVEl3YjBOU1ZXaHJUMFV0UmtaRVlWWnFZbUYxVDNGM2NUazJSMWhEWW5NMWEyeDNZMUpQVG5OWk1XVm5TRUZCTVdaU1dVUnpjREZSWkd4aFQzZzJOMHRJU0dodllsazNhVzkzYkdKVVMzUmlSbWxCZGxNNWJXVk5ZVFptVGpsaWVISXhNbFZDWjNZNFExWjVjVXRyVjFsNlpuTnhZbmxpUlMxaFJHazRaMVZSWDNKeWNIb3pTMTh3TlcxcGIxUm5PVzAxU2tGV1IwbzFVbVYzV2tsaVFqaFNXVTlJU1VWSVptNVNhWGxzZEhjekxWWmFVemgzY0V0RVRGWnhOamRzWVZSVGRtNDFRUzAzTm5wYWQzUkxOamxTWVhCVGMzZGtkVGxoTW1SbVZWbE5RVXRMWmxkT2QzUkNWVGhUUTNsZmNqbGpWV013TXpoeVZHSjRVM0F4ZFZsS1FqbElUMmx0V0ROallubGlSMHBDZGxaNE56RnlRa0pzY0U4M1FrSmhURGRIY1RoVE56aGhWV0ZPTlRCM1ZYTlBhMU4yUVdWeWEwbFFkSFppZDFKT1VsOWlORmRKV1VveE1tNTNka3BmUkhSNlRsaERNVXhRYW1sa1lrNVZZalU0WXpCMldrOW1aeTU1WTBSZlkzWjZOSGh4YVhGd05VUlVWbkJsYzB4bi52V0V6UmJEc0pJbURTeFVLaDNhZDMtSTNmUHlhX2tXelUxa05wQ1BWTWxNIiwiZXhwIjoxNzA5NzA4ODQ1LCJpYXQiOjE3MDk3MDcwNDV9.J5_MB-LRfZ2AzX330G8LXLJ_hLV-tOTMocuxGPBq3L8\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"\"\n    }\n   ]\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "4926"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:37:44 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "8310"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "successfully / 200",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoicTZyYjkyNWNoOTU5Mmg5ZmlvcWtldmJvc2kiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1TGNtWXhSbVJvV0Vsc05Vb3lZbDgyUkhwNE1XTm5MblkyTm5GQlJrTk1hVFp5WXpkWVl6WlNUWEZuZUdWUlozWTNhVVF6VlU0d00wazBYMjR4Y0ZobVQyOVBaMEppVTNCWWJFdG9lbXBoWTNSSlh6UlRla1l3Y2tNeVUwbDNjemxPV1hKYUxVdE1SRUZrT0drNFEyNWtRVmx4WjNsbVNtdDNSMmRyTTBWS2RVZFJUbU5hVEcxcVkyUlFlVUpJV2tGRFFVTkdaVTFFY2sxb1lWQnVSMVJXVWpOTk5GbG9kVWxmZGxwcVRXNU9jMGwzUVZka2FXaE1ObVZCTkUxZldtNXFXRzAxU2xoNE9VaGpOMGRLTFRRNVREbGZTbmRSTkhWSlFWRjFhSEZtZFVFeFpsZHNaMnBVZEZOa1VWQnpNVVZVUW5GdU5Gb3RZV3hNZDNWRGJIcHNhakY1YUdzdFpWSlNWbWgyVW1SdGJVRm9SbkYzYmt0VGQwZzFabXhGWTBWUlRFYzBZbXBwWlhWcFJrNWtkak0wVUVZM1NrSXlaVGRTWVdOalVuaHhObkI1T0dST1RqRldNSEJ5WmxJdFUwVllTM0ZZWVV4T2VHNVJlbEE0VG5aMlZqVkRSMUJLV0RsMU4wdGxTbWxKZUdjMk1XSXdRMVpzWkdSUFdVZ3RaRWRuVjJ0RE5FeGphemRWTjNwemVqSkZSeTAyZVhCTFNVMXFiMkpJWkRFMmJESlFaWFZCWDBWTmJWODVOMVpWWmtoSmJGZG9MVXhQZFVsaFR6Qnpia3h0VEdOMU0xQjNNMlkxUjJsV05ubG9ibWhsYmxwMVZucExlRXgwWjNGZlExVTBja2x5Y1RsRFIycE1Rak5zYlhCT01XaEdhM2xoVnpGV09WTlRVVkpmUVdZMmNERkVkbXRCTm1sa1QxSnZYM0E1TldSTlQxUTNkbXhtTm1OVWF5MUJkMU01VEVSV01GUjZOVWxKVjJkc2VqSktXRlpPWVRKRmJWUmFRVzQxZEZka1dqUm9hRzV1WVRBMFEzcHdUWEZCZUdkR1VFeE9jRkIyUVd3NFdWVmZja0ptVHpCVFVVZFZZMGR1Y0ZaS2RHbzNRV1ZYY3pKb1FWQk9WM3BaU1hVNFJEY3dhVEZ1ZFZVNFRXUkRhV3A1UlVseU1ubEpaemt5VGxCRFgxUnphbFkwUmxCU2N6SklVWEJQWmtFM1NVMWpNME10UkhWRWRYQTViWEpqVFY4eGMxOXJMbVIxY25sNVZXSnhWVVk1ZW5keFlrdFVlazlyVTJjLmRyalNoTzlsQ2Y2RFg5c3VyTDZDNGhKZFdqT0JvaWZidFJRaThLbUFwS3MiLCJleHAiOjE3MDk3MDg4NDUsImlhdCI6MTcwOTcwNzA0NX0._0dsCzAmm1V6tSAg_0HEvEwAw6IbZDcpCKeZicleXxA\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"chetraleng\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"ChetTest@123\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoic2hidTVoZDFscWF0YThqdGpjamxxN3RwMzciLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1UGRuUlZRMnBWUjNkb2RHTjNlVUpJVFRFM2FEZFJMbk5GVGpkM0xVMXFTVmt5TlZaeVNEVXpYMXBETmxaRmFqWm9jbmRmV0V0TFZEbE1TMEprYjE4MFgxWnNVR2swTjJNM09XbEdSRU5uVm5oV1pEZEJValJHZVMxdFMzUkdSWE15TVdScE4wTm1WMng2ZDAxUWNtTTRPRmRXUzNwMVpURktSVlJMVWxGaFVIaEtSR2x0ZDB4bE0xTnZlV2xxTkZSU2IySlhNMWx0YTNwVmMwaEljMmt5YVRWRVNVeDRXWE5aZVZoT1JsZE9OWGc1VUdoWVEwRndTa2MwVkVoUGJHZE1PRUl5TlRsZlIxbDJRMGRyYmtNNE9HeHZjbWRYTVdOUFVGUkRaR2xwZHpsMGRqaDZWRWxMZGtGR1ZIVTJZWHA1VG14RVZESlhSbEZoVGpSM1VGUm1kRFp3VGpWeVVVczVlbXBEWlZoUU4yTk9ibFZ6TmpoMGFGVnVVRXBpVEc5b1lWUklSR3BYWXpWTE1tVlBVMFV6TFRjeVFtUlFaa3RHTnpsRVVHSnBaV2Q2Y3kwMVlua3lSa2RQWkUxQmFHYzNlbEJzTmtObFIzTkZVRVJQZDJ4blEwcFpOemRwYW1GNGIySlhiMjlFZWtwR1RIaFNNRlJxTjE4dFIyRk9lbUpNUVdRNExXbzNNMEpwYm1NMFZuWkJSWFpJYmxsQ2RHeEJVbU5yTlVZeGRISkpYeTF5YTBoelRraGpVVmxmYW5CeE1WQjFabkl3ZG1GVFRYWkdiak5zVUhSSmVFNTFSMFpUY2tSd1lYUXpabEprV1V4alUwVlNXVXd4UmtKc1JIVjBla3B5VVZGSFFXazFkVWhsVTBKeVIwOHhZWEJqUmxBdFRYRnJhVXN6U0ZaSmRteHJZV1JDU1hsNWNGVXhOekZQYVZwQ2JGWnFaMEZCVlZkNUxXZG9NVE5rYm1aQlgxSXpSM2xNZFdoTVFrbHlVSEI0TjBWeWJqQTFMVmRpV21SUFYzQnlNekF4TmpGbU9HeGFOa2Q2VVZkME5WbExNR1Z4ZUdWaGExQlhaMWhIVDNFMk5uTmxWVGxLVFRsemEyczNNa05MTTBOZk5rSkdlSGRvVlhFeVowazFkMko0ZUc5cVZVeDNWMHhXWkdsS05XTjBZbTlWWm1ReGRGcEtXRGhCWW1ac2JHVlVVazlWZVRKR05VZ3RWbTU1ZVZkS1lUUldiRzlOVVdSM1RtNXdNSG8xTVhZMWJEZEtObVZDTWxwNVRWTlhWRWgwVURKelJqbDZkRmxwZG1wR2NFMWpiMHRCUkhwdk9XbEJTVGw1VjNjdE5VWjVOekZUVlV4NVdXWTVkbEJMTjBwTlQweDBUak5vUlZCbFZGWlhOREV0VFUxYVpsRmFZVFYyVkMxU2VXbHJNWEZDWldRMmN6aDVkWGRaVnpoTk9ISklTWEZZWldGd2NWVm1Xak5YV2t0YWJUZGhaMVIwTjNWaGJtcHRUa05rVkROb2EyWm5RMWRFYkc5ZlMwWlJWVWxsY0Y5dFlXcHdORzFGWVZwVlVtczRkbmhYZWxkdFpXWkZZV1p0UXkxVldYUlVXVll0VnpBeFRFNVhlR3RNT1RWbmRWaFBOMGR0Wm5OTGVGbE9XVTlQU1daNGVFOTZXWGs1YUhST1dVVk5kWEpSZG05SWFESnpXVVZ4WVhKTk1tMVNVamw2T1dObE5IY3dUa0ZIU2pneVZrcE9PVXhOTVhSNE1tSmZNa3A2ZEVaQlkycEJNek01Y2xwNmJGTjZhR3gyTWtveVkwRm5VREpqUkc0MFdtNVRkbWgxWkd0UWRrWmtjemhoVURCalQyODFYMDkwTjBzd1NEUkNUM2xqWlU1TVJtSllTRGRJWTBGVGQwNTFNbHBwWWxWcGEzQmljMnhNT1hGMU1rMVBUR1ZtTW5Gbk1qWTROWFV3T0MxeU5FaG1ibnA2ZW1NeVgxUm5iemRuUlRkTlZWWjFVVzFYUlVNdFpVaHRSRU13WmpSc01rRjZRVVJzTlVGZlMyZFdXRFZYUlVobmJITlZiWGRZTUROeFdtVXdTMnBOWHpsdk1EQmZOa0ZVV201c05WbGhNREZsVHpOb1JXRmZUMHBFYzFGcFpqUmlSbDlOYzNKSmNsTm9SekpGVjNGT1NUZElOMEpJU1RCaGN6bHFhbkF1T1ZGblVqVmFZbHByV2pnemRGRkJWbmRmZDJWWlp3LkR6QVlXUk9ZTm1fZ0l6N2xPVnpSbUphV3EwRU00M0pzVkJPQTBMMXFkOU0iLCJleHAiOjE3MTAxNjAwNTYsImlhdCI6MTcxMDE1ODI1Nn0.zvZrnIkD7wj9DZValJoCa266pljd-xAkVaX9vQ23NI0\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"incorrectUsernamePwd\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 2\n        },\n        {\n            \"type\": \"NameCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"User Name\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"\"\n                }\n            ],\n            \"_id\": 3\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken3\",\n                    \"value\": \"\"\n                }\n            ],\n            \"_id\": 4\n        }\n    ]\n}",
+							"cookie": [],
+							"header": [],
+							"name": "incorrectUsernamePwd",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"NameCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"User Name\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{userName}}\"\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"{{password}}\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							}
+						}
+					]
+				},
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('tokenId', response.tokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "passOtp(sms)",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+						},
+						"description": "Use the default 2fa method **sms** To get **tokenId**, make sure the user has accepted \"**terms & privacy condition\"** for a successfull response.",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "login"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"tokenId\": \"F1sHWAv9sMeL4LrmWCLcTOx2kiY.*AAJTSQACMDIAAlNLABxWNXdEU1FCaTNwZ2tHS01hRDNibW9TeFdDZWc9AAR0eXBlAANDVFMAAlMxAAIwMQ..*\",\n \"successUrl\": \"/am/console\",\n \"realm\": \"/customer\"\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "175"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 06 Mar 2024 06:38:09 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "234"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "successfully / 200",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6ImxvZ2luIiwib3RrIjoib2JzNWRtMHBsOWJuNGVuaGozcWgzamY4N3IiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1Q1YwTm5Na3N3ZDBSWldYWm5hazF4WlVSS2NUZEJMbkpIZVZNNVIxaHZXblZ0U1VaUGFUVnJSWEYwVUdKdVIybFVWRnBhZUhwU1RGRnhVMGR4U0VKUmVVRjVhMGRyV2psaU5GQjRlSFZZU1VGbFZucEhjMGQwZUhGWGVVVkJhemRDY0cxWE9XRllNWGRMV1hOalowSTBVRVpoVWtOaWRGTnBNbDkxWVRsSU1tVXRWVTl5ZGtSM00ydHdWMDQ0WDJKMWNsWmhaVVYxTWxOTll6QkRWalJaU0VNeGJDMHpibXhqUWpCNmRtdDZhbFJoUldWdlQyMUZOR0ZqUVMxeWQwMDNjRXRNUVZJMGEwNTROelZzZVZOb1JubEllVVZEYm1WdU5YSnZUbXRMWkZCS2JrNXRVVlZLYWxSMGQyaFVNM1YzWWxoVWVsTndaemxPVXpnMGN6aFVORU55ZEZGSWVFRnRUVU5NZHpSUlRXOXJWV05sYjNoa1NGcFpiRlZXUTFaaWNYTkRkMjVWVFRWMmNGVjZiRmRKUTNkQ1FUUnRlSEY1YUdvMU5Vd3dVR1kwUTNoTE1XNVdVRzFNYjE5V1lUZEdVWFZHZURscWNtbzFkMWxLTTA0MVRXcGFRVXhzUTJ4M1lVdEhkbkl6YVU5ck5WUnBjWFpDZWtKTFRWbzJibHBJU0dSRlVYaHVOMXBKU25semJrazVOa2hETW1sa1lYVllaMnRmTWtaa2FGaGtkM3BoYTJNeU0xbFVhSEZOYjFCRFdVSnVia3RQUkV4d1UyZ3RTWEZPUkhCdlJGQnBaVmxsUTNSQ1kydG5SMlZKVDBST2EycE1ja1ZwUkdWUVdHaFJVRmRvWjJGdU0yUm1iRmxvZEhBd1lrbERUREpEVmtaWlZucGFjR3BEYUhWVWNHbzVUMUJtYW1oVWJXRnRjalkzTkRGb2VISjRiRGcwU0RoSVUxbEdRMWR1WHpWdFlrUjRVMVY2ZVc5TVEyVkdkekUwUlVkM09XTTFiVVZuVWxOUE9EUlNXbFpTUlV0NFZHaGhPV0ZRUWtoRExVbG5Za3BHYm1kRFdHdGFWR1ZMVFhZelFWVTVNRTFGU3pGclJWSlBUV2cwT1VwNVpGQTRlVkEwYWpCNGVrOU1aR05oTUdFME4xOHhVekZ1UWt3MFEyTnNVbDlpTjJGWU5rMHRRVXA1WmpaMU5GTjJNWGgzTkhOZmFuTjBWSEYyY1dOT2JsZHlaVk5KWjBOT0xYZHlNWEpYZG1Wd2RqVmpObGhZTjNWb1pHdFZURFkxVnpVMlNqVXRPSHBPVUZreWVFWXpUa3BPY3pnd0xUaFpUMlIxZEdaVVlrZ3diV0pOYkc0elVYcHdaRzVLVGxkeWJVWnVOa3RUWlU5S2EwcFFNVmN3UWxwZmRWbDVlVWh2YzJ0RVYwcEdVak5zTlZKdU5uWjZNV3RHUWxSMVluUllWRkUzTTNCalIwNXhUbmxVZEVGZlZubGtSVWxpYlRKaVkwVTFPRlptZVhSMWNtaEdjeTFGYlVkTmVHUkhURFpVVDA1eVNqbFhkbkpZVlhWNFgzQXlSazlrYkRORFpIUmFUM2RzUmtKR1R6Vk9RVEV4ZGkxMFRVVlFSVUZJZFRobGRWOWtkV3hhUVdscU9EVXRabW96U1hscVFVazJjamx4YTBGVlZUbFJTVFI1WTFKNVJsUkJaMnRtTUVwTk5qZHBaV2cyWkVaaGVVcE5YMlV3ZVd0RU5tbDZUV1pNYUU1elVtOXNiVmh6TWxnMVNFSjVjMjVLWkhKdWVFMXJXa3RDYW1KcGFGVmplSGd5VXpSQ2RUZzBkbkJpVWt3NVVtZFFNRE50UlV4MGNYcFpXRGhRYWtoMGRUSXdYM2hUVlUxRWRVaHNhMjFxWVVoU1dFMXhSVkpPVlhsM2RIWmtUak0zTW5WVWRUQkxlV04zU0Rkb2JFVkpNVGw0ZEVFM2FqVkhlbXRPZGtKTU0zWlNkbEZrVkUxbk9VTllhalpUZVRoeFgyOVdObkpDWmpsUFFrdzVVbmxoVHpkTVJ6UmllbVp5UjE5VFl5MWlaREZqYzE5aGJHazVSR1pXVmt0UFExSlJSbVk1U1VKaGVrSkhhRVJPVGt4NWVUZENZakZqVTFJd2NGQm5jRVZhVm14Q1kxOXdjM1IwV0VaaldYZERUV1JJTmtkbk0yeGhkbTQ0VjFWME1YSkpPRFphYmtwVFlTMUtlVmsxY25oMlgwZFBiRmREZG1Oa00xWlZZa1ZZV2tKbFVFUnpVSEZ2TURobVoyNUZMVzlNUW1KYVJVcEdORWw0WWxGR09ITmpOaTFxYjBOVWNUWkJTRWRVYTB3eVNHcHBiR3cwWjA1a01ubDRlbUl4YlcxdFJHZzRjbk4xWTFKbVJsOWFOVTVWVWswM1RFOVplRlZCYjBKTVIzaGFiVXN6YzJWbE5GQTNhVE5KYWxobVNXUnFiV1p6UjBkV2JFOXJjM2hUTTNWdlZIQjZiM1oxY1dOeWJuVlJVMkl6YzNSSU1rcFlVVFZPVDNWMldYQjBMVVIwTFVwWE1qUm9lVWx1TVZKd2QyaHBUakJ5VUVOaE5GSmFNV2hvVDBGcmJVNDFWaTFFUVRJM01tVkZZMWh5ZWtoamNXZDFhVTVNWVU1Q1kzbDRVek14WkZoVWJ6bGlkRE5pWjFkc1dHSkhlVTkzVld0Q1pUVk1OVFJpYlV0dU1qQXRaSGhVVGtseGMwNTNWVWx6VFVaTFVXaHRXRzkyZFZoU1NFUk5UR3QwUm5WNVpqVk5jM1UyUW5nMk5sUmtkbTlVVEdOTWExQnpTbFZwVVRSUFZrVktRVzlwWjFJemFGQnRhVUZwY1VKa1VHOVpUM2sxZEdoVU4yTnFlVk5VYzA1UmJFRTNObVkxV0ZZek1rTXlVekZYWmtkYVRVSnJhblZUVlMxMWJWTkJUa0pQWVZCbk1XaG1YMnBvYWtOcGFVNVZRVzEzTXpKUVkySXdZM1prWjNGQ2JYcEpkV1pOVjJkakxYQk1WbE4yYmtKV1lXeEVYMDh4Y1RkU1ZXWlVUR2RwTmtwbWJFOTBNV1EzYVRkblVEVlNhRWRGYUVWUk5sSlhia1ZrYzBkbVEybFZVMDlLYlY5WlIycDVXbFU0YmxSQlFWTlhNVFZpZEZsdVJHZHpUbE5hZWtsT2FWQlFVVVl3Y0RSSGMyOWlXSEZ4Um1sSlpDMDBWbGMwTjJGdlVHcGZlRzQwUzJWVGFIVm5OemRvU0ZSd09XWlVRMkpmUW5KbWQwbEpYMEp3TldkV0xVTkJWa1ZTUWxwWk0yaHVYMGRNUVRoaU5ETnpPVTEwY0VOZmFsbFpZMDlSUkhOUGJ6SXpMV2RZUW5Zd2JEWnBRMGRHUlhWQllUUkVaWEpWT1RreFdXNXhTVkJWYWpWQmFFSkJTemhvTmtkUVVuTmpPRWQwWVV0Wk0yRXpNUzFXUVUxVVMya3diVko0WDNSUmVWRlViVEl3YjBOU1ZXaHJUMFV0UmtaRVlWWnFZbUYxVDNGM2NUazJSMWhEWW5NMWEyeDNZMUpQVG5OWk1XVm5TRUZCTVdaU1dVUnpjREZSWkd4aFQzZzJOMHRJU0dodllsazNhVzkzYkdKVVMzUmlSbWxCZGxNNWJXVk5ZVFptVGpsaWVISXhNbFZDWjNZNFExWjVjVXRyVjFsNlpuTnhZbmxpUlMxaFJHazRaMVZSWDNKeWNIb3pTMTh3TlcxcGIxUm5PVzAxU2tGV1IwbzFVbVYzV2tsaVFqaFNXVTlJU1VWSVptNVNhWGxzZEhjekxWWmFVemgzY0V0RVRGWnhOamRzWVZSVGRtNDFRUzAzTm5wYWQzUkxOamxTWVhCVGMzZGtkVGxoTW1SbVZWbE5RVXRMWmxkT2QzUkNWVGhUUTNsZmNqbGpWV013TXpoeVZHSjRVM0F4ZFZsS1FqbElUMmx0V0ROallubGlSMHBDZGxaNE56RnlRa0pzY0U4M1FrSmhURGRIY1RoVE56aGhWV0ZPTlRCM1ZYTlBhMU4yUVdWeWEwbFFkSFppZDFKT1VsOWlORmRKV1VveE1tNTNka3BmUkhSNlRsaERNVXhRYW1sa1lrNVZZalU0WXpCMldrOW1aeTU1WTBSZlkzWjZOSGh4YVhGd05VUlVWbkJsYzB4bi52V0V6UmJEc0pJbURTeFVLaDNhZDMtSTNmUHlhX2tXelUxa05wQ1BWTWxNIiwiZXhwIjoxNzA5NzA4ODQ1LCJpYXQiOjE3MDk3MDcwNDV9.J5_MB-LRfZ2AzX330G8LXLJ_hLV-tOTMocuxGPBq3L8\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"360122\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"code\": 401,\n    \"reason\": \"Unauthorized\",\n    \"message\": \"2FA method Not Found in User profile\"\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "incorrectOtp",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"{{authId}}\",\n \"callbacks\": [\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"One Time Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"{{otp}}\"\n    }\n   ]\n  }\n ],\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login"
+								}
+							}
+						}
+					]
+				}
+			],
+			"name": "prerequisites"
+		},
+		{
+			"description": "After successfull-login proceed to selfservice_changeuserName journey collection.",
+			"item": [
+				{
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set('authId', response.authId);"
+								],
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"name": "getAuthId",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\r\n    \"tokenId\": \"{{tokenId}}\"\r\n}"
+						},
+						"description": "Request the **selfservice_changeUsername** journey with the tokenId generated in the previous login journey to get AuthId.",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "accept-encoding",
+								"value": "gzip, deflate, br"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-length",
+								"value": "0"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeUsername"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeUsername"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZVVzZXJuYW1lIiwib3RrIjoicnFiOWYxMnRqNjlyNG9yNWdybGV0aGl2MmEiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1R1NXVkxNa2RMVEZkRFowRmxkVnBGTldkeWF6RkJMazAxYW1aWGNFUm1abkZITFRkRE9UUlpNMFI2TFhWRWVGTnlhRWRoTkRrd1JHbGZVRWM0T0hkVlQxRktPRGQ2YlRsSk5YTlViMU5tWW5kbk5FRjBabkl6VWs1dGNrSXRXbVV5T1ZKT04zWllNMk5uVFd0ZmNXdDFZbHBxWjFKSmVWWk1SVkZoTW5aRGNVUkxhR3BTVHpKaWRsVjBTakpDY1hsNFozcERVRTh6T1VoT2R6TTFhMVJRYUd3emJHa3RUakJUVUhsSVRYRXRUMlpsU0U1Q01GQXdhVlZGVmxnelZFNVZWRGx3TlVaamRtTXpPWE15V0hKaWMwOVNZamxIVTFoTVpqZDBRbTVCY2tkdVMydFJTbkZaUjJGQmJXeE1ZVGhXTVhSbU5saGpibDlXTm1aalJWQjFiR3cwU2pWR00zaGtjM2RVTTNoSFdXTkNhalpHWkVobVpXbHZWV2MxWkU1RVRHOUhNa0ZKVXpKSk1scDVkRGhET1RWZmFWQlhSRXQxVWxVeWFFTlFlRmhUWWtab1FsWmhTWFY0YlRsaGFFVkNXRU00YlhaSGMwUTBjM2RqZWpWd2MxWlZaalpvWDNsWWNXc3RTRFIxV1dOU2FVSlBjakJyWDNwTk5pMXljRWN4TTNVMVQzTkxPWEJxWTA5blEwOHhjVk0zTld4bGJYbDBXR00zYkROalVWZ3RiR2RUY1Zvd1VrWlpOVlZaZFU1TU1qSnVZbHBIZVdJM2EzSktOeTAwUkMxVWEwMXRjM1ZsZEZaUGNqTlpjSFpvU25kbWIwcEZSMDR4ZG04M1lYQjFkRkZOYzIxc2IxcFJTVmRxY1dVd1MwTktjR2d5T0d0T2RYZGpVMjVOWjBWbFIyNTVSMVZ0ZFZaVVlYVnNUM3ByZEVVMmRuVm1PVmxGTldrd2IxSTBaSFZIV21ScWNHUmtVVGhHYmtKblkxcERNMXA0TUVwTFNVZG9XVXBKVm1WSGFFWlFOMnRCU2tWRlVtNHhURE5RYURKbVFXOVlRVFkyTkdSaE5FSnZORmRsTlZsU00yRmpiRGxZYjJkbFQzRlJWREprYUVaUk1XaEtORTE1Y1c5SlEwOW5hVTExZWkxR2NuWkVkVmhEWTBGMWFFczBiWGsxVEU0elNsaFlTa1Z2UW1aVFpXMVlaV2ROUjFVNGFWcDNWREEzZWtOTVNVWjRjRTFmY0ZObFJXSkxlWEpGWW1JMU4yOHhXbmRCVlVFeE1rdGtaWGxqVEZkR1ZYa3hZbkEzT0dFdFIxcHNha3hXTFd4RVIxQkNaWEY1VkdacmRqbHFTV0pOZDFaNVZUTTJlVGxrWm5sTE9HSTFhMlp5TFVjMlRHeGZibXg2TFVwWGIxZ3hjM2xLY21WdmQybFRhRWc0YVZkbVFteGlaSHBXV2kwNVUyVTBkRVZ1V0RSaVpWazJVRGxWUzFWYVprRnJjRVZHYW1SVldWUjBWRE5uZDJobWJXTk9lRVZvZWtSUFozQnVlVGcwYXpaS1FsRkdVMEl4VnpjdFluTm1USHA1WkVveWVYWlhaSEZ1WVZCTWVVeFhhRU0zTmtwWFdFVTBhV3N0UmpsR2NuaFBkemxtTUY5UVlrVnpSMUY2T0d4VVV6RnlVUzUwZVdWSFFsZHhVbkZMTTNsZlYzbFRWbUpHYkRGQi5CMWNZdVRMQ3ZsZkEwSU1wUDNJUUowZ2tWMVJfTU8xb3pmalpMX1M4ZVJzIiwiZXhwIjoxNzEwNzY5MTI3LCJpYXQiOjE3MTA3NjczMjd9.lbviCg8yhach2EXF4yRK07woIzWIP1i8_yIyIJKWqpo\",\n \"callbacks\": [\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"userName\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Username\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"REQUIRED\",\n       \"MIN_LENGTH\",\n       \"VALID_TYPE\",\n       \"VALID_USERNAME\",\n       \"CANNOT_CONTAIN_CHARACTERS\",\n       \"MAX_LENGTH\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"userName\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"REQUIRED\"\n        ],\n        \"policyId\": \"not-empty\"\n       },\n       {\n        \"policyRequirements\": [\n         \"MIN_LENGTH\"\n        ],\n        \"policyId\": \"minimum-length\",\n        \"params\": {\n         \"minLength\": 1\n        }\n       },\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       },\n       {\n        \"policyId\": \"valid-username\",\n        \"policyRequirements\": [\n         \"VALID_USERNAME\"\n        ]\n       },\n       {\n        \"params\": {\n         \"forbiddenChars\": [\n          \"/\"\n         ]\n        },\n        \"policyId\": \"cannot-contain-characters\",\n        \"policyRequirements\": [\n         \"CANNOT_CONTAIN_CHARACTERS\"\n        ]\n       },\n       {\n        \"params\": {\n         \"minLength\": 1\n        },\n        \"policyId\": \"minimum-length\",\n        \"policyRequirements\": [\n         \"MIN_LENGTH\"\n        ]\n       },\n       {\n        \"params\": {\n         \"maxLength\": 255\n        },\n        \"policyId\": \"maximum-length\",\n        \"policyRequirements\": [\n         \"MAX_LENGTH\"\n        ]\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"chetraleng\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"chetraleng\"\n    },\n    {\n     \"name\": \"IDToken1validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"header\": \"Enter new Username and current password\"\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3766"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 18 Mar 2024 13:08:47 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "104"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "successfully / 200",
+							"originalRequest": {
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeUsername"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeUsername"
+								}
+							},
+							"status": "OK"
+						}
+					]
+				},
+				{
+					"name": "Submit new UserName and current Password",
+					"request": {
+						"body": {
+							"mode": "raw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							},
+							"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"userName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Username\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"MIN_LENGTH\",\n                            \"VALID_TYPE\",\n                            \"VALID_USERNAME\",\n                            \"CANNOT_CONTAIN_CHARACTERS\",\n                            \"MAX_LENGTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"userName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"not-empty\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ],\n                                \"policyId\": \"minimum-length\",\n                                \"params\": {\n                                    \"minLength\": 1\n                                }\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"valid-username\",\n                                \"policyRequirements\": [\n                                    \"VALID_USERNAME\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"forbiddenChars\": [\n                                        \"/\"\n                                    ]\n                                },\n                                \"policyId\": \"cannot-contain-characters\",\n                                \"policyRequirements\": [\n                                    \"CANNOT_CONTAIN_CHARACTERS\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"minLength\": 1\n                                },\n                                \"policyId\": \"minimum-length\",\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"maxLength\": 255\n                                },\n                                \"policyId\": \"maximum-length\",\n                                \"policyRequirements\": [\n                                    \"MAX_LENGTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{newUserName}}\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 0\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"{{password}}\"\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"header\": \"Enter new Username and current password\"\n}"
+						},
+						"description": "Submit the new **username** along with the **current password**. Different values for variables will result in different responses (refer to examples).",
+						"header": [
+							{
+								"key": "accept-api-version",
+								"value": "protocol=1.0,resource=2.1"
+							},
+							{
+								"key": "accept-encoding",
+								"value": "gzip, deflate, br"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"url": {
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"am",
+								"json",
+								"realms",
+								"root",
+								"realms",
+								"customer",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "authIndexType",
+									"value": "service"
+								},
+								{
+									"key": "authIndexValue",
+									"value": "selfservice_changeUsername"
+								}
+							],
+							"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeUsername"
+						}
+					},
+					"response": [
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZVVzZXJuYW1lIiwib3RrIjoiY2QxdmMxZHI5dTk4czFrb2g1ZnNrZnYzc3MiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1RmFFeGtTV1J2YVdOMlkxRmFja1F4UWw5eWRHTkJMa04zYVdOVVNGZE1VR1UzYjJ0M0xVTk1UMEZCVVdoSE9IaDZNWEJCZERaSWMyRlRiRXRCVmw5NE9GbEdNSFJTUjJwNlMwUlZZbmhFTVVWV2NEY3RZWEJGYW1ab1UwUllaV1F6VjA1MU5EUXlabkpKVXkxR1JEWTNhWE5YVTFwd2REQjNWV0ZrVlc5elVDMVBObGx4YzFwemIxZElTMW90TUZWMmNUWm5PSGxWZGs5U1JXRllla0YwWjBGTlRuUXdSa2w0YWpaWVEzWkNaRkoxTUZsS2VsSjBNa3c1ZEY4MWVFMVZSMEZIUVdKWU9GbEthMjlZUVRrMk5XOUdaVkZ2VEZVdE9Yb3djSEp1ZWxJd2FYaE1SRUp3TWpSaVpGOXhURWgyTUdWNlowMU9SRXh3UW5sSlNHOXZXRFF3TUVoRWMxOU1aVzF5UkRZMWMxOTJZVzUzU0RkQlNDMVlVV3BhVm1vMlJEbDVRMUE0VkZkWGVVaGtTMnA0V1hwWmJsTlVWRUZxVW01WlptSlNjblJ2UTJkNU9XTnNOVzlJUzFWSE4yRk9ObGxyTWpGcGIzcHVORkp1Y0RSRFZIbzFja3BuTFRSbGVXVlpkWFowVjJWSGQxQnpVVlJOTUdGalJrWkNZek10VmpCbFN6WlRlalZhTTFOSVVtaElPVlozZW1Jd1pIaHBjR3M0UkVGVFVFZExPR0pCUzFSVloyUjNUbFozYmtzNVUyaGxjRTVtVUVFM2MyTTNaRzUyV0ZacWNHeEJlak5aVFY4MFFUQXpSMUZDWmtZMFdVRkVUM2t6VURsdFZHbG1OR3RVY1ZWeWVuTm5ZemhET0MxYWFHMW1abWd3ZDBaWmFqQlpUbFZuWnpaT2FWZDZWM0JZV1dvNVNrTjNORE0zUkZZeGRtcERNVVZOWTNFd09XVmljRFZRVms1SVltTmhWMnBXWlhGZlpVcExaVWgxU1VWUVgybGhTR1U1U1c0eVpFSnlNVWR6U1RkNWNVbE1lVFkzTkhWelFuQndiek5RV0dGaE5sRjRWVlYxV0MxRE5sTXdTRXR3UjFKdE1WSkRaWE5mU205bVQxQTFSemQxVGpsM05rYzBWSGRzVmpGM2QxUmFkRVJCU2tKWlNWTjVSVGRXWlROWU9EbG1kRXBZUlU4eE4wSmxka1l5VEdkWWJsZEZPVGd3VjBKdlJuUkxNRW94VEVOMFdURmthVEZhVUhCQldqWkpObEpMWTNkQ1pHUnlSRVJwVWxGM1RGTXhWMVpHVm1rMGRXRktaMXBpY25wUVdYUjRiVGRLTjFCRVJHRkNibGw2TlV0cVYwZFBSRU5vUTB4R1lWRndhVlJ2TFZoM2REbDBNVmsyVDJwS01URXhTV3RXTlhGWU4yTk9aR05GTkdSVFNFUm9MWFZxTTBaT00waFFXRUk1YUhWbU0wZHVOMncyVlRFMVpURkplRlZZVm5kUk9FZ3hTemRKUTBsaFRpMHhhWEU1YlhvMmEyZDJjVXR0TWpGRFp6VmpMWFJoZWtRNFFqY3lZbTR0VUhwT1VuZDJOV1Z4UkRGeFl6bFNVVUpoTWpsRFowbERUbTFmUm5ac2FYZ3RkVkI2T0RoRFdrRmtUbTVQWTBOV1JrOHllWEJGUkRaNk9EUjZPVmxJTVVKZk56ZGxaa3BxWjFWVVF6QTRlbEZ2ZDJ0S05FSnBWbEp1VDFoVFF5MDFUVE5KZVhSNFEzZHNkV0Z0Y1ZGbmFsSmtibHBGTFRRelZ6ZG1hRUpoWjBsTkxVVTBkMnh5YmxwcVRHZHJPSE4wWlhoWVgwRnBkMVZvWTBoWFpYUnROMW8wU1dKcWQwZFViMDgzVEZreE9XVXdVVVpOVmpGU2VqWlNkM1ZWU1VacFdrNDRXR1JNVTFCd1MwVkdSWFJ2YW1SMlZtWlJZM1pPWkVGZllsSktWVkJKTm05UFRHUmlWRUl4YzBaQ2JtMVBhRWRUZHk1a1QyMXJNbEpWVWtkaFZIa3hiREJvZDFoTVVUUm4uYmIyTUpXUWxFbFJXTzNEcnZ4c18yLUUyaFRfeTV2VTZ1WEVZUm9uR2NQayIsImV4cCI6MTcxMDE1NjExMywiaWF0IjoxNzEwMTU0MzEzfQ.O6YyEQ5YhDym4VDmZZYPGR33rJqzZPAAxY6pQ17swz0\",\n \"callbacks\": [\n  {\n   \"type\": \"TextOutputCallback\",\n   \"output\": [\n    {\n     \"name\": \"message\",\n     \"value\": \"Username was changed.\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": \"0\"\n    }\n   ],\n   \"_id\": 2\n  },\n  {\n   \"type\": \"ConfirmationCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"\"\n    },\n    {\n     \"name\": \"messageType\",\n     \"value\": 0\n    },\n    {\n     \"name\": \"options\",\n     \"value\": [\n      \"Yes\",\n      \"No\"\n     ]\n    },\n    {\n     \"name\": \"optionType\",\n     \"value\": -1\n    },\n    {\n     \"name\": \"defaultOption\",\n     \"value\": 1\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": 0\n    }\n   ],\n   \"_id\": 3\n  }\n ]\n}",
+							"code": 200,
+							"cookie": [],
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "private"
+								},
+								{
+									"key": "content-api-version",
+									"value": "resource=2.1"
+								},
+								{
+									"key": "content-length",
+									"value": "3102"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; default-src 'self';"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 11 Mar 2024 10:52:06 GMT"
+								},
+								{
+									"key": "expires",
+									"value": "0"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "837"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"name": "Username was changed",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZVVzZXJuYW1lIiwib3RrIjoiZG85OHJ2amszZTIyMnR2N2hmNjc3bDg3bGMiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1WlRsSkVPRXRHV21oMGJsZGpkRWN3T0RRNFZGZFJMakZuWkMxRlVrWjRhSEJNZUUxU2VVczVRazlxVlZSdUxVMXVkM3BuWkRaQmJ6WmpUaTFMWjE5WVJ6WnVNMUk1VWpoSE1XOWZhR1JsZWtaaldGQm1WV2sxYlU5Vk1VSTNOMmh3ZWpsalVWWmFkMnhIYjFsc1VtRXljblZtYmxCeVNISnpaRVF5ZWxoV09VRnNaVkpsVldJNE5HRjFWRWczTlc5U1NFSm1NMWc1ZFU0MGIzbFZUazlwYTBGMU1qTlJjRVp3U1dveVRGTnBhalY2TkZWdGJtUmZZbWRXU0dNNGFsOXVjVzVPVEc5S2FHMWZUa1JyVm5OWFJVcHFkMk50Ym5KU0xYa3Rkbmt3UkdoTmRrTTRhWFZXV0VOb1ZsQklkRzFTYjJOTGJsZG5TVXBCVldGbmN6bHZjMHRWVW1ZM1JHOWFUbmwwTFhOaWFXTnhTelU0VVhRMU0xQjZTVUp3YkUxeFlYWjFiMk5mTWxjdFJVNU5Ua1pMVEd4dlZtSjVNMU0wVUhFeVRXWjBUVWxpZWtwQlQyNURhVkl0YlZCTlNGVXlhSEJrUXpCcmMyWXliRVozUm1GQmRVZHJUWFZtVFZCSU5uWmtNVmRDVmpWeFUyTmtUalZsZW5sWGVucDRSR2hqWDFCc2FuTm1Sbk10WkhsR2NXWlpUa2RxVEdkV1JWVllaMWs0UmpOU09ESlZhamhVVDBKeFpYQnFUa0pHWVRaMlRIbENhRUZHVDFJeFlqSnBhVk54YlhGRFVuQkNhVUZhUlVORFpsbHdSbFUwWjBjd05XbDJSMkp2UkdOcFdsUnJTbkJwVlVGb1RWOTBaVE0zU1UxMFkwVm9UVXBMVjFSeFpuUmxVVGxMZG05aE1XNXRjV2cxU2pad09XTkJUalJ4ZERSV1IzaGFTbXMzWnpNMWNWZHRlV3N3Um5CQ04yMXlkRzAxUmtaWGFsZ3pSelZIZG5aRWQzSmtVWFpKTUhOTmRGRkdNVVJyT0VsMFMxSjBkV1pHWlRJMFFYWmtSbWg0YjB3eVpqWkxkVTB0ZDJnM2FVaGhUMDB5UTJOSFgwbDJkRXRoTWtWc1dsbHJiVzh5WW1Gb1VWQmlWRFl0TFRWdVoxVkdTMk13YzBZM2RYTlNOMGhqZW5wbllUVmhVRU00U0ZaS01HTTNjbWxyUTE5eVFrZEJiQzB0ZWxGU1gwSkhXSEZUVW5wS1ZtMXFkWE5DWjA0NU5YRlFPWFJmZFVkeFNqWjBRaTAwUTNobWIydzBiMGRzYjJRNU1FMU1XVTVUVkZaaU9VTkRSbTQ1U2tORll6TnNOME5JZFRKeWRXcDBialF6T0RCa1RrVjVhbEJVYkhReVNqZEtOR2h5V2s1Vk5HdG1YM0ZHYTNaS1p6QTRNV3RaWTNkclNqRjRkbGxpYUVaR1FVZ3pWbEJtYjB4MlZXMXdRVGxIYlRsWWIweDZSR2xFTFdOSWVDMVJkMG81U21sV2VsWTFObmR2UmpoVk5YTm5lbEEwYzJZeGRsOVJlamczU0ZSWE16UlNOMHBwWlRoaGIwYzJXbXhOY2psQlExZERZVWg0UkVvNWNWb3paek5GWVhjNWJqazFVR0kzTXkxR1VsWXpMWE0xZUVzM2NIaHNkeTVQTkZKc1NsWnJPREpvVFc1WmJuaG5XRmMyYmpobi5XU1NHTWMwUmMzejQ4dGRMVS1DbFphZ2xXalhYTTdIZmNRZjVTWjd0dElzIiwiZXhwIjoxNzEwMTU2MTEzLCJpYXQiOjE3MTAxNTQzMTN9.kwySdO3aRWJ21PoT2aS-YOToOO_g_WOPHixTQdq4zqg\",\n \"callbacks\": [\n  {\n   \"type\": \"StringAttributeInputCallback\",\n   \"output\": [\n    {\n     \"name\": \"name\",\n     \"value\": \"userName\"\n    },\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Username\"\n    },\n    {\n     \"name\": \"required\",\n     \"value\": true\n    },\n    {\n     \"name\": \"policies\",\n     \"value\": {\n      \"policyRequirements\": [\n       \"REQUIRED\",\n       \"MIN_LENGTH\",\n       \"VALID_TYPE\",\n       \"VALID_USERNAME\",\n       \"CANNOT_CONTAIN_CHARACTERS\",\n       \"MAX_LENGTH\"\n      ],\n      \"fallbackPolicies\": null,\n      \"name\": \"userName\",\n      \"policies\": [\n       {\n        \"policyRequirements\": [\n         \"REQUIRED\"\n        ],\n        \"policyId\": \"not-empty\"\n       },\n       {\n        \"policyRequirements\": [\n         \"MIN_LENGTH\"\n        ],\n        \"policyId\": \"minimum-length\",\n        \"params\": {\n         \"minLength\": 1\n        }\n       },\n       {\n        \"policyRequirements\": [\n         \"VALID_TYPE\"\n        ],\n        \"policyId\": \"valid-type\",\n        \"params\": {\n         \"types\": [\n          \"string\"\n         ]\n        }\n       },\n       {\n        \"policyId\": \"valid-username\",\n        \"policyRequirements\": [\n         \"VALID_USERNAME\"\n        ]\n       },\n       {\n        \"params\": {\n         \"forbiddenChars\": [\n          \"/\"\n         ]\n        },\n        \"policyId\": \"cannot-contain-characters\",\n        \"policyRequirements\": [\n         \"CANNOT_CONTAIN_CHARACTERS\"\n        ]\n       },\n       {\n        \"params\": {\n         \"minLength\": 1\n        },\n        \"policyId\": \"minimum-length\",\n        \"policyRequirements\": [\n         \"MIN_LENGTH\"\n        ]\n       },\n       {\n        \"params\": {\n         \"maxLength\": 255\n        },\n        \"policyId\": \"maximum-length\",\n        \"policyRequirements\": [\n         \"MAX_LENGTH\"\n        ]\n       }\n      ],\n      \"conditionalPolicies\": null\n     }\n    },\n    {\n     \"name\": \"failedPolicies\",\n     \"value\": []\n    },\n    {\n     \"name\": \"validateOnly\",\n     \"value\": false\n    },\n    {\n     \"name\": \"value\",\n     \"value\": \"chetraleng2\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken1\",\n     \"value\": \"chetraleng\"\n    },\n    {\n     \"name\": \"IDToken1validateOnly\",\n     \"value\": false\n    }\n   ],\n   \"_id\": 0\n  },\n  {\n   \"type\": \"PasswordCallback\",\n   \"output\": [\n    {\n     \"name\": \"prompt\",\n     \"value\": \"Password\"\n    }\n   ],\n   \"input\": [\n    {\n     \"name\": \"IDToken2\",\n     \"value\": \"ChetTest@123\"\n    }\n   ],\n   \"_id\": 1\n  }\n ],\n \"header\": \"Enter new Username and current password\",\n \"status\": 200,\n \"ok\": true\n}"
+								},
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"id-ciam-2274",
+										"aws-0414",
+										"cloudfirst",
+										"digital"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"protocol": "https",
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeUsername"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeUsername"
+								}
+							},
+							"status": "OK"
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZVVzZXJuYW1lIiwib3RrIjoiMTAyMmkxMDNlNWM1cGtsY3FjbXNhOHQ2Nm4iLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1Zk1YaDJTRVpDWkZCS1pHeGhSVFZLWHpkVlltTkJMaTFMYkhKd2J6VmhZMEpXZVY5M01HMVRiMDl5Y1VSNlJXOTFkM05MVkd0NFVYTjNPSFZxVnpSVmFtdG5WMjB5TjBWaWMwWm9WMjV6VUcxWlR6ZG1jVUZVYjNCM1EwRnVVbTk0U0ZCYWVYVjNNRmd4TFRFMlNFaG1ZV3R4TUcxcWJtMXRTM1V3UzJsQlpuSTVibFpvZWsxMVdWcGFSalpxTlRacFIzRmZTMjR0YVZKZlVrSnVORTUwZFRsMlFsaGtjMG94VGpFMWJWaENURkF3WWxCMVdGOUxhRzEzY1cxVGQweFRZVGRZVDB0TU9WaHNZM2czUlVaMVRUZE1TRkZwVERCak5uWmplREpzTkhkM1ZHSk5NR2syWVY5bE9WVjNhMlpGYVZGWU0xUnZURTltY0hWSmREaHZiMHRKTVY5ZmJEQkRhVEpPVmxoalRrOTNTWFZ6VG5admQyVnJkM1YzTW5SNE1sTjNiRGg0ZUd4V1lVNWlRUzE1UlZSTWIyRXRkbnBRZFRrMGFIQlViRUpIVVVSb1UxYzJkM052TmtZMVpEZFJOSG94YTNVM2JYaFVSUzFqV0VwdWQweGphR2RmV0RsSmFHODRhMDlqZG1aT05tUkdjVU5TUTFnMmFrMVZZbkJ6WkMxa1lXWmxTMFV6WTFsa01WQTRWa00zZUhOR05URnBOVXhQY2xsaFdtNHRYM2hpZFhsNlNYQnRNbTFzU1hOSmVHeHNSbmhVYW5NelJEWjZlVlZzVW04NU4xRm9aM04zVEZrNU4xOHhiSGMyTjNReFdXODNRVzV5VEhCb2NWOUJiMnh6YlUwMmRqTnhjV3MwWTBoU05HSTNZbEJRU1dsTmNrUlBWVWg0VWs5WVNHNWxhV0pJYkhsRlpFRlNWRGxtVDB3M05qZGtkV1o1UWtReFRtNVpja2RGWWkxaWRqaGFXbWx0TUhSMFJYQjFTV1l5YmxaTlVGcHZObmRIUWs1MFNURTJlbk13UW1WSllqazJNakJLVGsxc1dGUldWazFNVlcxdVZEUlNkREZSWnpZemEzRTBOR2RyYW1jeWJuUlpORGhLWDB4blRHNXRXamsxTUVad1ExUTRMVTVVU1VOTU1VNVFWRU4xUlcwNExWbE5UazlGVkdkVE5IWkRVV05xVG1SNk55MWhYMHN4TVU5MlZqVjFObk10Y0Y5RlNrUlJWWGhrUm1sbUxWUlNkblJQY2t0WkxWOUJPVVZPU1ZkVVEyUXpRV1JyV2s1dWMxa3dTMGx3UmtsQ1RFNWtUWFZOUTE5RldqaFlhV3RFWmsxbGJUY3RSMFV5YmxGNGVsSnNVa3Q2UTIxMlJEVmpha0l4V0hwM1JWSTNhazFWYmtjNVRYZHZkVWRZUkVwdlVUSm9Sa0p6WTBvMVVVaFBaR2xxTTFkTVpGZzJSblZpTkhwZlRVbFlhMTgyV20xSWJYUlhOblJpV1ZGUUxYbENVblozTTFoNFgyUnJNSFpSWWtKMmFVVkRXRGhST1VOUFpITklYMHRuVUZoUlZYcHNXbUZXYkZwWUxWSjNTMU5GVms0eVdFMXJPV3hSZEVWeVNqVkdlak42U1RWc1J6Rm9XblZZTWt0YU1ERTBTR2xOT1VGRWRHdFdjbHBYTW0xdU9HMUVWMVZrVW1GTFkyMTZNMTlIYzE4MVNHVXRObmx5UlRWRmJqaDNWSEpLYWsxVVZHTXdkV05uY1c4eVdYTjBMVEZTZUdKRE1VNTNabVZMT0hWSFpEQm1hVmxHT1Y5ZlQwVm1VMUpvT1ZSSmRtUk9XbFZEWkdablZrZFJTVjlITW5sQk5qSmFkRkpqYlY5ck5HcFViWEJpTkdOelkwSnVNbDh6TTJsS1RFVkhVR3hDZWs1aU9VTnJRVXRqTmw4M05YTkdORm8wTTE5Q09WUXhXbXhLUTI5WGNtZEdTSFE0YW5kblpuaHFhRzFwZVVwcWNESlljMFl6VUhjelVVRm9VRkZYVldkWGFUVkRUbmhsYmxObVRGZFlWMk4wYzFOR1pXTjFiV1ozY25kSVh6bGpWV3RVWTJaRVF6bElaSGRUTm5GemVFVkdja2RNZUVWbmRIaGtNamM1YnpKSVNtVXpjRFJRZVdkTmVsZEZSalJTWm5CaVdEUlhOemhZZWtkUWNtTlBlR0ZQT0MxUWNGRkZjekpRU0hCQ1QwWmhUbVpwTTFkNVowNHlibXhYUVZwYU9VbHFWR1owWmpoMGVqZGhkUzFHWlc5cVRUSnJSR1p3UWxJMFZsQnhVRGhpUTFkNU5GcHNWRVowYWpCSVJWUmlVMFpmTUhwNGEyOTVZMFZmZGpZNE5FTkRja1EyWlZGRmFVTlphaTFwZFV0aFQzaEZRVXh2T1RsQ1QwNURNbVowUTFaTFIzSm5VRTh6U2s1eWNUZ3RaR3h3Y1VGa1dWZHJWemR6YWpoUWVWOW9OelpCVmxCQldWaHNjVEF1ZGtwbVpVVkVhbGR2WTJSd0xVMDVSMVExYm5KbGR3LnJDOVlMUUc2OFNtYVpjOWVrNjk4Ml9ucktfSHk1Y2xVZVVEbzgzdjBoTHMiLCJleHAiOjE3MTAxNjQ5ODcsImlhdCI6MTcxMDE2MzE4N30.K-l1_nkzedaUiwWRENp3E4lX8fOkxe2_u7avYj-PWv4\",\n    \"callbacks\": [\n        {\n            \"type\": \"TextOutputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"message\",\n                    \"value\": \"oldPasswordNotMatch\"\n                },\n                {\n                    \"name\": \"messageType\",\n                    \"value\": \"2\"\n                }\n            ],\n            \"_id\": 2\n        },\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"userName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Username\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"MIN_LENGTH\",\n                            \"VALID_TYPE\",\n                            \"VALID_USERNAME\",\n                            \"CANNOT_CONTAIN_CHARACTERS\",\n                            \"MAX_LENGTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"userName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"not-empty\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ],\n                                \"policyId\": \"minimum-length\",\n                                \"params\": {\n                                    \"minLength\": 1\n                                }\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"valid-username\",\n                                \"policyRequirements\": [\n                                    \"VALID_USERNAME\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"forbiddenChars\": [\n                                        \"/\"\n                                    ]\n                                },\n                                \"policyId\": \"cannot-contain-characters\",\n                                \"policyRequirements\": [\n                                    \"CANNOT_CONTAIN_CHARACTERS\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"minLength\": 1\n                                },\n                                \"policyId\": \"minimum-length\",\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"maxLength\": 255\n                                },\n                                \"policyId\": \"maximum-length\",\n                                \"policyRequirements\": [\n                                    \"MAX_LENGTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"HumanBeing\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"HumanBeing\"\n                },\n                {\n                    \"name\": \"IDToken2validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 3\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken3\",\n                    \"value\": \"\"\n                }\n            ],\n            \"_id\": 4\n        }\n    ],\n    \"header\": \"Enter new Username and current password\"\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "oldPasswordNotMatch",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"userName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Username\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"MIN_LENGTH\",\n                            \"VALID_TYPE\",\n                            \"VALID_USERNAME\",\n                            \"CANNOT_CONTAIN_CHARACTERS\",\n                            \"MAX_LENGTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"userName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"not-empty\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ],\n                                \"policyId\": \"minimum-length\",\n                                \"params\": {\n                                    \"minLength\": 1\n                                }\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"valid-username\",\n                                \"policyRequirements\": [\n                                    \"VALID_USERNAME\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"forbiddenChars\": [\n                                        \"/\"\n                                    ]\n                                },\n                                \"policyId\": \"cannot-contain-characters\",\n                                \"policyRequirements\": [\n                                    \"CANNOT_CONTAIN_CHARACTERS\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"minLength\": 1\n                                },\n                                \"policyId\": \"minimum-length\",\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"maxLength\": 255\n                                },\n                                \"policyId\": \"maximum-length\",\n                                \"policyRequirements\": [\n                                    \"MAX_LENGTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"chetraleng\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{newUserName}}\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 0\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"{{password}}\"\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"header\": \"Enter new Username and current password\"\n}"
+								},
+								"header": [
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeUsername"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeUsername"
+								}
+							}
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZVVzZXJuYW1lIiwib3RrIjoiODE4ZXZkYzdlcWJuY3ZjbjNndWVtOGc5bTYiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk0NGFUVkxZbVpoTVVkaGMxVnRTakpyVVdNNGJWUm5MbFZZYzJwRE5GOUlkak5QU1ZOUU0xcEViRmxsTldSMU9TMUJXbk5uUjNkUFZtdGhUa3czYmt0NFgweENUMmhRVjNKUmRtb3hWamR4T1cxb2RUZDNlVWh6V2pKMlIxSm1lbE5zV21ONE9HSXRVRXgxZVVsM00xTnFUVWhLU2xwaE1FTkJWRXRrVDJ0bFJrdFVSVlp3YW1wWllreHhabGszWkhGWk9WRXlTa1JxUlZVNE1VdGFUQzF1U21wM1pFVnNPRFJGWlRsbFJqZFhOWHBYZEdaNlZWSnpNMVJ5TWxocE1qZGtTM040YWtveFEwRlhlWEJGUzNaU05XbGlaazlIUVVwQ2MwVkJjbGhaTlZWdGJtVnljM1V5YmtZMGFtaHJORmRZVlY4eVp6SklXRTFKUTJGRk0wWjVlRVpIUlhWWGQxbDFVbGh1Um5oaGRtbHFPRTlPVlhBNVNtZDFSR3hsYkRCRFZHTlNORkpmUVdSSE5rcFVTbUpRZWsxWFJXWmhhVFZNWlVGbk4zTlJaMGhGWms1RmNtOURYemsyWDJaQlYyNVJSV1pJYm5kck5WWndkbGhuYTFScVkzUkpOSEZEV0RFNVQwSnNjVEpRUWs5WU0wWndTMmc0V1U5MVZHVTFiMVpuTlZoRE1raFhVVzlHTUZOUFNsUXdVa1JJU1ZodGFWOHdiakpWY2xWTFJqQm9UM1pwTmxoUFNGWlBSRTlWYTNKTVZXTnNWVWRWVVY5cFJEVmZiVGN0TUZWQ1JXZDJRVEIyU1dKdk5UbDZOa2xTUzNkQlR6ZHNaVmxJUjJGYWRXOUdhVEY0YkRaUVRXTXpUREZ6UTBSNmMxTjZiMmRpY2xaSVV6ZEtObTB3VUVkaE9XYzFlV05sVXpsWGJYWnpOVVZLV1VkUGVrZFNlVmRPT1RCVlp5MXhORXBJV2w5RVUzbFplbHBWTjFSaFFXVk1Xa296ZVZkTFRqSjFUREF3TkdkU1FYUkdUVGN4TFdGak5qWk5PQzE2UW1Od1EzaHVXVVI1V0U1b1pYcHNhRVkyWlZCRFN6STJTelZ5TW1sTVNuaHdZVUZTTlhaNFFVazVkSFk1VEMxdlRXMVdlWE5PWDJGS1ZERnBWRjlETjA5WlRWbGZPVU5SVDNwbFZtbG1jMGM0WjNKb01uQm1VSEkxVUY4MlJFaHVNRlZ1WkVOWlJHRklOVkp4Tm1wWlZuQlhTbXhNUldoc1prdHpkWFIyTUZSUVQyRjVNVVJZUVVFdE56QXlRVWRhVTE5WVNEVlVNbDlsUWs5blMzcGFOa1JPVjBkcGJGaGxWREpTUjBwUk1sbE5UekYxVmxsc1QydE1MVmc0UlV4TFVFRlNhak5ITjBGcmFGOHhjV3B6Y1d0emJqRlhORTh4TmxCSlpYTmpjMkZuZEdGVVpXZDNWVXRSZW5wMlNtVmpRa05GWlZKMFEwNDFVV3N3UmxOUGVGaDJRVVo0UTNSclRucEZSMjl6VW5VNFpGVndXbkZrWVZkSlRISnVabkk0UnpkdlZISmhaWFJ5UkZOWVFVTTFaRWxRUXpKV1NXZHpjRGhYYmkxWE1sVjFRMUpWTkhsR2JUWXphVGhyT1hBNWIwRk5NbnBwTTA1U1RGbG5ibXRvYUhRMVluVjNOamhHT0hZM1RIRlBjVTlsYnk1b01GOW1WazlFZGkxWlUyTnNYMUEzVm5aMWNGaG4uNk9BdEFWN3BkZkRoQVpXYlJKN0VXdUNMZFg4Y29mcmVmbkp2SUMySzFTNCIsImV4cCI6MTcxMDE2NDk4NywiaWF0IjoxNzEwMTYzMTg3fQ.kWRHLNhqXBymZLhZtOr5FXYt63VqhsjE4IttWX9zSjM\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"userName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Username\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"MIN_LENGTH\",\n                            \"VALID_TYPE\",\n                            \"VALID_USERNAME\",\n                            \"CANNOT_CONTAIN_CHARACTERS\",\n                            \"MAX_LENGTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"userName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"not-empty\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ],\n                                \"policyId\": \"minimum-length\",\n                                \"params\": {\n                                    \"minLength\": 1\n                                }\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"valid-username\",\n                                \"policyRequirements\": [\n                                    \"VALID_USERNAME\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"forbiddenChars\": [\n                                        \"/\"\n                                    ]\n                                },\n                                \"policyId\": \"cannot-contain-characters\",\n                                \"policyRequirements\": [\n                                    \"CANNOT_CONTAIN_CHARACTERS\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"minLength\": 1\n                                },\n                                \"policyId\": \"minimum-length\",\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"maxLength\": 255\n                                },\n                                \"policyId\": \"maximum-length\",\n                                \"policyRequirements\": [\n                                    \"MAX_LENGTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": [\n                        \"{ \\\"policyRequirement\\\": \\\"VALID_USERNAME\\\" }\"\n                    ]\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"HumanBeing2\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"HumanBeing2\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 2\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"\"\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"header\": \"Enter new Username and current password\"\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "userName is Dupilcated",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"userName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Username\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"MIN_LENGTH\",\n                            \"VALID_TYPE\",\n                            \"VALID_USERNAME\",\n                            \"CANNOT_CONTAIN_CHARACTERS\",\n                            \"MAX_LENGTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"userName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"not-empty\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ],\n                                \"policyId\": \"minimum-length\",\n                                \"params\": {\n                                    \"minLength\": 1\n                                }\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"valid-username\",\n                                \"policyRequirements\": [\n                                    \"VALID_USERNAME\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"forbiddenChars\": [\n                                        \"/\"\n                                    ]\n                                },\n                                \"policyId\": \"cannot-contain-characters\",\n                                \"policyRequirements\": [\n                                    \"CANNOT_CONTAIN_CHARACTERS\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"minLength\": 1\n                                },\n                                \"policyId\": \"minimum-length\",\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"maxLength\": 255\n                                },\n                                \"policyId\": \"maximum-length\",\n                                \"policyRequirements\": [\n                                    \"MAX_LENGTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"chetraleng\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{newUserName}}\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 0\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"{{password}}\"\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"header\": \"Enter new Username and current password\"\n}"
+								},
+								"header": [
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeUsername"
+										}
+									],
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeUsername"
+								}
+							}
+						},
+						{
+							"_postman_previewlanguage": "json",
+							"body": "{\n    \"authId\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoSW5kZXhWYWx1ZSI6InNlbGZzZXJ2aWNlX2NoYW5nZVVzZXJuYW1lIiwib3RrIjoiZ2NpN2RmMnFxN204NDVxdDdzbGlsNThqdmUiLCJhdXRoSW5kZXhUeXBlIjoic2VydmljZSIsInJlYWxtIjoiL2N1c3RvbWVyIiwic2Vzc2lvbklkIjoiKkFBSlRTUUFDTURJQUJIUjVjR1VBQ0VwWFZGOUJWVlJJQUFKVE1RQUNNREUuKmV5SjBlWEFpT2lKS1YxUWlMQ0pqZEhraU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuWlhsS01HVllRV2xQYVVwTFZqRlJhVXhEU214aWJVMXBUMmxLUWsxVVNUUlJNRXBFVEZWb1ZFMXFWVEpKYVhkcFdWZDRia2xxYjJsYVIyeDVTVzR3TGk1T1RrTTVkVTFOUmxFdFZUUnpVRUZxTVVNd1YzVjNMbHBVVTFGQk4xWlhNbUZaVlZKRU9VaGlhRlZYV0VNM1RuTnlSRWhrTmpoSlV6RlpNQzFEWTBsZlVHWkJNbXRQVEVKR2IzSnlhbVJ2VmtSU1luRnRjMVF5VURsWU1XSTJjRFZwZFdadWNGZzJjRk56VW01U1VubE1UbTVtYjFOaU9FZ3plSFpOY1ZwWU5YbDVNekl4WTNKNGVqbHpjVEJTZEhKNU0yOHdXV2d5UzA1VE9XeHFiMnRYTFdwM1dGWllZMFk0YjFsVVVHWllUWE5ZVFRCMGMwRlJMVXRYTFVoeGFFbHJPSE0xZEhWNFZtNXhVbEozYzA1clZIUnVSSGhKUm5GVFJrVlhNakl6YlZseldFaHlTazlSTWpjd1NXMDFOR0pVWlZFd1pXVmtiRFZ2TlZGNlZuWk9UekppZG5keVduQTVUVXBuTkdSUFJGZDBVbTFsVFhSa2MyNUlhbXc1WDJsWVZ5MXZVVE13Y1V3MVIzbFRVMGQzT1VwaFZrcHRRV3hsUzNvMWEydFhVMXBQYzJSVlVucHFNVlV5VG1oWVVVbDJPRVoyTmxad1ZuSkpURUpIVGxkVFNWZ3RXWEZrWmtOVldrcFlNRzUwVVMxMFFtNVpSblJFVEU1SmF6SmhTR0p2TTBod01YWklWMjFuVGt3eGNuVTVWR1p0VEVnMVRWQm5aMDluWjJweWFFaFZOazFDYmkxMlVsUkdWMDFaUVMxbVoxSndUVWRzVmpVNGIwd3lVRmhZTUVWWldHaE9VbmhNU0VSTVIxSkJRV3gzZWxoNlgwZHlPRFJOYWtKSVdtWnNZbWx4Wm5OUmRFUkxWRVZ6Tm14NGFHNUJiR1pmUldaeE9YaHBValIyYTFWRlFrUTRXRGxNYVhGaFFVb3hUMTl1VG5kck9GUk5aVVZsYUhwbldtcEJUMWRqWlc1RGIwYzNNMmgyTUZkd2VGRmpVamRrU1RKNk5GOXpjREoxWDJsclVFaEVlakoyZFhKcWMySTJTbFpEZVc1SE9IQmtlbWR3VUVoRVpraFlVVjl3VWxwVmR6Qllja0p5V1RWVlRWWXpNWGRXU21abVZWY3plWGwxWmxSRU9FMTBkWEZGZVRSTmNYaHdXWEpEZFhGRFoyTlFkR2xYWmtWUGRtOVFSMUowZUY5VlVVSXdXR2RuU1RFelZYaGxXSEZhYTJnNGVscDJabFJZUm5seGVqSnZUemhOVUZsWmVtcGhjVTVpYW1SMmFtazVTbHAxWTBsNmVURmZWVzVqVjNkTU9FdzVPVlJhWTJKRVpVWm9NblE0ZUZKaFEwSm9jR3g2TkZaVU0yaElTMkpoZG5GM01YSmthSGxmYW5WT05XNVVVRVV5YjNwalRIQTRMVFpZYWpCWlFuUldRV3d5ZFV0Q1NXRlRVblZzYzI0NGVFVnVObTA0Y0RCVVNYQkpjVFpUVEMxWFowMTVkbmxFU1hVeFZFSndOalZvV2tkMmJUZzBSR0pxUVhWemMwbE9XVlJ2Y1dOMloycGlkemhtVkdsWVRsTnllRkJ3TkZCUVMxQnZha3gzVUdsSGJHZDNjWE5WZWs5alJFaHVkbVZWTUZJdFdVWnVTWHBKWkY5S2NVOXpTelpmTWpKSFRqQTJiR3MyUjAxd1pXcGpNa3ROUzJ4T1VWaDRhREpzVFM0emFIazJRVmxPY0V3eGRrSmxlRUpwWjJ0S1VqWm4ua0FyeFlRUUdjbTNEblZpQUFKeFVaMGlsZFdXUE52SkE2eFp3YVVQZVR1MCIsImV4cCI6MTcxMDc3MzMyOCwiaWF0IjoxNzEwNzcxNTI4fQ.vfR8C81MGQmFEy67Lxp54KdwrTzWiBnzeVh16Qoj9-A\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"userName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Username\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"MIN_LENGTH\",\n                            \"VALID_TYPE\",\n                            \"VALID_USERNAME\",\n                            \"CANNOT_CONTAIN_CHARACTERS\",\n                            \"MAX_LENGTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"userName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"not-empty\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ],\n                                \"policyId\": \"minimum-length\",\n                                \"params\": {\n                                    \"minLength\": 1\n                                }\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"valid-username\",\n                                \"policyRequirements\": [\n                                    \"VALID_USERNAME\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"forbiddenChars\": [\n                                        \"/\"\n                                    ]\n                                },\n                                \"policyId\": \"cannot-contain-characters\",\n                                \"policyRequirements\": [\n                                    \"CANNOT_CONTAIN_CHARACTERS\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"minLength\": 1\n                                },\n                                \"policyId\": \"minimum-length\",\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"maxLength\": 255\n                                },\n                                \"policyId\": \"maximum-length\",\n                                \"policyRequirements\": [\n                                    \"MAX_LENGTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": [\n                        \"{ \\\"params\\\": { \\\"forbiddenChars\\\": \\\"/\\\" }, \\\"policyRequirement\\\": \\\"CANNOT_CONTAIN_CHARACTERS\\\" }\"\n                    ]\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"chet/raleng?\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"chet/raleng?\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 2\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"\"\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"header\": \"Enter new Username and current password\"\n}",
+							"cookie": [],
+							"header": [
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"type": "text",
+									"value": "application/json"
+								}
+							],
+							"name": "Cannot Contain Characters",
+							"originalRequest": {
+								"body": {
+									"mode": "raw",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									},
+									"raw": "{\n    \"authId\": \"{{authId}}\",\n    \"callbacks\": [\n        {\n            \"type\": \"StringAttributeInputCallback\",\n            \"output\": [\n                {\n                    \"name\": \"name\",\n                    \"value\": \"userName\"\n                },\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Username\"\n                },\n                {\n                    \"name\": \"required\",\n                    \"value\": true\n                },\n                {\n                    \"name\": \"policies\",\n                    \"value\": {\n                        \"policyRequirements\": [\n                            \"REQUIRED\",\n                            \"MIN_LENGTH\",\n                            \"VALID_TYPE\",\n                            \"VALID_USERNAME\",\n                            \"CANNOT_CONTAIN_CHARACTERS\",\n                            \"MAX_LENGTH\"\n                        ],\n                        \"fallbackPolicies\": null,\n                        \"name\": \"userName\",\n                        \"policies\": [\n                            {\n                                \"policyRequirements\": [\n                                    \"REQUIRED\"\n                                ],\n                                \"policyId\": \"not-empty\"\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ],\n                                \"policyId\": \"minimum-length\",\n                                \"params\": {\n                                    \"minLength\": 1\n                                }\n                            },\n                            {\n                                \"policyRequirements\": [\n                                    \"VALID_TYPE\"\n                                ],\n                                \"policyId\": \"valid-type\",\n                                \"params\": {\n                                    \"types\": [\n                                        \"string\"\n                                    ]\n                                }\n                            },\n                            {\n                                \"policyId\": \"valid-username\",\n                                \"policyRequirements\": [\n                                    \"VALID_USERNAME\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"forbiddenChars\": [\n                                        \"/\"\n                                    ]\n                                },\n                                \"policyId\": \"cannot-contain-characters\",\n                                \"policyRequirements\": [\n                                    \"CANNOT_CONTAIN_CHARACTERS\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"minLength\": 1\n                                },\n                                \"policyId\": \"minimum-length\",\n                                \"policyRequirements\": [\n                                    \"MIN_LENGTH\"\n                                ]\n                            },\n                            {\n                                \"params\": {\n                                    \"maxLength\": 255\n                                },\n                                \"policyId\": \"maximum-length\",\n                                \"policyRequirements\": [\n                                    \"MAX_LENGTH\"\n                                ]\n                            }\n                        ],\n                        \"conditionalPolicies\": null\n                    }\n                },\n                {\n                    \"name\": \"failedPolicies\",\n                    \"value\": []\n                },\n                {\n                    \"name\": \"validateOnly\",\n                    \"value\": false\n                },\n                {\n                    \"name\": \"value\",\n                    \"value\": \"\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken1\",\n                    \"value\": \"{{newUserName}}\"\n                },\n                {\n                    \"name\": \"IDToken1validateOnly\",\n                    \"value\": false\n                }\n            ],\n            \"_id\": 0\n        },\n        {\n            \"type\": \"PasswordCallback\",\n            \"output\": [\n                {\n                    \"name\": \"prompt\",\n                    \"value\": \"Password\"\n                }\n            ],\n            \"input\": [\n                {\n                    \"name\": \"IDToken2\",\n                    \"value\": \"{{password}}\"\n                }\n            ],\n            \"_id\": 1\n        }\n    ],\n    \"header\": \"Enter new Username and current password\"\n}"
+								},
+								"header": [
+									{
+										"key": "accept-api-version",
+										"value": "protocol=1.0,resource=2.1"
+									},
+									{
+										"key": "accept-encoding",
+										"value": "gzip, deflate, br"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"url": {
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "selfservice_changeUsername"
+										}
+									],
+									"raw": "/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=selfservice_changeUsername"
+								}
+							}
+						}
+					]
+				}
+			],
+			"name": "changeUserName"
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "userName",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "authId",
+			"value": ""
+		},
+		{
+			"key": "otp",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "tokenId",
+			"value": ""
+		},
+		{
+			"key": "newUserName",
+			"type": "default",
+			"value": ""
+		},
+		{
+			"key": "authIdId",
+			"value": ""
+		}
+	]
+}

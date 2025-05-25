@@ -1,0 +1,30 @@
+{
+  "data": {
+    "_id": "8afdaec3-275e-4301-bb53-34f03e6a4b29",
+    "_outcomes": [
+      {
+        "displayName": "True",
+        "id": "true"
+      },
+      {
+        "displayName": "False",
+        "id": "false"
+      }
+    ],
+    "_type": {
+      "_id": "LoginCountDecisionNode",
+      "collection": true,
+      "name": "Login Count Decision"
+    },
+    "amount": 3,
+    "identityAttribute": "userName",
+    "interval": "AT"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "8afdaec3-275e-4301-bb53-34f03e6a4b29",
+    "entityType": "LoginCountDecision",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

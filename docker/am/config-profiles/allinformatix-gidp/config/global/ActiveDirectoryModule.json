@@ -1,0 +1,41 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "activedirectory",
+      "collection": false,
+      "name": "Active Directory"
+    },
+    "defaults": {
+      "authenticationLevel": 0,
+      "connectionHeartbeatInterval": 1,
+      "connectionHeartbeatTimeUnit": "MINUTES",
+      "openam-auth-ldap-connection-mode": "LDAPS",
+      "operationTimeout": 0,
+      "primaryLdapServer": [
+        "localhost:50636"
+      ],
+      "profileAttributeMappings": [],
+      "returnUserDN": true,
+      "searchScope": "SUBTREE",
+      "secondaryLdapServer": [],
+      "stopLdapbindAfterInmemoryLockedEnabled": false,
+      "trustAllServerCertificates": false,
+      "userBindDN": "cn=Directory Manager",
+      "userProfileRetrievalAttribute": "uid",
+      "userSearchAttributes": [
+        "uid"
+      ],
+      "userSearchStartDN": [
+        "ou=identities"
+      ]
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "ActiveDirectoryModule",
+    "entityType": "ActiveDirectoryModule",
+    "pathParams": {},
+    "realm": null
+  }
+}

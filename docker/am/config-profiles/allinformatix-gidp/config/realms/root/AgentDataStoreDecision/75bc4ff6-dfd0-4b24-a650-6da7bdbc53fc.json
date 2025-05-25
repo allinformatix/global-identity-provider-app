@@ -1,0 +1,27 @@
+{
+  "data": {
+    "_id": "75bc4ff6-dfd0-4b24-a650-6da7bdbc53fc",
+    "_outcomes": [
+      {
+        "displayName": "True",
+        "id": "true"
+      },
+      {
+        "displayName": "False",
+        "id": "false"
+      }
+    ],
+    "_type": {
+      "_id": "AgentDataStoreDecisionNode",
+      "collection": true,
+      "name": "Agent Data Store Decision"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "75bc4ff6-dfd0-4b24-a650-6da7bdbc53fc",
+    "entityType": "AgentDataStoreDecision",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

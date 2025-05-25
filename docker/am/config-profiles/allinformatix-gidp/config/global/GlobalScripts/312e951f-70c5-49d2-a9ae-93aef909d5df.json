@@ -1,0 +1,27 @@
+{
+  "data": {
+    "_id": "312e951f-70c5-49d2-a9ae-93aef909d5df",
+    "_type": {
+      "_id": "globalScript",
+      "collection": true,
+      "name": "globalScript"
+    },
+    "context": "SOCIAL_IDP_PROFILE_TRANSFORMATION",
+    "createdBy": "null",
+    "creationDate": "0",
+    "description": "Normalizes raw profile data from Salesforce",
+    "evaluatorVersion": "V1_0",
+    "language": "GROOVY",
+    "lastModifiedBy": "null",
+    "lastModifiedDate": "0",
+    "name": "Salesforce Profile Normalization",
+    "script": "LyoKICogQ29weXJpZ2h0IDIwMjAgRm9yZ2VSb2NrIEFTLiBBbGwgUmlnaHRzIFJlc2VydmVkCiAqCiAqIFVzZSBvZiB0aGlzIGNvZGUgcmVxdWlyZXMgYSBjb21tZXJjaWFsIHNvZnR3YXJlIGxpY2Vuc2Ugd2l0aCBGb3JnZVJvY2sgQVMuCiAqIG9yIHdpdGggb25lIG9mIGl0cyBhZmZpbGlhdGVzLiBBbGwgdXNlIHNoYWxsIGJlIGV4Y2x1c2l2ZWx5IHN1YmplY3QKICogdG8gc3VjaCBsaWNlbnNlIGJldHdlZW4gdGhlIGxpY2Vuc2VlIGFuZCBGb3JnZVJvY2sgQVMuCiAqLwoKaW1wb3J0IHN0YXRpYyBvcmcuZm9yZ2Vyb2NrLmpzb24uSnNvblZhbHVlLmZpZWxkCmltcG9ydCBzdGF0aWMgb3JnLmZvcmdlcm9jay5qc29uLkpzb25WYWx1ZS5qc29uCmltcG9ydCBzdGF0aWMgb3JnLmZvcmdlcm9jay5qc29uLkpzb25WYWx1ZS5vYmplY3QKCnJldHVybiBqc29uKG9iamVjdCgKICAgICAgICBmaWVsZCgiaWQiLCByYXdQcm9maWxlLnVzZXJfaWQpLAogICAgICAgIGZpZWxkKCJkaXNwbGF5TmFtZSIsIHJhd1Byb2ZpbGUubmFtZSksCiAgICAgICAgZmllbGQoImdpdmVuTmFtZSIsIHJhd1Byb2ZpbGUuZ2l2ZW5fbmFtZSksCiAgICAgICAgZmllbGQoImZhbWlseU5hbWUiLCByYXdQcm9maWxlLmZhbWlseV9uYW1lKSwKICAgICAgICBmaWVsZCgicGhvdG9VcmwiLCByYXdQcm9maWxlLnBpY3R1cmUpLAogICAgICAgIGZpZWxkKCJlbWFpbCIsIHJhd1Byb2ZpbGUuZW1haWwpLAogICAgICAgIGZpZWxkKCJ1c2VybmFtZSIsIHJhd1Byb2ZpbGUuZW1haWwpLAogICAgICAgIGZpZWxkKCJsb2NhbGUiLCByYXdQcm9maWxlLnpvbmVJbmZvKSkp"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "312e951f-70c5-49d2-a9ae-93aef909d5df",
+    "entityType": "GlobalScripts",
+    "pathParams": {},
+    "realm": null
+  }
+}

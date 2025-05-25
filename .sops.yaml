@@ -1,0 +1,22 @@
+# `age` Public Keys für SOPS-Verschlüsselung
+# Fehmi            age10yjujp0j07snre96rf04vw83wq9fkktgfst5j9mcv28k7e6cgpfqe34xmq
+# infra-runner     age12jdzawu8qt72m9vg75m6wh7kd06dr2hsv638x8g9e07jy5zumq4smepjrt
+# keystore-handler age133jlmkazkr6ncraqm24a3rhlmhc66gjpkezct9c5cpstc3p2kakqdtc23v
+creation_rules:
+  - path_regex: ".*terraform.tfstate$"
+    age: >
+      age10yjujp0j07snre96rf04vw83wq9fkktgfst5j9mcv28k7e6cgpfqe34xmq,
+      age12jdzawu8qt72m9vg75m6wh7kd06dr2hsv638x8g9e07jy5zumq4smepjrt
+  - path_regex: ".*terraform.tfvars$"
+    age: >
+      age10yjujp0j07snre96rf04vw83wq9fkktgfst5j9mcv28k7e6cgpfqe34xmq,
+      age12jdzawu8qt72m9vg75m6wh7kd06dr2hsv638x8g9e07jy5zumq4smepjrt
+  - path_regex: ".*ansible-vault.yml$"
+    age: >
+      age10yjujp0j07snre96rf04vw83wq9fkktgfst5j9mcv28k7e6cgpfqe34xmq,
+      age12jdzawu8qt72m9vg75m6wh7kd06dr2hsv638x8g9e07jy5zumq4smepjrt
+  - path_regex: ".*keystore-config.yaml$"
+    age: >
+      age10yjujp0j07snre96rf04vw83wq9fkktgfst5j9mcv28k7e6cgpfqe34xmq,
+      age12jdzawu8qt72m9vg75m6wh7kd06dr2hsv638x8g9e07jy5zumq4smepjrt,
+      age133jlmkazkr6ncraqm24a3rhlmhc66gjpkezct9c5cpstc3p2kakqdtc23v

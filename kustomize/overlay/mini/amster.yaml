@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: amster
+spec:
+  template:
+    spec:
+      containers:
+        - name: pause
+          args: ["upload"]
+          env:
+            - name: ACTION
+              value: "upload"
+          volumeMounts:
+            - name: idm-admin-secret
+              mountPath: /var/run/secrets/idm-env
+              readOnly: true
+      volumes:
+        - name: idm-admin-secret
+          secret:
+            secretName: idm-env-secrets

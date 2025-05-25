@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "606e3a5a-1afb-4b8f-a404-7ceae0e345c4",
+    "_outcomes": [
+      {
+        "displayName": "Outcome",
+        "id": "outcome"
+      }
+    ],
+    "_type": {
+      "_id": "UsernameCollectorNode",
+      "collection": true,
+      "name": "Username Collector"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "606e3a5a-1afb-4b8f-a404-7ceae0e345c4",
+    "entityType": "UsernameCollector",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

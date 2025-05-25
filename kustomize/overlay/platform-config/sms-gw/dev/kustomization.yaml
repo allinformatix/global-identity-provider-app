@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+# defines config map patches to set SMS GW connection details for DEV
+patches:
+- target:
+    kind: ConfigMap
+    name: platform-config
+  patch: |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: platform-config
+    data:
+      SMS_PROVIDER_URL: "https://twilio.com"
+      SMS_PROVIDER_HEADER: "allinformatix DEV"

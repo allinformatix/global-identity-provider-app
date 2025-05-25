@@ -1,0 +1,38 @@
+/**
+ * Copyright (c) 2020 ForgeRock. All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ */
+
+.device-xs {
+  width: 36px;
+  height: 36px;
+  background: no-repeat url('~@forgerock/platform-shared/src/assets/images/devices-sprite.svg');
+  background-size: 36px 252px;
+
+  &[data-device-type=android] {
+    background-position: 0 -36px;
+  }
+
+  &[data-device-type=chromiumos] {
+    background-position: 0 -72px;
+  }
+
+  &[data-device-type=ios] {
+    background-position: 0 -108px;
+  }
+
+  &[data-device-type=macos] {
+    background-position: 0 -144px;
+  }
+
+  &[data-device-type=linux] {
+    background-position: 0 -180px;
+  }
+
+  &[data-device-type=windows] {
+    background-position: 0 -216px;
+  }
+}
+

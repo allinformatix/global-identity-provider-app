@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "dsameuser",
+    "_type": {
+      "_id": "user",
+      "collection": true,
+      "name": "User"
+    },
+    "dn": "cn=dsameuser,ou=DSAME Users,",
+    "inetUserStatus": "Active",
+    "iplanet-am-user-auth-config": "[Empty]",
+    "roles": [],
+    "userPassword": null
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "dsameuser",
+    "entityType": "IdRepositoryUser",
+    "pathParams": {},
+    "realm": null
+  }
+}

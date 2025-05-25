@@ -1,0 +1,211 @@
+{
+    "mappings" : [
+        {
+            "target" : "system/allinformatixOrg/account",
+            "source" : "managed/user",
+            "name" : "map_moUser_systemAllinformatixorgAccount",
+            "consentRequired" : false,
+            "icon" : null,
+            "displayName" : "map_moUser_systemAllinformatixorgAccount",
+            "properties" : [
+                {
+                    "target" : "dn",
+                    "transform" : {
+                        "type" : "text/javascript",
+                        "globals" : { },
+                        "source" : "\"uid=\" + source._id + \",ou=people,ou=identities\""
+                    },
+                    "source" : ""
+                },
+                {
+                    "source" : "mail",
+                    "target" : "mail"
+                },
+                {
+                    "source" : "givenName",
+                    "target" : "givenName"
+                },
+                {
+                    "source" : "password",
+                    "target" : "userPassword"
+                },
+                {
+                    "target" : "cn",
+                    "transform" : {
+                        "type" : "text/javascript",
+                        "globals" : { },
+                        "source" : "source.givenName + ' ' + source.sn"
+                    },
+                    "source" : ""
+                },
+                {
+                    "target" : "sn",
+                    "source" : "sn"
+                },
+                {
+                    "target" : "allinformatixID",
+                    "source" : "userName"
+                },
+                {
+                    "target" : "objectClass",
+                    "transform" : {
+                        "type" : "text/javascript",
+                        "globals" : { },
+                        "source" : "['allinformatixEnterpriseUser',\n'boundDevicesContainer',\n'devicePrintProfilesContainer',\n'deviceProfilesContainer',\n'forgerock-am-dashboard-service',\n'fr-idm-managed-user-explicit',\n'inetorgperson',\n'inetuser',\n'iplanet-am-auth-configuration-service',\n'iplanet-am-managed-person',\n'iplanet-am-user-service',\n'iPlanetPreferences',\n'kbaInfoContainer',\n'oathDeviceProfilesContainer',\n'organizationalperson',\n'person',\n'pushDeviceProfilesContainer',\n'sunAMAuthAccountLockout',\n'sunFMSAML2NameIdentifier',\n'top',\n'webauthnDeviceProfilesContainer']"
+                    },
+                    "source" : ""
+                }
+            ],
+            "policies" : [
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "AMBIGUOUS"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "SOURCE_MISSING"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "MISSING"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "FOUND_ALREADY_LINKED"
+                },
+                {
+                    "action" : "DELETE",
+                    "situation" : "UNQUALIFIED"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "UNASSIGNED"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "LINK_ONLY"
+                },
+                {
+                    "action" : "IGNORE",
+                    "situation" : "TARGET_IGNORED"
+                },
+                {
+                    "action" : "IGNORE",
+                    "situation" : "SOURCE_IGNORED"
+                },
+                {
+                    "action" : "IGNORE",
+                    "situation" : "ALL_GONE"
+                },
+                {
+                    "action" : "UPDATE",
+                    "situation" : "CONFIRMED"
+                },
+                {
+                    "action" : "UPDATE",
+                    "situation" : "FOUND"
+                },
+                {
+                    "action" : "CREATE",
+                    "situation" : "ABSENT"
+                }
+            ],
+            "targetQuery" : {
+                "_queryFilter" : "!(uid eq \"idm-admin\")"
+            },
+            "correlationQuery" : [
+                {
+                    "linkQualifier" : "default",
+                    "expressionTree" : {
+                        "any" : [
+                            "allinformatixID"
+                        ]
+                    },
+                    "mapping" : "map_moUser_systemAllinformatixorgAccount",
+                    "type" : "text/javascript",
+                    "file" : "ui/correlateTreeToQueryFilter.js"
+                }
+            ]
+        },
+        {
+            "target" : "managed/supplierProducts",
+            "source" : "system/productFetcherAzure/allProducts",
+            "name" : "map_sys_to_mo_azureProducts_supplierProducts",
+            "displayName" : "map_sys_to_mo_azureProducts_supplierProducts",
+            "reconSourceQueryPaging": true,
+            "reconSourceQueryPageSize": 1000,
+            "properties" : [
+                {
+                    "target" : "internalSku",
+                    "source" : "__NAME__"
+                },
+                {
+                    "target" : "supplierUniqueId",
+                    "source" : "meterId"
+                },
+                {
+                    "target" : "supplierProductName",
+                    "source" : "productName"
+                }
+            ],
+            "policies" : [
+                {
+                    "action" : "ASYNC",
+                    "situation" : "ABSENT"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "ALL_GONE"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "AMBIGUOUS"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "CONFIRMED"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "FOUND"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "FOUND_ALREADY_LINKED"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "LINK_ONLY"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "MISSING"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "SOURCE_IGNORED"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "SOURCE_MISSING"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "TARGET_IGNORED"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "UNASSIGNED"
+                },
+                {
+                    "action" : "ASYNC",
+                    "situation" : "UNQUALIFIED"
+                }
+            ],
+            "linkQualifiers" : [
+                "link_map_sys_to_mo_azureProducts_supplierProducts"
+            ],
+            "taskThreads" : 1
+        }
+    ]
+}

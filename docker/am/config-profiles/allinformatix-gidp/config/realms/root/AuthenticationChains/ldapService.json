@@ -1,0 +1,31 @@
+{
+  "data": {
+    "_id": "ldapService",
+    "_type": {
+      "_id": "EMPTY",
+      "collection": true,
+      "name": "Authentication Configuration"
+    },
+    "authChainConfiguration": [
+      {
+        "criteria": "REQUIRED",
+        "module": "DataStore",
+        "options": {}
+      }
+    ],
+    "loginFailureUrl": [
+      ""
+    ],
+    "loginPostProcessClass": [],
+    "loginSuccessUrl": [
+      ""
+    ]
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "ldapService",
+    "entityType": "AuthenticationChains",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

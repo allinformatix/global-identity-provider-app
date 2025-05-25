@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.global.services.session.clientbased.encryption",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "test"
+    ],
+    "secretId": "am.global.services.session.clientbased.encryption"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.global.services.session.clientbased.encryption",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

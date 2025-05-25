@@ -1,0 +1,25 @@
+{
+  "data": {
+    "_id": "7fcaf48e-a754-4959-858b-05b2933b825f",
+    "_outcomes": [
+      {
+        "displayName": "Outcome",
+        "id": "outcome"
+      }
+    ],
+    "_type": {
+      "_id": "ValidatedUsernameNode",
+      "collection": true,
+      "name": "Platform Username"
+    },
+    "usernameAttribute": "userName",
+    "validateInput": true
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "7fcaf48e-a754-4959-858b-05b2933b825f",
+    "entityType": "PlatformUsername",
+    "pathParams": {},
+    "realm": "/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "data": {
+    "_id": "am.services.oauth2.remote.consent.response.decryption",
+    "_type": {
+      "_id": "mappings",
+      "collection": true,
+      "name": "Mappings"
+    },
+    "aliases": [
+      "test"
+    ],
+    "secretId": "am.services.oauth2.remote.consent.response.decryption"
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "am.services.oauth2.remote.consent.response.decryption",
+    "entityType": "KeyStoreMappings",
+    "pathParams": {
+      "KeyStoreSecretStore": "default-keystore"
+    },
+    "realm": null
+  }
+}

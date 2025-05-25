@@ -1,0 +1,20 @@
+{
+  "data": {
+    "_id": "",
+    "_type": {
+      "_id": "accountactivecheck",
+      "collection": false,
+      "name": "Account Active Check"
+    },
+    "defaults": {
+      "authenticationLevel": 0
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "AccountActiveCheck",
+    "entityType": "AccountActiveCheck",
+    "pathParams": {},
+    "realm": null
+  }
+}

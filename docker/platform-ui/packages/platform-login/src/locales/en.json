@@ -1,0 +1,51 @@
+{
+  "routeNames": {
+    "service": "Service"
+  },
+  "login": {
+    "agreeToTerms": "By clicking 'Next' you agree to our ",
+    "displayElementsByScripts": "Display elements defined by scripts",
+    "invalidRealm": "Invalid Realm",
+    "newHere": "New here?",
+    "sessionTimeoutLink": "Start Over",
+    "errorHeading": "Error",
+    "title": "Login",
+    "header": {
+      "skipToMainContent": "Skip to main content"
+    },
+    "kba": {
+      "description": "Select security question(s) below. These questions will help us verify your identity if you forget your password.",
+      "selectQuestion": "Select a security question...",
+      "custom": "Provide your own:",
+      "question": "Question",
+      "answer": "Answer",
+      "answerFor": "Answer for: {question}",
+      "notUnique": "Custom questions cannot be duplicates"
+    },
+    "password": {
+      "confirmPassword": "Confirm Password",
+      "passwordsDoNotMatch": "Passwords do not match"
+    },
+    "pushChallenge": {
+      "message": "Open your Authenticator app and tap the number shown to sign-in."
+    },
+    "social": {
+      "legend": "Social Sign-in",
+      "or": "or",
+      "signInWith": "Sign in with {buttonDisplayName}"
+    },
+    "webAuthn": {
+      "authenticate": "Verifying your identity...",
+      "authenticateInfo": "Use your device to verify your identity.",
+      "failed": "Verification Failed",
+      "failedInfo": "Don't worry - you can still access your account using a recovery code.",
+      "register": "Registering your device...",
+      "registerInfo": "Your device will be used to verify your identity."
+    }
+  },
+  "pages": {
+    "selfservice": {
+      "captchaError": "Error loading reCaptcha"
+    }
+  }
+}

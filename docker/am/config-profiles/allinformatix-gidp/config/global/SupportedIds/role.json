@@ -1,0 +1,17 @@
+{
+  "data": {
+    "_id": "role",
+    "_type": {
+      "_id": "SupportedIdentities",
+      "collection": true,
+      "name": "SupportedIdentities"
+    }
+  },
+  "metadata": {
+    "amsterVersion": "&{version}",
+    "entityId": "role",
+    "entityType": "SupportedIds",
+    "pathParams": {},
+    "realm": null
+  }
+}

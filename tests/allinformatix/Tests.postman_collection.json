@@ -1,0 +1,4956 @@
+{
+	"info": {
+		"_postman_id": "fb57d1d6-4fb7-43d4-b80d-9101532c66dd",
+		"name": "ERGO-ID CIAM Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20626077"
+	},
+	"item": [
+		{
+			"name": "AM",
+			"item": [
+				{
+					"name": "Security Headers",
+					"item": [
+						{
+							"name": "AM Header Test",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HSTS header is present\", function () {",
+											"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+											"});",
+											"pm.test(\"HSTS header has recommended value\", function () {",
+											"    pm.response.to.have.header(\"Strict-Transport-Security\", \"max-age=63072000; includeSubDomains; preload\");",
+											"});",
+											"pm.test(\"CSP header is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Security-Policy\");",
+											"});",
+											"pm.test(\"CSP header has recommended value\", function () {",
+											"    var csp = pm.response.headers.get(\"Content-Security-Policy\");",
+											"    pm.expect(csp).to.contain(\"default-src 'self'\");",
+											"    pm.expect(csp).to.contain(\"frame-ancestors 'none'\");",
+											"});",
+											"pm.test(\"X-Frame-Options header is present\", function () {",
+											"    pm.response.to.have.header(\"X-Frame-Options\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/authenticate",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"authenticate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login UI Header Test",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HSTS header is present\", function () {",
+											"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+											"});",
+											"pm.test(\"HSTS header has recommended value\", function () {",
+											"    pm.response.to.have.header(\"Strict-Transport-Security\", \"max-age=63072000; includeSubDomains; preload\");",
+											"});",
+											"pm.test(\"CSP header is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Security-Policy\");",
+											"});",
+											"pm.test(\"CSP header has recommended value\", function () {",
+											"    var csp = pm.response.headers.get(\"Content-Security-Policy\");",
+											"    pm.expect(csp).to.contain(\"default-src 'self' 'unsafe-eval'\");",
+											"    pm.expect(csp).to.contain(\"frame-ancestors 'none'\");",
+											"});",
+											"pm.test(\"X-Frame-Options header is present\", function () {",
+											"    pm.response.to.have.header(\"X-Frame-Options\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/login/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"login",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Journey UI Header Test",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HSTS header is present\", function () {",
+											"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+											"});",
+											"pm.test(\"HSTS header has recommended value\", function () {",
+											"    pm.response.to.have.header(\"Strict-Transport-Security\", \"max-age=63072000; includeSubDomains; preload\");",
+											"});",
+											"pm.test(\"CSP header is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Security-Policy\");",
+											"});",
+											"pm.test(\"CSP header has recommended value\", function () {",
+											"    var csp = pm.response.headers.get(\"Content-Security-Policy\");",
+											"    pm.expect(csp).to.contain(\"default-src 'self'\");",
+											"    pm.expect(csp).to.contain(\"frame-ancestors 'none'\");",
+											"});",
+											"pm.test(\"X-Frame-Options header is present\", function () {",
+											"    pm.response.to.have.header(\"X-Frame-Options\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/ui/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"ui",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AM CORS Test",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"CORS is not allowed\", function () {",
+											"    pm.response.to.not.have.header(\"Access-Control-Allow-Origin\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "https://evilsite.com"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/authenticate",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"authenticate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "Prerequisites",
+							"item": [
+								{
+									"name": "postman-admin-auth",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Has non-empty tokenId for root realm\", function () {",
+													"    pm.expect(jsonData.tokenId).to.be.not.empty;",
+													"    pm.expect(jsonData.realm).to.equal(\"/customer\");",
+													"});",
+													"pm.environment.set(\"amadmin-session\", jsonData.tokenId);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-OpenAM-Username",
+												"value": "t_postmanapiadmin"
+											},
+											{
+												"key": "X-OpenAM-Password",
+												"value": "{{postmanapiadmin_pass}}"
+											},
+											{
+												"key": "Accept-API-Version",
+												"value": "resource=2.0, protocol=1.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											]
+										},
+										"description": "Login as amadmin"
+									},
+									"response": []
+								},
+								{
+									"name": "create-test-user",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.collectionVariables.set(\"testUserName\", pm.variables.replaceIn(\"{{$randomUserName}}\"));",
+													"pm.collectionVariables.set(\"testUserFirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"));",
+													"pm.collectionVariables.set(\"testUserLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+													"pm.collectionVariables.set(\"testUserEmail\", pm.variables.replaceIn(\"ergotest-{{$timestamp}}@icconsult.33mail.com\"));",
+													"pm.collectionVariables.set(\"testUserMobilePhone\", `+4917139200${Math.random().toString().slice(2,4)}`)",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"pm.test(\"Right values\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData.realm).to.eql(\"/customer\");",
+													"    pm.environment.set(\"testUserUUID\", jsonData[\"_id\"][0]);",
+													"    pm.expect(jsonData.mail[0]).to.eql(pm.variables.replaceIn(\"{{testUserEmail}}\"));",
+													"    pm.expect(jsonData.username).to.eql(pm.variables.replaceIn(\"{{testUserName}}\"));",
+													"    pm.expect(jsonData.givenName[0]).to.eql(pm.variables.replaceIn(\"{{testUserFirstName}}\"));",
+													"    pm.expect(jsonData.sn[0]).to.eql(pm.variables.replaceIn(\"{{testUserLastName}}\"));",
+													"    pm.expect(jsonData.dn[0]).to.eql(pm.variables.replaceIn(\"fr-idm-uuid={{testUserUUID}},ou=people,ou=customer,ou=identities\"));",
+													"    pm.expect(jsonData[\"fr-idm-uuid\"][0]).to.eql(pm.variables.replaceIn(\"{{testUserUUID}}\"));",
+													"    pm.expect(jsonData.uid[0]).to.eql(pm.variables.replaceIn(\"{{testUserName}}\"));",
+													"    ",
+													"    pm.expect(jsonData.universalid[0]).to.eql(pm.variables.replaceIn(\"id={{testUserUUID}},ou=user,o=customer,ou=services,ou=am-config\"));",
+													"    pm.expect(jsonData.inetUserStatus[0]).to.eql(\"Active\");",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=3.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{    \n    \"username\": \"{{testUserName}}\",\n    \"userpassword\": \"ErgoErgo2023\",\n    \"mail\": \"{{testUserEmail}}\",\n    \"givenName\":\"{{testUserFirstName}}\",\n    \"sn\":\"{{testUserLastName}}\",\n    \"ergo-attr-mobilephone\": { \"value\" : \"{{testUserMobilePhone}}\"},\n    \"ergo-attr-dob\": \"2000-01-01\",\n    \"ergo-attr-2faMethods\": { \"value\" : \"SMS\"}\n}"
+										},
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/users/?_action=create",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"users",
+												""
+											],
+											"query": [
+												{
+													"key": "_action",
+													"value": "create"
+												}
+											]
+										},
+										"description": "Create test user"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Journey for login",
+							"item": [
+								{
+									"name": "Enter Credential Page",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"",
+													"pm.test(\"authId returned\", function () {",
+													"    pm.expect(jsonData).to.have.property('authId');",
+													"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+													"});",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Returns right callbacks\", function () {    ",
+													"    pm.expect(jsonData.callbacks[0].type).to.eql(\"NameCallback\");",
+													"    pm.expect(jsonData.callbacks[1].type).to.eql(\"PasswordCallback\");",
+													"    pm.expect(jsonData.callbacks.length).to.eql(2);",
+													"});",
+													"",
+													"jsonData.callbacks[0].input[0].value = pm.variables.get('testUserName');",
+													"jsonData.callbacks[1].input[0].value = 'ErgoErgo2023';",
+													"",
+													"pm.collectionVariables.set(\"callbacks\",JSON.stringify(jsonData));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=2.1"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "service"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "login"
+												}
+											]
+										},
+										"description": "Initialize tree to get callbacks"
+									},
+									"response": []
+								},
+								{
+									"name": "Submit Credential",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"",
+													"pm.test(\"authId returned\", function () {",
+													"    pm.expect(jsonData).to.have.property('authId');",
+													"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+													"});",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"pm.test(\"Returns right callbacks\", function () {    ",
+													"    pm.expect(jsonData.callbacks[0].type).to.eql(\"PasswordCallback\");",
+													"    pm.expect(jsonData.callbacks.length).to.eql(1);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=2.1"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{{callbacks}}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "service"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "login"
+												}
+											]
+										},
+										"description": "Initialize tree to get callbacks"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Journey for login retry",
+							"item": [
+								{
+									"name": "Enter Credential Page",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"",
+													"pm.test(\"authId returned\", function () {",
+													"    pm.expect(jsonData).to.have.property('authId');",
+													"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+													"});",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Returns right callbacks\", function () {    ",
+													"    pm.expect(jsonData.callbacks[0].type).to.eql(\"NameCallback\");",
+													"    pm.expect(jsonData.callbacks[1].type).to.eql(\"PasswordCallback\");",
+													"    pm.expect(jsonData.callbacks.length).to.eql(2);",
+													"});",
+													"",
+													"jsonData.callbacks[0].input[0].value = pm.variables.get('testUserName');",
+													"jsonData.callbacks[1].input[0].value = 'ErgoErgo202';",
+													"",
+													"pm.collectionVariables.set(\"callbacks\",JSON.stringify(jsonData));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=2.1"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "service"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "login"
+												}
+											]
+										},
+										"description": "Initialize tree to get callbacks"
+									},
+									"response": []
+								},
+								{
+									"name": "Submit Credential",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"",
+													"pm.test(\"authId returned\", function () {",
+													"    pm.expect(jsonData).to.have.property('authId');",
+													"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+													"});",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Returns right callbacks\", function () { ",
+													"   ",
+													"    pm.expect(jsonData.callbacks[0].type).to.eql(\"TextOutputCallback\");",
+													"    pm.expect(jsonData.callbacks[0].output[0].value).to.eql(\"incorrectUsernamePwd\");",
+													"    pm.expect(jsonData.callbacks.length).to.eql(3);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=2.1"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{{callbacks}}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "service"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "login"
+												}
+											]
+										},
+										"description": "Initialize tree to get callbacks"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Journey for password forgotten",
+							"item": [
+								{
+									"name": "Enter personal detail page",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"",
+													"pm.test(\"authId returned\", function () {",
+													"    pm.expect(jsonData).to.have.property('authId');",
+													"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+													"});",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Returns right callbacks\", function () {    ",
+													"    pm.expect(jsonData.callbacks[0].type).to.eql(\"StringAttributeInputCallback\");",
+													"    pm.expect(jsonData.callbacks[0].output[0].value).to.eql(\"userName\");",
+													"    pm.expect(jsonData.callbacks[1].type).to.eql(\"StringAttributeInputCallback\");",
+													"    pm.expect(jsonData.callbacks[1].output[0].value).to.eql(\"givenName\");",
+													"    pm.expect(jsonData.callbacks[2].type).to.eql(\"StringAttributeInputCallback\");",
+													"    pm.expect(jsonData.callbacks[2].output[0].value).to.eql(\"sn\");",
+													"    pm.expect(jsonData.callbacks[3].type).to.eql(\"StringAttributeInputCallback\");",
+													"    pm.expect(jsonData.callbacks[3].output[0].value).to.eql(\"dob\");",
+													"    pm.expect(jsonData.callbacks.length).to.eql(4);",
+													"});",
+													"",
+													"jsonData.callbacks[0].input[0].value = pm.variables.get('testUserName')",
+													"jsonData.callbacks[1].input[0].value = pm.variables.get('testUserFirstName')",
+													"jsonData.callbacks[2].input[0].value = pm.variables.get('testUserLastName')",
+													"jsonData.callbacks[3].input[0].value = \"2000-01-01\"",
+													"",
+													"pm.collectionVariables.set(\"callbacks\",JSON.stringify(jsonData));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=2.1"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=passwordForgottenTrigger",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "service"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "passwordForgottenTrigger"
+												}
+											]
+										},
+										"description": "Initialize tree to get callbacks"
+									},
+									"response": []
+								},
+								{
+									"name": "Submit personal detail",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"",
+													"pm.test(\"authId returned\", function () {",
+													"    pm.expect(jsonData).to.have.property('authId');",
+													"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+													"});",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Returns right callbacks\", function () {    ",
+													"    pm.expect(jsonData.callbacks[0].type).to.eql(\"TextOutputCallback\");",
+													"    pm.expect(jsonData.callbacks[0].output[0].value).to.eql(pm.variables.replaceIn(\"{{testUserEmail}}\"));",
+													"    pm.expect(jsonData.callbacks.length).to.eql(2);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=2.1"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{{callbacks}}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=passwordForgottenTrigger",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "service"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "passwordForgottenTrigger"
+												}
+											]
+										},
+										"description": "Initialize tree to get callbacks"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Journey for username forgotten",
+							"item": [
+								{
+									"name": "Enter personal detail page",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"",
+													"pm.test(\"authId returned\", function () {",
+													"    pm.expect(jsonData).to.have.property('authId');",
+													"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+													"});",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													" ",
+													"",
+													"pm.test(\"Returns right callbacks\", function () {    ",
+													"    pm.expect(jsonData.callbacks[0].type).to.eql(\"StringAttributeInputCallback\");",
+													"    pm.expect(jsonData.callbacks[0].output[0].value).to.eql(\"givenName\");",
+													"    pm.expect(jsonData.callbacks[1].type).to.eql(\"StringAttributeInputCallback\");",
+													"    pm.expect(jsonData.callbacks[1].output[0].value).to.eql(\"sn\");",
+													"    pm.expect(jsonData.callbacks[2].type).to.eql(\"StringAttributeInputCallback\");",
+													"    pm.expect(jsonData.callbacks[2].output[0].value).to.eql(\"dob\");",
+													"    pm.expect(jsonData.callbacks[3].type).to.eql(\"TextInputCallback\");",
+													"    pm.expect(jsonData.callbacks[3].output[0].value).to.eql(\"policyNumber\");",
+													"    pm.expect(jsonData.callbacks.length).to.eql(4);",
+													"});",
+													"",
+													"jsonData.callbacks[0].input[0].value = pm.variables.get('testUserFirstName')",
+													"jsonData.callbacks[1].input[0].value = pm.variables.get('testUserLastName')",
+													"jsonData.callbacks[2].input[0].value = \"2000-01-01\"",
+													"jsonData.callbacks[3].input[0].value = 'DA000673071'",
+													"",
+													"pm.collectionVariables.set(\"callbacks\",JSON.stringify(jsonData));",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=2.1"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "service"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "usernameForgottenTrigger"
+												}
+											]
+										},
+										"description": "Initialize tree to get callbacks"
+									},
+									"response": []
+								},
+								{
+									"name": "Submit personal detail",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"",
+													"pm.test(\"authId returned\", function () {",
+													"    pm.expect(jsonData).to.have.property('authId');",
+													"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+													"});",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Returns right callbacks\", function () {    ",
+													"    pm.expect(jsonData.callbacks[0].type).to.eql(\"TextOutputCallback\");",
+													"    pm.expect(jsonData.callbacks[0].output[0].value).to.eql(\"idNotFound\");",
+													"    pm.expect(jsonData.callbacks.length).to.eql(5);",
+													"});",
+													"",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=1.0,resource=2.1"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{{callbacks}}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=usernameForgottenTrigger",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "service"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "usernameForgottenTrigger"
+												}
+											]
+										},
+										"description": "Initialize tree to get callbacks"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "OAuth2 Login",
+							"item": [
+								{
+									"name": "password-grant",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"function jwt_decode(jwt) {",
+													"    var parts = jwt.split('.'); // header, payload, signature",
+													"    return JSON.parse(atob(parts[1]));",
+													"}",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Has access token\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData.access_token).to.be.not.empty;",
+													"});",
+													"",
+													"pm.test(\"Has openid and profile scope\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData.scope).to.contain(\"openid\");",
+													"    pm.expect(jsonData.scope).to.contain(\"profile\");",
+													"});",
+													"",
+													"pm.test(\"id-token issuer is matching\", function () {",
+													"    pm.expect(jwt_decode(pm.response.json().id_token).iss).to.be.eql(pm.environment.get(\"url\") + \":443/am/oauth2/realms/root/realms/customer\");",
+													"});",
+													"",
+													"pm.test(\"id-token audience is correct\", function () {",
+													"    pm.expect(jwt_decode(pm.response.json().id_token).aud).to.be.eql(pm.environment.get(\"customer_oauth2_clientid\"));",
+													"});",
+													"",
+													"pm.test(\"id-token sub and loginname are right\", function () {",
+													"    pm.expect(jwt_decode(pm.response.json().id_token).sub).to.be.eql(pm.variables.get(\"testUserUUID\"));",
+													"    pm.expect(jwt_decode(pm.response.json().id_token).loginName).to.be.eql(pm.variables.get(\"{{testUserName}}\"));",
+													"});",
+													"",
+													"pm.environment.set(\"access_token\", pm.response.json().access_token);",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{customer_oauth2_clientsecret}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{customer_oauth2_clientid}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "grant_type",
+													"value": "password",
+													"type": "text"
+												},
+												{
+													"key": "username",
+													"value": "{{testUserName}}",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "ErgoErgo2023",
+													"type": "text"
+												},
+												{
+													"key": "realm",
+													"value": "customer",
+													"type": "text"
+												},
+												{
+													"key": "scope",
+													"value": "openid profile",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/am/oauth2/realms/root/realms/customer/access_token",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"oauth2",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"access_token"
+											]
+										},
+										"description": "Get access token using password grant"
+									},
+									"response": []
+								},
+								{
+									"name": "token-info",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Valid token response\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData.token_type).to.eql(\"Bearer\");",
+													"    pm.expect(jsonData.client_id).to.eql(pm.environment.get(\"customer_oauth2_clientid\"));",
+													"    pm.expect(jsonData.access_token).to.eql(pm.environment.get(\"access_token\"));",
+													"    pm.expect(jsonData.grant_type).to.eql(\"password\");",
+													"    pm.expect(jsonData.scope.length).to.eql(2);",
+													"    pm.expect(jsonData.scope).to.contain(\"openid\");",
+													"    pm.expect(jsonData.scope).to.contain(\"profile\");",
+													"    pm.expect(jsonData.realm).to.equal(\"/customer\");",
+													"    pm.expect(jsonData.expires_in).to.be.lte(3600);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/am/oauth2/realms/root/realms/customer/tokeninfo?access_token={{access_token}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"oauth2",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"tokeninfo"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "{{access_token}}"
+												}
+											]
+										},
+										"description": "Retrieve token info"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Post script",
+							"item": [
+								{
+									"name": "postman-admin-auth",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Has non-empty tokenId for root realm\", function () {",
+													"    pm.expect(jsonData.realm).to.equal(\"/customer\");",
+													"});",
+													"pm.environment.set(\"amadmin-session\", jsonData.tokenId);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-OpenAM-Username",
+												"value": "t_postmanapiadmin"
+											},
+											{
+												"key": "X-OpenAM-Password",
+												"value": "{{postmanapiadmin_pass}}"
+											},
+											{
+												"key": "Accept-API-Version",
+												"value": "resource=2.0, protocol=1.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											]
+										},
+										"description": "Login as amadmin"
+									},
+									"response": []
+								},
+								{
+									"name": "delete-test-user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Test successful values\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData.success, \"sucess\").to.eql(\"true\");",
+													"    pm.expect(jsonData._id, \"ID\").to.not.be.empty;",
+													"    pm.expect(jsonData._rev, \"Revision\").to.not.be.empty;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "protocol=2.1,resource=3.0"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/users/{{testUserUUID}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"users",
+												"{{testUserUUID}}"
+											]
+										},
+										"description": "Delete test user"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "OIDC",
+							"item": [
+								{
+									"name": "OIDC-wellknown-endpoint",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"var schema = {",
+													"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+													"  \"type\": \"object\",",
+													"  \"properties\": {",
+													"    \"request_parameter_supported\": {",
+													"      \"type\": \"boolean\"",
+													"    },",
+													"    \"introspection_signing_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"introspection_encryption_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"claims_parameter_supported\": {",
+													"      \"type\": \"boolean\"",
+													"    },",
+													"    \"introspection_endpoint\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"check_session_iframe\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"scopes_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"backchannel_logout_supported\": {",
+													"      \"type\": \"boolean\"",
+													"    },",
+													"    \"issuer\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"id_token_encryption_enc_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"acr_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"items\": {}",
+													"      }",
+													"    },",
+													"    \"userinfo_encryption_enc_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"authorization_endpoint\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"request_object_encryption_enc_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"introspection_encryption_enc_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"rcs_request_encryption_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"claims_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"userinfo_signing_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"rcs_request_signing_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"token_endpoint_auth_methods_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"tls_client_certificate_bound_access_tokens\": {",
+													"      \"type\": \"boolean\"",
+													"    },",
+													"    \"backchannel_logout_session_supported\": {",
+													"      \"type\": \"boolean\"",
+													"    },",
+													"    \"token_endpoint\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"response_types_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"revocation_endpoint_auth_methods_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"request_uri_parameter_supported\": {",
+													"      \"type\": \"boolean\"",
+													"    },",
+													"    \"rcs_response_encryption_enc_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"userinfo_encryption_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"grant_types_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"end_session_endpoint\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"rcs_request_encryption_enc_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"revocation_endpoint\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"version\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"rcs_response_encryption_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"userinfo_endpoint\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"token_endpoint_auth_signing_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"require_request_uri_registration\": {",
+													"      \"type\": \"boolean\"",
+													"    },",
+													"    \"id_token_encryption_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"jwks_uri\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"subject_types_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"id_token_signing_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"registration_endpoint\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"request_object_signing_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"request_object_encryption_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    },",
+													"    \"rcs_response_signing_alg_values_supported\": {",
+													"      \"type\": \"array\",",
+													"      \"items\": {",
+													"        \"type\": \"string\"",
+													"      }",
+													"    }",
+													"  },",
+													"  \"required\": [",
+													"    \"request_parameter_supported\",",
+													"    \"introspection_signing_alg_values_supported\",",
+													"    \"introspection_encryption_alg_values_supported\",",
+													"    \"claims_parameter_supported\",",
+													"    \"introspection_endpoint\",",
+													"    \"check_session_iframe\",",
+													"    \"scopes_supported\",",
+													"    \"backchannel_logout_supported\",",
+													"    \"issuer\",",
+													"    \"id_token_encryption_enc_values_supported\",",
+													"    \"acr_values_supported\",",
+													"    \"userinfo_encryption_enc_values_supported\",",
+													"    \"authorization_endpoint\",",
+													"    \"request_object_encryption_enc_values_supported\",",
+													"    \"introspection_encryption_enc_values_supported\",",
+													"    \"rcs_request_encryption_alg_values_supported\",",
+													"    \"claims_supported\",",
+													"    \"userinfo_signing_alg_values_supported\",",
+													"    \"rcs_request_signing_alg_values_supported\",",
+													"    \"token_endpoint_auth_methods_supported\",",
+													"    \"tls_client_certificate_bound_access_tokens\",",
+													"    \"backchannel_logout_session_supported\",",
+													"    \"token_endpoint\",",
+													"    \"response_types_supported\",",
+													"    \"revocation_endpoint_auth_methods_supported\",",
+													"    \"request_uri_parameter_supported\",",
+													"    \"rcs_response_encryption_enc_values_supported\",",
+													"    \"userinfo_encryption_alg_values_supported\",",
+													"    \"grant_types_supported\",",
+													"    \"end_session_endpoint\",",
+													"    \"rcs_request_encryption_enc_values_supported\",",
+													"    \"revocation_endpoint\",",
+													"    \"version\",",
+													"    \"rcs_response_encryption_alg_values_supported\",",
+													"    \"userinfo_endpoint\",",
+													"    \"token_endpoint_auth_signing_alg_values_supported\",",
+													"    \"require_request_uri_registration\",",
+													"    \"id_token_encryption_alg_values_supported\",",
+													"    \"jwks_uri\",",
+													"    \"subject_types_supported\",",
+													"    \"id_token_signing_alg_values_supported\",",
+													"    \"registration_endpoint\",",
+													"    \"request_object_signing_alg_values_supported\",",
+													"    \"request_object_encryption_alg_values_supported\",",
+													"    \"rcs_response_signing_alg_values_supported\"",
+													"  ]",
+													"};",
+													"pm.test('Schema is valid', function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/am/oauth2/realms/root/realms/customer/.well-known/openid-configuration",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"oauth2",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												".well-known",
+												"openid-configuration"
+											]
+										},
+										"description": "Get OIDC configuration"
+									},
+									"response": []
+								},
+								{
+									"name": "JWK-uri",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"At least one key available\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData.keys.length).to.be.gte(1);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/am/oauth2/realms/root/realms/customer/connect/jwk_uri",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"oauth2",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"connect",
+												"jwk_uri"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Policy",
+							"item": [
+								{
+									"name": "agent-auth",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(`cookies for ${url} cleared!`);",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Has non-empty tokenId for root realm\", function () {",
+													"    pm.expect(jsonData.tokenId).to.be.not.empty;",
+													"    pm.expect(jsonData.realm).to.equal(\"/customer\");",
+													"});",
+													"pm.environment.set(\"amadmin-session\", jsonData.tokenId);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-OpenAM-Username",
+												"value": "ErgoWebAgent"
+											},
+											{
+												"key": "X-OpenAM-Password",
+												"value": "{{agent_password}}"
+											},
+											{
+												"key": "Accept-API-Version",
+												"value": "resource=2.1"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=module&authIndexValue=Application",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"authenticate"
+											],
+											"query": [
+												{
+													"key": "authIndexType",
+													"value": "module"
+												},
+												{
+													"key": "authIndexValue",
+													"value": "Application"
+												}
+											]
+										},
+										"description": "Login as technical user"
+									},
+									"response": []
+								},
+								{
+									"name": "Evaluate Policy L1",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"GET allowed\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData[0].actions.GET).to.eql(true);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "resource=2.1"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"resources\":[\n        \"https://{{customerfqdn}}:443/meineversicherungen/l1/test\"\n    ],\n    \"subject\":{\n        \"ssoToken\": \"{{amadmin-session}}\"\n    },\n    \"application\":\"iPlanetAMWebAgentService\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/policies?_action=evaluate",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"policies"
+											],
+											"query": [
+												{
+													"key": "_action",
+													"value": "evaluate"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Evaluate Policy HT",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"GET allowed\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData[0].actions.GET).to.eql(true);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-API-Version",
+												"value": "resource=2.1"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"resources\":[\n        \"https://{{customerfqdn}}:443/meineversicherungen-ht/test\"\n    ],\n    \"subject\":{\n        \"ssoToken\": \"{{amadmin-session}}\"\n    },\n    \"application\":\"iPlanetAMWebAgentService\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/am/json/realms/root/realms/customer/policies?_action=evaluate",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"json",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"policies"
+											],
+											"query": [
+												{
+													"key": "_action",
+													"value": "evaluate"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			],
+			"description": "Tests based on the AM API"
+		},
+		{
+			"name": "IDM",
+			"item": [
+				{
+					"name": "Prerequisites",
+					"item": [
+						{
+							"name": "am-get-password-token",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"function jwt_decode(jwt) {",
+											"    var parts = jwt.split('.'); // header, payload, signature",
+											"    return JSON.parse(atob(parts[1]));",
+											"}",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Has access token\", function () {",
+											"    pm.expect(jsonData.access_token).to.be.a(\"string\")",
+											"});",
+											"",
+											"pm.environment.set(\"access_token\", jsonData.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "default"
+										},
+										{
+											"key": "client_id",
+											"value": "automated-api-tests",
+											"type": "default"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{client-secret}}",
+											"type": "default"
+										},
+										{
+											"key": "scope",
+											"value": "fr:idm:*",
+											"type": "default"
+										},
+										{
+											"key": "username",
+											"value": "t_postmanapiadmin",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "{{postmanapiadmin_pass}}",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/am/oauth2/access_token",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"oauth2",
+										"access_token"
+									]
+								},
+								"description": "Generate access token with the client credentials grant type"
+							},
+							"response": []
+						}
+					],
+					"description": "This directory contains the prerequisites for other directories.\n\nEnsure you have completed these steps before running any other request."
+				},
+				{
+					"name": "Test Customer API",
+					"item": [
+						{
+							"name": "idm-get-customeridentity-config",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const jsonData = pm.response.json();",
+											"const customerIdentity = jsonData.objects.find(i => i.name == \"customeridentity\");",
+											"",
+											"pm.test(\"Has a 'customeridentity' managed object definition\", function () {",
+											"    pm.expect(customerIdentity).to.be.not.empty;",
+											"});",
+											"",
+											"props = [",
+											"    'givenName',",
+											"    'sn',",
+											"    'email',",
+											"    'lastChangeEmail',",
+											"    'mobilephoneNumber',",
+											"    'lastChangePhoneNumber',",
+											"    'ergoDirektId',",
+											"    'ergoId'",
+											"];",
+											"for (i in props) {",
+											"    const prop = props[i];",
+											"    pm.test(`Has the '${prop}' property on 'customeridentity' managed object definition`, function () {",
+											"        pm.expect(customerIdentity.schema.properties[prop]).to.be.not.empty;",
+											"    });",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"followRedirects": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/openidm/config/managed",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"config",
+										"managed"
+									]
+								},
+								"description": "Get IDM managed objects configuration"
+							},
+							"response": []
+						},
+						{
+							"name": "idm-create-user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"testUserName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"));",
+											"pm.collectionVariables.set(\"testUserLastname\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+											"pm.collectionVariables.set(\"testUserEmail\", pm.variables.replaceIn(\"ergotest-{{$timestamp}}@icconsult.33mail.com\"));",
+											"pm.collectionVariables.set(\"testUserErgoId\", pm.variables.replaceIn(\"{{$randomInt}}\"));",
+											"// use a ficticious phone number according to https://en.wikipedia.org/wiki/Fictitious_telephone_number#Germany",
+											"pm.collectionVariables.set(\"testUserPhoneNo\", `+4917139200${Math.random().toString().slice(2,4)}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"",
+											"var jsonData = pm.response.json();",
+											"pm.test(\"Has non-empty ID\", function () {",
+											"    pm.expect(jsonData._id).to.be.not.empty;",
+											"});",
+											"pm.collectionVariables.set(\"testUserID\", jsonData._id);",
+											"",
+											"pm.test(\"Has non-empty 'lastChangeEmail'\", function () {",
+											"    pm.expect(jsonData.lastChangeEmail).to.be.not.empty;",
+											"});",
+											"pm.collectionVariables.set(\"testUserLastChangeEmail\", jsonData.lastChangeEmail);",
+											"",
+											"pm.test(\"Has non-empty 'lastChangePhoneNumber'\", function () {",
+											"    pm.expect(jsonData.lastChangePhoneNumber).to.be.not.empty;",
+											"});",
+											"pm.collectionVariables.set(\"testUserLastChangePhoneNumber\", jsonData.lastChangePhoneNumber);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"followRedirects": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"{{testUserEmail}}\",\n    \"ergoDirektId\":\"{{testUserErgoId}}\",\n    \"ergoId\":\"{{testUserErgoId}}\",\n    \"givenName\":\"{{testUserName}}\",\n    \"sn\":\"{{testUserLastname}}\",\n    \"mobilephoneNumber\":\"{{testUserPhoneNo}}\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/openidm/managed/customeridentity?_action=create",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"managed",
+										"customeridentity"
+									],
+									"query": [
+										{
+											"key": "_action",
+											"value": "create"
+										}
+									]
+								},
+								"description": "Create test identity"
+							},
+							"response": []
+						},
+						{
+							"name": "idm-list-user-ids",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Result count is greater than 0\", function () {",
+											"    pm.expect(jsonData.resultCount > 0);",
+											"});",
+											"",
+											"pm.test(\"Result contains test user ID\", function () {",
+											"    const testUserID = pm.collectionVariables.get(\"testUserID\");",
+											"    pm.expect(jsonData.result.find(r => r._id === testUserID)).to.not.be.undefined;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/openidm/managed/customeridentity?_queryFilter=true&_fields=_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"managed",
+										"customeridentity"
+									],
+									"query": [
+										{
+											"key": "_queryFilter",
+											"value": "true"
+										},
+										{
+											"key": "_fields",
+											"value": "_id"
+										}
+									]
+								},
+								"description": "Get list of customeridentity IDs"
+							},
+							"response": []
+						},
+						{
+							"name": "idm-patch-user-email",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(function(){}, 1000);",
+											"pm.collectionVariables.set(\"testUserEmail\", pm.variables.replaceIn(\"ergotest-{{$timestamp}}@ergo.33mail.com\"));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var jsonData = pm.response.json();",
+											"pm.test(\"Has changed 'email' value\", function () {",
+											"    const testUserEmail = pm.collectionVariables.get(\"testUserEmail\");",
+											"    pm.expect(jsonData.email).to.be.equal(testUserEmail);",
+											"});",
+											"",
+											"pm.test(\"Has changed 'lastChangeEmail' value\", function () {",
+											"    const testUserLastChangeEmail = pm.collectionVariables.get(\"testUserLastChangeEmail\");",
+											"    pm.expect(jsonData.lastChangeEmail).to.not.equal(testUserLastChangeEmail);",
+											"});",
+											"pm.collectionVariables.set(\"testUserLastChangeEmail\", jsonData.lastChangeEmail);",
+											"",
+											"pm.test(\"Has NOT changed 'lastChangePhoneNumber' value\", function () {",
+											"    const testUserLastChangePhoneNumber = pm.collectionVariables.get(\"testUserLastChangePhoneNumber\");",
+											"    pm.expect(jsonData.lastChangePhoneNumber).to.equal(testUserLastChangePhoneNumber);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\n    \"operation\":\"replace\",\n    \"field\":\"/email\",\n    \"value\":\"{{testUserEmail}}\"\n}]"
+								},
+								"url": {
+									"raw": "{{url}}/openidm/managed/customeridentity/{{testUserID}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"managed",
+										"customeridentity",
+										"{{testUserID}}"
+									]
+								},
+								"description": "Update users email address"
+							},
+							"response": []
+						},
+						{
+							"name": "idm-patch-user-phone",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// use a ficticious phone number according to https://en.wikipedia.org/wiki/Fictitious_telephone_number#Germany",
+											"pm.collectionVariables.set(\"testUserPhoneNo\", `+4917139200${Math.random().toString().slice(2,4)}`);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var jsonData = pm.response.json();",
+											"pm.test(\"Has changed 'mobilephoneNumber' value\", function () {",
+											"    const testUserPhoneNo = pm.collectionVariables.get(\"testUserPhoneNo\");",
+											"    pm.expect(jsonData.mobilephoneNumber).to.be.equal(testUserPhoneNo);",
+											"});",
+											"",
+											"pm.test(\"Has NOT changed 'lastChangeEmail' value\", function () {",
+											"    const testUserLastChangeEmail = pm.collectionVariables.get(\"testUserLastChangeEmail\");",
+											"    pm.expect(jsonData.lastChangeEmail).to.equal(testUserLastChangeEmail);",
+											"});",
+											"",
+											"pm.test(\"Has changed 'lastChangePhoneNumber' value\", function () {",
+											"    const testUserLastChangePhoneNumber = pm.collectionVariables.get(\"testUserLastChangePhoneNumber\");",
+											"    pm.expect(jsonData.lastChangePhoneNumber).to.not.equal(testUserLastChangePhoneNumber);",
+											"});",
+											"pm.collectionVariables.set(\"testUserLastChangePhoneNumber\", jsonData.lastChangePhoneNumber);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\n    \"operation\":\"replace\",\n    \"field\":\"/mobilephoneNumber\",\n    \"value\":\"{{testUserPhoneNo}}\"\n}]"
+								},
+								"url": {
+									"raw": "{{url}}/openidm/managed/customeridentity/{{testUserID}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"managed",
+										"customeridentity",
+										"{{testUserID}}"
+									]
+								},
+								"description": "Update users phone number"
+							},
+							"response": []
+						},
+						{
+							"name": "idm-delete-user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/openidm/managed/customeridentity/{{testUserID}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"managed",
+										"customeridentity",
+										"{{testUserID}}"
+									]
+								},
+								"description": "Delete test identity"
+							},
+							"response": []
+						},
+						{
+							"name": "idm-sync-queue",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Has resultCount\", function() {",
+											"    pm.expect(jsonData.resultCount).to.not.equal(undefined);",
+											"    pm.expect(jsonData.resultCount).to.be.a('number');",
+											"});",
+											"",
+											"if (jsonData.resultCount > 0) {",
+											"    pm.test(\"Has PDB connector items\", function() {",
+											"        const count = jsonData.result.filter(i => i.mapping == \"managedCustomeridentity_systemApifactoryrestConta\").length;",
+											"        pm.expect(count).to.be.greaterThan(0);",
+											"    });",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-API-Version",
+										"value": "resource=1.0"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/openidm/repo/sync/queue?_queryFilter=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"repo",
+										"sync",
+										"queue"
+									],
+									"query": [
+										{
+											"key": "_queryFilter",
+											"value": "true"
+										}
+									]
+								},
+								"description": "Get IDM managed objects configuration"
+							},
+							"response": []
+						},
+						{
+							"name": "idm-locks",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"A lock is present\", function () {",
+											"    pm.expect(jsonData.resultCount).to.be.at.least(1);",
+											"});",
+											"",
+											"pm.test(\"IDM connector is locked\", function () {",
+											"    pm.expect(jsonData.result).to.not.equal(undefined);",
+											"    const lock = jsonData.result.find(l => l._id == \"managedCustomeridentity_systemApifactoryrestConta\");",
+											"    pm.expect(lock).to.not.equal(undefined);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-API-Version",
+										"value": "resource=1.0"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/openidm/repo/locks?_queryFilter=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"repo",
+										"locks"
+									],
+									"query": [
+										{
+											"key": "_queryFilter",
+											"value": "true"
+										}
+									]
+								},
+								"description": "Get IDM managed objects configuration"
+							},
+							"response": []
+						}
+					],
+					"description": "This directory contains requests that are testing the custom managed object definition in IDM."
+				},
+				{
+					"name": "Fuzzy Match API",
+					"item": [
+						{
+							"name": "idm-fuzzy-match",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// When running the collection in Postman runner this request",
+											"// will be executed multiple times (once per each test case below)",
+											"",
+											"// Define test cases to be used against the endpoint",
+											"// - the `request` object defines input params",
+											"// - the `result` object defines expected results",
+											"const testCases = [",
+											"    { ",
+											"        request: { type: 'EXACT_MATCH_EQ', input: 'ADRIAN', autoident: null }, ",
+											"        result: { code: 200, match: 'NOT_MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'EXACT_MATCH_EQ', input: 'ADRIAN', autoident: 'ADRIAN1' }, ",
+											"        result: { code: 200, match: 'NOT_MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'EXACT_MATCH_EQ', input: 'ADRIAN', autoident: 'ADRIAN' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'EXACT_MATCH_CONTAIN', input: 'ADRIAN', autoident: 'ADRIAN ANDRZEJ' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'EXACT_MATCH_CONTAIN', input: 'ADRIANNA', autoident: 'ADRIAN ANDRZEJ' }, ",
+											"        result: { code: 200, match: 'NOT_MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'TYPO_FUZZY_MATCH', input: 'ADRIAN ANDREJ', autoident: 'ADRIAN ANDRZEJ' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'TYPO_FUZZY_MATCH', input: 'ADRIN ANDREJ', autoident: 'ADRIAN ANDRZEJ' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'TYPO_FUZZY_MATCH', input: 'ADRIN ANDRE', autoident: 'ADRIAN ANDRZEJ' }, ",
+											"        result: { code: 200, match: 'NOT_MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_EQ', input: 'FAIRDALE', autoident: 'FAREDALE' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_EQ', input: 'ADRIANA', autoident: 'ADRIAN' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_EQ', input: 'JON', autoident: 'JOHN' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_EQ', input: 'FAIRDALE', autoident: 'FAREDALINGTON' }, ",
+											"        result: { code: 200, match: 'NOT_MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_CONTAINS', input: 'ADRIAAAANN', autoident: 'ADRIAN' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_CONTAINS', input: 'ADRIAN1', autoident: 'ADRIAN' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_CONTAINS', input: 'FAIRDALE', autoident: 'FAREDALE' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_CONTAINS', input: 'FAIRDALE', autoident: 'FAREDALINGTON' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_CONTAINS', input: 'ADRIANA', autoident: 'ADRIAN' }, ",
+											"        result: { code: 200, match: 'MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_CONTAINS', input: 'TEST', autoident: 'TESTING' }, ",
+											"        result: { code: 200, match: 'NOT_MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: 'PHONETIC_FUZZY_MATCH_CONTAINS', input: 'ADRIAN', autoident: 'TESTING' }, ",
+											"        result: { code: 200, match: 'NOT_MATCH' }",
+											"    },",
+											"    { ",
+											"        request: { type: '', input: '', autoident: '' }, ",
+											"        result: { code: 501 }",
+											"    },",
+											"];",
+											"",
+											"// Var names",
+											"const indexVarName = 'testIndex';",
+											"const continueVarName = 'testContinue';",
+											"const resultVarName = 'testResult';",
+											"",
+											"// Get current test index",
+											"let currentTestCase;",
+											"const testIndex =",
+											"    pm.collectionVariables.get(indexVarName) || 0;",
+											"if (isNaN(testIndex) || testIndex >= testCases.length - 1) {",
+											"    // test index is either an incorrect number, last index or out of scope - use the last test case from test array and do not repeat request",
+											"    currentTestCase = testCases[testCases.length - 1];",
+											"    // make sure to reset testIndex",
+											"    pm.collectionVariables.set(indexVarName, undefined);",
+											"    // do not run this request again",
+											"    pm.collectionVariables.set(continueVarName, false);",
+											"} else {",
+											"    // test index is in the scope of test case array - use it to get current case",
+											"    currentTestCase = testCases[testIndex];",
+											"    // increase testIndex",
+											"    pm.collectionVariables.set(indexVarName, testIndex + 1);",
+											"    // make sure to run this request again",
+											"    pm.collectionVariables.set(continueVarName, true);",
+											"}",
+											"",
+											"// save the expected result",
+											"pm.collectionVariables.set(resultVarName, JSON.stringify(currentTestCase.result));",
+											"// set the query params",
+											"const { type, input, autoident } = currentTestCase.request;",
+											"pm.request.url.addQueryParams(`type=${type}&input=${input}` ",
+											"    + (autoident ? `&autoident=${autoident}` : ''));",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Var names",
+											"const continueVarName = 'testContinue';",
+											"const resultVarName = 'testResult';",
+											"",
+											"// Check if there's more test cases to run",
+											"if ((pm.collectionVariables.get(continueVarName) || false) === true) {",
+											"    // re-run this request",
+											"    postman.setNextRequest(request.name);",
+											"}",
+											"",
+											"const expectedResult = JSON.parse(pm.collectionVariables.get(resultVarName));",
+											"if (expectedResult) {",
+											"    // check response HTTP code",
+											"    pm.test(`Status code is '${expectedResult.code}'`, () => {",
+											"        pm.response.to.have.status(expectedResult.code);",
+											"    });",
+											"",
+											"    if (expectedResult.code === 200) {",
+											"        // if HTTP code 200 other tests can be performed",
+											"        const jsonData = pm.response.json();",
+											"",
+											"        pm.test(`Match status is '${expectedResult.match}'`, () => {",
+											"            pm.expect(jsonData.matchStatus).to.equal(expectedResult.match);",
+											"        });",
+											"    }",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/openidm/endpoint/fuzzymatch",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"endpoint",
+										"fuzzymatch"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "This directory contains requests that are testing the fuzzy matching logic for IDNow data comparison.\n\nPlease refer to [Confluence](https://confluence.itergo.com/x/aKPGFw) for details."
+				},
+				{
+					"name": "Audit Logs API",
+					"item": [
+						{
+							"name": "postman-admin-auth",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var jsonData = pm.response.json();",
+											"pm.test(\"Has non-empty tokenId for root realm\", function () {",
+											"    pm.expect(jsonData.tokenId).to.be.not.empty;",
+											"    pm.expect(jsonData.realm).to.equal(\"/customer\");",
+											"});",
+											"pm.environment.set(\"amadmin-session\", jsonData.tokenId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-OpenAM-Username",
+										"value": "t_postmanapiadmin"
+									},
+									{
+										"key": "X-OpenAM-Password",
+										"value": "{{postmanapiadmin_pass}}"
+									},
+									{
+										"key": "Accept-API-Version",
+										"value": "resource=2.0, protocol=1.0"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									]
+								},
+								"description": "Login as amadmin"
+							},
+							"response": []
+						},
+						{
+							"name": "create-test-user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"testUserName\", pm.variables.replaceIn(\"{{$randomUserName}}\"));",
+											"pm.collectionVariables.set(\"testUserFirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"));",
+											"pm.collectionVariables.set(\"testUserLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+											"pm.collectionVariables.set(\"testUserEmail\", pm.variables.replaceIn(\"ergotest-{{$timestamp}}@icconsult.33mail.com\"));",
+											"pm.collectionVariables.set(\"testUserMobilePhone\", `+4917139200${Math.random().toString().slice(2,4)}`)",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"",
+											"pm.test(\"Right values\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.realm).to.eql(\"/customer\");",
+											"    pm.environment.set(\"testUserUUID\", jsonData[\"_id\"][0]);",
+											"    pm.expect(jsonData.mail[0]).to.eql(pm.variables.replaceIn(\"{{testUserEmail}}\"));",
+											"    pm.expect(jsonData.username).to.eql(pm.variables.replaceIn(\"{{testUserName}}\"));",
+											"    pm.expect(jsonData.givenName[0]).to.eql(pm.variables.replaceIn(\"{{testUserFirstName}}\"));",
+											"    pm.expect(jsonData.sn[0]).to.eql(pm.variables.replaceIn(\"{{testUserLastName}}\"));",
+											"    pm.expect(jsonData.dn[0]).to.eql(pm.variables.replaceIn(\"fr-idm-uuid={{testUserUUID}},ou=people,ou=customer,ou=identities\"));",
+											"    pm.expect(jsonData[\"fr-idm-uuid\"][0]).to.eql(pm.variables.replaceIn(\"{{testUserUUID}}\"));",
+											"    pm.expect(jsonData.uid[0]).to.eql(pm.variables.replaceIn(\"{{testUserName}}\"));",
+											"    ",
+											"    pm.expect(jsonData.universalid[0]).to.eql(pm.variables.replaceIn(\"id={{testUserUUID}},ou=user,o=customer,ou=services,ou=am-config\"));",
+											"    pm.expect(jsonData.inetUserStatus[0]).to.eql(\"Active\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-API-Version",
+										"value": "protocol=1.0,resource=3.0"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \n    \"username\": \"{{testUserName}}\",\n    \"userpassword\": \"ErgoErgo2023\",\n    \"mail\": \"{{testUserEmail}}\",\n    \"givenName\":\"{{testUserFirstName}}\",\n    \"sn\":\"{{testUserLastName}}\",\n    \"ergo-attr-mobilephone\": { \"value\" : \"{{testUserMobilePhone}}\"},\n    \"ergo-attr-dob\": \"2000-01-01\",\n    \"ergo-attr-2faMethods\": { \"value\" : \"SMS\"}\n}"
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/users/?_action=create",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"users",
+										""
+									],
+									"query": [
+										{
+											"key": "_action",
+											"value": "create"
+										}
+									]
+								},
+								"description": "Create test user"
+							},
+							"response": []
+						},
+						{
+							"name": "am-get-test-user-token",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"function jwt_decode(jwt) {",
+											"    var parts = jwt.split('.'); // header, payload, signature",
+											"    return JSON.parse(atob(parts[1]));",
+											"}",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Has access token\", function () {",
+											"    pm.expect(jsonData.access_token).to.be.a(\"string\")",
+											"});",
+											"",
+											"pm.environment.set(\"access_token\", jsonData.access_token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "default"
+										},
+										{
+											"key": "client_id",
+											"value": "automated-api-tests",
+											"type": "default"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{client-secret}}",
+											"type": "default"
+										},
+										{
+											"key": "scope",
+											"value": "fr:idm:*",
+											"type": "default"
+										},
+										{
+											"key": "username",
+											"value": "{{testUserName}}",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "ErgoErgo2023",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/am/oauth2/realms/root/realms/customer/access_token",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"oauth2",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"access_token"
+									]
+								},
+								"description": "Generate access token with the client credentials grant type"
+							},
+							"response": []
+						},
+						{
+							"name": "get-audit-logs-denied",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/openidm/endpoint/auditlogs?userId=testUser",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"endpoint",
+										"auditlogs"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "testUser"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "am-get-test-user-token-audit-scope",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"function jwt_decode(jwt) {",
+											"    var parts = jwt.split('.'); // header, payload, signature",
+											"    return JSON.parse(atob(parts[1]));",
+											"}",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Has access token\", function () {",
+											"    pm.expect(jsonData.access_token).to.be.a(\"string\")",
+											"});",
+											"",
+											"pm.environment.set(\"access_token\", jsonData.access_token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "default"
+										},
+										{
+											"key": "client_id",
+											"value": "automated-api-tests",
+											"type": "default"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{client-secret}}",
+											"type": "default"
+										},
+										{
+											"key": "scope",
+											"value": "fr:idm:* ciam:audit:readall",
+											"type": "default"
+										},
+										{
+											"key": "username",
+											"value": "{{testUserName}}",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "ErgoErgo2023",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/am/oauth2/realms/root/realms/customer/access_token",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"oauth2",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"access_token"
+									]
+								},
+								"description": "Generate access token with the client credentials grant type"
+							},
+							"response": []
+						},
+						{
+							"name": "get-audit-logs-empty",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Contains empty logs\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('content');",
+											"",
+											"    var logContent = JSON.parse(jsonData.content);",
+											"    pm.expect(logContent).to.have.property('logEntries');",
+											"    pm.expect(logContent.logEntries.length).to.eql(0);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/openidm/endpoint/auditlogs?userId=no-such-user-can-exist",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"endpoint",
+										"auditlogs"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "no-such-user-can-exist"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Enter Credential Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"authId returned\", function () {",
+											"    pm.expect(jsonData).to.have.property('authId');",
+											"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+											"});",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Returns right callbacks\", function () {    ",
+											"    pm.expect(jsonData.callbacks[0].type).to.eql(\"NameCallback\");",
+											"    pm.expect(jsonData.callbacks[1].type).to.eql(\"PasswordCallback\");",
+											"    pm.expect(jsonData.callbacks.length).to.eql(2);",
+											"});",
+											"",
+											"jsonData.callbacks[0].input[0].value = pm.variables.get('testUserName');",
+											"jsonData.callbacks[1].input[0].value = 'ErgoErgo2023';",
+											"",
+											"pm.collectionVariables.set(\"callbacks\",JSON.stringify(jsonData));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-API-Version",
+										"value": "protocol=1.0,resource=2.1"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									]
+								},
+								"description": "Initialize tree to get callbacks"
+							},
+							"response": []
+						},
+						{
+							"name": "Submit Credential",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"authId returned\", function () {",
+											"    pm.expect(jsonData).to.have.property('authId');",
+											"    pm.environment.set(\"signin-authid\", jsonData.authId);",
+											"});",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Returns right callbacks\", function () {    ",
+											"    pm.expect(jsonData.callbacks[0].type).to.eql(\"PasswordCallback\");",
+											"    pm.expect(jsonData.callbacks.length).to.eql(1);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-API-Version",
+										"value": "protocol=1.0,resource=2.1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{callbacks}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate?authIndexType=service&authIndexValue=login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									],
+									"query": [
+										{
+											"key": "authIndexType",
+											"value": "service"
+										},
+										{
+											"key": "authIndexValue",
+											"value": "login"
+										}
+									]
+								},
+								"description": "Initialize tree to get callbacks"
+							},
+							"response": []
+						},
+						{
+							"name": "get-audit-log-populated",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Contains logs\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('content');",
+											"",
+											"    var logContent = JSON.parse(jsonData.content);",
+											"    pm.expect(logContent).to.have.property('logEntries');",
+											"",
+											"    // NOTE: not really sure if this will work that fast, but can be only tested on DVIT and up.",
+											"    pm.expect(logContent.logEntries.length).to.be.gt(0);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/openidm/endpoint/auditlogs?userId={{testUserName}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"endpoint",
+										"auditlogs"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{testUserName}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postman-admin-auth",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// clear cookies",
+											"const jar = pm.cookies.jar();",
+											"const url = pm.variables.get('url');",
+											"jar.clear(url, function (err) {",
+											"    if(err) {",
+											"        console.error(err);",
+											"    }",
+											"    else {",
+											"        console.log(\"cookies cleared!\");",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var jsonData = pm.response.json();",
+											"pm.environment.set(\"amadmin-session\", jsonData.tokenId);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-OpenAM-Username",
+										"value": "t_postmanapiadmin"
+									},
+									{
+										"key": "X-OpenAM-Password",
+										"value": "{{postmanapiadmin_pass}}"
+									},
+									{
+										"key": "Accept-API-Version",
+										"value": "resource=2.0, protocol=1.0"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/authenticate",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"authenticate"
+									]
+								},
+								"description": "Login as amadmin"
+							},
+							"response": []
+						},
+						{
+							"name": "delete-test-user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Test successful values\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.success, \"sucess\").to.eql(\"true\");",
+											"    pm.expect(jsonData._id, \"ID\").to.not.be.empty;",
+											"    pm.expect(jsonData._rev, \"Revision\").to.not.be.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept-API-Version",
+										"value": "protocol=2.1,resource=3.0"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/am/json/realms/root/realms/customer/users/{{testUserUUID}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"am",
+										"json",
+										"realms",
+										"root",
+										"realms",
+										"customer",
+										"users",
+										"{{testUserUUID}}"
+									]
+								},
+								"description": "Delete test user"
+							},
+							"response": []
+						}
+					],
+					"description": "This directory contains requests that are testing the custom Audit Log API, implemented in IDM.\n\nPlease refer to [Confluence](https://confluence.itergo.com/x/FeX9Fg) for details.\n\n**NOTE!** By default all requests under this directory are skipped on feature environments. If you want to enable them - make sure necessary infra is deployed to the environment and comment out the `Pre-request` script in the Scripts tab (of the directory).",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									"const url = pm.variables.get('url');",
+									"",
+									"// check if this is a non-feature env",
+									"if (url.includes('aws-0414.cloudfirst.digital')) {",
+									"    // this is a feature env - skip the test",
+									"    console.log(\"Audit Logs only available on non-feature environments - skipping test...\")",
+									"    // this is a fearly new feature - if you're getting errors update Postman",
+									"    pm.execution.skipRequest();",
+									"}"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Security Headers",
+					"item": [
+						{
+							"name": "IDM Header Test",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HSTS header is present\", function () {",
+											"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+											"});",
+											"pm.test(\"HSTS header has recommended value\", function () {",
+											"    pm.response.to.have.header(\"Strict-Transport-Security\", \"max-age=63072000; includeSubDomains; preload\");",
+											"});",
+											"pm.test(\"CSP header is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Security-Policy\");",
+											"});",
+											"pm.test(\"CSP header has recommended value\", function () {",
+											"    var csp = pm.response.headers.get(\"Content-Security-Policy\");",
+											"    pm.expect(csp).to.contain(\"default-src 'self'\");",
+											"    pm.expect(csp).to.contain(\"frame-ancestors 'self'\");",
+											"});",
+											"pm.test(\"X-Frame-Options header is present\", function () {",
+											"    pm.response.to.have.header(\"X-Frame-Options\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IDM CORS Test",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"CORS is not allowed\", function () {",
+											"    pm.response.to.not.have.header(\"Access-Control-Allow-Origin\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "https://evilsite.com"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/openidm/info/ping",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"openidm",
+										"info",
+										"ping"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Identity Management API",
+					"item": [
+						{
+							"name": "Prerequisites",
+							"item": [
+								{
+									"name": "am-get-password-token",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"function jwt_decode(jwt) {",
+													"    var parts = jwt.split('.'); // header, payload, signature",
+													"    return JSON.parse(atob(parts[1]));",
+													"}",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Has access token\", function () {",
+													"    pm.expect(jsonData.access_token).to.be.a(\"string\")",
+													"});",
+													"",
+													"pm.environment.set(\"access_token\", jsonData.access_token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "grant_type",
+													"value": "password",
+													"type": "default"
+												},
+												{
+													"key": "client_id",
+													"value": "automated-api-tests",
+													"type": "default"
+												},
+												{
+													"key": "client_secret",
+													"value": "{{client-secret}}",
+													"type": "default"
+												},
+												{
+													"key": "scope",
+													"value": "fr:idm:*",
+													"type": "default"
+												},
+												{
+													"key": "username",
+													"value": "t_postmanapiadmin",
+													"type": "default"
+												},
+												{
+													"key": "password",
+													"value": "{{postmanapiadmin_pass}}",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/am/oauth2/access_token",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"oauth2",
+												"access_token"
+											]
+										},
+										"description": "Generate access token with the client credentials grant type"
+									},
+									"response": []
+								},
+								{
+									"name": "idm-create-ergo-support-user",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.collectionVariables.set(\"testUserName\", pm.variables.replaceIn(\"{{$randomUserName}}\"));",
+													"pm.collectionVariables.set(\"testUserFirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"));",
+													"pm.collectionVariables.set(\"testUserLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+													"pm.collectionVariables.set(\"testUserEmail\", pm.variables.replaceIn(\"ergotest-{{$timestamp}}@icconsult.33mail.com\"));",
+													"pm.collectionVariables.set(\"testUserMobilePhone\", `+4917139200${Math.random().toString().slice(2,4)}`)",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Has non-empty ID\", function () {",
+													"    pm.expect(jsonData._id).to.be.not.empty;",
+													"});",
+													"pm.collectionVariables.set(\"testUserID\", jsonData._id);",
+													"",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {},
+										"followRedirects": false
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{    \n    \"userName\": \"{{testUserName}}\",\n    \"password\": \"ErgoErgo2023\",\n    \"mail\": \"{{testUserEmail}}\",\n    \"givenName\":\"{{testUserFirstName}}\",\n    \"sn\":\"{{testUserLastName}}\",\n    \"dob\": \"2000-01-01\",\n    \"verificationProcedure\" : \"CALLAGENT\",\n    \"authzRoles\": [\n        {\n            \"_ref\": \"internal/role/ergo-support\",\n            \"_refResourceCollection\": \"internal/role\",\n            \"_refResourceId\": \"ergo-support\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{url}}/openidm/managed/user?_action=create",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"openidm",
+												"managed",
+												"user"
+											],
+											"query": [
+												{
+													"key": "_action",
+													"value": "create"
+												}
+											]
+										},
+										"description": "Create test identity"
+									},
+									"response": []
+								},
+								{
+									"name": "get-ergo-support-access-token",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													"const jsonData = pm.response.json();",
+													"pm.environment.set(\"access_token\", jsonData.access_token);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "grant_type",
+													"value": "password",
+													"type": "default"
+												},
+												{
+													"key": "client_id",
+													"value": "automated-api-tests",
+													"type": "default"
+												},
+												{
+													"key": "client_secret",
+													"value": "{{client-secret}}",
+													"type": "default"
+												},
+												{
+													"key": "scope",
+													"value": "fr:idm:*",
+													"type": "default"
+												},
+												{
+													"key": "username",
+													"value": "{{testUserName}}",
+													"type": "default"
+												},
+												{
+													"key": "password",
+													"value": "ErgoErgo2023",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/am/oauth2/realms/root/realms/customer/access_token",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"oauth2",
+												"realms",
+												"root",
+												"realms",
+												"customer",
+												"access_token"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Test API",
+							"item": [
+								{
+									"name": "Call Agent",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Success message\", function () {",
+													"    pm.expect(jsonData.message).to.equal(\"success\")",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\" : \"{{testUserID}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=telephoneIdent",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"openidm",
+												"endpoint",
+												"idmconsole",
+												"registration"
+											],
+											"query": [
+												{
+													"key": "_action",
+													"value": "telephoneIdent"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Letter Ident",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Success message\", function () {",
+													"    pm.expect(jsonData.message).to.equal(\"no customer found\")",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"{{testUserFirstName}}\",\n    \"lastName\":\"{{testUserLastName}}\",\n    \"dob\":\"2000-01-01\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=letterIdent",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"openidm",
+												"endpoint",
+												"idmconsole",
+												"registration"
+											],
+											"query": [
+												{
+													"key": "_action",
+													"value": "letterIdent"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Personal Ident",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													"var jsonData = pm.response.json();",
+													"pm.test(\"No customer found message\", function () {",
+													"    pm.expect(jsonData.message).to.equal(\"no customer found\")",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"policynumber\":\"DA000113071\",\n    \"firstName\":\"{{testUserFirstName}}\",\n    \"lastName\":\"{{testUserLastName}}\",\n    \"dob\":\"2000-01-01\",\n    \"mobilePhone\" : \"{{testUserMobilePhone}}\",\n    \"email\" :\"{{testUserEmail}}\" \n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/openidm/endpoint/idmconsole/registration?_action=personalIdent",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"openidm",
+												"endpoint",
+												"idmconsole",
+												"registration"
+											],
+											"query": [
+												{
+													"key": "_action",
+													"value": "personalIdent"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Poststep",
+							"item": [
+								{
+									"name": "am-get-password-token",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// clear cookies",
+													"const jar = pm.cookies.jar();",
+													"const url = pm.variables.get('url');",
+													"jar.clear(url, function (err) {",
+													"    if(err) {",
+													"        console.error(err);",
+													"    }",
+													"    else {",
+													"        console.log(\"cookies cleared!\");",
+													"    }",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"function jwt_decode(jwt) {",
+													"    var parts = jwt.split('.'); // header, payload, signature",
+													"    return JSON.parse(atob(parts[1]));",
+													"}",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Has access token\", function () {",
+													"    pm.expect(jsonData.access_token).to.be.a(\"string\")",
+													"});",
+													"",
+													"pm.environment.set(\"access_token\", jsonData.access_token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "grant_type",
+													"value": "password",
+													"type": "default"
+												},
+												{
+													"key": "client_id",
+													"value": "automated-api-tests",
+													"type": "default"
+												},
+												{
+													"key": "client_secret",
+													"value": "{{client-secret}}",
+													"type": "default"
+												},
+												{
+													"key": "scope",
+													"value": "fr:idm:*",
+													"type": "default"
+												},
+												{
+													"key": "username",
+													"value": "t_postmanapiadmin",
+													"type": "default"
+												},
+												{
+													"key": "password",
+													"value": "{{postmanapiadmin_pass}}",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/am/oauth2/access_token",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"am",
+												"oauth2",
+												"access_token"
+											]
+										},
+										"description": "Generate access token with the client credentials grant type"
+									},
+									"response": []
+								},
+								{
+									"name": "idm-delete-ergo-support-user",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{url}}/openidm/managed/user/{{testUserID}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"openidm",
+												"managed",
+												"user",
+												"{{testUserID}}"
+											]
+										},
+										"description": "Delete test identity"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			],
+			"description": "Tests based on the IDM API"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "testUserName",
+			"value": ""
+		},
+		{
+			"key": "testUserLastname",
+			"value": ""
+		},
+		{
+			"key": "testUserEmail",
+			"value": ""
+		},
+		{
+			"key": "testUserErgoId",
+			"value": ""
+		},
+		{
+			"key": "testUserPhoneNo",
+			"value": ""
+		},
+		{
+			"key": "testUserID",
+			"value": ""
+		},
+		{
+			"key": "testUserLastChangeEmail",
+			"value": ""
+		},
+		{
+			"key": "testUserLastChangePhoneNumber",
+			"value": ""
+		},
+		{
+			"key": "testUserFirstName",
+			"value": ""
+		},
+		{
+			"key": "testUserLastName",
+			"value": ""
+		},
+		{
+			"key": "testUserMobilePhone",
+			"value": ""
+		},
+		{
+			"key": "callbacks",
+			"value": ""
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		}
+	]
+}
