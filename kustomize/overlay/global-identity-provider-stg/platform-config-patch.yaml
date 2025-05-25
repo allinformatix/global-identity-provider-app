@@ -3,14 +3,12 @@ kind: ConfigMap
 metadata:
   name: platform-config
 data:
-  DOMAIN: "allinformatix.com"
-  FQDN: "gidp.k8s.prd.allinformatix.com"
-  FQDN_API: "api.allinformatix.com"
-  FQDN_LONGHORN: "longhorn.k8s.prd.allinformatix.com"
+  DOMAIN: "app.stg.global-identity-provider.com"
+  FQDN: "app.stg.global-identity-provider.com"
+  FQDN_API: "api.stg.global-identity-provider.com"
   DSBACKUP_HOSTS: "ds-idrepo-0"
-  DSBACKUP_DIRECTORY: "s3://prd-gidp-backups"
+  DSBACKUP_DIRECTORY: "s3://dev-gidp-backups"
   AUTORESTORE_FROM_DSBACKUP: "false"
   CERT_ISSUER: "letsencrypt-dns"
   TLS_SECRET_FQDN_API: "api-sslcert"
   IDM_DS_USERSTORE_ADDRESS: "ds-idrepo-0.ds-idrepo"
-  TLS_SECRET_FQDN_LONGHORN: "longhorn-sslcert"

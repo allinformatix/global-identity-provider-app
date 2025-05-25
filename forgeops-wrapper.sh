@@ -3,7 +3,7 @@
 set -euo pipefail
 
 ### === Default-Konfiguration === ###
-CONFIG_PROFILE="allinformatix-gidp"
+CONFIG_PROFILE="global-identity-provider"
 DOCKER_REGISTRY="docker.io/allinformatix"
 IG_AGENT_SECRET=""
 REALMS_ROOT_OAUTH2CLIENTS_ALLINFORMATIX_GLOBALIDP=""
@@ -61,7 +61,7 @@ Parameter:
   --install-all            ➔ Installiere alle Komponenten für die angegebene Stage (nur mit --stage & ohne --component)
   --build-all              ➔ Baue alle Komponenten (nur sinnvoll mit --stage)
   --stage=<name>           ➔ Stage wählen (z. B. dev, stg, prd)
-  --config-profile=<name>  ➔ Config-Profil (Standard: allinformatix-gidp)
+  --config-profile=<name>  ➔ Config-Profil (Standard: global-identity-provider)
   --tag=<tag>              ➔ Build-Tag für Docker (Default: Stage-Name)
   --release-tag=<tag>      ➔ Git-Tag setzen und pushen
   --help                   ➔ Zeigt diese Hilfe an
@@ -413,7 +413,7 @@ EOF
   ./bin/forgeops install secrets \
     --namespace "$NAMESPACE" \
     --deploy-env "$STAGE_FILTER" \
-    --custom "kustomize/overlay/allinformatix-gidp-$STAGE_FILTER"
+    --custom "kustomize/overlay/global-identity-provider-$STAGE_FILTER"
 
   echo "✅ Secret-Bereitstellung abgeschlossen."
   exit 0
