@@ -1,6 +1,6 @@
 FROM allinformatix/am:7.5.1
 
-ARG CONFIG_PROFILE=allinformatix-gidp
+ARG CONFIG_PROFILE=global-identity-provider
 RUN echo "\033[0;36m*** Building '${CONFIG_PROFILE}' profile ***\033[0m"
 COPY  --chown=forgerock:root config-profiles/${CONFIG_PROFILE}/ /home/forgerock/openam/
 

@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: platform-config
 data:
-  DOMAIN: "dev.allinformatix.com"
-  FQDN: "gidp.k8s.dev.allinformatix.com"
-  FQDN_API: "api.dev.allinformatix.com"
+  DOMAIN: "app.global-identity-provider.com"
+  FQDN: "app.global-identity-provider.com"
+  FQDN_API: "api.global-identity-provider.com"
   DSBACKUP_HOSTS: "ds-idrepo-0"
   DSBACKUP_DIRECTORY: "s3://dev-gidp-backups"
   AUTORESTORE_FROM_DSBACKUP: "false"

@@ -6,7 +6,7 @@ USER root
 RUN apt-get update && apt-get install -y curl jq && rm -rf /var/lib/apt/lists/*
 
 # IG-Konfiguration kopieren
-ARG CONFIG_PROFILE=allinformatix-gidp
+ARG CONFIG_PROFILE=global-identity-provider
 RUN echo "\033[0;36m*** Building '${CONFIG_PROFILE}' profile ***\033[0m"
 COPY --chown=forgerock:root config-profiles/${CONFIG_PROFILE}/ /var/ig
 COPY --chown=forgerock:root . /var/ig

@@ -82,6 +82,6 @@ secrets/*
 !secrets/*.gpg.json
 !secrets/*.enc
 !secrets/*.gpg
-docker/idm/config-profiles/allinformatix-gidp/conf/ui-configuration.json
+
 deploy-experimental/
 

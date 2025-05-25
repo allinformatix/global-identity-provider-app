@@ -24,6 +24,9 @@ images:
 - name: idm
   newName: docker.io/allinformatix/idm
   newTag: v-0.9.0
+- name: ai-exec-layer
+  newName: docker.io/allinformatix/ai-exec-layer
+  newTag: v-0.9.0
 - name: ig
   newName: docker.io/allinformatix/ig
   newTag: v-0.9.0

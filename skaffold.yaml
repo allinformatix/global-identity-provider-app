@@ -149,7 +149,19 @@ profiles:
   deploy:
     kustomize:
       paths:
-      - ./kustomize/overlay/allinformatix-gidp-dev
+      - ./kustomize/overlay/global-identity-provider-dev
+- name: stg
+  build: *default-build
+  deploy:
+    kustomize:
+      paths:
+      - ./kustomize/overlay/global-identity-provider-stg
+- name: prd
+  build: *default-build
+  deploy:
+    kustomize:
+      paths:
+      - ./kustomize/overlay/global-identity-provider-prd
 
 ###################################################################
 #####################INDIVIDUAL COMPONENTS#########################

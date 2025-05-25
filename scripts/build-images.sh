@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-CONFIG_PROFILE="allinformatix-gidp"
+CONFIG_PROFILE="global-identity-provider"
 DOCKER_REGISTRY="docker.io/allinformatix"
 BUILD_TAG=""
 RELEASE_TAG=""
@@ -27,7 +27,7 @@ Dieses Skript automatisiert den Bau (und optional Deployment) von ForgeRock Dock
   --deploy                   ➔ Nach dem Bauen: automatisches Löschen & Neuinstallieren der Komponenten.
   --skip-build               ➔ Build überspringen, nur Deployment durchführen.
   --stage=<name>             ➔ Nur die angegebene Stage verarbeiten (z. B. dev, stg, prd).
-  --config-profile=<name>    ➔ Name des zu verwendenden Config-Profils (Standard: allinformatix-gidp).
+  --config-profile=<name>    ➔ Name des zu verwendenden Config-Profils (Standard: global-identity-provider).
   --tag=<tag>                ➔ Docker-Tag setzen (Standard: latest).
   --help                     ➔ Zeigt diese Hilfe an.
 
@@ -100,7 +100,7 @@ for STAGE in $STAGES; do
 
   echo "🔁 Processing stage: $STAGE"
 
-  OVERLAY_PATH="kustomize/overlay/allinformatix-gidp-${STAGE}"
+  OVERLAY_PATH="kustomize/overlay/global-identity-provider-${STAGE}"
   PATCH_FILE="${OVERLAY_PATH}/platform-config-patch.yaml"
   TEMPLATE_FILE="docker/idm/config-profiles/${CONFIG_PROFILE}/conf/ui-configuration.json.template"
   OUTPUT_FILE="docker/idm/config-profiles/${CONFIG_PROFILE}/conf/ui-configuration.json"
@@ -135,8 +135,8 @@ for STAGE in $STAGES; do
         echo "📆 Building custom component ldif-importer"
         DOCKER_REGISTRY="docker.io/allinformatix"
         ARCHS="linux/amd64,linux/arm64"
-        docker buildx build docker/ldif-importer --platform $ARCHS --tag $DOCKER_REGISTRY/allinformatix-gidp-ldif-importer:7.5.1 --push
-        # docker push $DOCKER_REGISTRY/allinformatix-gidp-ldif-importer:7.5.1
+        docker buildx build docker/ldif-importer --platform $ARCHS --tag $DOCKER_REGISTRY/global-identity-provider-ldif-importer:7.5.1 --push
+        # docker push $DOCKER_REGISTRY/global-identity-provider-ldif-importer:7.5.1
         LDIF_USED=true
         continue
       fi
@@ -156,18 +156,18 @@ for STAGE in $STAGES; do
     echo "🏷️  Tagging Komponenten als $RELEASE_TAG"
     for component in "${COMPONENTS[@]}"; do
       if [[ "$component" == "ldif-importer" ]]; then
-        # docker tag "$DOCKER_REGISTRY/allinformatix-gidp-ldif-importer:7.5.1" "$DOCKER_REGISTRY/allinformatix-gidp-ldif-importer:$RELEASE_TAG"
-        # docker push "$DOCKER_REGISTRY/allinformatix-gidp-ldif-importer:$RELEASE_TAG"
+        # docker tag "$DOCKER_REGISTRY/global-identity-provider-ldif-importer:7.5.1" "$DOCKER_REGISTRY/global-identity-provider-ldif-importer:$RELEASE_TAG"
+        # docker push "$DOCKER_REGISTRY/global-identity-provider-ldif-importer:$RELEASE_TAG"
         DOCKER_REGISTRY="docker.io/allinformatix"
         ARCHS="linux/amd64,linux/arm64"
-        docker buildx build docker/ldif-importer --platform $ARCHS --tag $DOCKER_REGISTRY/allinformatix-gidp-ldif-importer:$RELEASE_TAG --push
+        docker buildx build docker/ldif-importer --platform $ARCHS --tag $DOCKER_REGISTRY/global-identity-provider-ldif-importer:$RELEASE_TAG --push
         
       else
         # docker tag "$DOCKER_REGISTRY/$component:$STAGE" "$DOCKER_REGISTRY/$component:$RELEASE_TAG"
         # docker push "$DOCKER_REGISTRY/$component:$RELEASE_TAG"
         DOCKER_REGISTRY="docker.io/allinformatix"
         ARCHS="linux/amd64,linux/arm64"
-        docker buildx build docker/ldif-importer --platform $ARCHS --tag $DOCKER_REGISTRY/allinformatix-gidp-ldif-importer:$RELEASE_TAG --push
+        docker buildx build docker/ldif-importer --platform $ARCHS --tag $DOCKER_REGISTRY/global-identity-provider-ldif-importer:$RELEASE_TAG --push
         
       fi
     done

@@ -38,7 +38,7 @@ kubectl get secrets -n gidp
 
 # Ordnerstruktur
 ```bash
-allinformatix-gidp-app/
+global-identity-provider-app/
 ├── helm/
 │   ├── am/
 │   ├── idm/
@@ -175,34 +175,34 @@ cd ~/projects/allinformatix-global-idp-app/bin
 cd /bin
 
 ./forgeops build ds \
-  --push-to docker.io/allinformatix/allinformatix-gidp-ds \
+  --push-to docker.io/allinformatix/global-identity-provider-ds \
   --tag 7.5.1 \
-  --config-profile allinformatix-gidp-ds-new
+  --config-profile global-identity-provider-ds-new
 
 ./forgeops build ds \
-  --push-to docker.io/allinformatix/allinformatix-gidp-ds-cts \
+  --push-to docker.io/allinformatix/global-identity-provider-ds-cts \
   --tag 7.5.1 \
-  --config-profile allinformatix-gidp-ds-cts
+  --config-profile global-identity-provider-ds-cts
   
 ./forgeops build ds \
-  --push-to docker.io/allinformatix/allinformatix-gidp-ds-idrepo \
+  --push-to docker.io/allinformatix/global-identity-provider-ds-idrepo \
   --tag 7.5.1 \
-  --config-profile allinformatix-gidp-ds-idrepo
+  --config-profile global-identity-provider-ds-idrepo
 
 ./forgeops build amster \
-  --push-to docker.io/allinformatix/allinformatix-gidp-amster \
+  --push-to docker.io/allinformatix/global-identity-provider-amster \
   --tag 7.5.1 \
-  --config-profile allinformatix-gidp-amster
+  --config-profile global-identity-provider-amster
 
 ./forgeops build am \
-  --push-to docker.io/allinformatix/allinformatix-gidp-am \
+  --push-to docker.io/allinformatix/global-identity-provider-am \
   --tag 7.5.1 \
-  --config-profile allinformatix-gidp-am
+  --config-profile global-identity-provider-am
 
 ./forgeops build idm \
-  --push-to docker.io/allinformatix/allinformatix-gidp-idm \
+  --push-to docker.io/allinformatix/global-identity-provider-idm \
   --tag 7.5.0 \
-  --config-profile allinformatix-gidp-idm
+  --config-profile global-identity-provider-idm
 
 curl \
  --request POST \
@@ -372,13 +372,13 @@ curl \
 
 ### export config
 cd bin
-./bin/amster export docker/am/config-profiles/allinformatix-gidp/config --namespace gidp-stg
-./bin/amster export docker/am/config-profiles/allinformatix-gidp/config --namespace gidp-stg --full
-./bin/amster export docker/am/config-profiles/allinformatix-gidp/config --namespace gidp-stg --global
+./bin/amster export docker/am/config-profiles/global-identity-provider/config --namespace gidp-stg
+./bin/amster export docker/am/config-profiles/global-identity-provider/config --namespace gidp-stg --full
+./bin/amster export docker/am/config-profiles/global-identity-provider/config --namespace gidp-stg --global
 
 
-./bin/amster import docker/am/config-profiles/allinformatix-gidp/config --namespace gidp-stg
-./bin/amster import docker/am/config-profiles/allinformatix-gidp/config/realms/root/IdentityGatewayAgents --namespace gidp-stg
+./bin/amster import docker/am/config-profiles/global-identity-provider/config --namespace gidp-stg
+./bin/amster import docker/am/config-profiles/global-identity-provider/config/realms/root/IdentityGatewayAgents --namespace gidp-stg
 
 
 ./opendj/import-ldif \
@@ -425,11 +425,11 @@ dsconfig list-backend-indexes \
   --trustAll
 
 kustomize build kustomize/overlay/mini | yq '. | select(.kind == "ConfigMap") | select(.metadata.name == "platform-config")'
-kustomize build kustomize/overlay/allinformatix-gidp-dev | yq '. | select(.kind == "ConfigMap") | select(.metadata.name == "platform-config")'
+kustomize build kustomize/overlay/global-identity-provider-dev | yq '. | select(.kind == "ConfigMap") | select(.metadata.name == "platform-config")'
 
-./bin/forgeops build --deploy-env dev --push-to docker.io/allinformatix --tag dev --config-profile allinformatix-gidp && \
-  ./bin/forgeops build --deploy-env stg --push-to docker.io/allinformatix --tag stg --config-profile allinformatix-gidp && \
-  ./bin/forgeops build --deploy-env prd --push-to docker.io/allinformatix --tag prd --config-profile allinformatix-gidp
+./bin/forgeops build --deploy-env dev --push-to docker.io/allinformatix --tag dev --config-profile global-identity-provider && \
+  ./bin/forgeops build --deploy-env stg --push-to docker.io/allinformatix --tag stg --config-profile global-identity-provider && \
+  ./bin/forgeops build --deploy-env prd --push-to docker.io/allinformatix --tag prd --config-profile global-identity-provider
 
 ./bin/forgeops install \
   --deploy-env dev \
@@ -437,34 +437,34 @@ kustomize build kustomize/overlay/allinformatix-gidp-dev | yq '. | select(.kind 
   --fqdn gidp.k8s.prd.allinformatix.com \
   --mini \
   --ingress-class nginx \
-  --config-profile allinformatix-gidp
+  --config-profile global-identity-provider
 
 ./bin/forgeops generate all \
   --deploy-env prd \
   --fqdn gidp.k8s.prd.allinformatix.com \
-  --config-profile allinformatix-gidp
+  --config-profile global-identity-provider
 
 ./bin/forgeops generate all \
   --deploy-env dev \
   --fqdn gidp.k8s.dev.allinformatix.com \
   --ingress-class nginx \
-  --config-profile allinformatix-gidp \
-  --custom kustomize/overlay/allinformatix-gidp-dev \
+  --config-profile global-identity-provider \
+  --custom kustomize/overlay/global-identity-provider-dev \
   --debug
 
 ./bin/forgeops generate all \
   --deploy-env dev \
   --ingress-class nginx \
-  --config-profile allinformatix-gidp \
-  --custom kustomize/overlay/allinformatix-gidp-dev \
+  --config-profile global-identity-provider \
+  --custom kustomize/overlay/global-identity-provider-dev \
   --debug
 
 
 ./bin/forgeops generate all \
   --deploy-env stg \
   --ingress-class nginx \
-  --config-profile allinformatix-gidp \
-  --custom kustomize/overlay/allinformatix-gidp-stg
+  --config-profile global-identity-provider \
+  --custom kustomize/overlay/global-identity-provider-stg
 
 #### deployment strategy
 
@@ -491,8 +491,8 @@ kubectl create secret generic hetzner-s3-credentials \
 ./bin/forgeops install \
   --deploy-env prd \
   --ingress-class nginx \
-  --custom kustomize/overlay/allinformatix-gidp-prd \
-  --config-profile allinformatix-gidp \
+  --custom kustomize/overlay/global-identity-provider-prd \
+  --config-profile global-identity-provider \
   --namespace gidp-prd
 
 ###### DEV #####
@@ -515,20 +515,20 @@ kubectl create secret generic hetzner-s3-credentials \
   --deploy-env dev \
   --push-to docker.io/allinformatix \
   --tag dev \
-  --config-profile allinformatix-gidp
+  --config-profile global-identity-provider
 
 ./bin/forgeops generate all \
   --deploy-env dev \
   --ingress-class nginx \
-  --config-profile allinformatix-gidp \
-  --custom kustomize/overlay/allinformatix-gidp-dev \
+  --config-profile global-identity-provider \
+  --custom kustomize/overlay/global-identity-provider-dev \
   --debug
 
 ./bin/forgeops install \
   --deploy-env dev \
   --ingress-class nginx \
-  --custom kustomize/overlay/allinformatix-gidp-dev \
-  --config-profile allinformatix-gidp \
+  --custom kustomize/overlay/global-identity-provider-dev \
+  --config-profile global-identity-provider \
   --namespace gidp-dev
 
 
@@ -554,15 +554,15 @@ kubectl create secret generic hetzner-s3-credentials \
 ./bin/forgeops generate all \
   --deploy-env stg \
   --ingress-class nginx \
-  --config-profile allinformatix-gidp \
-  --custom kustomize/overlay/allinformatix-gidp-stg \
+  --config-profile global-identity-provider \
+  --custom kustomize/overlay/global-identity-provider-stg \
   --debug
 
 ./bin/forgeops install \
   --deploy-env stg \
   --ingress-class nginx \
-  --custom kustomize/overlay/allinformatix-gidp-stg \
-  --config-profile allinformatix-gidp \
+  --custom kustomize/overlay/global-identity-provider-stg \
+  --config-profile global-identity-provider \
   --namespace gidp-stg
 
 ###### PROD ###### 
@@ -583,15 +583,15 @@ kubectl create secret generic hetzner-s3-credentials \
 ./bin/forgeops generate all \
   --deploy-env prd \
   --ingress-class nginx \
-  --config-profile allinformatix-gidp \
-  --custom kustomize/overlay/allinformatix-gidp-prd \
+  --config-profile global-identity-provider \
+  --custom kustomize/overlay/global-identity-provider-prd \
   --debug
 
 ./bin/forgeops install \
   --deploy-env prd \
   --ingress-class nginx \
-  --custom kustomize/overlay/allinformatix-gidp-prd \
-  --config-profile allinformatix-gidp \
+  --custom kustomize/overlay/global-identity-provider-prd \
+  --config-profile global-identity-provider \
   --namespace gidp-prd
 
 ./bin/forgeops delete --namespace gidp-stg --y
@@ -599,13 +599,13 @@ kubectl create secret generic hetzner-s3-credentials \
 ######
 
 kustomize build kustomize/overlay/secrets-dev | yq '. | select(.kind == "SecretAgentConfiguration")'
-kustomize build kustomize/overlay/allinformatix-gidp-dev | yq '. | select(.kind == "SecretAgentConfiguration")'
-kustomize build kustomize/overlay/allinformatix-gidp-stg | yq '. | select(.kind == "SecretAgentConfiguration")'
-kustomize build kustomize/overlay/allinformatix-gidp-prd | yq '. | select(.kind == "SecretAgentConfiguration")'
+kustomize build kustomize/overlay/global-identity-provider-dev | yq '. | select(.kind == "SecretAgentConfiguration")'
+kustomize build kustomize/overlay/global-identity-provider-stg | yq '. | select(.kind == "SecretAgentConfiguration")'
+kustomize build kustomize/overlay/global-identity-provider-prd | yq '. | select(.kind == "SecretAgentConfiguration")'
 
 
-kustomize build kustomize/overlay/allinformatix-gidp-dev | yq '. | select(.kind == "ConfigMap")'
-kustomize build kustomize/overlay/allinformatix-gidp-dev | yq '.spec.template.spec.containers[] | {name, image}'
+kustomize build kustomize/overlay/global-identity-provider-dev | yq '. | select(.kind == "ConfigMap")'
+kustomize build kustomize/overlay/global-identity-provider-dev | yq '.spec.template.spec.containers[] | {name, image}'
 
 
 #####
@@ -613,22 +613,22 @@ kustomize build kustomize/overlay/allinformatix-gidp-dev | yq '.spec.template.sp
 ./bin/forgeops install \
   --deploy-env prd \
   --ingress-class nginx \
-  --custom kustomize/overlay/allinformatix-gidp-prd \
-  --config-profile allinformatix-gidp \
+  --custom kustomize/overlay/global-identity-provider-prd \
+  --config-profile global-identity-provider \
   --namespace gidp-prd
 
 ./bin/forgeops install \
   --deploy-env stg \
   --ingress-class nginx \
-  --custom kustomize/overlay/allinformatix-gidp-stg \
-  --config-profile allinformatix-gidp \
+  --custom kustomize/overlay/global-identity-provider-stg \
+  --config-profile global-identity-provider \
   --namespace gidp-stg
 
 ./bin/forgeops install \
   --deploy-env dev \
   --ingress-class nginx \
-  --custom kustomize/overlay/allinformatix-gidp-dev \
-  --config-profile allinformatix-gidp \
+  --custom kustomize/overlay/global-identity-provider-dev \
+  --config-profile global-identity-provider \
   --namespace gidp-dev
 
 ### DELETE Components
@@ -655,7 +655,7 @@ docker run -it --rm --entrypoint bash docker.io/allinformatix/ds-idrepo:experime
 
 export DOCKER_REGISTRY="docker.io/allinformatix"
 export ARCHS="linux/amd64,linux/arm64"
-docker buildx build docker/ldif-importer --platform "$ARCHS" --tag $DOCKER_REGISTRY/allinformatix-gidp-ldif-importer:7.5.1 --push
+docker buildx build docker/ldif-importer --platform "$ARCHS" --tag $DOCKER_REGISTRY/global-identity-provider-ldif-importer:7.5.1 --push
 
 kubectl get secret ds-passwords -n gidp-stg -o jsonpath="{.data.dirmanager\.pw}" | base64 -d
 
@@ -711,7 +711,7 @@ kubectl create secret generic longhorn-oauth2-secret \
   --from-literal=client-secret='<CLIENT_SECRET>' \
   --from-literal=cookie-secret=$(openssl rand -hex 16)
 
-kustomize build kustomize/overlay/allinformatix-gidp-dev | yq eval '. | select(.kind == "Ingress")' -
+kustomize build kustomize/overlay/global-identity-provider-dev | yq eval '. | select(.kind == "Ingress")' -
 
 # Secret erzeugen
 cat <<EOF | kubectl apply -f -
@@ -790,25 +790,25 @@ curl -X POST \
   https://gidp.k8s.dev.allinformatix.com/am/oauth2/access_token
 
 # export IDM Config
-./bin/config export idm allinformatix-gidp
-cd kustomize/overlay/allinformatix-gidp-stg
+./bin/config export idm global-identity-provider
+cd kustomize/overlay/global-identity-provider-stg
 kustomize build . | kubectl apply -f -
 
 # secrets bereitstellen
 ./bin/forgeops install secrets \
   --namespace gidp-dev \
   --deploy-env dev \
-  --custom kustomize/overlay/allinformatix-gidp-dev
+  --custom kustomize/overlay/global-identity-provider-dev
 
 ./bin/forgeops install secrets \
   --namespace gidp-stg \
   --deploy-env stg \
-  --custom kustomize/overlay/allinformatix-gidp-stg
+  --custom kustomize/overlay/global-identity-provider-stg
 
 ./bin/forgeops install secrets \
   --namespace gidp-prd \
   --deploy-env prd \
-  --custom kustomize/overlay/allinformatix-gidp-prd
+  --custom kustomize/overlay/global-identity-provider-prd
 
 kubectl -n longhorn-system port-forward service/longhorn-frontend 8088:80
 
@@ -1085,7 +1085,7 @@ kubectl delete -f kustomize/base/postgres/postgres-user-setup-job.yaml
 ./forgeops-build-wrapper.sh --component=postgres --tag=v-0.1.8 --image-initialized=true --deploy --force
 kubectl apply -f kustomize/base/postgres/postgres-user-setup-job.yaml 
 
-export CONFIG_PROFILE=allinformatix-gidp
+export CONFIG_PROFILE=global-identity-provider
 export STAGE_FILTER=stg
 ./bin/forgeops install secrets -n gidp-stg --custom "kustomize/overlay/${CONFIG_PROFILE}-${STAGE_FILTER}"
 ./bin/forgeops install base -n gidp-stg --custom "kustomize/overlay/${CONFIG_PROFILE}-${STAGE_FILTER}"

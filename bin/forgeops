@@ -213,7 +213,6 @@ def main():
     size_group.add_argument('--medium', action='store_const', dest='size', const='medium', help='Install/generate manifests for the CDM medium platform')
     size_group.add_argument('--large', action='store_const', dest='size', const='large', help='Install/generate manifests for the CDM large platform')
     size_group.add_argument('--custom', dest='custom', help='Full path to a directory containing custom CDM patches')
-    size_group.add_argument('--allinformatix-gidp-prd', action='store_const', dest='size', const='allinformatix-gidp-prd', help='Install/generate manifests for the CDM mini platform')
 
     subparser = parser.add_subparsers(dest='cmd', metavar='{command}')
     parser_install = subparser.add_parser('install', parents=[common_ns, common, common_sz, common_dg, common_lg, common_dl, common_op], allow_abbrev=False,
